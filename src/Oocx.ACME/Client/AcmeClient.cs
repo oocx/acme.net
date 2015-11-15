@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using IO = System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
-using Directory = Oocx.ACME.Protocol.Directory;
 
 namespace Oocx.ACME.Client
 {
@@ -17,7 +16,7 @@ namespace Oocx.ACME.Client
     {        
         private readonly HttpClient client;
 
-        public Directory Directory { get; set; }
+        private Directory directory;
 
         private string nonce;        
         private JWS jws;
@@ -56,10 +55,7 @@ namespace Oocx.ACME.Client
 
         public async Task<RegistrationResponse> RegisterAsync()
         {
-            if (Directory == null || nonce == null)
-            {
-                Directory = await DiscoverAsync();
-            }
+            await EnsureDirectory();
 
             Console.WriteLine("registering with server");
 
@@ -70,15 +66,20 @@ namespace Oocx.ACME.Client
                 Agreement = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
             };                                 
 
-            return await PostAsync<RegistrationResponse>(Directory.NewRegistration, registration);            
+            return await PostAsync<RegistrationResponse>(directory.NewRegistration, registration);            
+        }
+
+        private async Task EnsureDirectory()
+        {
+            if (directory == null || nonce == null)
+            {
+                directory = await DiscoverAsync();
+            }
         }
 
         public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri)
         {
-            if (Directory == null || nonce == null)
-            {
-                Directory = await DiscoverAsync();
-            }
+            await EnsureDirectory();
 
             Console.WriteLine("updating registration: accepting terms of service");
 
@@ -94,10 +95,7 @@ namespace Oocx.ACME.Client
 
         public async Task<AuthorizationResponse> NewDnsAuthorizationAsync(string dnsName)
         {
-            if (Directory == null || nonce == null)
-            {
-                Directory = await DiscoverAsync();
-            }
+            await EnsureDirectory();
 
             Console.WriteLine($"starting authorization for dns identifier {dnsName}");
 
@@ -107,15 +105,12 @@ namespace Oocx.ACME.Client
                 Identifier = new Identifier() {  Type = "dns", Value = dnsName}
             };
 
-            return await PostAsync<AuthorizationResponse>(Directory.NewAuthorization, authorization);
+            return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
         public async Task<object> AcceptSimpleHttpChallengeAsync(Challange challenge)
         {
-            if (Directory == null || nonce == null)
-            {
-                Directory = await DiscoverAsync();
-            }
+            await EnsureDirectory();
 
             Console.WriteLine($"accepting challenge {challenge.Type}");
 
@@ -132,9 +127,9 @@ namespace Oocx.ACME.Client
 
             const string acmeChallengePath = @"r:\acme";
 
-            var challengeFile = Path.Combine(acmeChallengePath, challenge.Token);
+            var challengeFile = IO.Path.Combine(acmeChallengePath, challenge.Token);
             
-            File.WriteAllText(challengeFile, json);
+            IO.File.WriteAllText(challengeFile, json);
 
             Console.WriteLine($"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}");
             Console.WriteLine("Press ENTER when your server is ready to server the file");
@@ -159,15 +154,12 @@ namespace Oocx.ACME.Client
 
         public async Task<CertificateResponse> NewCertificateRequestAsync(byte[] csr)
         {
-            if (Directory == null || nonce == null)
-            {
-                Directory = await DiscoverAsync();
-            }
+            await EnsureDirectory();
 
             Console.WriteLine("requesting certificate");
 
             var request = new CertificateRequest {Csr = csr.Base64UrlEncoded()};
-            var response = await PostAsync<CertificateResponse>(Directory.NewCertificate, request);            
+            var response = await PostAsync<CertificateResponse>(directory.NewCertificate, request);            
 
             return response;
         }
@@ -242,10 +234,4 @@ namespace Oocx.ACME.Client
             }
         }
     }
-
-    public class AcmeHeader
-    {
-        [JsonProperty("nonce")]
-        public string Nonce { get; set; }
-    }   
 }
