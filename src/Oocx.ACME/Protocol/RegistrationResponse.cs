@@ -21,5 +21,7 @@ namespace Oocx.ACME.Protocol
 
         [JsonProperty("certificates")]
         public string Certificates { get; set; }
+
+        public string Location { get; set; }
     }
 }

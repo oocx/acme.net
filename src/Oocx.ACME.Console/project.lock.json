@@ -3,6 +3,15 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.6": {
+      "CommandLineParser/2.0.275-beta": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommandLine.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommandLine.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.3": {
         "type": "package",
         "dependencies": {
@@ -85,6 +94,15 @@
       }
     },
     "DNX,Version=v4.6/win7-x86": {
+      "CommandLineParser/2.0.275-beta": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommandLine.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommandLine.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.3": {
         "type": "package",
         "dependencies": {
@@ -179,6 +197,15 @@
       }
     },
     "DNX,Version=v4.6/win7-x64": {
+      "CommandLineParser/2.0.275-beta": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommandLine.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommandLine.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.3": {
         "type": "package",
         "dependencies": {
@@ -281,6 +308,19 @@
     "Oocx.Asn1PKCS/1.0.0": {
       "type": "project",
       "path": "../Oocx.Asn1PKCS/project.json"
+    },
+    "CommandLineParser/2.0.275-beta": {
+      "type": "package",
+      "sha512": "GwuGq7q3kM8ymbPXj3ZNMGY9YKDDPxL3VM3kvTQ+VKqz2fUbvgaSfeRKtAObq/V5yjLw2ur64djBE0L52Pf2dw==",
+      "files": [
+        "CommandLineParser.2.0.275-beta.nupkg",
+        "CommandLineParser.2.0.275-beta.nupkg.sha512",
+        "CommandLineParser.nuspec",
+        "lib/net40/CommandLine.dll",
+        "lib/net40/CommandLine.XML",
+        "lib/net45/CommandLine.dll",
+        "lib/net45/CommandLine.XML"
+      ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.3": {
       "type": "package",
@@ -516,6 +556,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "CommandLineParser >= 2.0.275-beta",
       "Oocx.ACME ",
       "Oocx.Asn1PKCS "
     ],

@@ -7,12 +7,13 @@
   "licenseUrl": "",
 
   "dependencies": {
+    "CommandLineParser": "2.0.275-beta",
     "Oocx.ACME": "",
     "Oocx.Asn1PKCS": ""
   },
 
   "commands": {
-    "ACME.Console": "ACME.Console"
+    "ACME.Console": "Oocx.ACME.Console"
   },
 
   "frameworks": {

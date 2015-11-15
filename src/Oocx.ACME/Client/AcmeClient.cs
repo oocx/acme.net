@@ -55,18 +55,26 @@ namespace Oocx.ACME.Client
 
         public async Task<RegistrationResponse> RegisterAsync()
         {
-            await EnsureDirectory();
+            await EnsureDirectory();            
 
-            Console.WriteLine("registering with server");
-
-            var registration = new RegistrationRequest()
+            var request = new RegistrationRequest()
             {                
                 Resource = "new-reg",
                 Contact = new[] { "mailto:mathias@raacke.info" },
-                Agreement = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
-            };                                 
+                //Agreement = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
+            };
 
-            return await PostAsync<RegistrationResponse>(directory.NewRegistration, registration);            
+            try
+            {
+                return await PostAsync<RegistrationResponse>(directory.NewRegistration, request);
+            }
+            catch (AcmeException ex) when ((int) ex.Response.StatusCode == 409)
+            {
+                return new RegistrationResponse()
+                {
+                    Location = ex.Response.Headers.Location.ToString()
+                };
+            }            
         }
 
         private async Task EnsureDirectory()
@@ -132,7 +140,7 @@ namespace Oocx.ACME.Client
             IO.File.WriteAllText(challengeFile, json);
 
             Console.WriteLine($"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}");
-            Console.WriteLine("Press ENTER when your server is ready to server the file");
+            Console.WriteLine("Press ENTER when your server is ready to serve the file");
             Console.ReadLine();
 
             var challangeRequest = new ChallangeRequest()
@@ -195,12 +203,13 @@ namespace Oocx.ACME.Client
 
             var response = await client.SendAsync(request);
             RememberNonce(response);
+            
 
             if (response.Content.Headers.ContentType.MediaType == "application/problem+json")
             {
                 var problemJson = await response.Content.ReadAsStringAsync();
                 var problem = JsonConvert.DeserializeObject<Problem>(problemJson);
-                throw new AcmeException(problem);
+                throw new AcmeException(problem, response);
             }
 
             if (typeof(TResult) == typeof(CertificateResponse) && response.Content.Headers.ContentType.MediaType == "application/pkix-cert")

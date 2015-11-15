@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ACME.Console": {
+      "commandName": "ACME.Console",
+      "commandLineArgs": "-d test.startliste.info -i"
+    }
+  }
+}
