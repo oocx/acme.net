@@ -1,0 +1,469 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    "DNX,Version=v4.6": {
+      "Microsoft.AspNet.WebApi.Client/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        }
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "System.Linq/4.0.1-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Net.Http/4.0.1-beta-23409": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Runtime/4.0.21-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net46/_._": {}
+        },
+        "runtime": {
+          "lib/net46/_._": {}
+        }
+      },
+      "System.Threading/4.0.11-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net46/_._": {}
+        },
+        "runtime": {
+          "lib/net46/_._": {}
+        }
+      }
+    },
+    "DNX,Version=v4.6/win7-x86": {
+      "Microsoft.AspNet.WebApi.Client/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        }
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "runtime.win7.System.Net.Http/4.0.1-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/dotnet/_._": {}
+        }
+      },
+      "runtime.win7.System.Threading/4.0.11-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/dotnet/_._": {}
+        }
+      },
+      "System.Linq/4.0.1-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Net.Http/4.0.1-beta-23409": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Runtime/4.0.21-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net46/_._": {}
+        },
+        "runtime": {
+          "lib/net46/_._": {}
+        }
+      },
+      "System.Threading/4.0.11-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net46/_._": {}
+        },
+        "runtime": {
+          "lib/net46/_._": {}
+        }
+      }
+    },
+    "DNX,Version=v4.6/win7-x64": {
+      "Microsoft.AspNet.WebApi.Client/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        }
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "runtime.win7.System.Net.Http/4.0.1-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/dotnet/_._": {}
+        }
+      },
+      "runtime.win7.System.Threading/4.0.11-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/dotnet/_._": {}
+        }
+      },
+      "System.Linq/4.0.1-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Net.Http/4.0.1-beta-23409": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Runtime/4.0.21-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net46/_._": {}
+        },
+        "runtime": {
+          "lib/net46/_._": {}
+        }
+      },
+      "System.Threading/4.0.11-beta-23409": {
+        "type": "package",
+        "compile": {
+          "ref/net46/_._": {}
+        },
+        "runtime": {
+          "lib/net46/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.AspNet.WebApi.Client/5.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "3kiI8peSXbXHDDrRuo+QaX0iCEVRe0nvn2dBDRw656uPX32UalbBlSIDUDlJxu05eau4tnuhsikiUuugvvoUoQ==",
+      "files": [
+        "lib/net45/System.Net.Http.Formatting.dll",
+        "lib/net45/System.Net.Http.Formatting.xml",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
+        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg",
+        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg.sha512",
+        "Microsoft.AspNet.WebApi.Client.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/7.0.1": {
+      "type": "package",
+      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
+      "files": [
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.7.0.1.nupkg",
+        "Newtonsoft.Json.7.0.1.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "tools/install.ps1"
+      ]
+    },
+    "runtime.win7.System.Net.Http/4.0.1-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "PsM0ItHJ6ahnDzXPXJeCQpKwL/VOQ4GjFiI4Y+HCkHZlaTSwJayoLuroDU545G+cvEtmbMinLNDqG5HdKQExMw==",
+      "files": [
+        "ref/dotnet/_._",
+        "runtime.win7.System.Net.Http.4.0.1-beta-23409.nupkg",
+        "runtime.win7.System.Net.Http.4.0.1-beta-23409.nupkg.sha512",
+        "runtime.win7.System.Net.Http.nuspec",
+        "runtimes/win7/lib/DNXCore50/de/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/es/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/fr/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/it/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/ja/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/ko/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/ru/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/System.Net.Http.dll",
+        "runtimes/win7/lib/DNXCore50/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/zh-hans/System.Net.Http.xml",
+        "runtimes/win7/lib/DNXCore50/zh-hant/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/de/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/es/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/fr/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/it/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/ja/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/ko/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/ru/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/System.Net.Http.dll",
+        "runtimes/win7/lib/netcore50/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/zh-hans/System.Net.Http.xml",
+        "runtimes/win7/lib/netcore50/zh-hant/System.Net.Http.xml"
+      ]
+    },
+    "runtime.win7.System.Threading/4.0.11-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "V9BYsks+TUXbB52ze7t9OM5KB8aD/KuvRml9arSfToJdZMo7zYSTrcj8xCRuIE7ClFCyNplJzs53zYA9qQi8zw==",
+      "files": [
+        "ref/dotnet/_._",
+        "runtime.win7.System.Threading.4.0.11-beta-23409.nupkg",
+        "runtime.win7.System.Threading.4.0.11-beta-23409.nupkg.sha512",
+        "runtime.win7.System.Threading.nuspec",
+        "runtimes/win7/lib/DNXCore50/de/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/es/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/fr/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/it/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/ja/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/ko/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/ru/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/System.Threading.dll",
+        "runtimes/win7/lib/DNXCore50/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/zh-hans/System.Threading.xml",
+        "runtimes/win7/lib/DNXCore50/zh-hant/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/de/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/es/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/fr/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/it/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/ja/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/ko/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/ru/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/System.Threading.dll",
+        "runtimes/win7/lib/netcore50/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/zh-hans/System.Threading.xml",
+        "runtimes/win7/lib/netcore50/zh-hant/System.Threading.xml",
+        "runtimes/win8-aot/lib/netcore50/System.Threading.dll"
+      ]
+    },
+    "System.Linq/4.0.1-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "VqrieHGgjmtYEPqqVQyw1jOFDVQuo5KvAEXaAavvpefiBBs+n6x3K3GG1qqDCYlA2GOz/8Snh6CSNZ8pl+O2bw==",
+      "files": [
+        "lib/dotnet/de/System.Linq.xml",
+        "lib/dotnet/es/System.Linq.xml",
+        "lib/dotnet/fr/System.Linq.xml",
+        "lib/dotnet/it/System.Linq.xml",
+        "lib/dotnet/ja/System.Linq.xml",
+        "lib/dotnet/ko/System.Linq.xml",
+        "lib/dotnet/ru/System.Linq.xml",
+        "lib/dotnet/System.Linq.dll",
+        "lib/dotnet/System.Linq.xml",
+        "lib/dotnet/zh-hans/System.Linq.xml",
+        "lib/dotnet/zh-hant/System.Linq.xml",
+        "lib/net45/_._",
+        "lib/netcore50/System.Linq.dll",
+        "lib/netcore50/System.Linq.xml",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.Linq.dll",
+        "ref/net45/_._",
+        "ref/netcore50/System.Linq.dll",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "System.Linq.4.0.1-beta-23409.nupkg",
+        "System.Linq.4.0.1-beta-23409.nupkg.sha512",
+        "System.Linq.nuspec"
+      ]
+    },
+    "System.Net.Http/4.0.1-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "h9CPYbGzH/9faYD24qLNBY+/dH8F67AktW3UvrEJR7Xan3bzXKJd5Po/3+qRswNsRUH2P/HBSK5fZE3CKVmhxg==",
+      "files": [
+        "lib/net45/_._",
+        "lib/win8/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.Net.Http.dll",
+        "ref/net45/_._",
+        "ref/netcore50/System.Net.Http.dll",
+        "ref/win8/_._",
+        "ref/wpa81/_._",
+        "runtime.json",
+        "System.Net.Http.4.0.1-beta-23409.nupkg",
+        "System.Net.Http.4.0.1-beta-23409.nupkg.sha512",
+        "System.Net.Http.nuspec"
+      ]
+    },
+    "System.Runtime/4.0.21-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "RMY5vXDu2cCelJmXP5un1HZSzbgRVpT5sgQPvFL2T7cLVinSY4vMWIgnlkh1visiQiy+nUlzeWP0uoMPDDRRJw==",
+      "files": [
+        "lib/DNXCore50/de/System.Runtime.xml",
+        "lib/DNXCore50/es/System.Runtime.xml",
+        "lib/DNXCore50/fr/System.Runtime.xml",
+        "lib/DNXCore50/it/System.Runtime.xml",
+        "lib/DNXCore50/ja/System.Runtime.xml",
+        "lib/DNXCore50/ko/System.Runtime.xml",
+        "lib/DNXCore50/ru/System.Runtime.xml",
+        "lib/DNXCore50/System.Runtime.dll",
+        "lib/DNXCore50/System.Runtime.xml",
+        "lib/DNXCore50/zh-hans/System.Runtime.xml",
+        "lib/DNXCore50/zh-hant/System.Runtime.xml",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/_._",
+        "lib/netcore50/de/System.Runtime.xml",
+        "lib/netcore50/es/System.Runtime.xml",
+        "lib/netcore50/fr/System.Runtime.xml",
+        "lib/netcore50/it/System.Runtime.xml",
+        "lib/netcore50/ja/System.Runtime.xml",
+        "lib/netcore50/ko/System.Runtime.xml",
+        "lib/netcore50/ru/System.Runtime.xml",
+        "lib/netcore50/System.Runtime.dll",
+        "lib/netcore50/System.Runtime.xml",
+        "lib/netcore50/zh-hans/System.Runtime.xml",
+        "lib/netcore50/zh-hant/System.Runtime.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "ref/dotnet/System.Runtime.dll",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "runtimes/win8-aot/lib/netcore50/de/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/es/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/fr/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/it/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/ja/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/ko/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/ru/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.dll",
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/zh-hans/System.Runtime.xml",
+        "runtimes/win8-aot/lib/netcore50/zh-hant/System.Runtime.xml",
+        "System.Runtime.4.0.21-beta-23409.nupkg",
+        "System.Runtime.4.0.21-beta-23409.nupkg.sha512",
+        "System.Runtime.nuspec"
+      ]
+    },
+    "System.Threading/4.0.11-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "8jaof2HzSCHh1xcB4BQW5Z4mVaC66g71ewBSWKCGerqae4ffwthAoEbvfYIl68YH3MZ0dQvd0OxRkO9+ib4ZOA==",
+      "files": [
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "ref/dotnet/System.Threading.dll",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "runtime.json",
+        "System.Threading.4.0.11-beta-23409.nupkg",
+        "System.Threading.4.0.11-beta-23409.nupkg.sha512",
+        "System.Threading.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "System.Runtime >= 4.0.21-beta-23409",
+      "System.Linq >= 4.0.1-beta-23409",
+      "System.Threading >= 4.0.11-beta-23409",
+      "Newtonsoft.Json >= 7.0.1",
+      "System.Net.Http >= 4.0.1-beta-23409",
+      "Microsoft.AspNet.WebApi.Client >= 5.2.3"
+    ],
+    "DNX,Version=v4.6": []
+  }
+}

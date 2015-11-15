@@ -1,0 +1,19 @@
+using System.Linq;
+
+namespace ACME.Protocol.Asn1
+{
+    /// <summary>
+    /// https://msdn.microsoft.com/en-us/library/windows/desktop/bb540792(v=vs.85).aspx
+    /// </summary>
+    public class BitString : Asn1Primitive
+    {
+        public BitString(byte[] data, byte unusedBits = 0) : base(3)
+        {
+            Data = new byte[]{0}.Concat(data).ToArray();
+            UnusedBits = unusedBits;
+            Size = Length+LengthBytes.Length+1;
+        }
+
+        public byte UnusedBits { get; }
+    }
+}
