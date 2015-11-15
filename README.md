@@ -2,7 +2,7 @@
 
 This repository contains a library that can be used to develop ACME / Let's Encrypt clients.
 
-**This project is work in progress, you probably won't be able to use it for anything yet **
+**This project is work in progress, you probably won't be able to use it for anything yet**
 
 I created this project as a training excercise and to learn about ACME and related 
 technologies (certificate file formats, ASN1, ...). This is not intended to be a finished 
