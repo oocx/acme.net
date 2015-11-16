@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Oocx.ACME.IIS;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
@@ -120,7 +121,7 @@ namespace Oocx.ACME.Client
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
-        public async Task<PendingChallenge> AcceptSimpleHttpChallengeAsync(Challange challenge)
+        public async Task<PendingChallenge> AcceptSimpleHttpChallengeAsync(Challenge challenge)
         {
             await EnsureDirectory();
 
@@ -137,32 +138,51 @@ namespace Oocx.ACME.Client
             var encodedMessage = jws.Encode(simpleHttp, header);
             var json = JsonConvert.SerializeObject(encodedMessage, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
 
-            var acmeChallengePath = Environment.CurrentDirectory;
+            return CompleteChallengeByIisIntegration(challenge, json);
+            //return CompleteChallengeByManualFileCopy(challenge, json);
+        }
 
+        private PendingChallenge CompleteChallengeByIisIntegration(Challenge challenge, string json)
+        {
+            var iis = new IisIntegration();
+            var domain = challenge.Uri.Host;
+            iis.AcceptChallenge(domain, challenge.Token, json);
+
+            return new PendingChallenge()
+            {
+                Instructions = $"using IIS integration to complete the challenge. press enter.",
+                Complete = async () => await CompleteChallenge(challenge)
+            };
+        }
+
+        private PendingChallenge CompleteChallengeByManualFileCopy(Challenge challenge, string json)
+        {
+            var acmeChallengePath = Environment.CurrentDirectory;
             var challengeFile = IO.Path.Combine(acmeChallengePath, challenge.Token);
-            
             IO.File.WriteAllText(challengeFile, json);
 
             return new PendingChallenge()
-                {
-                    Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
-                    Complete = new Action(async () =>
-                    {
-                        var challangeRequest = new ChallangeRequest()
-                        {
-                            Tls = true,
-                            Type = challenge.Type
-                        };
+            {
+                Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
+                Complete = async () => await CompleteChallenge(challenge)
+            };
+        }
 
-                        challenge = await PostAsync<Challange>(challenge.Uri, challangeRequest);
+        private async Task CompleteChallenge(Challenge challenge)
+        {
+            var challangeRequest = new ChallangeRequest()
+            {
+                Tls = true,
+                Type = challenge.Type
+            };
 
-                        while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
-                        {
-                            challenge = await GetAsync<Challange>(challenge.Uri);
-                            await Task.Delay(4000);
-                        }
-                    })
-                };
+            challenge = await PostAsync<Challenge>(challenge.Uri, challangeRequest);
+
+            while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
+            {
+                challenge = await GetAsync<Challenge>(challenge.Uri);
+                await Task.Delay(4000);
+            }
         }
 
         public async Task<CertificateResponse> NewCertificateRequestAsync(byte[] csr)

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oocx.ACME.Protocol
 {
-    public class Challange
+    public class Challenge
     {
         [JsonProperty("type")]
         public string Type { get; set; }

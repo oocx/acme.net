@@ -15,7 +15,7 @@ namespace Oocx.ACME.Protocol
         public Identifier Identifier { get; set; }
 
         [JsonProperty("challenges")]
-        public Challange[] Challenges { get; set; }
+        public Challenge[] Challenges { get; set; }
 
         [JsonProperty("combinations")]
         public int[][] Combinations { get; set; }

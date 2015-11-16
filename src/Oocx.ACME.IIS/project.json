@@ -1,19 +1,15 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "ACME.Console Console Application",
+  "description": "Oocx.ACME.IIS Class Library",
   "authors": [ "mathi" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "dependencies": {
-    "CommandLineParser": "2.0.275-beta",
-    "Oocx.ACME": "",
-    "Oocx.Asn1PKCS": ""
-  },
-
-  "commands": {
-    "ACME.Console": "Oocx.ACME.Console"
+    "System.Runtime": "4.0.21-beta-23409",
+    "System.Linq": "4.0.1-beta-23409",
+    "System.Threading": "4.0.11-beta-23409",
+    "Microsoft.Web.Administration": "7.0.0"    
   },
 
   "frameworks": {
@@ -23,6 +19,6 @@
         "define": [ "DEBUG" ]
       }
     },
-    "net46": { }    
+    "net46": { }
   }
 }
