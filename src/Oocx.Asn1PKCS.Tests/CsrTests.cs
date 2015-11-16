@@ -42,8 +42,8 @@ namespace Oocx.Asn1PKCS.Tests
 
             // Assert            
 
-            File.WriteAllBytes(@"r:\request.der", der);
-            File.WriteAllText(@"r:\request.txt", base64);
+            File.WriteAllBytes(@"request.der", der);
+            File.WriteAllText(@"request.txt", base64);
             bytes.Should().NotBeNull();
 
             // openssl req -in r:\request.txt -noout -text
@@ -61,7 +61,7 @@ namespace Oocx.Asn1PKCS.Tests
             sut.Save(key.ExportParameters(true), "test.startliste.info", KeyExport.Format.PEM);
 
             // Assert
-            File.Exists(@"C:\github\ACME.net\test.startliste.info.pem").Should().BeTrue();
+            File.Exists(Path.Combine(Environment.CurrentDirectory, "test.startliste.info.pem")).Should().BeTrue();
         }
 
         
@@ -74,10 +74,10 @@ namespace Oocx.Asn1PKCS.Tests
             var sut = new Pkcs12();
             
             // Act
-            sut.CreatePfxFile(key, @"C:\github\ACME.net\test.startliste.info.cer", "test", @"r:\acme\test.startliste.info.pfx");
+            sut.CreatePfxFile(key, @"test.startliste.info.cer", "test", @"test.startliste.info.pfx");
 
             // Assert
-            File.Exists(@"r:\acme\test.startliste.info.pfx").Should().BeTrue();
+            File.Exists(@"test.startliste.info.pfx").Should().BeTrue();
         }
     }
 }
