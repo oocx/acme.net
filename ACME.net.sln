@@ -21,7 +21,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Oocx.Asn1PKCS", "src\Oocx.A
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Oocx.Asn1PKCS.Tests", "src\Oocx.Asn1PKCS.Tests\Oocx.Asn1PKCS.Tests.xproj", "{829DC27B-8E9F-4EE4-AD9B-0976E725F26F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oocx.ACME.CLRConsole", "Oocx.ACME.CLRConsole\Oocx.ACME.CLRConsole.csproj", "{772D1046-FB4C-4FDA-8586-185D353B418B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oocx.ACME.CLRConsole", "src\Oocx.ACME.CLRConsole\Oocx.ACME.CLRConsole.csproj", "{772D1046-FB4C-4FDA-8586-185D353B418B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
