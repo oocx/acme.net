@@ -1,5 +1,7 @@
 # Oocx.ACME - an ACME protocol library and simple Let's Encrypt client
 
+[![Build status](https://ci.appveyor.com/api/projects/status/igpc0c9u9sxresij?svg=true)](https://ci.appveyor.com/project/oocx/acme-net)
+
 This repository contains a library that can be used to develop ACME / Let's Encrypt clients.
 
 **This project is work in progress, you probably won't be able to use it for anything yet**
@@ -32,6 +34,11 @@ be used to communicate with ACME servers.
 This is a simple command line client that I use to test my ACME client. It does not yet have
 any command line arguments (I use it by commenting out/in whatever I need).
 
+## Oocx.ACME.ConsoleCLR
+
+A "classic" .net framework console application used to create a console .exe in addition to the
+dnx console application.
+
 ## Oocx.Asn1PKCS
 
 This project contains classes to generate PKCS10 certificate requests. It can also save private 
@@ -39,6 +46,11 @@ keys in a PKCS1 .pem file. I have started to work on PKCS12 (PFX) support, but t
 not used yet.
 
 # Change log
+
+## 2015-11-16 basic command line client
+
+The console application now accepts command line parameters. I also added a first prerelease
+binary to the releases page. I have also set up an AppVeyor CI build.
 
 ## 2015-11-15 Initial Commit
 

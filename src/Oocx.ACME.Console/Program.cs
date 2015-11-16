@@ -6,6 +6,7 @@ using static System.Console;
 using CommandLine;
 using Oocx.ACME.Client;
 using Oocx.ACME.Services;
+using static  Oocx.ACME.Services.Log;
 
 namespace Oocx.ACME.Console
 {
@@ -47,17 +48,15 @@ namespace Oocx.ACME.Console
 
         private void ArgumentsError(IEnumerable<Error> errors)
         {
-            foreach (var error in errors)
-            {
-                WriteLine(error);
-            }
+            WriteLine("To use this application before December 3rd 2015, you must be a member of the Let's Encrypt beta program.");
+            WriteLine("You can get more information from https://letsencrypt.org/");
         }
 
         private static void PrintError(AcmeException ex)
         {
-            WriteLine("error:");
-            WriteLine(ex.Problem.Type);
-            WriteLine(ex.Problem.Detail);
+            Error("error:");
+            Error(ex.Problem.Type);
+            Error(ex.Problem.Detail);
         }
     }
 }
