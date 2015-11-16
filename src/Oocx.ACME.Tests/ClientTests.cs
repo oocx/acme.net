@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Oocx.ACME.Client;
@@ -23,7 +24,7 @@ namespace Oocx.ACME.Tests
             response.Headers.Add("Replay-Nonce", "nonce");
             var handler = new FakeHttpMessageHandler("http://baseaddress/directory", response);            
             var client = new HttpClient(handler) { BaseAddress =  new Uri("http://baseAddress")};
-            var sut = new AcmeClient(client);
+            var sut = new AcmeClient(client, new RSACryptoServiceProvider());
 
             // Act
             var discoverResponse = await sut.DiscoverAsync();
@@ -51,10 +52,10 @@ namespace Oocx.ACME.Tests
             });
 
             var client = new HttpClient(handler) { BaseAddress = new Uri("http://baseAddress") };
-            var sut = new AcmeClient(client);
+            var sut = new AcmeClient(client, new RSACryptoServiceProvider());
 
             // Act
-            var registrationResponse =  await sut.RegisterAsync();
+            var registrationResponse =  await sut.RegisterAsync(false);
 
             // Assert
             registrationResponse.Should().NotBeNull();

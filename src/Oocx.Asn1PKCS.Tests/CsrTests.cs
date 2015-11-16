@@ -17,7 +17,7 @@ namespace Oocx.Asn1PKCS.Tests
         {
             // Arrange
 
-            var keyManager = new KeyStore(Environment.CurrentDirectory);
+            var keyManager = new FileKeyStore(Environment.CurrentDirectory);
             var rsa = keyManager.GetOrCreateKey("test.startliste.info");
             var key = rsa.ExportParameters(true);
 
@@ -53,7 +53,7 @@ namespace Oocx.Asn1PKCS.Tests
         public void Convert_xml_key_to_pem()
         {
             // Arrange            
-            var keyStore = new KeyStore(Environment.CurrentDirectory);            
+            var keyStore = new FileKeyStore(Environment.CurrentDirectory);            
             var key = keyStore.GetOrCreateKey("test.startliste.info");
             var sut = new KeyExport(Environment.CurrentDirectory);
 
@@ -69,7 +69,7 @@ namespace Oocx.Asn1PKCS.Tests
         public void Create_pfx()
         {
             // Arrange            
-            var keyManager = new KeyStore(Environment.CurrentDirectory);
+            var keyManager = new FileKeyStore(Environment.CurrentDirectory);
             var key = keyManager.GetOrCreateKey("test.startliste.info").ExportParameters(true);
             var sut = new Pkcs12();
             

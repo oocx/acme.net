@@ -3,6 +3,7 @@ using IO = System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -16,31 +17,27 @@ namespace Oocx.ACME.Client
     public class AcmeClient
     {        
         private readonly HttpClient client;
+        private readonly RSA key;
 
         private Directory directory;
 
         private string nonce;        
         private JWS jws;
 
-        public AcmeClient(HttpClient client)
+        public AcmeClient(HttpClient client, RSA key)
         {
             Info($"using server {client.BaseAddress}");
 
             this.client = client;
-            Initialize();
+            this.key = key;
+            jws = new JWS(key);            
         }
 
-        public AcmeClient(string baseAddress): this(new HttpClient() { BaseAddress =  new Uri(baseAddress) })
-        {             
+        public AcmeClient(string baseAddress, RSA key): this(new HttpClient() { BaseAddress =  new Uri(baseAddress) }, key)
+        {         
         }
 
-        private void Initialize()
-        {
-            var keyManager = new KeyStore(Environment.CurrentDirectory);
-            var rsa = keyManager.GetOrCreateKey("acme-key");
-                        
-            jws = new JWS(rsa);
-        }
+        
 
         public async Task<Directory> DiscoverAsync()
         {
@@ -54,7 +51,7 @@ namespace Oocx.ACME.Client
             Verbose($"nonce from server is {nonce}");
         }
 
-        public async Task<RegistrationResponse> RegisterAsync()
+        public async Task<RegistrationResponse> RegisterAsync(bool acceptTermsOfService)
         {
             await EnsureDirectory();            
 
@@ -64,7 +61,7 @@ namespace Oocx.ACME.Client
             {                
                 Resource = "new-reg",
                 Contact = new[] { "mailto:mathias@raacke.info" },
-                //Agreement = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
+                Agreement = acceptTermsOfService ? "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf" : null
             };
 
             try

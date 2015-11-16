@@ -24,5 +24,11 @@ namespace Oocx.ACME.Console
 
         [Option('p', "password", HelpText = "The password used to protect the generated pfx file")]
         public string PfxPassword { get; set; }
+
+        [Option('t', "accountKeyContainerType", HelpText = "The base path or key container type that is used to store the acme registration key. 'user' will store the key in a user protected key container, 'machine' uses a machine container. All other inputs will be used as directory name.")]
+        public string AccountKeyContainerType { get; set; }
+
+        [Option('n', "accountKeyName", HelpText = "The name of the key file or key container used to store the acme registration key.", Default = "acme-key")]
+        public string AccountKeyName { get; set; }
     }
 }

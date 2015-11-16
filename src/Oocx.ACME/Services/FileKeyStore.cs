@@ -2,18 +2,74 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Security.Cryptography;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.PKCS1;
+using static Oocx.ACME.Services.Log;
 
 namespace Oocx.ACME.Services
 {
-    public class KeyStore
+    public interface IKeyStore
+    {
+        RSA GetOrCreateKey(string keyName);
+    }
+
+    public class KeyStoreFactory
+    {
+        public IKeyStore GetKeyStore(string storeType)
+        {
+            if ("user".Equals(storeType) || "machine".Equals(storeType))
+            {
+                return new KeyContainerStore(storeType);
+                
+            }            
+            return new FileKeyStore(storeType);                            
+        }
+    }
+
+    public class KeyContainerStore : IKeyStore
+    {
+        private readonly CspProviderFlags flags;
+
+        public KeyContainerStore(string storeType)
+        {
+            flags = "machine".Equals(storeType)
+                ? CspProviderFlags.UseMachineKeyStore
+                : CspProviderFlags.UseUserProtectedKey;
+
+            Verbose($"using key container, flags: {flags}");
+        }
+
+        public RSA GetOrCreateKey(string keyName)
+        {            
+            Verbose($"using key name {keyName}");            
+            var csp = new CspParameters()
+            {
+                KeyContainerName = keyName,
+                Flags =  flags,                
+            };
+                        
+            var rsa = new RSACryptoServiceProvider(2048, csp);
+            return rsa;
+        }
+    }
+
+    public class FileKeyStore : IKeyStore
     {
         private readonly string basePath;
 
-        public KeyStore(string basePath)
+        public FileKeyStore() : this(Environment.CurrentDirectory)
+        {            
+        }
+
+        public FileKeyStore(string basePath)
         {
+            if (string.IsNullOrWhiteSpace(basePath))
+            {
+                basePath = Environment.CurrentDirectory;
+            }
+            Verbose($"using key base path {basePath}");
             this.basePath = basePath;
         }
 
@@ -26,14 +82,15 @@ namespace Oocx.ACME.Services
 
             if (File.Exists(keyFileName))
             {
-                Debug.WriteLine("verwende vorhandene Datei");
+                Verbose($"using existing key file {keyFileName}");
                 var keyXml = File.ReadAllText(keyFileName);
                 rsa.FromXmlString(keyXml);
             }
             else
             {
-                var keyXml = rsa.ToXmlString(true);
-                Debug.WriteLine(keyXml);
+                Verbose($"writing new key to file {keyFileName}");
+
+                var keyXml = rsa.ToXmlString(true);                
                 File.WriteAllText(keyFileName, keyXml);
             }
 

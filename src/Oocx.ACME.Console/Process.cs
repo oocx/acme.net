@@ -26,9 +26,9 @@ namespace Oocx.ACME.Console
         public async Task Start()
         {
             IgnoreSslErrors();
-            
-            var client = new AcmeClient(options.AcmeServer);
-            
+
+            var client = CreateAcmeClient();
+
             await RegisterWithServer(client);
 
             foreach (var domain in options.Domains)
@@ -45,6 +45,15 @@ namespace Oocx.ACME.Console
             }
         }
 
+        private AcmeClient CreateAcmeClient()
+        {
+            var factory = new KeyStoreFactory();
+            var keyManager = factory.GetKeyStore(options.AccountKeyContainerType);
+            var rsa = keyManager.GetOrCreateKey(options.AccountKeyName);
+            var client = new AcmeClient(options.AcmeServer, rsa);
+            return client;
+        }
+
         private async Task<CertificateResponse> RequestCertificateForDomain(AcmeClient client, string domain, RSAParameters key)
         {
             var csr = CreateCertificateRequest(domain, key);
@@ -53,7 +62,7 @@ namespace Oocx.ACME.Console
 
         private static RSAParameters GetPrivateKey(string domain)
         {
-            var keyManager = new KeyStore(Environment.CurrentDirectory);
+            var keyManager = new FileKeyStore(Environment.CurrentDirectory);
             var rsa = keyManager.GetOrCreateKey(domain);
             var key = rsa.ExportParameters(true);
             return key;
@@ -129,9 +138,9 @@ namespace Oocx.ACME.Console
 
         private async Task RegisterWithServer(AcmeClient client)
         {
-            var registration = await client.RegisterAsync();
+            var registration = await client.RegisterAsync(options.AcceptTermsOfService);
 
-            if (options.AcceptTermsOfService)
+            if (!string.IsNullOrWhiteSpace(registration.Location) && options.AcceptTermsOfService)
             {
                 System.Console.WriteLine("accepting terms of service");
                 registration = await client.UpdateRegistrationAsync(registration.Location);
