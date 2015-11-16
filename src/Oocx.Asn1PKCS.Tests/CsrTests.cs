@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Oocx.ACME.Services;
@@ -16,7 +17,7 @@ namespace Oocx.Asn1PKCS.Tests
         {
             // Arrange
 
-            var keyManager = new KeyManager();
+            var keyManager = new KeyStore(Environment.CurrentDirectory);
             var rsa = keyManager.GetOrCreateKey("test.startliste.info");
             var key = rsa.ExportParameters(true);
 
@@ -52,11 +53,12 @@ namespace Oocx.Asn1PKCS.Tests
         public void Convert_xml_key_to_pem()
         {
             // Arrange            
-            var sut = new KeyManager();
-            var key = sut.GetOrCreateKey("test.startliste.info");
+            var keyStore = new KeyStore(Environment.CurrentDirectory);            
+            var key = keyStore.GetOrCreateKey("test.startliste.info");
+            var sut = new KeyExport(Environment.CurrentDirectory);
 
             // Act
-            sut.SaveKeyAsPEM(key.ExportParameters(true), "test.startliste.info");
+            sut.Save(key.ExportParameters(true), "test.startliste.info", KeyExport.Format.PEM);
 
             // Assert
             File.Exists(@"C:\github\ACME.net\test.startliste.info.pem").Should().BeTrue();
@@ -67,7 +69,7 @@ namespace Oocx.Asn1PKCS.Tests
         public void Create_pfx()
         {
             // Arrange            
-            var keyManager = new KeyManager();
+            var keyManager = new KeyStore(Environment.CurrentDirectory);
             var key = keyManager.GetOrCreateKey("test.startliste.info").ExportParameters(true);
             var sut = new Pkcs12();
             

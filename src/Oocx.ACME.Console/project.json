@@ -9,7 +9,7 @@
   "dependencies": {
     "CommandLineParser": "2.0.275-beta",
     "Oocx.ACME": "",
-    "Oocx.Asn1PKCS": ""
+    "Oocx.Asn1PKCS": ""    
   },
 
   "commands": {
@@ -17,6 +17,12 @@
   },
 
   "frameworks": {
-    "dnx46": { "compilationOptions": {"optimize": false, "define": ["DEBUG"]} }        
+    "dnx46": {
+      "compilationOptions": {
+        "optimize": false,
+        "define": [ "DEBUG" ]
+      }
+    },
+    "net46": { }    
   }
 }

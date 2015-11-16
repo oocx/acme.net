@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
+using static Oocx.ACME.Services.Log;
 
 namespace Oocx.ACME.Client
 {
@@ -23,19 +24,19 @@ namespace Oocx.ACME.Client
 
         public AcmeClient(HttpClient client)
         {
+            Info($"using server {client.BaseAddress}");
+
             this.client = client;
             Initialize();
         }
 
-        public AcmeClient(string baseAddress)
-        {
-            this.client = new HttpClient() { BaseAddress =  new Uri(baseAddress)};
-            Initialize();
+        public AcmeClient(string baseAddress): this(new HttpClient() { BaseAddress =  new Uri(baseAddress) })
+        {             
         }
 
         private void Initialize()
         {
-            var keyManager = new KeyManager();
+            var keyManager = new KeyStore(Environment.CurrentDirectory);
             var rsa = keyManager.GetOrCreateKey("acme-key");
                         
             jws = new JWS(rsa);
@@ -43,19 +44,21 @@ namespace Oocx.ACME.Client
 
         public async Task<Directory> DiscoverAsync()
         {
-            Console.WriteLine($"Querying directory information from {client.BaseAddress}" );
+            Verbose($"Querying directory information from {client.BaseAddress}" );
             return await GetAsync<Directory>(new Uri("directory", UriKind.Relative));            
         }
 
         private void RememberNonce(HttpResponseMessage response)
         {
             nonce = response.Headers.GetValues("Replay-Nonce").First();
-            Console.WriteLine($"nonce from server is {nonce}");
+            Verbose($"nonce from server is {nonce}");
         }
 
         public async Task<RegistrationResponse> RegisterAsync()
         {
             await EnsureDirectory();            
+
+            Info("creating new registration");
 
             var request = new RegistrationRequest()
             {                
@@ -66,13 +69,17 @@ namespace Oocx.ACME.Client
 
             try
             {
-                return await PostAsync<RegistrationResponse>(directory.NewRegistration, request);
+                var registration = await PostAsync<RegistrationResponse>(directory.NewRegistration, request);
+                Info($"using new registration: {registration.Location}");
+                return registration;
             }
             catch (AcmeException ex) when ((int) ex.Response.StatusCode == 409)
             {
+                var location = ex.Response.Headers.Location.ToString();
+                Info($"using existing registration: {location}");
                 return new RegistrationResponse()
                 {
-                    Location = ex.Response.Headers.Location.ToString()
+                    Location = location
                 };
             }            
         }
@@ -89,7 +96,7 @@ namespace Oocx.ACME.Client
         {
             await EnsureDirectory();
 
-            Console.WriteLine("updating registration: accepting terms of service");
+            Info("updating registration: accepting terms of service");
 
             var registration = new RegistrationRequest()
             {
@@ -105,7 +112,7 @@ namespace Oocx.ACME.Client
         {
             await EnsureDirectory();
 
-            Console.WriteLine($"starting authorization for dns identifier {dnsName}");
+            Info($"requesting authorization for dns identifier {dnsName}");            
 
             var authorization = new AuthorizationRequest()
             {
@@ -116,11 +123,11 @@ namespace Oocx.ACME.Client
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
-        public async Task<object> AcceptSimpleHttpChallengeAsync(Challange challenge)
+        public async Task<PendingChallenge> AcceptSimpleHttpChallengeAsync(Challange challenge)
         {
             await EnsureDirectory();
 
-            Console.WriteLine($"accepting challenge {challenge.Type}");
+            Info($"accepting challenge {challenge.Type}");
 
             // acme / SimpleHttp!
             var simpleHttp = new SimpleHttpChallenge()
@@ -133,41 +140,45 @@ namespace Oocx.ACME.Client
             var encodedMessage = jws.Encode(simpleHttp, header);
             var json = JsonConvert.SerializeObject(encodedMessage, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
 
-            const string acmeChallengePath = @"r:\acme";
+            var acmeChallengePath = Environment.CurrentDirectory;
 
             var challengeFile = IO.Path.Combine(acmeChallengePath, challenge.Token);
             
             IO.File.WriteAllText(challengeFile, json);
 
-            Console.WriteLine($"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}");
-            Console.WriteLine("Press ENTER when your server is ready to serve the file");
-            Console.ReadLine();
+            return new PendingChallenge()
+                {
+                    Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
+                    Complete = new Action(async () =>
+                    {
+                        var challangeRequest = new ChallangeRequest()
+                        {
+                            Tls = true,
+                            Type = challenge.Type
+                        };
 
-            var challangeRequest = new ChallangeRequest()
-            {
-                Tls = true,
-                Type = challenge.Type
-            };
+                        challenge = await PostAsync<Challange>(challenge.Uri, challangeRequest);
 
-            challenge = await PostAsync<Challange>(challenge.Uri, challangeRequest);
-
-            while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
-            {
-                challenge = await GetAsync<Challange>(challenge.Uri);
-                await Task.Delay(4000);
-            }
-
-            return challenge;
+                        while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
+                        {
+                            challenge = await GetAsync<Challange>(challenge.Uri);
+                            await Task.Delay(4000);
+                        }
+                    })
+                };
         }
 
         public async Task<CertificateResponse> NewCertificateRequestAsync(byte[] csr)
         {
             await EnsureDirectory();
 
-            Console.WriteLine("requesting certificate");
+            Info("requesting certificate");
 
             var request = new CertificateRequest {Csr = csr.Base64UrlEncoded()};
             var response = await PostAsync<CertificateResponse>(directory.NewCertificate, request);            
+
+            Verbose($"location: {response.Location}");
+            Verbose($"link: {response.Link}");            
 
             return response;
         }
@@ -184,9 +195,9 @@ namespace Oocx.ACME.Client
 
         private async Task<TResult> SendAsync<TResult>(HttpMethod method, Uri uri, object message) where TResult : class
         {
-            Console.WriteLine($"{method} {uri} {message?.GetType()}");
+            Verbose($"{method} {uri} {message?.GetType()}");
             var nonceHeader = new AcmeHeader { Nonce = nonce };
-            Console.WriteLine($"sending nonce {nonce}");
+            Verbose($"sending nonce {nonce}");
 
             HttpContent content = null;
             if (message != null)
@@ -202,6 +213,8 @@ namespace Oocx.ACME.Client
             };
 
             var response = await client.SendAsync(request);
+            Verbose($"response status: {(int)response.StatusCode} {response.ReasonPhrase}");
+
             RememberNonce(response);
             
 
@@ -209,12 +222,12 @@ namespace Oocx.ACME.Client
             {
                 var problemJson = await response.Content.ReadAsStringAsync();
                 var problem = JsonConvert.DeserializeObject<Problem>(problemJson);
+                Verbose($"error response from server: {problem.Type}: {problem.Detail}");
                 throw new AcmeException(problem, response);
             }
 
             if (typeof(TResult) == typeof(CertificateResponse) && response.Content.Headers.ContentType.MediaType == "application/pkix-cert")
-            {
-                
+            {                
                 var certificateBytes = await response.Content.ReadAsByteArrayAsync();
                 var certificateResponse = new CertificateResponse() {Certificate = certificateBytes};
                 GetHeaderValues(response, certificateResponse);

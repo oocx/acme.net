@@ -7,6 +7,7 @@
   "licenseUrl": "",
 
   "frameworks": {
-    "dnx46": { }    
-  }
+    "dnx46": { },
+    "net46": { }
+  }  
 }

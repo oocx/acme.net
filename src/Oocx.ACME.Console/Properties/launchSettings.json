@@ -2,7 +2,8 @@
   "profiles": {
     "ACME.Console": {
       "commandName": "ACME.Console",
-      "commandLineArgs": "-d test.startliste.info -i"
+      "commandLineArgs": "test.startliste.info -i -v Verbose -a",
+      "workingDirectory": "r:\\"
     }
   }
 }
