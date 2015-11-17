@@ -1,0 +1,18 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    "DNX,Version=v4.6": {},
+    ".NETFramework,Version=v4.6": {},
+    "DNX,Version=v4.6/win7-x86": {},
+    "DNX,Version=v4.6/win7-x64": {},
+    ".NETFramework,Version=v4.6/win7-x86": {},
+    ".NETFramework,Version=v4.6/win7-x64": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "": [],
+    "DNX,Version=v4.6": [],
+    ".NETFramework,Version=v4.6": []
+  }
+}

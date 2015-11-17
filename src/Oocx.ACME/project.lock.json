@@ -36,11 +36,16 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "Oocx.ACME.IIS/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME.Common": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -124,11 +129,16 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "Oocx.ACME.IIS/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME.Common": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -212,11 +222,16 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "Oocx.ACME.IIS/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME.Common": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -312,11 +327,16 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "Oocx.ACME.IIS/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME.Common": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -412,11 +432,16 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "Oocx.ACME.IIS/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME.Common": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -512,11 +537,16 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "Oocx.ACME.IIS/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME.Common": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -580,6 +610,10 @@
     }
   },
   "libraries": {
+    "Oocx.ACME.Common/1.0.0": {
+      "type": "project",
+      "path": "../Oocx.ACME.Common/project.json"
+    },
     "Oocx.ACME.IIS/1.0.0": {
       "type": "project",
       "path": "../Oocx.ACME.IIS/project.json"
@@ -838,6 +872,7 @@
       "Newtonsoft.Json >= 7.0.1",
       "System.Net.Http >= 4.0.1-beta-23409",
       "Microsoft.AspNet.WebApi.Client >= 5.2.3",
+      "Oocx.ACME.Common ",
       "Oocx.Asn1PKCS ",
       "Oocx.ACME.IIS "
     ],

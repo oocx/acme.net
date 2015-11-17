@@ -129,7 +129,7 @@ namespace Oocx.ACME.Console
             var authorization = await client.NewDnsAuthorizationAsync(domain);
 
             var simpleHttp = authorization.Challenges.First(c => c.Type == "simpleHttp");
-            var challenge = await client.AcceptSimpleHttpChallengeAsync(simpleHttp);
+            var challenge = await client.AcceptSimpleHttpChallengeAsync(domain, simpleHttp);
             System.Console.WriteLine(challenge.Instructions);
             System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
             System.Console.ReadLine();

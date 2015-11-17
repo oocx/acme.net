@@ -12,6 +12,10 @@
           "lib/net20/Microsoft.Web.Administration.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "System.Linq/4.0.1-beta-23409": {
         "type": "package",
         "compile": {
@@ -50,6 +54,10 @@
           "lib/net20/Microsoft.Web.Administration.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "System.Linq/4.0.1-beta-23409": {
         "type": "package",
         "compile": {
@@ -87,6 +95,10 @@
         "runtime": {
           "lib/net20/Microsoft.Web.Administration.dll": {}
         }
+      },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
       },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
@@ -132,6 +144,10 @@
           "lib/net20/Microsoft.Web.Administration.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
         "compile": {
@@ -175,6 +191,10 @@
         "runtime": {
           "lib/net20/Microsoft.Web.Administration.dll": {}
         }
+      },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
       },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
@@ -220,6 +240,10 @@
           "lib/net20/Microsoft.Web.Administration.dll": {}
         }
       },
+      "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
         "compile": {
@@ -256,6 +280,10 @@
     }
   },
   "libraries": {
+    "Oocx.ACME.Common/1.0.0": {
+      "type": "project",
+      "path": "../Oocx.ACME.Common/project.json"
+    },
     "Microsoft.Web.Administration/7.0.0": {
       "type": "package",
       "sha512": "EuvWscCjs8RtM3sjHCwGHOe9DFrnTa59dywEG3dy0IhoaWklJgSEmGuTtwIlww97xAVdrt4XUdE7BgMgwl59+g==",
@@ -415,7 +443,8 @@
       "System.Runtime >= 4.0.21-beta-23409",
       "System.Linq >= 4.0.1-beta-23409",
       "System.Threading >= 4.0.11-beta-23409",
-      "Microsoft.Web.Administration >= 7.0.0"
+      "Microsoft.Web.Administration >= 7.0.0",
+      "Oocx.ACME.Common "
     ],
     "DNX,Version=v4.6": [],
     ".NETFramework,Version=v4.6": []

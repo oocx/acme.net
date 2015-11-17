@@ -5,8 +5,9 @@ using static System.Console;
 
 using CommandLine;
 using Oocx.ACME.Client;
+using Oocx.ACME.Common;
 using Oocx.ACME.Services;
-using static  Oocx.ACME.Services.Log;
+using static  Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Console
 {

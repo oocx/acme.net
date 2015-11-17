@@ -50,6 +50,9 @@
     <Reference Include="Oocx.ACME">
       <HintPath>..\..\artifacts\bin\Oocx.ACME\Debug\net46\Oocx.ACME.dll</HintPath>
     </Reference>
+    <Reference Include="Oocx.ACME.Common">
+      <HintPath>..\..\artifacts\bin\Oocx.ACME.Common\Debug\net46\Oocx.ACME.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Oocx.ACME.Console">
       <HintPath>..\..\artifacts\bin\Oocx.ACME.Console\Debug\net46\Oocx.ACME.Console.dll</HintPath>
       <Private>True</Private>

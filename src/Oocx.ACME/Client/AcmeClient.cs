@@ -11,7 +11,7 @@ using Oocx.ACME.IIS;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
-using static Oocx.ACME.Services.Log;
+using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Client
 {
@@ -121,7 +121,7 @@ namespace Oocx.ACME.Client
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
-        public async Task<PendingChallenge> AcceptSimpleHttpChallengeAsync(Challenge challenge)
+        public async Task<PendingChallenge> AcceptSimpleHttpChallengeAsync(string domain, Challenge challenge)
         {
             await EnsureDirectory();
 
@@ -138,14 +138,14 @@ namespace Oocx.ACME.Client
             var encodedMessage = jws.Encode(simpleHttp, header);
             var json = JsonConvert.SerializeObject(encodedMessage, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
 
-            return CompleteChallengeByIisIntegration(challenge, json);
+            return CompleteChallengeByIisIntegration(domain, challenge, json);
             //return CompleteChallengeByManualFileCopy(challenge, json);
         }
 
-        private PendingChallenge CompleteChallengeByIisIntegration(Challenge challenge, string json)
+        private PendingChallenge CompleteChallengeByIisIntegration(string domain, Challenge challenge, string json)
         {
-            var iis = new IisIntegration();
-            var domain = challenge.Uri.Host;
+            var iis = new IISChallengeService();
+            
             iis.AcceptChallenge(domain, challenge.Token, json);
 
             return new PendingChallenge()

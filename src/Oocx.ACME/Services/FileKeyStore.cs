@@ -6,7 +6,7 @@ using System.Security.AccessControl;
 using System.Security.Cryptography;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.PKCS1;
-using static Oocx.ACME.Services.Log;
+using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Services
 {
