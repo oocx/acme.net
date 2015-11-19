@@ -11,6 +11,7 @@ using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.PKCS10;
 using Oocx.Asn1PKCS.PKCS12;
+using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Console
 {
@@ -33,7 +34,12 @@ namespace Oocx.ACME.Console
 
             foreach (var domain in options.Domains)
             {
-                await AuthorizeForDomain(client, domain);
+                bool isAuthorized = await AuthorizeForDomain(client, domain);
+                if (!isAuthorized)
+                {
+                    Error($"authorization for domain {domain} failed");
+                    continue;
+                }
 
                 var key = GetPrivateKey(domain);
 
@@ -70,13 +76,13 @@ namespace Oocx.ACME.Console
 
         private void SaveCertificateWithPrivateKey(string domain, RSAParameters key, string certificatePath)
         {
-            System.Console.WriteLine("generating pfx file with certificate and private key");
+            Info("generating pfx file with certificate and private key");
             GetPfxPasswordFromUser();
 
             var pfxGenerator = new Pkcs12();
             var pfxPath = Path.Combine(Environment.CurrentDirectory, $"{domain}.pfx");
             pfxGenerator.CreatePfxFile(key, certificatePath, options.PfxPassword, pfxPath);
-            System.Console.WriteLine($"pfx file saved to {pfxPath}");
+            Info($"pfx file saved to {pfxPath}");
         }
 
         private static byte[] CreateCertificateRequest(string domain, RSAParameters key)
@@ -119,12 +125,12 @@ namespace Oocx.ACME.Console
         private static string SaveCertificateReturnedByServer(string domain, CertificateResponse response)
         {
             var certificatePath = Path.Combine(Environment.CurrentDirectory, $"{domain}.cer");
-            System.Console.WriteLine($"saving certificate returned by ACME server to {certificatePath}");
+            Info($"saving certificate returned by ACME server to {certificatePath}");
             File.WriteAllBytes(certificatePath, response.Certificate);
             return certificatePath;
         }
 
-        private static async Task AuthorizeForDomain(AcmeClient client, string domain)
+        private static async Task<bool> AuthorizeForDomain(AcmeClient client, string domain)
         {
             var authorization = await client.NewDnsAuthorizationAsync(domain);
 
@@ -134,7 +140,7 @@ namespace Oocx.ACME.Console
             System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
             System.Console.ReadLine();
             var challengeResult = await challenge.Complete;
-            //TODO handle failed challenges            
+            return "pending".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
         }
 
         private async Task RegisterWithServer(AcmeClient client)
@@ -143,11 +149,10 @@ namespace Oocx.ACME.Console
 
             if (!string.IsNullOrWhiteSpace(registration.Location) && options.AcceptTermsOfService)
             {
-                System.Console.WriteLine("accepting terms of service");
+                Info("accepting terms of service");
                 registration = await client.UpdateRegistrationAsync(registration.Location);
-                System.Console.WriteLine(registration.Agreement);
-                System.Console.WriteLine(string.Join(", ", registration.Contact));
-                System.Console.WriteLine(registration.Certificates);
+                Verbose($"Agreement: {registration.Agreement}");
+                Verbose($"Contact: {string.Join(", ", registration.Contact)}");                
             }
         }
 
@@ -158,7 +163,7 @@ namespace Oocx.ACME.Console
                 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) =>
                 {
                     if (sslPolicyErrors != SslPolicyErrors.None)
-                        System.Console.WriteLine($"ignoring SSL certificate error: {sslPolicyErrors}");
+                        Verbose($"ignoring SSL certificate error: {sslPolicyErrors}");
                     return true;
                 };
             }

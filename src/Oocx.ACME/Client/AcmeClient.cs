@@ -184,7 +184,7 @@ namespace Oocx.ACME.Client
                 challenge = await GetAsync<Challenge>(challenge.Uri);                                
             }
 
-            Info($"challenge stauts is {challenge?.Status}");
+            Info($"challenge status is {challenge?.Status}");
 
             return challenge;
         }
