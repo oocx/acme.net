@@ -44,7 +44,7 @@ namespace Oocx.Asn1PKCS.PKCS10
 
             var rsa = new RSACryptoServiceProvider();
             rsa.ImportParameters(requestData.Key);
-            var signatureBytes = rsa.SignData(certificationRequestInfoBytes, new SHA256CryptoServiceProvider());
+            var signatureBytes = rsa.SignData(certificationRequestInfoBytes, SHA256.Create());
 
             return new CertificationRequest(
                 certificationRequestInfo,
