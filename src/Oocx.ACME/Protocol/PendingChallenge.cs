@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Oocx.ACME.Protocol
 {
@@ -6,6 +7,6 @@ namespace Oocx.ACME.Protocol
     {
         public string Instructions { get; set; }
 
-        public Action Complete { get; set; }
+        public Task<Challenge> Complete { get; set; }
     }
 }

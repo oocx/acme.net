@@ -133,7 +133,8 @@ namespace Oocx.ACME.Console
             System.Console.WriteLine(challenge.Instructions);
             System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
             System.Console.ReadLine();
-            challenge.Complete();
+            var challengeResult = await challenge.Complete;
+            //TODO handle failed challenges            
         }
 
         private async Task RegisterWithServer(AcmeClient client)

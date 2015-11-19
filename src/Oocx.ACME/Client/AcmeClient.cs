@@ -151,7 +151,7 @@ namespace Oocx.ACME.Client
             return new PendingChallenge()
             {
                 Instructions = $"using IIS integration to complete the challenge. press enter.",
-                Complete = async () => await CompleteChallenge(challenge)
+                Complete = CompleteChallenge(challenge)
             };
         }
 
@@ -164,11 +164,11 @@ namespace Oocx.ACME.Client
             return new PendingChallenge()
             {
                 Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
-                Complete = async () => await CompleteChallenge(challenge)
+                Complete = CompleteChallenge(challenge)
             };
         }
 
-        private async Task CompleteChallenge(Challenge challenge)
+        private async Task<Challenge> CompleteChallenge(Challenge challenge)
         {
             var challangeRequest = new ChallangeRequest()
             {
@@ -180,9 +180,13 @@ namespace Oocx.ACME.Client
 
             while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
             {
-                challenge = await GetAsync<Challenge>(challenge.Uri);
                 await Task.Delay(4000);
+                challenge = await GetAsync<Challenge>(challenge.Uri);                                
             }
+
+            Info($"challenge stauts is {challenge?.Status}");
+
+            return challenge;
         }
 
         public async Task<CertificateResponse> NewCertificateRequestAsync(byte[] csr)
