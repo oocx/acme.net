@@ -47,6 +47,7 @@ namespace Oocx.ACME.IIS
             var everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
             var allowRead = new FileSystemAccessRule(everyone, FileSystemRights.Read, AccessControlType.Allow);
             accessControl.AddAccessRule(allowRead);
+            File.SetAccessControl(wellKnownPath, accessControl);
         }
 
         private void CreateIISVirtualDirectory(string domain, string wellKnownPath)
