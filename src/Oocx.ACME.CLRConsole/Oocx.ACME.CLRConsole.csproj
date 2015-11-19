@@ -57,6 +57,9 @@
       <HintPath>..\..\artifacts\bin\Oocx.ACME.Console\Debug\net46\Oocx.ACME.Console.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Oocx.ACME.IIS">
+      <HintPath>..\..\artifacts\bin\Oocx.ACME.IIS\Debug\net46\Oocx.ACME.IIS.dll</HintPath>
+    </Reference>
     <Reference Include="Oocx.Asn1PKCS">
       <HintPath>..\..\artifacts\bin\Oocx.Asn1PKCS\Debug\net46\Oocx.Asn1PKCS.dll</HintPath>
     </Reference>
