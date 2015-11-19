@@ -31,7 +31,10 @@ namespace Oocx.ACME.IIS
         }
 
         const string AcmeWebConfigContents =
-            "<?xml version = \"1.0\" encoding=\"UTF-8\"?><configuration><system.webServer><staticContent><mimeMap fileExtension = \".\" mimeType=\"application/jose+json\" /></staticContent></system.webServer></configuration>";
+            "<?xml version = \"1.0\" encoding=\"UTF-8\"?><configuration><system.webServer>"+
+            "<staticContent><mimeMap fileExtension = \".\" mimeType=\"application/jose+json\" /></staticContent>"+
+            "<modules runAllManagedModulesForAllRequests=\"false\"></modules>"+
+            "</system.webServer></configuration>";
 
         public void AcceptChallenge(string domain, string token, string challengeJson)
         {

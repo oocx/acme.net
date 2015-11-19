@@ -27,7 +27,7 @@ namespace Oocx.ACME.Console
 
         public async Task Start()
         {
-            Info($"acme.exe v{typeof(Process).Assembly.GetName()?.Version}");
+            Info($"acme.exe v{typeof(AcmeClient).Assembly.GetName()?.Version}");
 
             IgnoreSslErrors();
 
