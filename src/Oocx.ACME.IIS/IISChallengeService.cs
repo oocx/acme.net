@@ -54,12 +54,17 @@ namespace Oocx.ACME.IIS
         {
             var site = GetSiteForDomain(domain);
             var root = site.Applications["/"];
-            var wellKnownDir = root.VirtualDirectories.FirstOrDefault(d => "/.well-known".Equals(d.Path));
-            if (wellKnownDir == null)
+            
+            if (!root.VirtualDirectories.Any(d => "/.well-known".Equals(d.Path)))
+            {
+                Verbose("creating virtual directory /.well-known");
+                root.VirtualDirectories.Add("/.well-known", wellKnownPath);
+                manager.CommitChanges();
+            }
+            if (!root.VirtualDirectories.Any(d => "/.well-known/acme".Equals(d.Path)))
             {
                 Verbose("creating virtual directory /.well-known/acme");
-                var wellKnownVdir = root.VirtualDirectories.Add("/.well-known", wellKnownPath);
-                var acmeVdir = root.VirtualDirectories.Add("/.well-known/acme", Path.Combine(wellKnownPath, "acme"));
+                root.VirtualDirectories.Add("/.well-known/acme", Path.Combine(wellKnownPath, "acme"));
                 manager.CommitChanges();
             }
         }
