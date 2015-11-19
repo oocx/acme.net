@@ -150,7 +150,7 @@ namespace Oocx.ACME.Client
 
             return new PendingChallenge()
             {
-                Instructions = $"using IIS integration to complete the challenge. press enter.",
+                Instructions = $"using IIS integration to complete the challenge.",
                 Complete = CompleteChallenge(challenge)
             };
         }

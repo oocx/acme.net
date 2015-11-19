@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Security;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Oocx.ACME.Client;
@@ -26,6 +27,8 @@ namespace Oocx.ACME.Console
 
         public async Task Start()
         {
+            Info($"acme.exe v{typeof(Process).Assembly.GetName()?.Version}");
+
             IgnoreSslErrors();
 
             var client = CreateAcmeClient();
