@@ -143,7 +143,7 @@ namespace Oocx.ACME.Console
             System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
             System.Console.ReadLine();
             var challengeResult = await challenge.Complete();
-            return "pending".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
+            return "valid".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
         }
 
         private async Task RegisterWithServer(AcmeClient client)
