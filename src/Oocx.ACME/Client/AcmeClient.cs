@@ -121,24 +121,15 @@ namespace Oocx.ACME.Client
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
-        public async Task<PendingChallenge> AcceptSimpleHttpChallengeAsync(string domain, Challenge challenge)
+        public async Task<PendingChallenge> AcceptHttp01ChallengeAsync(string domain, Challenge challenge)
         {
             await EnsureDirectory();
 
             Info($"accepting challenge {challenge.Type}");
+                        
+            var data = jws.GetKeyAuthorization(challenge.Token);
 
-            // acme / SimpleHttp!
-            var simpleHttp = new SimpleHttpChallenge()
-            {
-                Tls = challenge.Tls,
-                Token = challenge.Token
-            };
-            
-            var header = new object();            
-            var encodedMessage = jws.Encode(simpleHttp, header);
-            var json = JsonConvert.SerializeObject(encodedMessage, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
-
-            return CompleteChallengeByIisIntegration(domain, challenge, json);
+            return CompleteChallengeByIisIntegration(domain, challenge, data);
             //return CompleteChallengeByManualFileCopy(challenge, json);
         }
 
@@ -151,7 +142,7 @@ namespace Oocx.ACME.Client
             return new PendingChallenge()
             {
                 Instructions = $"using IIS integration to complete the challenge.",
-                Complete = CompleteChallenge(challenge)
+                Complete = () => CompleteChallenge(challenge)
             };
         }
 
@@ -164,16 +155,22 @@ namespace Oocx.ACME.Client
             return new PendingChallenge()
             {
                 Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
-                Complete = CompleteChallenge(challenge)
+                Complete = () => CompleteChallenge(challenge)
             };
         }
 
         private async Task<Challenge> CompleteChallenge(Challenge challenge)
         {
-            var challangeRequest = new ChallangeRequest()
+            //var challangeRequest = new ChallangeRequest()
+            //{
+            //    //Tls = true,
+            //    Type = challenge.Type,                
+            //    Token = challenge.Token
+            //};
+
+            var challangeRequest = new KeyAuthorizationRequest()
             {
-                Tls = true,
-                Type = challenge.Type
+                KeyAuthorization = jws.GetKeyAuthorization(challenge.Token)
             };
 
             challenge = await PostAsync<Challenge>(challenge.Uri, challangeRequest);

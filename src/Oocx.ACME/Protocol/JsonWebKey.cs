@@ -46,6 +46,7 @@ namespace Oocx.ACME.Protocol
 
     }
 
+
     // Based on: https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#appendix-C
 
     public class JWSHeader
@@ -85,13 +86,7 @@ namespace Oocx.ACME.Protocol
 
         public JWSMessage Encode<TPayload, THeader>(TPayload payload, THeader protectedHeader)
         {
-            var parameters = rsa.ExportParameters(true);
-            var jwk = new JsonWebKey()
-            {
-                KeyType = "RSA",                                
-                Exponent = parameters.Exponent.Base64UrlEncoded(),                
-                Modulus = parameters.Modulus.Base64UrlEncoded(),                
-            };
+            var jwk = GetKey();
 
             var header = new JWSHeader()
             {
@@ -110,6 +105,30 @@ namespace Oocx.ACME.Protocol
 
             return message;
         }
-        
+
+        public JsonWebKey GetKey()
+        {
+            var parameters = rsa.ExportParameters(true);
+            var jwk = new JsonWebKey()
+            {
+                KeyType = "RSA",
+                Exponent = parameters.Exponent.Base64UrlEncoded(),
+                Modulus = parameters.Modulus.Base64UrlEncoded(),
+            };
+            return jwk;
+        }
+
+        public string GetSha256Thumbprint()
+        {
+            var key = GetKey();
+            var json = "{\"e\":\"" + key.Exponent + "\",\"kty\":\"RSA\",\"n\":\"" + key.Modulus + "\"}";
+            var sha256 = SHA256.Create();
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(json)).Base64UrlEncoded();
+        }
+
+        public string GetKeyAuthorization(string token)
+        {
+            return $"{token}.{GetSha256Thumbprint()}";
+        }
     }
 }

@@ -7,6 +7,6 @@ namespace Oocx.ACME.Protocol
     {
         public string Instructions { get; set; }
 
-        public Task<Challenge> Complete { get; set; }
+        public Func<Task<Challenge>> Complete { get; set; }
     }
 }

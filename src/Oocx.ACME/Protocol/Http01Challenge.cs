@@ -2,15 +2,12 @@ using Newtonsoft.Json;
 
 namespace Oocx.ACME.Protocol
 {
-    public class SimpleHttpChallenge
+    public class Http01Challenge
     {
         [JsonProperty("type")]
-        public string Type => "simpleHttp";
+        public string Type => "http-01";
 
         [JsonProperty("token")]
         public string Token { get; set; }
-
-        [JsonProperty("tls")]
-        public bool Tls { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Oocx.ACME.IIS
 
         const string AcmeWebConfigContents =
             "<?xml version = \"1.0\" encoding=\"UTF-8\"?><configuration><system.webServer>"+
-            "<staticContent><mimeMap fileExtension = \".\" mimeType=\"application/jose+json\" /></staticContent>"+
+            "<staticContent><mimeMap fileExtension = \".\" mimeType=\"text/plain\" /></staticContent>"+
             "<modules runAllManagedModulesForAllRequests=\"false\"></modules>"+
             "</system.webServer></configuration>";
 
@@ -40,7 +40,7 @@ namespace Oocx.ACME.IIS
         {
             Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
             var wellKnownPath = CreateWellKnownDirectory(token, challengeJson);            
-            CreateIISVirtualDirectory(domain, wellKnownPath);
+            CreateIISAppAndVirtualDirectory(domain, wellKnownPath);
         }
 
         private static void AllowReadPermissionsForEveryone(string wellKnownPath)
@@ -53,23 +53,25 @@ namespace Oocx.ACME.IIS
             File.SetAccessControl(wellKnownPath, accessControl);
         }
 
-        private void CreateIISVirtualDirectory(string domain, string wellKnownPath)
+        private void CreateIISAppAndVirtualDirectory(string domain, string wellKnownPath)
         {
             var site = GetSiteForDomain(domain);
-            var root = site.Applications["/"];
-            
-            if (!root.VirtualDirectories.Any(d => "/.well-known".Equals(d.Path)))
+
+            bool commitChanges = false;
+            var app = site.Applications.FirstOrDefault(a => "/.well-known".Equals(a.Path));
+            if (app == null)
             {
-                Verbose("creating virtual directory /.well-known");
-                root.VirtualDirectories.Add("/.well-known", wellKnownPath);
-                manager.CommitChanges();
+                Verbose("creating application /.well-known");
+                app = site.Applications.Add("/.well-known", wellKnownPath);
+                commitChanges = true;
             }
-            if (!root.VirtualDirectories.Any(d => "/.well-known/acme".Equals(d.Path)))
+            if (!app.VirtualDirectories.Any(d => "/acme".Equals(d.Path)))
             {
                 Verbose("creating virtual directory /.well-known/acme");
-                root.VirtualDirectories.Add("/.well-known/acme", Path.Combine(wellKnownPath, "acme"));
-                manager.CommitChanges();
+                app.VirtualDirectories.Add("/acme", Path.Combine(wellKnownPath, "acme"));
+                commitChanges = true;
             }
+            if (commitChanges) manager.CommitChanges();
         }
 
         private static string CreateWellKnownDirectory(string token, string challengeJson)

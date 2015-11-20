@@ -12,5 +12,17 @@ namespace Oocx.ACME.Protocol
 
         [JsonProperty("tls")]
         public bool Tls { get; set; }
+
+        [JsonProperty("token")]
+        public string Token { get; set; }
+    }
+
+    public class KeyAuthorizationRequest
+    {
+        [JsonProperty("resource")]
+        public string Resource => "challenge";
+
+        [JsonProperty("keyAuthorization")]
+        public string KeyAuthorization { get; set; }        
     }
 }

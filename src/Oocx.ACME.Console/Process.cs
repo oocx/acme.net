@@ -137,12 +137,12 @@ namespace Oocx.ACME.Console
         {
             var authorization = await client.NewDnsAuthorizationAsync(domain);
 
-            var simpleHttp = authorization.Challenges.First(c => c.Type == "simpleHttp");
-            var challenge = await client.AcceptSimpleHttpChallengeAsync(domain, simpleHttp);
+            var http01 = authorization.Challenges.First(c => c.Type == "http-01");
+            var challenge = await client.AcceptHttp01ChallengeAsync(domain, http01);
             System.Console.WriteLine(challenge.Instructions);
             System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
             System.Console.ReadLine();
-            var challengeResult = await challenge.Complete;
+            var challengeResult = await challenge.Complete();
             return "pending".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
         }
 
