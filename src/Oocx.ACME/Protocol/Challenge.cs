@@ -17,6 +17,9 @@ namespace Oocx.ACME.Protocol
         [JsonProperty("status")]
         public string Status { get; set; }
 
+        [JsonProperty("error")]
+        public Error Error { get; set; }
+
         [JsonProperty("tls")]
         public bool Tls { get; set; }
 

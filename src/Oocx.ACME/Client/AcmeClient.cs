@@ -182,6 +182,10 @@ namespace Oocx.ACME.Client
             }
 
             Info($"challenge status is {challenge?.Status}");
+            if (challenge?.Error?.Type != null)
+            {
+                Error($"{challenge.Error.Type} : {challenge.Error.Detail}");
+            }
 
             return challenge;
         }
@@ -231,8 +235,9 @@ namespace Oocx.ACME.Client
             };
 
             var response = await client.SendAsync(request);
+            
             Verbose($"response status: {(int)response.StatusCode} {response.ReasonPhrase}");
-
+            
             RememberNonce(response);
             
 

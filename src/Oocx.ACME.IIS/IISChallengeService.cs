@@ -85,7 +85,7 @@ namespace Oocx.ACME.IIS
             root = Environment.ExpandEnvironmentVariables(root);
             var wellKnownPath = Path.Combine(root, ".well-known");
             CreateDirectory(wellKnownPath);
-            var acmePath = Path.Combine(wellKnownPath, "acme");
+            var acmePath = Path.Combine(wellKnownPath, "acme-challenge");
             CreateDirectory(acmePath);
             var challengeFilePath = Path.Combine(acmePath, token);
             File.WriteAllText(challengeFilePath, challengeJson);
