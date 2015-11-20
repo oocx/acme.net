@@ -29,18 +29,18 @@ namespace Oocx.ACME.IIS
         {
             return manager.Sites.SingleOrDefault(s => s.Bindings.Any(b => string.Equals(domain, b.Host, StringComparison.OrdinalIgnoreCase)));
         }
-
         const string AcmeWebConfigContents =
-            "<?xml version = \"1.0\" encoding=\"UTF-8\"?><configuration><system.webServer>"+
-            "<staticContent><mimeMap fileExtension = \".\" mimeType=\"text/plain\" /></staticContent>"+
-            "<modules runAllManagedModulesForAllRequests=\"false\"></modules>"+
-            "</system.webServer></configuration>";
+       "<?xml version = \"1.0\" encoding=\"UTF-8\"?><configuration><system.webServer>" +
+       "<staticContent><mimeMap fileExtension = \".\" mimeType=\"text/plain\" /></staticContent>" +
+       "<modules runAllManagedModulesForAllRequests=\"false\"></modules>" +
+       "</system.webServer></configuration>";
 
         public void AcceptChallenge(string domain, string token, string challengeJson)
         {
             Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
-            var wellKnownPath = CreateWellKnownDirectory(token, challengeJson);            
-            CreateIISAppAndVirtualDirectory(domain, wellKnownPath);
+            var root = GetIisRootAndConfigureMimeType(domain);
+            var wellKnownPath = CreateWellKnownDirectory(root, token, challengeJson);            
+            
         }
 
         private static void AllowReadPermissionsForEveryone(string wellKnownPath)
@@ -53,49 +53,52 @@ namespace Oocx.ACME.IIS
             File.SetAccessControl(wellKnownPath, accessControl);
         }
 
-        private void CreateIISAppAndVirtualDirectory(string domain, string wellKnownPath)
+        private string GetIisRootAndConfigureMimeType(string domain)
         {
             var site = GetSiteForDomain(domain);
 
-            bool commitChanges = false;
-            var app = site.Applications.FirstOrDefault(a => "/.well-known".Equals(a.Path));
-            if (app == null)
+            var app = site.Applications["/"];
+
+            var config = app.GetWebConfiguration();
+            var staticContent = config.GetSection("system.webServer/staticContent");
+            var collection = staticContent.GetCollection();
+            if (!collection.Any(
+                    e => e.ElementTagName == "mimeMap" && ".".Equals(e.GetAttribute("fileExtension").Value)))
             {
-                Verbose("creating application /.well-known");
-                app = site.Applications.Add("/.well-known", wellKnownPath);
-                commitChanges = true;
+                Info("adding mime type 'text/plain' for extension '.'");
+                var mime = collection.CreateElement("mimeMap");
+                mime["fileExtension"] = ".";
+                mime["mimeType"] = "text/plain";
+                collection.Add(mime);
+                manager.CommitChanges();
             }
-            if (!app.VirtualDirectories.Any(d => "/acme".Equals(d.Path)))
+            else
             {
-                Verbose("creating virtual directory /.well-known/acme");
-                app.VirtualDirectories.Add("/acme", Path.Combine(wellKnownPath, "acme"));
-                commitChanges = true;
-            }
-            if (commitChanges) manager.CommitChanges();
+                Info("configuration already contains mime type mapping for extension '.'");
+            }                        
+
+            return app.VirtualDirectories["/"].PhysicalPath;
         }
 
-        private static string CreateWellKnownDirectory(string token, string challengeJson)
+        private static string CreateWellKnownDirectory(string root, string token, string challengeJson)
         {
-            var challengePath = Path.Combine(Path.GetTempPath(), "oocx.acme");
-            CreateDirectory(challengePath);
-            var wellKnownPath = Path.Combine(challengePath, ".well-known");
-            if (CreateDirectory(wellKnownPath)) AllowReadPermissionsForEveryone(wellKnownPath); ;
+            root = Environment.ExpandEnvironmentVariables(root);
+            var wellKnownPath = Path.Combine(root, ".well-known");
+            CreateDirectory(wellKnownPath);
             var acmePath = Path.Combine(wellKnownPath, "acme");
             CreateDirectory(acmePath);
             var challengeFilePath = Path.Combine(acmePath, token);
             File.WriteAllText(challengeFilePath, challengeJson);
-            var acmeWebConfigFilePath = Path.Combine(acmePath, "web.config");
-            File.WriteAllText(acmeWebConfigFilePath, AcmeWebConfigContents);
+            
             return wellKnownPath;
         }
 
-        private static bool CreateDirectory(string challengePath)
+        private static void CreateDirectory(string challengePath)
         {
-            if (Directory.Exists(challengePath)) return false;
+            if (Directory.Exists(challengePath)) return;
 
             Verbose($"creating directory {challengePath}");
-            System.IO.Directory.CreateDirectory(challengePath);
-            return true;
+            System.IO.Directory.CreateDirectory(challengePath);            
         }
     }
 }
