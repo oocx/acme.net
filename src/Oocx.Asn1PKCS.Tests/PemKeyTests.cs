@@ -74,7 +74,7 @@ namespace Oocx.Asn1PKCS.Tests
             var asn1Rsa = new RSAPrivateKey(rsaParameters);
 
             // Act
-            var serializedPEM = asn1Serializer.Serialize(asn1Rsa).ToArray().EncodeAsPEM(PEMExtensions.PrivateKey);
+            var serializedPEM = asn1Serializer.Serialize(asn1Rsa).ToArray().EncodeAsPEM(PEMExtensions.RSAPrivateKey);
             var parsedRsaKey = rsaParser.ParsePem(new MemoryStream(Encoding.ASCII.GetBytes(serializedPEM)));
 
             // Assert

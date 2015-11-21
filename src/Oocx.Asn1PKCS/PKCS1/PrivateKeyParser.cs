@@ -39,22 +39,7 @@ namespace Oocx.Asn1PKCS.PKCS1
 
         private static byte[] DecodePem(Stream input)
         {
-            string[] lines;
-            using (var sr = new StreamReader(input))
-            {
-                lines = sr.ReadToEnd().Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            }
-            if (!"-----BEGIN PRIVATE KEY-----".Equals(lines.First()))
-            {
-                throw new InvalidDataException("A pem private key file should start with -----BEGIN PRIVATE KEY-----");
-            }
-            if (!"-----END PRIVATE KEY-----".Equals(lines.Last()))
-            {
-                throw new InvalidDataException("A pem private key file should end with -----END PRIVATE KEY-----");
-            }
-            var base64 = string.Join("", lines.Skip(1).Take(lines.Length - 2));
-            var der = base64.Base64UrlDecode();
-            return der;
+            return input.DecodePEM(PEMExtensions.PrivateKey);
         }
     }
 }

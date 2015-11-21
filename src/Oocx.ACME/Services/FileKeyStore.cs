@@ -154,7 +154,7 @@ namespace Oocx.ACME.Services
         {
             var keyBytes = GetKeyAsDER(key);
 
-            var pem = keyBytes.EncodeAsPEM(PEMExtensions.PrivateKey);
+            var pem = keyBytes.EncodeAsPEM(PEMExtensions.RSAPrivateKey);
 
             var keyFileName = Path.Combine(basePath, $"{keyName}.pem");
             File.WriteAllText(keyFileName, pem);
