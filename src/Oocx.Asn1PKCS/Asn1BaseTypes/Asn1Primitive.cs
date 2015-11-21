@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
@@ -25,10 +26,19 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
                 Size = Length + LengthBytes.Length + 1;
             }
         }
-
+        
         protected Asn1Primitive(byte tag)
         {
             Tag = tag;
+        }         
+    }
+
+    public abstract class Asn1Primitive<T> : Asn1Primitive
+    {
+        public T UnencodedValue { get; protected set; }
+
+        protected Asn1Primitive(byte tag) : base(tag)
+        {
         }
     }
 }

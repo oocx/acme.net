@@ -1,6 +1,8 @@
+using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Asn1PKCS.Parser;
 using Xunit;
 
 namespace Oocx.Asn1PKCS.Tests
@@ -90,20 +92,55 @@ namespace Oocx.Asn1PKCS.Tests
             bytes[2].Should().Equal(0x02, 2, 0, 128); // da das 1. Bit zur Vorzeichenerkennung genutzt wird, wird bei >= 128 ein 0-Byte voran gestellt
             bytes[3].Should().Equal(0x02, 3, 1, 0, 0);
         }
+        
+        [Fact]
+        public void Should_parse_integer_to_bytes()
+        {
+            // Arrange
+            var asn1Input = new[]
+            {
+                new byte[] {2, 1, 0},
+                new byte[] {2, 1, 127},
+                new byte[] {2, 2, 0, 128},
+                new byte[] {2, 3, 1, 0, 0},
+                new byte[] {2, 0}
+            }.Select(b => new MemoryStream(b));
 
+            var expectedParsedValues = new[]
+            {
+                new byte[] {0},
+                new byte[] {127},
+                new byte[] {128},
+                new byte[] {1, 0, 0},
+                new byte[0],
+            };
+
+            var sut = new Asn1Parser();
+
+            // Act
+            var result = asn1Input.SelectMany(sut.Parse).Cast<Integer>().Select(i => i.UnencodedValue).ToArray();
+
+            // Assert
+            result.Length.Should().Be(expectedParsedValues.Length);
+            for (int i = 0; i < expectedParsedValues.Length; i++)
+            {
+                result[i].Should().Equal(expectedParsedValues[i]);
+            }
+        }
+        
         [Fact]
         public void Should_serialize_integer_from_bytes()
         {
             // Arrange
             var byteArrays = new byte[][]
-            {                
+            {
                 new byte[] {0},
                 new byte[] {127},
                 new byte[] {128},
                 new byte[] {1, 0, 0},
                 new byte[0],
             }.Select(data => new Integer(data));
-            
+
             var sut = new Asn1Serializer();
 
             // Act

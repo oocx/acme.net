@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Cryptography;
+using Oocx.Asn1PKCS;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.PKCS1;
 using static Oocx.ACME.Common.Log;
@@ -153,13 +154,7 @@ namespace Oocx.ACME.Services
         {
             var keyBytes = GetKeyAsDER(key);
 
-            var base64 = Convert.ToBase64String(keyBytes);
-            string base64Lines = "";
-            for (int i = 0; i < base64.Length; i += 64)
-            {
-                base64Lines += base64.Substring(i, Math.Min(64, base64.Length - i)) + "\n";
-            }
-            var pem = $"-----BEGIN ENCRYPTED PRIVATE KEY-----\n{base64Lines}-----END ENCRYPTED PRIVATE KEY-----";
+            var pem = keyBytes.EncodeAsPEM(PEMExtensions.PrivateKey);
 
             var keyFileName = Path.Combine(basePath, $"{keyName}.pem");
             File.WriteAllText(keyFileName, pem);

@@ -46,6 +46,7 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -139,6 +140,7 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -232,6 +234,7 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -337,6 +340,7 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -442,6 +446,7 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
@@ -547,6 +552,7 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"

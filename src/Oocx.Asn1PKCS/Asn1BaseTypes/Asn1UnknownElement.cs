@@ -2,9 +2,9 @@ using System;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    public class OctetString : Asn1Primitive<Byte[]>
+    public class Asn1UnknownElement : Asn1Primitive<Byte[]>
     {
-        public OctetString(byte[] data) : base(0x04)
+        public Asn1UnknownElement(byte tag, byte[] data) : base(tag)
         {
             Data = data;
             UnencodedValue = data;

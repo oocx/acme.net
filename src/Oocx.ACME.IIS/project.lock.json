@@ -16,6 +16,10 @@
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "System.Linq/4.0.1-beta-23409": {
         "type": "package",
         "compile": {
@@ -58,6 +62,10 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "System.Linq/4.0.1-beta-23409": {
         "type": "package",
         "compile": {
@@ -97,6 +105,10 @@
         }
       },
       "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
+      "Oocx.Asn1PKCS/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
@@ -148,6 +160,10 @@
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
+      },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
         "compile": {
@@ -193,6 +209,10 @@
         }
       },
       "Oocx.ACME.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
+      "Oocx.Asn1PKCS/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
@@ -244,6 +264,10 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6"
+      },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
         "compile": {
@@ -283,6 +307,10 @@
     "Oocx.ACME.Common/1.0.0": {
       "type": "project",
       "path": "../Oocx.ACME.Common/project.json"
+    },
+    "Oocx.Asn1PKCS/1.0.0": {
+      "type": "project",
+      "path": "../Oocx.Asn1PKCS/project.json"
     },
     "Microsoft.Web.Administration/7.0.0": {
       "type": "package",
@@ -444,6 +472,7 @@
       "System.Linq >= 4.0.1-beta-23409",
       "System.Threading >= 4.0.11-beta-23409",
       "Microsoft.Web.Administration >= 7.0.0",
+      "Oocx.Asn1PKCS ",
       "Oocx.ACME.Common "
     ],
     "DNX,Version=v4.6": [],

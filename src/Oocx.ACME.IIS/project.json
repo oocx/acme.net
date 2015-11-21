@@ -10,6 +10,7 @@
     "System.Linq": "4.0.1-beta-23409",
     "System.Threading": "4.0.11-beta-23409",
     "Microsoft.Web.Administration": "7.0.0",
+    "Oocx.Asn1PKCS": "",
     "Oocx.ACME.Common": ""    
   },
 

@@ -34,16 +34,6 @@ namespace Oocx.ACME.IIS
             
         }
 
-        private static void AllowReadPermissionsForEveryone(string wellKnownPath)
-        {
-            //TODO instead of allowing read for everyone, only allow read for the IIS application pool account
-            var accessControl = File.GetAccessControl(wellKnownPath);
-            var everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
-            var allowRead = new FileSystemAccessRule(everyone, FileSystemRights.Read, AccessControlType.Allow);
-            accessControl.AddAccessRule(allowRead);
-            File.SetAccessControl(wellKnownPath, accessControl);
-        }
-
         private string GetIisRootAndConfigureMimeType(string domain)
         {
             var site = manager.GetSiteForDomain(domain);

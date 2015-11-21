@@ -13,8 +13,11 @@
     "NSubstitute": "1.9.2",
     "Oocx.ACME.IIS": ""
   },
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
 
-  "frameworks": {
-    "dnx46": { }    
+  "frameworks": {    
+    "dnx46": { "compilationOptions": {"optimize": false, "define": ["DEBUG"]} }    
   }
 }

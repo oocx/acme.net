@@ -176,10 +176,15 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
         }
+      },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
       },
       "System.Linq/4.0.1-beta-23409": {
         "type": "package",
@@ -492,10 +497,15 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
         }
+      },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
       },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
@@ -814,10 +824,15 @@
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
           "Oocx.ACME.Common": null,
+          "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Runtime": "4.0.21-beta-23409",
           "System.Threading": "4.0.11-beta-23409"
         }
+      },
+      "Oocx.Asn1PKCS/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.6"
       },
       "runtime.win7.System.Threading/4.0.11-beta-23409": {
         "type": "package",
@@ -971,6 +986,10 @@
     "Oocx.ACME.IIS/1.0.0": {
       "type": "project",
       "path": "../Oocx.ACME.IIS/project.json"
+    },
+    "Oocx.Asn1PKCS/1.0.0": {
+      "type": "project",
+      "path": "../Oocx.Asn1PKCS/project.json"
     },
     "FluentAssertions/4.0.1": {
       "type": "package",
