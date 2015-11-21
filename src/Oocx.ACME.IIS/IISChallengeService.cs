@@ -22,18 +22,9 @@ namespace Oocx.ACME.IIS
         }
         public bool CanAcceptChallengeForDomain(string domain)
         {            
-            return GetSiteForDomain(domain) != null;
+            return manager.GetSiteForDomain(domain) != null;
         }
-
-        private Site GetSiteForDomain(string domain)
-        {
-            return manager.Sites.SingleOrDefault(s => s.Bindings.Any(b => string.Equals(domain, b.Host, StringComparison.OrdinalIgnoreCase)));
-        }
-        const string AcmeWebConfigContents =
-       "<?xml version = \"1.0\" encoding=\"UTF-8\"?><configuration><system.webServer>" +
-       "<staticContent><mimeMap fileExtension = \".\" mimeType=\"text/plain\" /></staticContent>" +
-       "<modules runAllManagedModulesForAllRequests=\"false\"></modules>" +
-       "</system.webServer></configuration>";
+              
 
         public void AcceptChallenge(string domain, string token, string challengeJson)
         {
@@ -55,7 +46,7 @@ namespace Oocx.ACME.IIS
 
         private string GetIisRootAndConfigureMimeType(string domain)
         {
-            var site = GetSiteForDomain(domain);
+            var site = manager.GetSiteForDomain(domain);
 
             var app = site.Applications["/"];
 
