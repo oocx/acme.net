@@ -56,11 +56,10 @@ namespace Oocx.ACME.Client
         {
             await EnsureDirectory();            
 
-            Info("creating new registration");
+            Info("trying to create new registration");
 
-            var request = new RegistrationRequest()
-            {                
-                Resource = "new-reg",
+            var request = new NewRegistrationRequest()
+            {                            
                 Contact = new[] { "mailto:mathias@raacke.info" },
                 Agreement = acceptTermsOfService ? "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf" : null
             };
@@ -68,17 +67,15 @@ namespace Oocx.ACME.Client
             try
             {
                 var registration = await PostAsync<RegistrationResponse>(directory.NewRegistration, request);
-                Info($"using new registration: {registration.Location}");
+                Info($"new registration created: {registration.Location}");
+                
                 return registration;
             }
             catch (AcmeException ex) when ((int) ex.Response.StatusCode == 409)
             {
                 var location = ex.Response.Headers.Location.ToString();
                 Info($"using existing registration: {location}");
-                return new RegistrationResponse()
-                {
-                    Location = location
-                };
+                return await PostAsync<RegistrationResponse>(new Uri(location), new UpdateRegistrationRequest());                                                
             }            
         }
 
@@ -90,17 +87,16 @@ namespace Oocx.ACME.Client
             }
         }
 
-        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri)
+        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, string agreementUri)
         {
             await EnsureDirectory();
 
             Info("updating registration: accepting terms of service");
 
-            var registration = new RegistrationRequest()
-            {
-                Resource = "reg",
+            var registration = new UpdateRegistrationRequest()
+            {                
                 Contact = new[] { "mailto:mathias@raacke.info" },
-                Agreement = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
+                Agreement = agreementUri ?? "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
             };
 
             return await PostAsync<RegistrationResponse>(new Uri(registrationUri), registration);

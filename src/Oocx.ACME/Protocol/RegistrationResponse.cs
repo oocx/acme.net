@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Oocx.ACME.Protocol
@@ -7,8 +8,14 @@ namespace Oocx.ACME.Protocol
         [JsonProperty("key")]
         public JsonWebKey Key { get; set; }
 
-        [JsonProperty("resource")]
-        public string Resource { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("initialIp")]
+        public string InitialIp { get; set; }
+
+        [JsonProperty("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         [JsonProperty("contact")]
         public string[] Contact { get; set; }

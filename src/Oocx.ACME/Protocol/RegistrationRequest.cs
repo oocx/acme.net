@@ -2,14 +2,11 @@ using Newtonsoft.Json;
 
 namespace Oocx.ACME.Protocol
 {
-    public class RegistrationRequest
+    public abstract class RegistrationRequest
     {
         [JsonProperty("jwk")]
         public JsonWebKey Key { get; set; }
-
-        [JsonProperty("resource")]
-        public string Resource { get; set; }
-
+        
         [JsonProperty("contact")]
         public string[] Contact { get; set; }
 
@@ -21,5 +18,17 @@ namespace Oocx.ACME.Protocol
 
         [JsonProperty("certificates")]
         public string Certificates { get; set; }
+    }
+
+    public class NewRegistrationRequest : RegistrationRequest
+    {
+        [JsonProperty("resource")]
+        public string Resource { get; } = "new-reg";
+    }
+
+    public class UpdateRegistrationRequest : RegistrationRequest
+    {
+        [JsonProperty("resource")]
+        public string Resource { get; } = "reg";
     }
 }

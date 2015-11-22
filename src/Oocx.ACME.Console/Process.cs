@@ -158,13 +158,16 @@ namespace Oocx.ACME.Console
         private async Task RegisterWithServer(AcmeClient client)
         {
             var registration = await client.RegisterAsync(options.AcceptTermsOfService);
+            Info($"Terms of service: {registration.Agreement}");
+            Verbose($"Created at: {registration.CreatedAt}");
+            Verbose($"Id: {registration.Id}");
+            Verbose($"Contact: {string.Join(", ", registration.Contact)}");
+            Verbose($"Initial Ip: {registration.InitialIp}");
 
             if (!string.IsNullOrWhiteSpace(registration.Location) && options.AcceptTermsOfService)
             {
                 Info("accepting terms of service");
-                registration = await client.UpdateRegistrationAsync(registration.Location);
-                Verbose($"Agreement: {registration.Agreement}");
-                Verbose($"Contact: {string.Join(", ", registration.Contact)}");                
+                await client.UpdateRegistrationAsync(registration.Location, registration.Agreement);                
             }
         }
 
