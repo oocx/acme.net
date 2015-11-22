@@ -26,12 +26,25 @@ namespace Oocx.ACME.IIS
         }
               
 
-        public void AcceptChallenge(string domain, string token, string challengeJson)
+        public void AcceptChallengeForDomain(string domain, string token, string challengeJson)
         {
             Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
             var root = GetIisRootAndConfigureMimeType(domain);
-            var wellKnownPath = CreateWellKnownDirectory(root, token, challengeJson);            
-            
+            CreateWellKnownDirectoryWithChallengeFile(root, token, challengeJson);                        
+        }
+
+        public void AcceptChallengeForSite(string siteName, string token, string challengeJson)
+        {
+            Info($"IISChallengeService is accepting challenge with token {token} for IIS web site '{siteName}'");
+            var site = manager.Sites[siteName];
+            if (site == null)
+            {
+                Error($"ISS web site '{siteName}' not found, cannot process challenge.");
+                return;
+            }
+
+            var root = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+            CreateWellKnownDirectoryWithChallengeFile(root, token, challengeJson);
         }
 
         private string GetIisRootAndConfigureMimeType(string domain)
@@ -61,7 +74,7 @@ namespace Oocx.ACME.IIS
             return app.VirtualDirectories["/"].PhysicalPath;
         }
 
-        private static string CreateWellKnownDirectory(string root, string token, string challengeJson)
+        private static void CreateWellKnownDirectoryWithChallengeFile(string root, string token, string challengeJson)
         {
             root = Environment.ExpandEnvironmentVariables(root);
             var wellKnownPath = Path.Combine(root, ".well-known");
@@ -69,9 +82,9 @@ namespace Oocx.ACME.IIS
             var acmePath = Path.Combine(wellKnownPath, "acme-challenge");
             CreateDirectory(acmePath);
             var challengeFilePath = Path.Combine(acmePath, token);
-            File.WriteAllText(challengeFilePath, challengeJson);
-            
-            return wellKnownPath;
+
+            Verbose($"writing challenge to {challengeFilePath}");
+            File.WriteAllText(challengeFilePath, challengeJson);                        
         }
 
         private static void CreateDirectory(string challengePath)

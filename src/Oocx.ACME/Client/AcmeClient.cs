@@ -117,7 +117,7 @@ namespace Oocx.ACME.Client
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
-        public async Task<PendingChallenge> AcceptHttp01ChallengeAsync(string domain, Challenge challenge)
+        public async Task<PendingChallenge> AcceptHttp01ChallengeAsync(string domain, string siteName, Challenge challenge)
         {
             await EnsureDirectory();
 
@@ -125,15 +125,22 @@ namespace Oocx.ACME.Client
                         
             var data = jws.GetKeyAuthorization(challenge.Token);
 
-            return CompleteChallengeByIisIntegration(domain, challenge, data);
+            return CompleteChallengeByIisIntegration(domain, challenge, data, siteName);
             //return CompleteChallengeByManualFileCopy(challenge, json);
         }
 
-        private PendingChallenge CompleteChallengeByIisIntegration(string domain, Challenge challenge, string json)
+        private PendingChallenge CompleteChallengeByIisIntegration(string domain, Challenge challenge, string json, string siteName)
         {
             var iis = new IISChallengeService();
-            
-            iis.AcceptChallenge(domain, challenge.Token, json);
+
+            if (siteName == null)
+            {
+                iis.AcceptChallengeForDomain(domain, challenge.Token, json);
+            }
+            else
+            {
+                iis.AcceptChallengeForSite(siteName, challenge.Token, json);
+            }
 
             return new PendingChallenge()
             {

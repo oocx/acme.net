@@ -146,12 +146,12 @@ namespace Oocx.ACME.Console
             return certificatePath;
         }
 
-        private static async Task<bool> AuthorizeForDomain(AcmeClient client, string domain)
+        private async Task<bool> AuthorizeForDomain(AcmeClient client, string domain)
         {
             var authorization = await client.NewDnsAuthorizationAsync(domain);
 
             var http01 = authorization.Challenges.First(c => c.Type == "http-01");
-            var challenge = await client.AcceptHttp01ChallengeAsync(domain, http01);
+            var challenge = await client.AcceptHttp01ChallengeAsync(domain, options.IISWebSite, http01);
             System.Console.WriteLine(challenge.Instructions);
             System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
             System.Console.ReadLine();

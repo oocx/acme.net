@@ -47,6 +47,12 @@ not used yet.
 
 # Change log
 
+## 2015-11-22 IIS integration
+
+The console application can now configure IIS to automatically handle an http-01 challenge.
+It can now also install the certificate into the certificate store and update IIS bindings 
+to use the new certificate.
+
 ## 2015-11-16 basic command line client
 
 The console application now accepts command line parameters. I also added a first prerelease
