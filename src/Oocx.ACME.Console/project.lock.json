@@ -52,7 +52,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -69,6 +68,7 @@
         "framework": "DNX,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME": null,
           "Oocx.ACME.Common": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
@@ -170,7 +170,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -187,6 +186,7 @@
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME": null,
           "Oocx.ACME.Common": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
@@ -288,7 +288,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -305,6 +304,7 @@
         "framework": "DNX,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME": null,
           "Oocx.ACME.Common": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
@@ -418,7 +418,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -435,6 +434,7 @@
         "framework": "DNX,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME": null,
           "Oocx.ACME.Common": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
@@ -548,7 +548,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -565,6 +564,7 @@
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME": null,
           "Oocx.ACME.Common": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
@@ -678,7 +678,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -695,6 +694,7 @@
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Web.Administration": "7.0.0",
+          "Oocx.ACME": null,
           "Oocx.ACME.Common": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
@@ -1035,6 +1035,7 @@
     "": [
       "CommandLineParser >= 2.0.275-beta",
       "Oocx.ACME ",
+      "Oocx.ACME.IIS ",
       "Oocx.Asn1PKCS "
     ],
     "DNX,Version=v4.6": [],

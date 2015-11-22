@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Oocx.ACME.IIS;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
@@ -18,19 +17,18 @@ namespace Oocx.ACME.Client
     public class AcmeClient
     {        
         private readonly HttpClient client;
-        private readonly RSA key;
 
         private Directory directory;
 
         private string nonce;        
-        private JWS jws;
+
+        private readonly JWS jws;
 
         public AcmeClient(HttpClient client, RSA key)
         {
             Info($"using server {client.BaseAddress}");
 
             this.client = client;
-            this.key = key;
             jws = new JWS(key);            
         }
 
@@ -38,7 +36,7 @@ namespace Oocx.ACME.Client
         {         
         }
 
-        
+        public JWS Jws => jws;
 
         public async Task<Directory> DiscoverAsync()
         {
@@ -79,7 +77,7 @@ namespace Oocx.ACME.Client
             }            
         }
 
-        private async Task EnsureDirectory()
+        public async Task EnsureDirectory()
         {
             if (directory == null || nonce == null)
             {
@@ -117,60 +115,10 @@ namespace Oocx.ACME.Client
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
         }
 
-        public async Task<PendingChallenge> AcceptHttp01ChallengeAsync(string domain, string siteName, Challenge challenge)
-        {
-            await EnsureDirectory();
+            
 
-            Info($"accepting challenge {challenge.Type}");
-                        
-            var data = jws.GetKeyAuthorization(challenge.Token);
-
-            return CompleteChallengeByIisIntegration(domain, challenge, data, siteName);
-            //return CompleteChallengeByManualFileCopy(challenge, json);
-        }
-
-        private PendingChallenge CompleteChallengeByIisIntegration(string domain, Challenge challenge, string json, string siteName)
-        {
-            var iis = new IISChallengeService();
-
-            if (siteName == null)
-            {
-                iis.AcceptChallengeForDomain(domain, challenge.Token, json);
-            }
-            else
-            {
-                iis.AcceptChallengeForSite(siteName, challenge.Token, json);
-            }
-
-            return new PendingChallenge()
-            {
-                Instructions = $"using IIS integration to complete the challenge.",
-                Complete = () => CompleteChallenge(challenge)
-            };
-        }
-
-        private PendingChallenge CompleteChallengeByManualFileCopy(Challenge challenge, string json)
-        {
-            var acmeChallengePath = Environment.CurrentDirectory;
-            var challengeFile = IO.Path.Combine(acmeChallengePath, challenge.Token);
-            IO.File.WriteAllText(challengeFile, json);
-
-            return new PendingChallenge()
-            {
-                Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
-                Complete = () => CompleteChallenge(challenge)
-            };
-        }
-
-        private async Task<Challenge> CompleteChallenge(Challenge challenge)
-        {
-            //var challangeRequest = new ChallangeRequest()
-            //{
-            //    //Tls = true,
-            //    Type = challenge.Type,                
-            //    Token = challenge.Token
-            //};
-
+        public async Task<Challenge> CompleteChallengeAsync(Challenge challenge)
+        {           
             var challangeRequest = new KeyAuthorizationRequest()
             {
                 KeyAuthorization = jws.GetKeyAuthorization(challenge.Token)

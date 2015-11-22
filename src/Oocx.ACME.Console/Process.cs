@@ -151,10 +151,28 @@ namespace Oocx.ACME.Console
         {
             var authorization = await client.NewDnsAuthorizationAsync(domain);
 
-            var http01 = authorization.Challenges.First(c => c.Type == "http-01");
-            var challenge = await client.AcceptHttp01ChallengeAsync(domain, options.IISWebSite, http01);
+            IChallengeProvider provider;
+            if ("manual".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
+            {
+                provider = new ManualChallengeProvider(client);
+            } else if ("iis-http-01".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
+            {
+                provider = new IISChallengeProvider(client);
+            }
+            else
+            {
+                Error($"unsupported challenge provider: {options.ChallengeProvider}");
+                return false;
+            }
+
+            var challenge = await provider.AcceptChallengeAsync(domain, options.IISWebSite, authorization);
+            if (challenge == null)
+            {
+                return false;
+            }            
+
             System.Console.WriteLine(challenge.Instructions);
-            System.Console.WriteLine("Press ENTER when your server is ready to serve the file");
+            System.Console.WriteLine("Press ENTER to continue");
             System.Console.ReadLine();
             var challengeResult = await challenge.Complete();
             return "valid".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);

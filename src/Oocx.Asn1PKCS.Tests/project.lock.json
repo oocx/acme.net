@@ -188,15 +188,6 @@
           "lib/net45/System.Net.Http.Primitives.dll": {}
         }
       },
-      "Microsoft.Web.Administration/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net20/Microsoft.Web.Administration.dll": {}
-        },
-        "runtime": {
-          "lib/net20/Microsoft.Web.Administration.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -222,7 +213,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -233,18 +223,6 @@
       "Oocx.ACME.Common/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
-      },
-      "Oocx.ACME.IIS/1.0.0": {
-        "type": "project",
-        "framework": "DNX,Version=v4.6",
-        "dependencies": {
-          "Microsoft.Web.Administration": "7.0.0",
-          "Oocx.ACME.Common": null,
-          "Oocx.Asn1PKCS": null,
-          "System.Linq": "4.0.1-beta-23409",
-          "System.Runtime": "4.0.21-beta-23409",
-          "System.Threading": "4.0.11-beta-23409"
-        }
       },
       "Oocx.Asn1PKCS/1.0.0": {
         "type": "project",
@@ -606,15 +584,6 @@
           "lib/net45/System.Net.Http.Primitives.dll": {}
         }
       },
-      "Microsoft.Web.Administration/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net20/Microsoft.Web.Administration.dll": {}
-        },
-        "runtime": {
-          "lib/net20/Microsoft.Web.Administration.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -640,7 +609,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -651,18 +619,6 @@
       "Oocx.ACME.Common/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
-      },
-      "Oocx.ACME.IIS/1.0.0": {
-        "type": "project",
-        "framework": "DNX,Version=v4.6",
-        "dependencies": {
-          "Microsoft.Web.Administration": "7.0.0",
-          "Oocx.ACME.Common": null,
-          "Oocx.Asn1PKCS": null,
-          "System.Linq": "4.0.1-beta-23409",
-          "System.Runtime": "4.0.21-beta-23409",
-          "System.Threading": "4.0.11-beta-23409"
-        }
       },
       "Oocx.Asn1PKCS/1.0.0": {
         "type": "project",
@@ -1036,15 +992,6 @@
           "lib/net45/System.Net.Http.Primitives.dll": {}
         }
       },
-      "Microsoft.Web.Administration/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net20/Microsoft.Web.Administration.dll": {}
-        },
-        "runtime": {
-          "lib/net20/Microsoft.Web.Administration.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -1070,7 +1017,6 @@
           "Microsoft.AspNet.WebApi.Client": "5.2.3",
           "Newtonsoft.Json": "7.0.1",
           "Oocx.ACME.Common": null,
-          "Oocx.ACME.IIS": null,
           "Oocx.Asn1PKCS": null,
           "System.Linq": "4.0.1-beta-23409",
           "System.Net.Http": "4.0.1-beta-23409",
@@ -1081,18 +1027,6 @@
       "Oocx.ACME.Common/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
-      },
-      "Oocx.ACME.IIS/1.0.0": {
-        "type": "project",
-        "framework": "DNX,Version=v4.6",
-        "dependencies": {
-          "Microsoft.Web.Administration": "7.0.0",
-          "Oocx.ACME.Common": null,
-          "Oocx.Asn1PKCS": null,
-          "System.Linq": "4.0.1-beta-23409",
-          "System.Runtime": "4.0.21-beta-23409",
-          "System.Threading": "4.0.11-beta-23409"
-        }
       },
       "Oocx.Asn1PKCS/1.0.0": {
         "type": "project",
@@ -1289,10 +1223,6 @@
     "Oocx.ACME.Common/1.0.0": {
       "type": "project",
       "path": "../Oocx.ACME.Common/project.json"
-    },
-    "Oocx.ACME.IIS/1.0.0": {
-      "type": "project",
-      "path": "../Oocx.ACME.IIS/project.json"
     },
     "Oocx.Asn1PKCS/1.0.0": {
       "type": "project",
@@ -1679,16 +1609,6 @@
         "Microsoft.Net.Http.2.2.29.nupkg",
         "Microsoft.Net.Http.2.2.29.nupkg.sha512",
         "Microsoft.Net.Http.nuspec"
-      ]
-    },
-    "Microsoft.Web.Administration/7.0.0": {
-      "type": "package",
-      "sha512": "EuvWscCjs8RtM3sjHCwGHOe9DFrnTa59dywEG3dy0IhoaWklJgSEmGuTtwIlww97xAVdrt4XUdE7BgMgwl59+g==",
-      "files": [
-        "lib/net20/Microsoft.Web.Administration.dll",
-        "Microsoft.Web.Administration.7.0.0.nupkg",
-        "Microsoft.Web.Administration.7.0.0.nupkg.sha512",
-        "Microsoft.Web.Administration.nuspec"
       ]
     },
     "Newtonsoft.Json/7.0.1": {

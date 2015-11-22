@@ -14,8 +14,7 @@
     "System.Net.Http": "4.0.1-beta-23409",
     "Microsoft.AspNet.WebApi.Client": "5.2.3",
     "Oocx.ACME.Common": "",
-    "Oocx.Asn1PKCS": "",
-    "Oocx.ACME.IIS": ""
+    "Oocx.Asn1PKCS": ""    
   },
 
   "frameworks": {    

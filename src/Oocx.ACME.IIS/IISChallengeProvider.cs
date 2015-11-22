@@ -6,21 +6,55 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
+using Oocx.ACME.Client;
+using Oocx.ACME.Protocol;
 using static Oocx.ACME.Common.Log;
+using Directory = System.IO.Directory;
 
 namespace Oocx.ACME.IIS
 {
     // This project can output the Class library as a NuGet Package.
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
-    public class IISChallengeService
+    public class IISChallengeProvider : IChallengeProvider
     {
+        private readonly AcmeClient client;
         private readonly ServerManager manager;
 
-        public IISChallengeService()
+        public IISChallengeProvider(AcmeClient client)
         {
+            this.client = client;
             manager = new ServerManager();
         }
-        public bool CanAcceptChallengeForDomain(string domain)
+
+        public async Task<PendingChallenge> AcceptChallengeAsync(string domain, string siteName, AuthorizationResponse authorization)
+        {
+            var challenge = authorization?.Challenges.FirstOrDefault(c => c.Type == "http-01");
+            if (challenge == null)
+            {
+                Error("the server does not accept challenge type http-01");
+                return null;
+            }
+            Info($"accepting challenge {challenge.Type}");
+
+            var keyAuthorization = client.Jws.GetKeyAuthorization(challenge.Token);
+
+            if (siteName == null)
+            {
+                AcceptChallengeForDomain(domain, challenge.Token, keyAuthorization);
+            }
+            else
+            {
+                AcceptChallengeForSite(siteName, challenge.Token, keyAuthorization);
+            }
+
+            return new PendingChallenge()
+            {
+                Instructions = $"using IIS integration to complete the challenge.",
+                Complete = () => client.CompleteChallengeAsync(challenge)
+            };
+        }
+    
+    public bool CanAcceptChallengeForDomain(string domain)
         {            
             return manager.GetSiteForDomain(domain) != null;
         }
