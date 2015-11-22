@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Oocx.ACME.Client;
+using Oocx.ACME.IIS;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
@@ -51,13 +52,21 @@ namespace Oocx.ACME.Console
                 var certificatePath = SaveCertificateReturnedByServer(domain, certificateResponse);
 
                 SaveCertificateWithPrivateKey(domain, key, certificatePath);
+
+                InstallCertificateToIis(domain, certificatePath, key);
             }
+        }
+
+        private static void InstallCertificateToIis(string domain, string certificatePath, RSAParameters key)
+        {
+            var installer = new IISCertificateInstaller();
+            installer.InstallCertificate(domain, certificatePath, "my", key);
         }
 
         private AcmeClient CreateAcmeClient()
         {
             var factory = new KeyStoreFactory();
-            var keyManager = factory.GetKeyStore(options.AccountKeyContainerType);
+            var keyManager = factory.GetKeyStore(options.AccountKeyContainerLocation);
             var rsa = keyManager.GetOrCreateKey(options.AccountKeyName);
             var client = new AcmeClient(options.AcmeServer, rsa);
             return client;

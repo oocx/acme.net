@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Microsoft.Web.Administration;
 using static Oocx.ACME.Common.Log;
 
@@ -18,8 +20,21 @@ namespace Oocx.ACME.IIS
             manager = new ServerManager();
         }
 
+        public void InstallCertificate(string domain, string certificatePath, string certificateStoreName, RSAParameters privateKey)
+        {
+            var certificateBytes = File.ReadAllBytes(certificatePath);
+            var x509 = new X509Certificate2(certificateBytes, (string)null, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
+            var csp = new CspParameters { KeyContainerName = "oocx-acme-temp", Flags = CspProviderFlags.UseMachineKeyStore };
+            var rsa = new RSACryptoServiceProvider(csp);
+            rsa.ImportParameters(privateKey);
+            x509.PrivateKey = rsa;
+            InstallCertificate(domain, x509, certificateStoreName);
+        }
+
         public void InstallCertificate(string domain, X509Certificate2 certificate, string certificateStoreName)
         {
+            Info($"configuring IIS to use the new certificate for {domain}");
+
             InstallCertificateToStore(certificate, certificateStoreName);
 
             var site = manager.GetSiteForDomain(domain);
