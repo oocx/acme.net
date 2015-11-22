@@ -3,13 +3,13 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.6": {
-      "Autofac/2.2.4.900": {
+      "Autofac/3.5.2": {
         "type": "package",
         "compile": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         },
         "runtime": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         }
       },
       "CommandLineParser/2.0.275-beta": {
@@ -130,13 +130,13 @@
       }
     },
     ".NETFramework,Version=v4.6": {
-      "Autofac/2.2.4.900": {
+      "Autofac/3.5.2": {
         "type": "package",
         "compile": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         },
         "runtime": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         }
       },
       "CommandLineParser/2.0.275-beta": {
@@ -257,13 +257,13 @@
       }
     },
     "DNX,Version=v4.6/win7-x86": {
-      "Autofac/2.2.4.900": {
+      "Autofac/3.5.2": {
         "type": "package",
         "compile": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         },
         "runtime": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         }
       },
       "CommandLineParser/2.0.275-beta": {
@@ -396,13 +396,13 @@
       }
     },
     "DNX,Version=v4.6/win7-x64": {
-      "Autofac/2.2.4.900": {
+      "Autofac/3.5.2": {
         "type": "package",
         "compile": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         },
         "runtime": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         }
       },
       "CommandLineParser/2.0.275-beta": {
@@ -535,13 +535,13 @@
       }
     },
     ".NETFramework,Version=v4.6/win7-x86": {
-      "Autofac/2.2.4.900": {
+      "Autofac/3.5.2": {
         "type": "package",
         "compile": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         },
         "runtime": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         }
       },
       "CommandLineParser/2.0.275-beta": {
@@ -674,13 +674,13 @@
       }
     },
     ".NETFramework,Version=v4.6/win7-x64": {
-      "Autofac/2.2.4.900": {
+      "Autofac/3.5.2": {
         "type": "package",
         "compile": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         },
         "runtime": {
-          "lib/NET40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {}
         }
       },
       "CommandLineParser/2.0.275-beta": {
@@ -830,15 +830,17 @@
       "type": "project",
       "path": "../Oocx.Asn1PKCS/project.json"
     },
-    "Autofac/2.2.4.900": {
+    "Autofac/3.5.2": {
       "type": "package",
-      "sha512": "erfIUmId+CQ/QmWTXeHPjILb62aNeuX9Hsp6T3IUtdDPG+PxkWHH6J9MxHlGrexUlS6lQ4iP+WuaVoI06HWE5g==",
+      "sha512": "pGR5LjY8T/16x6SkJNd7u6EjQnE4C7JS0BZJ7Yl7pt313gIUZ/2ZnPSOIM5eaIA7ArxaudlyyLvAT4ayX5UJ/A==",
       "files": [
-        "Autofac.2.2.4.900.nupkg",
-        "Autofac.2.2.4.900.nupkg.sha512",
+        "Autofac.3.5.2.nupkg",
+        "Autofac.3.5.2.nupkg.sha512",
         "Autofac.nuspec",
-        "lib/NET40/Autofac.dll",
-        "lib/NET40/Autofac.XML"
+        "lib/net40/Autofac.dll",
+        "lib/net40/Autofac.xml",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Autofac.dll",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Autofac.xml"
       ]
     },
     "CommandLineParser/2.0.275-beta": {
@@ -1102,7 +1104,7 @@
       "Oocx.ACME ",
       "Oocx.ACME.IIS ",
       "Oocx.Asn1PKCS ",
-      "Autofac >= 2.2.4.900"
+      "Autofac >= 3.5.2"
     ],
     "DNX,Version=v4.6": [],
     ".NETFramework,Version=v4.6": []

@@ -11,7 +11,7 @@
     "Oocx.ACME": "",    
     "Oocx.ACME.IIS": "",
     "Oocx.Asn1PKCS": "",
-    "Autofac": "2.2.4.900"
+    "Autofac": "3.5.2"
   },
 
   "commands": {
