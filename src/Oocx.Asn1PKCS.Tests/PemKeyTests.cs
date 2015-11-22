@@ -64,7 +64,7 @@ namespace Oocx.Asn1PKCS.Tests
 
         [Fact]
         public void Serializing_and_deserializing_a_private_key_should_result_in_equal_keys()
-        {
+        {            
             // Arrange
             var rsa = new RSACryptoServiceProvider(2048);
             var rsaParameters = rsa.ExportParameters(true);
@@ -76,6 +76,9 @@ namespace Oocx.Asn1PKCS.Tests
             // Act
             var serializedPEM = asn1Serializer.Serialize(asn1Rsa).ToArray().EncodeAsPEM(PEMExtensions.RSAPrivateKey);
             var parsedRsaKey = rsaParser.ParsePem(new MemoryStream(Encoding.ASCII.GetBytes(serializedPEM)));
+
+            //TODO this test sometimes has a missing leading '0' byte.
+
 
             // Assert
             parsedRsaKey.Key.Exponent.Should().Equal(rsaParameters.Exponent);

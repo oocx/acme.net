@@ -62,7 +62,10 @@ namespace Oocx.Asn1PKCS.Parser
                 {
                     return new Integer(new byte[] { 0 });
                 }
-
+                if (element.Data[1] <= 127)
+                {
+                    return new Integer(element.Data);
+                }
                 return new Integer(element.Data.Skip(1).ToArray());
             }
             return new Integer(element.Data);

@@ -101,18 +101,22 @@ namespace Oocx.Asn1PKCS.Tests
             {
                 new byte[] {2, 1, 0},
                 new byte[] {2, 1, 127},
+                new byte[] {2, 2, 0, 127},
                 new byte[] {2, 2, 0, 128},
                 new byte[] {2, 3, 1, 0, 0},
-                new byte[] {2, 0}
+                new byte[] {2, 0},
+                new byte[] {2, 7, 0, 165, 163, 214, 2, 169, 62}
             }.Select(b => new MemoryStream(b));
 
             var expectedParsedValues = new[]
             {
                 new byte[] {0},
                 new byte[] {127},
+                new byte[] {0, 127},
                 new byte[] {128},
                 new byte[] {1, 0, 0},
                 new byte[0],
+                new byte[] {165, 163, 214, 2, 169, 62}   //TODO as far as I undertand, it is correct that the parser removes the leading zero here. However, when parsing a PEM this must be taken into account and the parser must pad the parsed value with a leading zero
             };
 
             var sut = new Asn1Parser();
@@ -133,25 +137,38 @@ namespace Oocx.Asn1PKCS.Tests
         {
             // Arrange
             var byteArrays = new byte[][]
-            {
+            {                
                 new byte[] {0},
                 new byte[] {127},
+                new byte[] {0, 127},
                 new byte[] {128},
                 new byte[] {1, 0, 0},
                 new byte[0],
+                new byte[] {0, 165, 163, 214, 2, 169, 62}
             }.Select(data => new Integer(data));
 
+            var expectedSerializedValues = new[]
+            {
+                new byte[] {2, 1, 0},
+                new byte[] {2, 1, 127},
+                new byte[] {2, 2, 0, 127},
+                new byte[] {2, 2, 0, 128}, // da das 1. Bit zur Vorzeichenerkennung genutzt wird, wird bei >= 128 ein 0-Byte voran gestellt
+                new byte[] {2, 3, 1, 0, 0},
+                new byte[] {2, 0},
+                new byte[] {2, 7, 0, 165, 163, 214, 2, 169, 62}
+            };
             var sut = new Asn1Serializer();
 
             // Act
-            var bytes = byteArrays.Select(i => sut.Serialize(i)).ToArray();
+            var result = byteArrays.Select(i => sut.Serialize(i)).ToArray();
 
             // Assert
-            bytes[0].Should().Equal(0x02, 1, 0);
-            bytes[1].Should().Equal(0x02, 1, 127);
-            bytes[2].Should().Equal(0x02, 2, 0, 128); // da das 1. Bit zur Vorzeichenerkennung genutzt wird, wird bei >= 128 ein 0-Byte voran gestellt
-            bytes[3].Should().Equal(0x02, 3, 1, 0, 0);
-            bytes[4].Should().Equal(0x02, 0);
+            result.Length.Should().Be(expectedSerializedValues.Length);
+            for (int i = 0; i < expectedSerializedValues.Length; i++)
+            {
+                result[i].Should().Equal(expectedSerializedValues[i]);
+            }
+           
         }
     }
 }
