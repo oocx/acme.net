@@ -20,7 +20,7 @@ namespace Oocx.ACME.Console
         [Option('i', "ignoreSSLErrors", HelpText = "Ignore SSL certificate errors for the HTTPS connection to the ACME server (useful for debugging messages with fiddler)")]
         public bool IgnoreSSLCertificateErrors { get; set; }
 
-        [Option('v', "verbosity", HelpText = "Configures the log level (verbose, info, warning, error, disabled).", Default = LogLevel.Info)]
+        [Option('v', "verbosity", HelpText = "Configures the log level (Verbose, Info, Warning, Error, Disabled - casing is important).", Default = LogLevel.Info)]
         public LogLevel Verbosity { get; set; }
 
         [Option('p', "password", HelpText = "The password used to protect the generated pfx file")]
