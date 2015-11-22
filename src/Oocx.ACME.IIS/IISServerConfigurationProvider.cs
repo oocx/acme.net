@@ -118,7 +118,7 @@ namespace Oocx.ACME.IIS
                 return;
             }
 
-            Info($"Installing certificate with subject {certificate.Subject} and hash {hash} is already to store LocalMachine\\{certificateStoreName}");
+            Info($"Installing certificate with subject {certificate.Subject} and hash {hash} to store LocalMachine\\{certificateStoreName}");
             
             store.Add(certificate);
             store.Close();
