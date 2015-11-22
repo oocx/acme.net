@@ -5,19 +5,8 @@ using System.Linq;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    public class Asn1Serializer
-    {
-        //public IEnumerable<byte> Serialize(IAsn1Entity entity)
-        //{
-        //    if (entity is IAsn1Element) return Serialize((IAsn1Element) entity);
-        //    if (entity is Asn1ComplexType)
-        //    {
-        //        return ((Asn1ComplexType) entity).Children.SelectMany(Serialize);
-        //    }
-
-        //    throw new Exception("Unknown Asn1 entity type: " + entity.GetType().FullName);
-        //}
-
+    public class Asn1Serializer : IAsn1Serializer
+    {        
         public IEnumerable<byte> Serialize(IAsn1Element element, int depth = 0)
         {
             string tabs = "";

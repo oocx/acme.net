@@ -6,11 +6,11 @@ using Oid = Oocx.Asn1PKCS.Asn1BaseTypes.Oid;
 
 namespace Oocx.Asn1PKCS.PKCS10
 {
-    public class CertificateRequestAsn1DEREncoder
+    public class CertificateRequestAsn1DEREncoder : ICertificateRequestAsn1DEREncoder
     {
-        private readonly Asn1Serializer serializer;
+        private readonly IAsn1Serializer serializer;
 
-        public CertificateRequestAsn1DEREncoder(Asn1Serializer serializer)
+        public CertificateRequestAsn1DEREncoder(IAsn1Serializer serializer)
         {
             this.serializer = serializer;
         }

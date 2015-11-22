@@ -8,9 +8,10 @@
 
   "dependencies": {
     "CommandLineParser": "2.0.275-beta",
-    "Oocx.ACME": "",
+    "Oocx.ACME": "",    
     "Oocx.ACME.IIS": "",
-    "Oocx.Asn1PKCS": ""
+    "Oocx.Asn1PKCS": "",
+    "Autofac": "2.2.4.900"
   },
 
   "commands": {

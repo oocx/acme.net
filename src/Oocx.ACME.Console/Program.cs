@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Autofac;
+using Autofac.Core;
 using static System.Console;
 
 using CommandLine;
 using Oocx.ACME.Client;
 using Oocx.ACME.Common;
-using Oocx.ACME.Services;
 using static  Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Console
@@ -26,8 +27,16 @@ namespace Oocx.ACME.Console
             try
             {
                 Log.Level = options.Verbosity;
-                var process = new Process(options);
-                process.Start().GetAwaiter().GetResult();
+
+                var configuration = new ContainerConfiguration();
+                var container = configuration.Configure(options);
+                if (container == null)
+                {
+                    return;
+                }
+
+                var process = container.Resolve<IAcmeProcess>(new Parameter[] { new NamedParameter("options",  options) });
+                process.StartAsync().GetAwaiter().GetResult();
             }
             catch (AggregateException ex)
             {

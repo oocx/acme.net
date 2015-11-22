@@ -1,5 +1,4 @@
 ﻿using System;
-using IO = System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -7,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Oocx.ACME.Jose;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
@@ -14,7 +14,7 @@ using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Client
 {
-    public class AcmeClient
+    public class AcmeClient : IAcmeClient
     {        
         private readonly HttpClient client;
 
@@ -32,11 +32,14 @@ namespace Oocx.ACME.Client
             jws = new JWS(key);            
         }
 
-        public AcmeClient(string baseAddress, RSA key): this(new HttpClient() { BaseAddress =  new Uri(baseAddress) }, key)
+        public AcmeClient(string baseAddress, string keyName, IKeyStore keyStore): this(new HttpClient() { BaseAddress =  new Uri(baseAddress) }, keyStore.GetOrCreateKey(keyName))
         {         
         }
 
-        public JWS Jws => jws;
+        public string GetKeyAuthorization(string token)
+        {
+            return jws.GetKeyAuthorization(token);
+        }
 
         public async Task<Directory> DiscoverAsync()
         {

@@ -76,7 +76,7 @@ namespace Oocx.ACME.IIS.Tests
         {
             // Arrange
             var x509 = new X509Certificate2(Encoding.ASCII.GetBytes(TestCertificate), (string)null, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);            
-            var sut = new IISCertificateInstaller();
+            var sut = new IISServerConfigurationProvider();
             var asn1Parser = new Asn1Parser();
             var rsaParser = new PrivateKeyParser(asn1Parser);
             var privateKey = rsaParser.ParsePem(TestPrivateKey).Key;            
@@ -86,7 +86,7 @@ namespace Oocx.ACME.IIS.Tests
             x509.PrivateKey = rsa2;
 
             // Act            
-            sut.ConfigureIis("test.startliste.info", x509.GetCertHash(), "my", null, null);
+            sut.ConfigureServer("test.startliste.info", x509.GetCertHash(), "my", null, null);
         }
     }
 }

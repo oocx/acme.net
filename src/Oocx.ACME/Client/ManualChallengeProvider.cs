@@ -10,9 +10,9 @@ namespace Oocx.ACME.Client
 {    
     public class ManualChallengeProvider : IChallengeProvider
     {
-        private readonly AcmeClient client;
+        private readonly IAcmeClient client;
 
-        public ManualChallengeProvider(AcmeClient client)
+        public ManualChallengeProvider(IAcmeClient client)
         {
             this.client = client;
         }
@@ -28,7 +28,7 @@ namespace Oocx.ACME.Client
             
             Info($"accepting challenge {challenge.Type}");
 
-            var keyAuthorization = client.Jws.GetKeyAuthorization(challenge.Token);
+            var keyAuthorization = client.GetKeyAuthorization(challenge.Token);
 
             var acmeChallengePath = Environment.CurrentDirectory;
             var challengeFile = Path.Combine(acmeChallengePath, challenge.Token);

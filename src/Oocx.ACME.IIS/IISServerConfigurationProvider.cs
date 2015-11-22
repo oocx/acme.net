@@ -7,15 +7,16 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Web.Administration;
+using Oocx.ACME.Services;
 using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.IIS
 {
-    public class IISCertificateInstaller
+    public class IISServerConfigurationProvider : IServerConfigurationProvider
     {
         private readonly ServerManager manager;
 
-        public IISCertificateInstaller()
+        public IISServerConfigurationProvider()
         {
             manager = new ServerManager();
         }
@@ -35,7 +36,7 @@ namespace Oocx.ACME.IIS
             return x509.GetCertHash();
         }
 
-        public void ConfigureIis(string domain, byte[] certificateHash, string certificateStoreName, string siteName, string binding)
+        public void ConfigureServer(string domain, byte[] certificateHash, string certificateStoreName, string siteName, string binding)
         {
             Info($"configuring IIS to use the new certificate for {domain}");
             

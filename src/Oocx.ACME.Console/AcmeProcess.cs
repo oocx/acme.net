@@ -10,80 +10,74 @@ using Oocx.ACME.Client;
 using Oocx.ACME.IIS;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.PKCS10;
 using Oocx.Asn1PKCS.PKCS12;
 using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Console
 {
-    public class Process
+    public class AcmeProcess : IAcmeProcess
     {
         private readonly Options options;
+        private readonly IChallengeProvider challengeProvider;
+        private readonly IServerConfigurationProvider serverConfiguration;
+        private readonly IAcmeClient client;
+        private readonly IPkcs12 pkcs12;
+        
+        private readonly ICertificateRequestAsn1DEREncoder certificateRequestEncoder;
 
-        public Process(Options options)
+        public AcmeProcess(Options options, IChallengeProvider challengeProvider, IServerConfigurationProvider serverConfiguration, IAcmeClient client, IPkcs12 pkcs12, ICertificateRequestAsn1DEREncoder certificateRequestEncoder)
         {
             this.options = options;
+            this.challengeProvider = challengeProvider;
+            this.serverConfiguration = serverConfiguration;
+            this.client = client;
+            this.pkcs12 = pkcs12;            
+            this.certificateRequestEncoder = certificateRequestEncoder;
         }
 
-        public async Task Start()
+        public async Task StartAsync()
         {            
             IgnoreSslErrors();
-
-            var client = CreateAcmeClient();
-
-            await RegisterWithServer(client);
+            
+            await RegisterWithServer();
 
             foreach (var domain in options.Domains)
             {
-                bool isAuthorized = await AuthorizeForDomain(client, domain);
+                bool isAuthorized = await AuthorizeForDomain(domain);
                 if (!isAuthorized)
                 {
                     Error($"authorization for domain {domain} failed");
                     continue;
                 }
 
-                var key = GetPrivateKey(domain);
+                var keyPair = GetNewKeyPair();
 
-                var certificateResponse = await RequestCertificateForDomain(client, domain, key);
+                var certificateResponse = await RequestCertificateForDomain(domain, keyPair);
 
                 var certificatePath = SaveCertificateReturnedByServer(domain, certificateResponse);
 
-                SaveCertificateWithPrivateKey(domain, key, certificatePath);
-
-                if ("iis".Equals(options.ServerConfigurationProvider, StringComparison.OrdinalIgnoreCase))
-                {
-                    InstallCertificateToIis(domain, certificatePath, key, options.IISWebSite, options.IISBinidng);
-                }
+                SaveCertificateWithPrivateKey(domain, keyPair, certificatePath);
+                
+                ConfigureServer(domain, certificatePath, keyPair, options.IISWebSite, options.IISBinidng);                
             }
         }
 
-        private static void InstallCertificateToIis(string domain, string certificatePath, RSAParameters key, string siteName, string binding)
-        {
-            var installer = new IISCertificateInstaller();            
-            var certificateHash = installer.InstallCertificateWithPrivateKey(certificatePath, "my", key);
-            installer.ConfigureIis(domain, certificateHash, "my", siteName, binding);
+        private void ConfigureServer(string domain, string certificatePath, RSAParameters key, string siteName, string binding)
+        {            
+            var certificateHash = serverConfiguration.InstallCertificateWithPrivateKey(certificatePath, "my", key);
+            serverConfiguration.ConfigureServer(domain, certificateHash, "my", siteName, binding);
         }
 
-        private AcmeClient CreateAcmeClient()
-        {
-            var factory = new KeyStoreFactory();
-            var keyManager = factory.GetKeyStore(options.AccountKeyContainerLocation);
-            var rsa = keyManager.GetOrCreateKey(options.AccountKeyName);
-            var client = new AcmeClient(options.AcmeServer, rsa);
-            return client;
-        }
-
-        private async Task<CertificateResponse> RequestCertificateForDomain(AcmeClient client, string domain, RSAParameters key)
+        private async Task<CertificateResponse> RequestCertificateForDomain(string domain, RSAParameters key)
         {
             var csr = CreateCertificateRequest(domain, key);
             return await client.NewCertificateRequestAsync(csr);                        
         }
 
-        private static RSAParameters GetPrivateKey(string domain)
-        {
-            var keyManager = new FileKeyStore(Environment.CurrentDirectory);
-            var rsa = keyManager.GetOrCreateKey(domain);
+        private static RSAParameters GetNewKeyPair()
+        {            
+            var rsa = new RSACryptoServiceProvider(2048);
             var key = rsa.ExportParameters(true);
             return key;
         }
@@ -93,18 +87,22 @@ namespace Oocx.ACME.Console
             Info("generating pfx file with certificate and private key");
             GetPfxPasswordFromUser();
 
-            var pfxGenerator = new Pkcs12();
-            var pfxPath = Path.Combine(Environment.CurrentDirectory, $"{domain}.pfx");
-            pfxGenerator.CreatePfxFile(key, certificatePath, options.PfxPassword, pfxPath);
-            Info($"pfx file saved to {pfxPath}");
+            try
+            {                
+                var pfxPath = Path.Combine(Environment.CurrentDirectory, $"{domain}.pfx");
+                pkcs12.CreatePfxFile(key, certificatePath, options.PfxPassword, pfxPath);
+                Info($"pfx file saved to {pfxPath}");
+            }
+            catch (Exception ex)
+            {
+                Error("could not create pfx file: " + ex);   
+            }
         }
 
-        private static byte[] CreateCertificateRequest(string domain, RSAParameters key)
+        private byte[] CreateCertificateRequest(string domain, RSAParameters key)
         {
-            var data = new CertificateRequestData(domain, key);
-            var serializer = new Asn1Serializer();
-            var sut = new CertificateRequestAsn1DEREncoder(serializer);
-            var csr = sut.EncodeAsDER(data);
+            var data = new CertificateRequestData(domain, key);                       
+            var csr = certificateRequestEncoder.EncodeAsDER(data);
             return csr;
         }
 
@@ -147,25 +145,11 @@ namespace Oocx.ACME.Console
             return certificatePath;
         }
 
-        private async Task<bool> AuthorizeForDomain(AcmeClient client, string domain)
+        private async Task<bool> AuthorizeForDomain(string domain)
         {
             var authorization = await client.NewDnsAuthorizationAsync(domain);
-
-            IChallengeProvider provider;
-            if ("manual".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
-            {
-                provider = new ManualChallengeProvider(client);
-            } else if ("iis-http-01".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
-            {
-                provider = new IISChallengeProvider(client);
-            }
-            else
-            {
-                Error($"unsupported challenge provider: {options.ChallengeProvider}");
-                return false;
-            }
-
-            var challenge = await provider.AcceptChallengeAsync(domain, options.IISWebSite, authorization);
+          
+            var challenge = await challengeProvider.AcceptChallengeAsync(domain, options.IISWebSite, authorization);
             if (challenge == null)
             {
                 return false;
@@ -178,7 +162,7 @@ namespace Oocx.ACME.Console
             return "valid".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
         }
 
-        private async Task RegisterWithServer(AcmeClient client)
+        private async Task RegisterWithServer()
         {
             var registration = await client.RegisterAsync(options.AcceptTermsOfService);
             Info($"Terms of service: {registration.Agreement}");

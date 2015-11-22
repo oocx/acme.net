@@ -17,10 +17,10 @@ namespace Oocx.ACME.IIS
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class IISChallengeProvider : IChallengeProvider
     {
-        private readonly AcmeClient client;
+        private readonly IAcmeClient client;
         private readonly ServerManager manager;
 
-        public IISChallengeProvider(AcmeClient client)
+        public IISChallengeProvider(IAcmeClient client)
         {
             this.client = client;
             manager = new ServerManager();
@@ -36,7 +36,7 @@ namespace Oocx.ACME.IIS
             }
             Info($"accepting challenge {challenge.Type}");
 
-            var keyAuthorization = client.Jws.GetKeyAuthorization(challenge.Token);
+            var keyAuthorization = client.GetKeyAuthorization(challenge.Token);
 
             if (siteName == null)
             {

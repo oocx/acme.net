@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Oocx.Asn1PKCS.PKCS12
 {
-    public class Pkcs12
+    public class Pkcs12 : IPkcs12
     {        
         public void CreatePfxFile(RSAParameters key, string pathToCertificate, string password, string pathToPfx)
         {
