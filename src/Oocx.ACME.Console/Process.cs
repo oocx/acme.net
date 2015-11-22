@@ -53,14 +53,18 @@ namespace Oocx.ACME.Console
 
                 SaveCertificateWithPrivateKey(domain, key, certificatePath);
 
-                InstallCertificateToIis(domain, certificatePath, key);
+                if ("iis".Equals(options.ServerConfigurationProvider, StringComparison.OrdinalIgnoreCase))
+                {
+                    InstallCertificateToIis(domain, certificatePath, key, options.IISWebSite, options.IISBinidng);
+                }
             }
         }
 
-        private static void InstallCertificateToIis(string domain, string certificatePath, RSAParameters key)
+        private static void InstallCertificateToIis(string domain, string certificatePath, RSAParameters key, string siteName, string binding)
         {
-            var installer = new IISCertificateInstaller();
-            installer.InstallCertificate(domain, certificatePath, "my", key);
+            var installer = new IISCertificateInstaller();            
+            var certificateHash = installer.InstallCertificateWithPrivateKey(certificatePath, "my", key);
+            installer.ConfigureIis(domain, certificateHash, "my", siteName, binding);
         }
 
         private AcmeClient CreateAcmeClient()

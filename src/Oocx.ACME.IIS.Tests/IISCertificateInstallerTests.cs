@@ -80,13 +80,13 @@ namespace Oocx.ACME.IIS.Tests
             var asn1Parser = new Asn1Parser();
             var rsaParser = new PrivateKeyParser(asn1Parser);
             var privateKey = rsaParser.ParsePem(TestPrivateKey).Key;            
-            var csp = new CspParameters { KeyContainerName = "oocx-acme-unittest-temp", Flags = CspProviderFlags.UseMachineKeyStore };
+            var csp = new CspParameters { KeyContainerName = x509.GetCertHashString(), Flags = CspProviderFlags.UseMachineKeyStore };
             var rsa2 = new RSACryptoServiceProvider(csp);
             rsa2.ImportParameters(privateKey);
-            x509.PrivateKey = rsa2;            
+            x509.PrivateKey = rsa2;
 
-            // Act
-            sut.InstallCertificate("test.startliste.info", x509, "my");
+            // Act            
+            sut.ConfigureIis("test.startliste.info", x509.GetCertHash(), "my", null, null);
         }
     }
 }

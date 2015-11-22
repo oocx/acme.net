@@ -37,5 +37,11 @@ namespace Oocx.ACME.Console
 
         [Option('s', "serverConfigurationProvider", HelpText = "The type of web server configuration to use to install and configure certificates. Supported types are: 'manual' (no integration), 'iis' (installs certificates to localmachine\\my and configures IIS bindings)", Default = "iis")]
         public string ServerConfigurationProvider { get; set; }
+
+        [Option('w', "iisWebSite", HelpText = "The IIS web site that should be configured to use the new certificate (used with --serverConfigurationProvider iis). If you do not specifiy a web site, the provider will try to find a matching site with a binding for your domain.")]
+        public string IISWebSite { get; set; }
+
+        [Option('b', "iisBinding", HelpText = "The IIS binding that should be configured to use the new certificate. Syntax: ip:port:hostname, for example '*:443:www.example.com' (used with --serverConfigurationProvider iis). If you do not specifiy a binding, the provider will try to find a matching binding. It will create a binding if no matching binding exists.")]
+        public string IISBinidng { get; set; }
     }    
 }
