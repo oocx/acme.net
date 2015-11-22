@@ -27,9 +27,7 @@ namespace Oocx.ACME.Console
         }
 
         public async Task Start()
-        {
-            Info($"acme.exe v{typeof(AcmeClient).Assembly.GetName()?.Version}");
-
+        {            
             IgnoreSslErrors();
 
             var client = CreateAcmeClient();
@@ -112,18 +110,20 @@ namespace Oocx.ACME.Console
 
         private void GetPfxPasswordFromUser()
         {
+            System.Console.CursorVisible = false;
+
             while (string.IsNullOrWhiteSpace(options.PfxPassword))
             {
                 System.Console.Write("Enter password for pfx file: ");
                 var color = System.Console.ForegroundColor;
                 System.Console.ForegroundColor = System.Console.BackgroundColor;
-                System.Console.CursorVisible = false;
+                
                 string pass1 = System.Console.ReadLine();
                 System.Console.ForegroundColor = color;
 
                 System.Console.Write("Repeat the password: ");
                 System.Console.ForegroundColor = System.Console.BackgroundColor;
-                System.Console.CursorVisible = false;
+            
                 string pass2 = System.Console.ReadLine();
                 System.Console.ForegroundColor = color;
 
@@ -136,6 +136,7 @@ namespace Oocx.ACME.Console
                     System.Console.WriteLine("The passwords do not match.");
                 }
             }
+            System.Console.CursorVisible = true;
         }
 
         private static string SaveCertificateReturnedByServer(string domain, CertificateResponse response)
