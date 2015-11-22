@@ -4,7 +4,14 @@
 
 This repository contains a library that can be used to develop ACME / Let's Encrypt clients.
 
-**This project is work in progress, you probably won't be able to use it for anything yet**
+Requesting and installing a a new SSL certificate can be as simple as this:
+
+acme.exe www.example.com -a
+
+That's all you need to do to request and install a free SSL certificate from Let's Encrypt!
+
+
+**This project is work in progress. It works, but probably still has many bugs and needs more testing.**
 
 I created this project as a training excercise and to learn about ACME and related 
 technologies (certificate file formats, ASN1, ...). This is not intended to be a finished 
@@ -47,7 +54,7 @@ not used yet.
 
 # Change log
 
-## 2015-11-22 IIS integration
+## 2015-11-22 IIS integration (v.0.0.56)
 
 The console application can now configure IIS to automatically handle an http-01 challenge.
 It can now also install the certificate into the certificate store and update IIS bindings 
