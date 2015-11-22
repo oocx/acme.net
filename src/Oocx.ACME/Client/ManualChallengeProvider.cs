@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Oocx.ACME.Protocol;
 using static Oocx.ACME.Common.Log;
@@ -31,11 +32,15 @@ namespace Oocx.ACME.Client
 
             var acmeChallengePath = Environment.CurrentDirectory;
             var challengeFile = Path.Combine(acmeChallengePath, challenge.Token);
-            File.WriteAllText(challengeFile, keyAuthorization);
+            using (var fs = new FileStream(challengeFile, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                var data = Encoding.ASCII.GetBytes(keyAuthorization);
+                await fs.WriteAsync(data, 0, data.Length);
+            }
 
             return new PendingChallenge()
             {
-                Instructions = $"Copy {challengeFile} to https://your-server/.well-known/acme/{challenge.Token}",
+                Instructions = $"Copy {challengeFile} to https://{domain ?? siteName}/.well-known/acme/{challenge.Token}",
                 Complete = () => client.CompleteChallengeAsync(challenge)
             };
         }

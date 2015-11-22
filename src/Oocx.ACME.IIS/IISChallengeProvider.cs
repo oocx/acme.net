@@ -40,11 +40,11 @@ namespace Oocx.ACME.IIS
 
             if (siteName == null)
             {
-                AcceptChallengeForDomain(domain, challenge.Token, keyAuthorization);
+                await AcceptChallengeForDomainAsync(domain, challenge.Token, keyAuthorization);
             }
             else
             {
-                AcceptChallengeForSite(siteName, challenge.Token, keyAuthorization);
+                await AcceptChallengeForSiteAsync(siteName, challenge.Token, keyAuthorization);
             }
 
             return new PendingChallenge()
@@ -60,14 +60,14 @@ namespace Oocx.ACME.IIS
         }
               
 
-        public void AcceptChallengeForDomain(string domain, string token, string challengeJson)
+        public async Task AcceptChallengeForDomainAsync(string domain, string token, string challengeJson)
         {
             Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
             var root = GetIisRootAndConfigureMimeType(domain);
-            CreateWellKnownDirectoryWithChallengeFile(root, token, challengeJson);                        
+            await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);                        
         }
 
-        public void AcceptChallengeForSite(string siteName, string token, string challengeJson)
+        public async Task AcceptChallengeForSiteAsync(string siteName, string token, string challengeJson)
         {
             Info($"IISChallengeService is accepting challenge with token {token} for IIS web site '{siteName}'");
             var site = manager.Sites[siteName];
@@ -78,7 +78,7 @@ namespace Oocx.ACME.IIS
             }
 
             var root = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
-            CreateWellKnownDirectoryWithChallengeFile(root, token, challengeJson);
+            await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);
         }
 
         private string GetIisRootAndConfigureMimeType(string domain)
@@ -108,7 +108,7 @@ namespace Oocx.ACME.IIS
             return app.VirtualDirectories["/"].PhysicalPath;
         }
 
-        private static void CreateWellKnownDirectoryWithChallengeFile(string root, string token, string challengeJson)
+        private static async Task CreateWellKnownDirectoryWithChallengeFileAsync(string root, string token, string keyAuthorization)
         {
             root = Environment.ExpandEnvironmentVariables(root);
             var wellKnownPath = Path.Combine(root, ".well-known");
@@ -118,7 +118,11 @@ namespace Oocx.ACME.IIS
             var challengeFilePath = Path.Combine(acmePath, token);
 
             Verbose($"writing challenge to {challengeFilePath}");
-            File.WriteAllText(challengeFilePath, challengeJson);                        
+            using (var fs = new FileStream(challengeFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                var data = System.Text.Encoding.ASCII.GetBytes(keyAuthorization);
+                await fs.WriteAsync(data, 0, data.Length);
+            }
         }
 
         private static void CreateDirectory(string challengePath)

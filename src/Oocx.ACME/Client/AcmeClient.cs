@@ -113,9 +113,7 @@ namespace Oocx.ACME.Client
             };
 
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
-        }
-
-            
+        }                    
 
         public async Task<Challenge> CompleteChallengeAsync(Challenge challenge)
         {           
