@@ -53,7 +53,7 @@ namespace Oocx.ACME.Client
             Verbose($"nonce from server is {nonce}");
         }
 
-        public async Task<RegistrationResponse> RegisterAsync(bool acceptTermsOfService)
+        public async Task<RegistrationResponse> RegisterAsync(string termsOfServiceUri, string[] contact)
         {
             await EnsureDirectory();            
 
@@ -61,8 +61,8 @@ namespace Oocx.ACME.Client
 
             var request = new NewRegistrationRequest()
             {                            
-                Contact = new[] { "mailto:mathias@raacke.info" },
-                Agreement = acceptTermsOfService ? "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf" : null
+                Contact = contact,
+                Agreement = termsOfServiceUri
             };
 
             try
@@ -88,7 +88,7 @@ namespace Oocx.ACME.Client
             }
         }
 
-        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, string agreementUri)
+        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, string agreementUri, string[] contact)
         {
             await EnsureDirectory();
 
@@ -96,8 +96,8 @@ namespace Oocx.ACME.Client
 
             var registration = new UpdateRegistrationRequest()
             {                
-                Contact = new[] { "mailto:mathias@raacke.info" },
-                Agreement = agreementUri ?? "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf"
+                Contact = contact,
+                Agreement = agreementUri
             };
 
             return await PostAsync<RegistrationResponse>(new Uri(registrationUri), registration);

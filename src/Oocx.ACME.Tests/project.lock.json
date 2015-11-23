@@ -33,21 +33,6 @@
           "lib/net45/System.Net.Http.Formatting.dll": {}
         }
       },
-      "Microsoft.Bcl/1.1.10": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.Build": "1.0.14"
-        },
-        "compile": {
-          "lib/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      },
-      "Microsoft.Bcl.Build/1.0.14": {
-        "type": "package"
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -169,25 +154,6 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Microsoft.Net.Http/2.2.29": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl": "1.1.10",
-          "Microsoft.Bcl.Build": "1.0.14"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Net.Http.WebRequest"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Extensions.dll": {},
-          "lib/net45/System.Net.Http.Primitives.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Extensions.dll": {},
-          "lib/net45/System.Net.Http.Primitives.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -274,18 +240,6 @@
         },
         "runtime": {
           "lib/net46/_._": {}
-        }
-      },
-      "WorldDomination.HttpClient.Helpers/3.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Net.Http": "[2.2.29, 3.0.0)"
-        },
-        "compile": {
-          "lib/net45/WorldDomination.HttpClient.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WorldDomination.HttpClient.Helpers.dll": {}
         }
       },
       "xunit/2.1.0": {
@@ -429,21 +383,6 @@
           "lib/net45/System.Net.Http.Formatting.dll": {}
         }
       },
-      "Microsoft.Bcl/1.1.10": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.Build": "1.0.14"
-        },
-        "compile": {
-          "lib/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      },
-      "Microsoft.Bcl.Build/1.0.14": {
-        "type": "package"
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -565,25 +504,6 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Microsoft.Net.Http/2.2.29": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl": "1.1.10",
-          "Microsoft.Bcl.Build": "1.0.14"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Net.Http.WebRequest"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Extensions.dll": {},
-          "lib/net45/System.Net.Http.Primitives.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Extensions.dll": {},
-          "lib/net45/System.Net.Http.Primitives.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -682,18 +602,6 @@
         },
         "runtime": {
           "lib/net46/_._": {}
-        }
-      },
-      "WorldDomination.HttpClient.Helpers/3.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Net.Http": "[2.2.29, 3.0.0)"
-        },
-        "compile": {
-          "lib/net45/WorldDomination.HttpClient.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WorldDomination.HttpClient.Helpers.dll": {}
         }
       },
       "xunit/2.1.0": {
@@ -837,21 +745,6 @@
           "lib/net45/System.Net.Http.Formatting.dll": {}
         }
       },
-      "Microsoft.Bcl/1.1.10": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.Build": "1.0.14"
-        },
-        "compile": {
-          "lib/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      },
-      "Microsoft.Bcl.Build/1.0.14": {
-        "type": "package"
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -973,25 +866,6 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Microsoft.Net.Http/2.2.29": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl": "1.1.10",
-          "Microsoft.Bcl.Build": "1.0.14"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Net.Http.WebRequest"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Extensions.dll": {},
-          "lib/net45/System.Net.Http.Primitives.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Extensions.dll": {},
-          "lib/net45/System.Net.Http.Primitives.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -1090,18 +964,6 @@
         },
         "runtime": {
           "lib/net46/_._": {}
-        }
-      },
-      "WorldDomination.HttpClient.Helpers/3.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Net.Http": "[2.2.29, 3.0.0)"
-        },
-        "compile": {
-          "lib/net45/WorldDomination.HttpClient.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WorldDomination.HttpClient.Helpers.dll": {}
         }
       },
       "xunit/2.1.0": {
@@ -1329,115 +1191,6 @@
         "Microsoft.AspNet.WebApi.Client.nuspec"
       ]
     },
-    "Microsoft.Bcl/1.1.10": {
-      "type": "package",
-      "sha512": "+tTqoh/M1pyL8El3qLy30EcwnAtyvFoDZJtdG9Cbg/WdFbh4N8kyrq198XHuEL7lnJbeD0DRO8jcX5IIOh05cQ==",
-      "files": [
-        "lib/monoandroid/_._",
-        "lib/monotouch/_._",
-        "lib/net40/ensureRedirect.xml",
-        "lib/net40/System.IO.dll",
-        "lib/net40/System.IO.xml",
-        "lib/net40/System.Runtime.dll",
-        "lib/net40/System.Runtime.xml",
-        "lib/net40/System.Threading.Tasks.dll",
-        "lib/net40/System.Threading.Tasks.xml",
-        "lib/net45/_._",
-        "lib/portable-net40+sl4+win8/ensureRedirect.xml",
-        "lib/portable-net40+sl4+win8/System.IO.dll",
-        "lib/portable-net40+sl4+win8/System.IO.xml",
-        "lib/portable-net40+sl4+win8/System.Runtime.dll",
-        "lib/portable-net40+sl4+win8/System.Runtime.xml",
-        "lib/portable-net40+sl4+win8/System.Threading.Tasks.dll",
-        "lib/portable-net40+sl4+win8/System.Threading.Tasks.xml",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/ensureRedirect.xml",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.IO.dll",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.IO.xml",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Runtime.dll",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Runtime.xml",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Threading.Tasks.dll",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Threading.Tasks.xml",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/ensureRedirect.xml",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/System.IO.dll",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/System.IO.xml",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/System.Runtime.dll",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/System.Runtime.xml",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/System.Threading.Tasks.dll",
-        "lib/portable-net40+sl4+win8+wp8+wpa81/System.Threading.Tasks.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/ensureRedirect.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/System.IO.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/System.IO.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/System.Runtime.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/System.Runtime.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/System.Threading.Tasks.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/System.Threading.Tasks.xml",
-        "lib/portable-net40+win8/ensureRedirect.xml",
-        "lib/portable-net40+win8/System.IO.dll",
-        "lib/portable-net40+win8/System.IO.xml",
-        "lib/portable-net40+win8/System.Runtime.dll",
-        "lib/portable-net40+win8/System.Runtime.xml",
-        "lib/portable-net40+win8/System.Threading.Tasks.dll",
-        "lib/portable-net40+win8/System.Threading.Tasks.xml",
-        "lib/portable-net40+win8+wp8+wpa81/ensureRedirect.xml",
-        "lib/portable-net40+win8+wp8+wpa81/System.IO.dll",
-        "lib/portable-net40+win8+wp8+wpa81/System.IO.xml",
-        "lib/portable-net40+win8+wp8+wpa81/System.Runtime.dll",
-        "lib/portable-net40+win8+wp8+wpa81/System.Runtime.xml",
-        "lib/portable-net40+win8+wp8+wpa81/System.Threading.Tasks.dll",
-        "lib/portable-net40+win8+wp8+wpa81/System.Threading.Tasks.xml",
-        "lib/portable-net45+win8+wp8+wpa81/_._",
-        "lib/portable-net45+win8+wpa81/_._",
-        "lib/portable-net451+win81/_._",
-        "lib/portable-net451+win81+wpa81/_._",
-        "lib/portable-win81+wp81+wpa81/_._",
-        "lib/sl4/System.IO.dll",
-        "lib/sl4/System.IO.xml",
-        "lib/sl4/System.Runtime.dll",
-        "lib/sl4/System.Runtime.xml",
-        "lib/sl4/System.Threading.Tasks.dll",
-        "lib/sl4/System.Threading.Tasks.xml",
-        "lib/sl4-windowsphone71/ensureRedirect.xml",
-        "lib/sl4-windowsphone71/System.IO.dll",
-        "lib/sl4-windowsphone71/System.IO.xml",
-        "lib/sl4-windowsphone71/System.Runtime.dll",
-        "lib/sl4-windowsphone71/System.Runtime.xml",
-        "lib/sl4-windowsphone71/System.Threading.Tasks.dll",
-        "lib/sl4-windowsphone71/System.Threading.Tasks.xml",
-        "lib/sl5/System.IO.dll",
-        "lib/sl5/System.IO.xml",
-        "lib/sl5/System.Runtime.dll",
-        "lib/sl5/System.Runtime.xml",
-        "lib/sl5/System.Threading.Tasks.dll",
-        "lib/sl5/System.Threading.Tasks.xml",
-        "lib/win8/_._",
-        "lib/wp8/_._",
-        "lib/wpa81/_._",
-        "lib/Xamarin.iOS10/_._",
-        "License-Stable.rtf",
-        "Microsoft.Bcl.1.1.10.nupkg",
-        "Microsoft.Bcl.1.1.10.nupkg.sha512",
-        "Microsoft.Bcl.nuspec"
-      ]
-    },
-    "Microsoft.Bcl.Build/1.0.14": {
-      "type": "package",
-      "sha512": "cDLKSvNvRa519hplsbSoYqO69TjdDIhfjtKUM0g20/nVROoWsGav9KCI9HtnGjLmdV1+TcUUDhbotcllibjPEA==",
-      "files": [
-        "content/net40/_._",
-        "content/netcore45/_._",
-        "content/portable-net40+win8+sl4+wp71+wpa81/_._",
-        "content/sl4/_._",
-        "content/sl4-windowsphone71/_._",
-        "License-Stable.rtf",
-        "Microsoft.Bcl.Build.1.0.14.nupkg",
-        "Microsoft.Bcl.Build.1.0.14.nupkg.sha512",
-        "Microsoft.Bcl.Build.nuspec",
-        "tools/Install.ps1",
-        "tools/Microsoft.Bcl.Build.targets",
-        "tools/Microsoft.Bcl.Build.Tasks.dll",
-        "tools/Uninstall.ps1"
-      ]
-    },
     "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
       "type": "package",
       "serviceable": true,
@@ -1541,74 +1294,6 @@
         "Microsoft.Extensions.PlatformAbstractions.1.0.0-rc1-final.nupkg",
         "Microsoft.Extensions.PlatformAbstractions.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.Extensions.PlatformAbstractions.nuspec"
-      ]
-    },
-    "Microsoft.Net.Http/2.2.29": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "fc4CPEewJ30Xgal+fSq1lYIBt582A7eKlAL7O4HXiYAiTp2VTnA4osSvk7T2n8aS4xTCPVJusQk3yKLT0XSpkg==",
-      "files": [
-        "lib/monoandroid/System.Net.Http.Extensions.dll",
-        "lib/monoandroid/System.Net.Http.Extensions.XML",
-        "lib/monoandroid/System.Net.Http.Primitives.dll",
-        "lib/monoandroid/System.Net.Http.Primitives.xml",
-        "lib/monotouch/System.Net.Http.Extensions.dll",
-        "lib/monotouch/System.Net.Http.Extensions.XML",
-        "lib/monotouch/System.Net.Http.Primitives.dll",
-        "lib/monotouch/System.Net.Http.Primitives.xml",
-        "lib/net40/ensureRedirect.xml",
-        "lib/net40/System.Net.Http.dll",
-        "lib/net40/System.Net.Http.Extensions.dll",
-        "lib/net40/System.Net.Http.Extensions.XML",
-        "lib/net40/System.Net.Http.Primitives.dll",
-        "lib/net40/System.Net.Http.Primitives.xml",
-        "lib/net40/System.Net.Http.WebRequest.dll",
-        "lib/net40/System.Net.Http.WebRequest.xml",
-        "lib/net40/System.Net.Http.xml",
-        "lib/net45/ensureRedirect.xml",
-        "lib/net45/System.Net.Http.Extensions.dll",
-        "lib/net45/System.Net.Http.Extensions.XML",
-        "lib/net45/System.Net.Http.Primitives.dll",
-        "lib/net45/System.Net.Http.Primitives.xml",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/ensureRedirect.xml",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Net.Http.dll",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Net.Http.Extensions.dll",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Net.Http.Extensions.XML",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Net.Http.Primitives.dll",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Net.Http.Primitives.XML",
-        "lib/portable-net40+sl4+win8+wp71+wpa81/System.Net.Http.xml",
-        "lib/portable-net45+win8/ensureRedirect.xml",
-        "lib/portable-net45+win8/System.Net.Http.Extensions.dll",
-        "lib/portable-net45+win8/System.Net.Http.Extensions.XML",
-        "lib/portable-net45+win8/System.Net.Http.Primitives.dll",
-        "lib/portable-net45+win8/System.Net.Http.Primitives.xml",
-        "lib/portable-net45+win8+wpa81/ensureRedirect.xml",
-        "lib/portable-net45+win8+wpa81/System.Net.Http.Extensions.dll",
-        "lib/portable-net45+win8+wpa81/System.Net.Http.Extensions.XML",
-        "lib/portable-net45+win8+wpa81/System.Net.Http.Primitives.dll",
-        "lib/portable-net45+win8+wpa81/System.Net.Http.Primitives.xml",
-        "lib/sl4-windowsphone71/System.Net.Http.dll",
-        "lib/sl4-windowsphone71/System.Net.Http.Extensions.dll",
-        "lib/sl4-windowsphone71/System.Net.Http.Extensions.XML",
-        "lib/sl4-windowsphone71/System.Net.Http.Primitives.dll",
-        "lib/sl4-windowsphone71/System.Net.Http.Primitives.XML",
-        "lib/sl4-windowsphone71/System.Net.Http.xml",
-        "lib/win8/System.Net.Http.Extensions.dll",
-        "lib/win8/System.Net.Http.Extensions.XML",
-        "lib/win8/System.Net.Http.Primitives.dll",
-        "lib/win8/System.Net.Http.Primitives.xml",
-        "lib/wpa81/System.Net.Http.Extensions.dll",
-        "lib/wpa81/System.Net.Http.Extensions.XML",
-        "lib/wpa81/System.Net.Http.Primitives.dll",
-        "lib/wpa81/System.Net.Http.Primitives.xml",
-        "lib/Xamarin.iOS10/System.Net.Http.Extensions.dll",
-        "lib/Xamarin.iOS10/System.Net.Http.Extensions.XML",
-        "lib/Xamarin.iOS10/System.Net.Http.Primitives.dll",
-        "lib/Xamarin.iOS10/System.Net.Http.Primitives.xml",
-        "License-Stable.rtf",
-        "Microsoft.Net.Http.2.2.29.nupkg",
-        "Microsoft.Net.Http.2.2.29.nupkg.sha512",
-        "Microsoft.Net.Http.nuspec"
       ]
     },
     "Newtonsoft.Json/7.0.1": {
@@ -1872,16 +1557,6 @@
         "System.Threading.nuspec"
       ]
     },
-    "WorldDomination.HttpClient.Helpers/3.0.1": {
-      "type": "package",
-      "sha512": "rVWmcdEYJL6diRGWfmQ5RZTKaqRoBk7x+dtnOuwBDlr0IZQosGSc02JQMNn15D/xBJ0V7XO88oVLiYcapk5fpw==",
-      "files": [
-        "lib/net45/WorldDomination.HttpClient.Helpers.dll",
-        "WorldDomination.HttpClient.Helpers.3.0.1.nupkg",
-        "WorldDomination.HttpClient.Helpers.3.0.1.nupkg.sha512",
-        "WorldDomination.HttpClient.Helpers.nuspec"
-      ]
-    },
     "xunit/2.1.0": {
       "type": "package",
       "sha512": "u/7VQSOSXa7kSG4iK6Lcn7RqKZQ3hk7cnyMNVMpXHSP0RI5VQEtc44hvkG3LyWOVsx1dhUDD3rPAHAxyOUDQJw==",
@@ -2052,7 +1727,6 @@
       "xunit.runner.dnx >= 2.1.0-rc1-build204",
       "FluentAssertions >= 4.0.1",
       "NSubstitute >= 1.9.2",
-      "WorldDomination.HttpClient.Helpers >= 3.0.1",
       "Newtonsoft.Json >= 7.0.1",
       "Oocx.ACME ",
       "System.Runtime >= 4.0.21-beta-23409",

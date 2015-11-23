@@ -14,8 +14,11 @@ namespace Oocx.ACME.Console
         [Value(0, HelpText = "The names of the domains for which you want to request a certificate.", Required = true, MetaName = "domains")]
         public IEnumerable<string> Domains { get; set; }
 
-        [Option('a', "acceptTOS", HelpText = "Accept the terms of service of the ACME server")]
+        [Option('a', "acceptTermsOfService", HelpText = "Accept the terms of service of the ACME server")]
         public bool AcceptTermsOfService { get; set; }
+
+        [Option('t', "termsOfServiceUri", HelpText = "The uri of the terms of service that you accept.", Default = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf")]
+        public string TermsOfServiceUri { get; set; }
 
         [Option('i', "ignoreSSLErrors", HelpText = "Ignore SSL certificate errors for the HTTPS connection to the ACME server (useful for debugging messages with fiddler)")]
         public bool IgnoreSSLCertificateErrors { get; set; }
@@ -43,5 +46,8 @@ namespace Oocx.ACME.Console
 
         [Option('b', "iisBinding", HelpText = "The IIS binding that should be configured to use the new certificate. Syntax: ip:port:hostname, for example '*:443:www.example.com' (used with --serverConfigurationProvider iis). If you do not specifiy a binding, the provider will try to find a matching binding. It will create a binding if no matching binding exists.")]
         public string IISBinidng { get; set; }
+
+        [Option('m', "contact", HelpText = "The contact information for the registration request. Example: mailto:you@example.com")]
+        public string[] Contact { get; set; }
     }    
 }
