@@ -6,7 +6,9 @@ This repository contains a library that can be used to develop ACME / Let's Encr
 
 Requesting and installing a a new SSL certificate can be as simple as this:
 
+```
 acme.exe www.example.com -a
+```
 
 That's all you need to do to request and install a free SSL certificate from Let's Encrypt!
 
@@ -40,9 +42,10 @@ Examples:
 
 Request a certificate for www.yourdomain.com and accept the terms of service of the ACME server (-a), 
 using your@email.com as registration contact information (-m):
-'''
+
+```
 acme.exe -a www.yourdomain.com -m mailto:your@email.com
-'''
+```
 
 If you don't want to use IIS integration or can't use it / you are not using IIS, you can also 
 run acme.exe without IIS support. In that case, you need to manually copy the challenge file
@@ -50,9 +53,10 @@ that is required to validate domain ownership to your server.
 
 Request a certificate for www.yourdomain.com without IIS integration and accept the terms of service of the ACME server (-a), 
 using your@email.com as registration contact information (-m):
-'''
+
+```
 acme.exe -a www.yourdomain.com -m mailto:your@email.com -c manual-http-01 -i manual
-'''
+```
 
 If something does not work, please contact me at mathias@raacke.info or submit an issue on GitHub. You
 can increase the output verbosity by using the parameter -v Verbose
