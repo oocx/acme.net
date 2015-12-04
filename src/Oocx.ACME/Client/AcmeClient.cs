@@ -76,7 +76,12 @@ namespace Oocx.ACME.Client
             {
                 var location = ex.Response.Headers.Location.ToString();
                 Info($"using existing registration: {location}");
-                return await PostAsync<RegistrationResponse>(new Uri(location), new UpdateRegistrationRequest());                                                
+                var response =  await PostAsync<RegistrationResponse>(new Uri(location), new UpdateRegistrationRequest());
+                if (string.IsNullOrEmpty(response.Location))
+                {
+                    response.Location = location;
+                }
+                return response;
             }            
         }
 
@@ -151,8 +156,7 @@ namespace Oocx.ACME.Client
             var request = new CertificateRequest {Csr = csr.Base64UrlEncoded()};
             var response = await PostAsync<CertificateResponse>(directory.NewCertificate, request);            
 
-            Verbose($"location: {response.Location}");
-            Verbose($"link: {response.Link}");            
+            Verbose($"location: {response.Location}");            
 
             return response;
         }
@@ -219,14 +223,30 @@ namespace Oocx.ACME.Client
         private static void GetHeaderValues<TResult>(HttpResponseMessage response, TResult responseContent)
         {
             var properties =
-                typeof (TResult).GetProperties(BindingFlags.Public | BindingFlags.SetProperty)
+                typeof (TResult).GetProperties(BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.Instance)
                     .Where(p => p.PropertyType == typeof (string))
                     .ToDictionary(p => p.Name, p => p);
             foreach (var header in response.Headers)
             {
-                if (properties.ContainsKey(header.Key))
+                if (properties.ContainsKey(header.Key) && header.Value.Count() == 1)
+                {                    
+                    properties[header.Key].SetValue(responseContent, header.Value.First());                    
+                }
+
+                if (header.Key == "Link")
                 {
-                    properties[header.Key].SetValue(responseContent, header.Value);
+                    foreach (var link in header.Value)
+                    {
+                        var parts = link.Split(';');
+                        if (parts.Length != 2)
+                        {
+                            continue;
+                        }
+                        if (parts[1] == "rel=\"terms-of-service\"" && properties.ContainsKey("Agreement"))
+                        {
+                            properties["Agreement"].SetValue(responseContent, parts[0].Substring(1, parts[0].Length - 2));
+                        }
+                    }
                 }
             }
         }

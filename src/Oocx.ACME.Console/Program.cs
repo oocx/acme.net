@@ -35,7 +35,7 @@ namespace Oocx.ACME.Console
                     return;
                 }
 
-                var process = container.Resolve<IAcmeProcess>(new Parameter[] { new NamedParameter("options",  options) });
+                var process = container.Resolve<IAcmeProcess>(new NamedParameter("options",  options));
                 process.StartAsync().GetAwaiter().GetResult();
             }
             catch (AggregateException ex)

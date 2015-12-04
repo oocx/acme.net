@@ -29,6 +29,26 @@ take a look at these projects:
 [.net ACME protocol library](https://github.com/ebekker/letsencrypt-win/).
 [A simple ACME Client for Windows](https://github.com/Lone-Coder/letsencrypt-win-simple)
 
+# Using acme.exe
+
+You can use acme.exe with or without IIS integration. With IIS integration, acme.exe autoamtically
+configures your IIS to respond to the ACME domain validation challenge, and it updates your IIS
+web site with the new SSL certificate. To use IIS integration, you must run acme.exe on your IIS web 
+server.
+
+Examples:
+
+Request a certificate for www.yourdomain.com and accept the terms of service of the ACME server (-a):
+'''
+acme.exe -a www.yourdomain.com
+'''
+
+If you don't want to use IIS integration or can't use it / you are not using IIS, you can also 
+run acme.exe without IIS support. In that case, you need to manually copy the challenge file
+that is required to validate domain ownership to your server.
+
+Request a certificate for www.yourdomain.com without IIS integration
+
 # Projects in this repository
 
 ## Oocx.ACME

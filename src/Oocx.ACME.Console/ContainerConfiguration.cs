@@ -30,7 +30,7 @@ namespace Oocx.ACME.Console
                 builder.RegisterType<FileKeyStore>().As<IKeyStore>().WithParameter("basePath", options.AccountKeyContainerLocation ?? Environment.CurrentDirectory);
             }
 
-            if ("manual".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
+            if ("manual-http-01".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
             {
                 builder.RegisterType<ManualChallengeProvider>().As<IChallengeProvider>();                
             }
@@ -50,7 +50,7 @@ namespace Oocx.ACME.Console
             }
             else
             {
-                builder.RegisterType<ManualChallengeProvider>().As<IServerConfigurationProvider>();
+                builder.RegisterType<ManualServerConfigurationProvider>().As<IServerConfigurationProvider>();
             }
 
             builder.RegisterType<Pkcs12>().As<IPkcs12>();

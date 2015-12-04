@@ -40,9 +40,9 @@ namespace Oocx.ACME.Client
 
             return new PendingChallenge()
             {
-                Instructions = $"Copy {challengeFile} to https://{domain ?? siteName}/.well-known/acme/{challenge.Token}",
+                Instructions = $"Copy {challengeFile} to https://{domain ?? siteName}/.well-known/acme-challenge/{challenge.Token}",
                 Complete = () => client.CompleteChallengeAsync(challenge)
             };
         }
-    }            
+    }
 }

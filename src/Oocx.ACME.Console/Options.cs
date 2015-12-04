@@ -20,7 +20,7 @@ namespace Oocx.ACME.Console
         [Option('t', "termsOfServiceUri", HelpText = "The uri of the terms of service that you accept.", Default = "https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf")]
         public string TermsOfServiceUri { get; set; }
 
-        [Option('i', "ignoreSSLErrors", HelpText = "Ignore SSL certificate errors for the HTTPS connection to the ACME server (useful for debugging messages with fiddler)")]
+        [Option("ignoreSSLErrors", HelpText = "Ignore SSL certificate errors for the HTTPS connection to the ACME server (useful for debugging messages with fiddler)")]
         public bool IgnoreSSLCertificateErrors { get; set; }
 
         [Option('v', "verbosity", HelpText = "Configures the log level (Verbose, Info, Warning, Error, Disabled - casing is important).", Default = LogLevel.Info)]
@@ -35,10 +35,10 @@ namespace Oocx.ACME.Console
         [Option('n', "accountKeyName", HelpText = "The name of the key file or key container used to store the acme registration key.", Default = "acme-key")]
         public string AccountKeyName { get; set; }
 
-        [Option('c', "challengeProvider", HelpText = "The type of web server integration to use for ACME challenges. Supported types are: 'manual' (no integration), 'iis-http-01' (IIS with http-01 challenge)", Default = "iis-http-01")]
+        [Option('c', "challengeProvider", HelpText = "The type of web server integration to use for ACME challenges. Supported types are: 'manual-http-01' (no integration with http-01 challenge), 'iis-http-01' (IIS with http-01 challenge)", Default = "iis-http-01")]
         public string ChallengeProvider { get; set; }
 
-        [Option('s', "serverConfigurationProvider", HelpText = "The type of web server configuration to use to install and configure certificates. Supported types are: 'manual' (no integration), 'iis' (installs certificates to localmachine\\my and configures IIS bindings)", Default = "iis")]
+        [Option('i', "serverConfigurationProvider", HelpText = "The type of web server configuration to use to install and configure certificates. Supported types are: 'manual' (no integration), 'iis' (installs certificates to localmachine\\my and configures IIS bindings)", Default = "iis")]
         public string ServerConfigurationProvider { get; set; }
 
         [Option('w', "iisWebSite", HelpText = "The IIS web site that should be configured to use the new certificate (used with --serverConfigurationProvider iis). If you do not specifiy a web site, the provider will try to find a matching site with a binding for your domain.")]
