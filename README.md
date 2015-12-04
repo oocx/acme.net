@@ -38,16 +38,24 @@ server.
 
 Examples:
 
-Request a certificate for www.yourdomain.com and accept the terms of service of the ACME server (-a):
+Request a certificate for www.yourdomain.com and accept the terms of service of the ACME server (-a), 
+using your@email.com as registration contact information (-m):
 '''
-acme.exe -a www.yourdomain.com
+acme.exe -a www.yourdomain.com -m mailto:your@email.com
 '''
 
 If you don't want to use IIS integration or can't use it / you are not using IIS, you can also 
 run acme.exe without IIS support. In that case, you need to manually copy the challenge file
 that is required to validate domain ownership to your server.
 
-Request a certificate for www.yourdomain.com without IIS integration
+Request a certificate for www.yourdomain.com without IIS integration and accept the terms of service of the ACME server (-a), 
+using your@email.com as registration contact information (-m):
+'''
+acme.exe -a www.yourdomain.com -m mailto:your@email.com -c manual-http-01 -i manual
+'''
+
+If something does not work, please contact me at mathias@raacke.info or submit an issue on GitHub. You
+can increase the output verbosity by using the parameter -v Verbose
 
 # Projects in this repository
 
