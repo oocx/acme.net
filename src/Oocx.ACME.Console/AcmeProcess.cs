@@ -164,7 +164,7 @@ namespace Oocx.ACME.Console
 
         private async Task RegisterWithServer()
         {
-            var registration = await client.RegisterAsync(options.AcceptTermsOfService ? options.TermsOfServiceUri : null, options.Contact);
+            var registration = await client.RegisterAsync(options.AcceptTermsOfService ? options.TermsOfServiceUri : null, new[] {options.Contact});
             Info($"Terms of service: {registration.Agreement}");
             Verbose($"Created at: {registration.CreatedAt}");
             Verbose($"Id: {registration.Id}");
@@ -179,7 +179,7 @@ namespace Oocx.ACME.Console
                     Error($"Cannot accept terms of service. The terms of service uri is '{registration.Agreement}', expected it to be '{options.TermsOfServiceUri}'.");
                     return;
                 }
-                await client.UpdateRegistrationAsync(registration.Location, registration.Agreement, options.Contact);                
+                await client.UpdateRegistrationAsync(registration.Location, registration.Agreement, new[] {options.Contact});                
             }
         }
 

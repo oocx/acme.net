@@ -48,6 +48,6 @@ namespace Oocx.ACME.Console
         public string IISBinidng { get; set; }
 
         [Option('m', "contact", HelpText = "The contact information for the registration request. Example: mailto:you@example.com")]
-        public string[] Contact { get; set; }
+        public string Contact { get; set; }
     }    
 }
