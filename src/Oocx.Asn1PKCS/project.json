@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.0.0-beta*",
+  "version": "0.0.0-beta-*",
   "description": "Helper classes that are used by ACME.net to work with various PKCS standards like certificate signing requests.",
   "authors": [ "Mathias Raacke" ],
   "tags": [ "asn1" ],
