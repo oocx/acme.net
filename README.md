@@ -86,6 +86,11 @@ not used yet.
 
 # Change log
 
+## 2015-12-06 ACME.net now also on NuGet (v.0.0.72)
+
+The ACME.net protocol library is now also available on nuget.org. The API could still
+change and is not widely used yet, therefore I have uploaded it as a prerelease package.
+
 ## 2015-11-22 IIS integration (v.0.0.56)
 
 The console application can now configure IIS to automatically handle an http-01 challenge.
