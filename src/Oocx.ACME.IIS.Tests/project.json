@@ -1,10 +1,10 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "0.0.0-*",
   "description": "",
   "authors": [ "" ],
   "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "projectUrl": "https://github.com/oocx/acme.net",
+  "licenseUrl": "https://github.com/oocx/acme.net/blob/master/LICENSE",
 
   "dependencies": {
     "xunit": "2.1.0",
@@ -17,7 +17,12 @@
     "test": "xunit.runner.dnx"
   },
 
-  "frameworks": {    
-    "dnx46": { "compilationOptions": {"optimize": false, "define": ["DEBUG"]} }    
+  "frameworks": {
+    "dnx46": {
+      "compilationOptions": {
+        "optimize": false,
+        "define": [ "DEBUG" ]
+      }
+    }
   }
 }

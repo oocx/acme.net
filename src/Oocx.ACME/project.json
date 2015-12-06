@@ -1,10 +1,10 @@
 ﻿{
   "version": "0.0.0-*",
-  "description": "ACME.Protocol Class Library",
+  "description": "ACME.net can be used to create clients for the ACME (Automatic Certificate Management Environment) protocol. ",
   "authors": [ "Mathias Raacke" ],
-  "tags": [ "ACME", "letsencrypt" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "tags": [ "ACME", "letsencrypt", "ssl", "certificates" ],
+  "projectUrl": "https://github.com/oocx/acme.net",
+  "licenseUrl": "https://github.com/oocx/acme.net/blob/master/LICENSE",
 
   "dependencies": {
     "System.Runtime": "4.0.21-beta-23409",
@@ -14,11 +14,16 @@
     "System.Net.Http": "4.0.1-beta-23409",
     "Microsoft.AspNet.WebApi.Client": "5.2.3",
     "Oocx.ACME.Common": "",
-    "Oocx.Asn1PKCS": ""    
+    "Oocx.Asn1PKCS": ""
   },
 
-  "frameworks": {    
-    "dnx46": { "compilationOptions": {"optimize": false, "define": ["DEBUG"]} },
-    "net46": {}   
+  "frameworks": {
+    "dnx46": {
+      "compilationOptions": {
+        "optimize": false,
+        "define": [ "DEBUG" ]
+      }
+    },
+    "net46": { }
   }
 }

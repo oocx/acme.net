@@ -1,14 +1,14 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "0.0.0-*",
   "description": "ACME.Console Console Application",
-  "authors": [ "mathi" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "authors": [ "Mathias Raacke" ],
+  "tags": [ "ACME", "letsencrypt", "ssl", "certificates" ],
+  "projectUrl": "https://github.com/oocx/acme.net",
+  "licenseUrl": "https://github.com/oocx/acme.net/blob/master/LICENSE",
 
   "dependencies": {
     "CommandLineParser": "2.0.275-beta",
-    "Oocx.ACME": "",    
+    "Oocx.ACME": "",
     "Oocx.ACME.IIS": "",
     "Oocx.Asn1PKCS": "",
     "Autofac": "3.5.2"
@@ -25,6 +25,6 @@
         "define": [ "DEBUG" ]
       }
     },
-    "net46": { }    
+    "net46": { }
   }
 }

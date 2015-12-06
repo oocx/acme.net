@@ -1,10 +1,10 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "Oocx.ACME.Common Class Library",
-  "authors": [ "mathi" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "version": "0.0.0-*",
+  "description": "Utility classes for ACME.net",
+  "authors": [ "Mathias Raacke" ],
+  "tags": [ "" ],  
+  "projectUrl": "https://github.com/oocx/acme.net",
+  "licenseUrl": "https://github.com/oocx/acme.net/blob/master/LICENSE",  
 
   "frameworks": {
     "dnx46": {
@@ -17,7 +17,7 @@
     "dnxcore50": {
       "dependencies": {
         "System.Runtime": "4.0.21-beta-23516",
-        "System.Console": "4.0.0-beta-23409",        
+        "System.Console": "4.0.0-beta-23409",
         "Microsoft.NETCore": "5.0.1-beta-23516"
       }
     }
