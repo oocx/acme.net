@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.0.0-*",
+  "version": "0.0.0-beta*",
   "description": "ACME.net can be used to create clients for the ACME (Automatic Certificate Management Environment) protocol. ",
   "authors": [ "Mathias Raacke" ],
   "tags": [ "ACME", "letsencrypt", "ssl", "certificates" ],
