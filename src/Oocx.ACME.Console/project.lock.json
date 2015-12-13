@@ -54,7 +54,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Oocx.ACME/0.0.0": {
+      "Oocx.ACME/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
@@ -68,11 +68,11 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.ACME.Common/0.0.0": {
+      "Oocx.ACME.Common/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
-      "Oocx.ACME.IIS/0.0.0": {
+      "Oocx.ACME.IIS/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
@@ -85,7 +85,7 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.Asn1PKCS/0.0.0": {
+      "Oocx.Asn1PKCS/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
@@ -181,7 +181,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Oocx.ACME/0.0.0": {
+      "Oocx.ACME/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -195,11 +195,11 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.ACME.Common/0.0.0": {
+      "Oocx.ACME.Common/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
-      "Oocx.ACME.IIS/0.0.0": {
+      "Oocx.ACME.IIS/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -212,7 +212,7 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.Asn1PKCS/0.0.0": {
+      "Oocx.Asn1PKCS/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
@@ -308,7 +308,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Oocx.ACME/0.0.0": {
+      "Oocx.ACME/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
@@ -322,11 +322,11 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.ACME.Common/0.0.0": {
+      "Oocx.ACME.Common/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
-      "Oocx.ACME.IIS/0.0.0": {
+      "Oocx.ACME.IIS/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
@@ -339,7 +339,7 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.Asn1PKCS/0.0.0": {
+      "Oocx.Asn1PKCS/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
@@ -447,7 +447,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Oocx.ACME/0.0.0": {
+      "Oocx.ACME/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
@@ -461,11 +461,11 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.ACME.Common/0.0.0": {
+      "Oocx.ACME.Common/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
-      "Oocx.ACME.IIS/0.0.0": {
+      "Oocx.ACME.IIS/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6",
         "dependencies": {
@@ -478,7 +478,7 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.Asn1PKCS/0.0.0": {
+      "Oocx.Asn1PKCS/0.0.0-beta": {
         "type": "project",
         "framework": "DNX,Version=v4.6"
       },
@@ -586,7 +586,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Oocx.ACME/0.0.0": {
+      "Oocx.ACME/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -600,11 +600,11 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.ACME.Common/0.0.0": {
+      "Oocx.ACME.Common/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
-      "Oocx.ACME.IIS/0.0.0": {
+      "Oocx.ACME.IIS/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -617,7 +617,7 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.Asn1PKCS/0.0.0": {
+      "Oocx.Asn1PKCS/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
@@ -725,7 +725,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Oocx.ACME/0.0.0": {
+      "Oocx.ACME/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -739,11 +739,11 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.ACME.Common/0.0.0": {
+      "Oocx.ACME.Common/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
-      "Oocx.ACME.IIS/0.0.0": {
+      "Oocx.ACME.IIS/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -756,7 +756,7 @@
           "System.Threading": "4.0.11-beta-23409"
         }
       },
-      "Oocx.Asn1PKCS/0.0.0": {
+      "Oocx.Asn1PKCS/0.0.0-beta": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6"
       },
@@ -814,19 +814,19 @@
     }
   },
   "libraries": {
-    "Oocx.ACME/0.0.0": {
+    "Oocx.ACME/0.0.0-beta": {
       "type": "project",
       "path": "../Oocx.ACME/project.json"
     },
-    "Oocx.ACME.Common/0.0.0": {
+    "Oocx.ACME.Common/0.0.0-beta": {
       "type": "project",
       "path": "../Oocx.ACME.Common/project.json"
     },
-    "Oocx.ACME.IIS/0.0.0": {
+    "Oocx.ACME.IIS/0.0.0-beta": {
       "type": "project",
       "path": "../Oocx.ACME.IIS/project.json"
     },
-    "Oocx.Asn1PKCS/0.0.0": {
+    "Oocx.Asn1PKCS/0.0.0-beta": {
       "type": "project",
       "path": "../Oocx.Asn1PKCS/project.json"
     },

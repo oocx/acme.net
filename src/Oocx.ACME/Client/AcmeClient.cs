@@ -223,7 +223,7 @@ namespace Oocx.ACME.Client
         private static void GetHeaderValues<TResult>(HttpResponseMessage response, TResult responseContent)
         {
             var properties =
-                typeof (TResult).GetProperties(BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.Instance)
+                typeof (TResult).GetProperties(BindingFlags.Public | (BindingFlags) 8192 /*BindingFlags.SetProperty*/ | BindingFlags.Instance)
                     .Where(p => p.PropertyType == typeof (string))
                     .ToDictionary(p => p.Name, p => p);
             foreach (var header in response.Headers)

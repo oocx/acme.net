@@ -30,7 +30,7 @@ namespace Oocx.ACME.Client
 
             var keyAuthorization = client.GetKeyAuthorization(challenge.Token);
 
-            var acmeChallengePath = Environment.CurrentDirectory;
+            var acmeChallengePath = System.IO.Directory.GetCurrentDirectory();
             var challengeFile = Path.Combine(acmeChallengePath, challenge.Token);
             using (var fs = new FileStream(challengeFile, FileMode.Create, FileAccess.Write, FileShare.None))
             {

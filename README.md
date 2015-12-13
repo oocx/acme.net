@@ -68,6 +68,11 @@ can increase the output verbosity by using the parameter -v Verbose
 This is an implementation of the ACME protocol. IT contains a class AcmeClient that can
 be used to communicate with ACME servers.
 
+Oocx.ACME supports .NET 4.6 and dnx46. It does not work with .NET 4.5 (see issue #2).
+I have begun to work on .NET Core support. I cannot really test it yet because I first need a
+version of NSubstitute that works with .NET Core, so that I can use .NET core to run my 
+unit tests.
+
 ## Oocx.ACME.Console
 
 This is a simple command line client that I use to test my ACME client. It does not yet have

@@ -14,8 +14,8 @@ namespace Oocx.ACME.Services
         public FileKeyStore(string basePath)
         {
             if (string.IsNullOrWhiteSpace(basePath))
-            {
-                basePath = Environment.CurrentDirectory;
+            {                
+                basePath = Directory.GetCurrentDirectory();
             }
             Verbose($"using key base path {basePath}");
             this.basePath = basePath;
