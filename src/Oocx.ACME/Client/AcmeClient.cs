@@ -44,7 +44,7 @@ namespace Oocx.ACME.Client
         public async Task<Directory> DiscoverAsync()
         {
             Verbose($"Querying directory information from {client.BaseAddress}" );
-            return await GetAsync<Directory>(new Uri("directory", UriKind.Relative));            
+            return await GetAsync<Directory>(new Uri("directory", UriKind.Relative)).ConfigureAwait(false);            
         }
 
         private void RememberNonce(HttpResponseMessage response)
@@ -55,7 +55,7 @@ namespace Oocx.ACME.Client
 
         public async Task<RegistrationResponse> RegisterAsync(string termsOfServiceUri, string[] contact)
         {
-            await EnsureDirectory();            
+            await EnsureDirectory().ConfigureAwait(false);            
 
             Info("trying to create new registration");
 
@@ -67,7 +67,7 @@ namespace Oocx.ACME.Client
 
             try
             {
-                var registration = await PostAsync<RegistrationResponse>(directory.NewRegistration, request);
+                var registration = await PostAsync<RegistrationResponse>(directory.NewRegistration, request).ConfigureAwait(false);
                 Info($"new registration created: {registration.Location}");
                 
                 return registration;
@@ -76,7 +76,7 @@ namespace Oocx.ACME.Client
             {
                 var location = ex.Response.Headers.Location.ToString();
                 Info($"using existing registration: {location}");
-                var response =  await PostAsync<RegistrationResponse>(new Uri(location), new UpdateRegistrationRequest());
+                var response =  await PostAsync<RegistrationResponse>(new Uri(location), new UpdateRegistrationRequest()).ConfigureAwait(false);
                 if (string.IsNullOrEmpty(response.Location))
                 {
                     response.Location = location;
@@ -89,28 +89,28 @@ namespace Oocx.ACME.Client
         {
             if (directory == null || nonce == null)
             {
-                directory = await DiscoverAsync();
+                directory = await DiscoverAsync().ConfigureAwait(false);
             }
         }
 
-        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, string agreementUri, string[] contact)
+        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, string termsOfServiceUri, string[] contact)
         {
-            await EnsureDirectory();
+            await EnsureDirectory().ConfigureAwait(false);
 
             Info("updating registration: accepting terms of service");
 
             var registration = new UpdateRegistrationRequest()
             {                
                 Contact = contact,
-                Agreement = agreementUri
+                Agreement = termsOfServiceUri
             };
 
-            return await PostAsync<RegistrationResponse>(new Uri(registrationUri), registration);
+            return await PostAsync<RegistrationResponse>(new Uri(registrationUri), registration).ConfigureAwait(false);
         }
 
         public async Task<AuthorizationResponse> NewDnsAuthorizationAsync(string dnsName)
         {
-            await EnsureDirectory();
+            await EnsureDirectory().ConfigureAwait(false);
 
             Info($"requesting authorization for dns identifier {dnsName}");            
 
@@ -120,7 +120,7 @@ namespace Oocx.ACME.Client
                 Identifier = new Identifier() {  Type = "dns", Value = dnsName}
             };
 
-            return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization);
+            return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization).ConfigureAwait(false);
         }                    
 
         public async Task<Challenge> CompleteChallengeAsync(Challenge challenge)
@@ -130,12 +130,12 @@ namespace Oocx.ACME.Client
                 KeyAuthorization = jws.GetKeyAuthorization(challenge.Token)
             };
 
-            challenge = await PostAsync<Challenge>(challenge.Uri, challangeRequest);
+            challenge = await PostAsync<Challenge>(challenge.Uri, challangeRequest).ConfigureAwait(false);
 
             while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
             {
-                await Task.Delay(4000);
-                challenge = await GetAsync<Challenge>(challenge.Uri);                                
+                await Task.Delay(4000).ConfigureAwait(false);
+                challenge = await GetAsync<Challenge>(challenge.Uri).ConfigureAwait(false);                                
             }
 
             Info($"challenge status is {challenge?.Status}");
@@ -149,12 +149,12 @@ namespace Oocx.ACME.Client
 
         public async Task<CertificateResponse> NewCertificateRequestAsync(byte[] csr)
         {
-            await EnsureDirectory();
+            await EnsureDirectory().ConfigureAwait(false);
 
             Info("requesting certificate");
 
             var request = new CertificateRequest {Csr = csr.Base64UrlEncoded()};
-            var response = await PostAsync<CertificateResponse>(directory.NewCertificate, request);            
+            var response = await PostAsync<CertificateResponse>(directory.NewCertificate, request).ConfigureAwait(false);            
 
             Verbose($"location: {response.Location}");            
 
@@ -163,12 +163,12 @@ namespace Oocx.ACME.Client
 
         private async Task<TResult> GetAsync<TResult>(Uri uri) where TResult : class
         {
-            return await SendAsync<TResult>(HttpMethod.Get, uri, null);
+            return await SendAsync<TResult>(HttpMethod.Get, uri, null).ConfigureAwait(false);
         }
 
         private async Task<TResult> PostAsync<TResult>(Uri uri, object message) where TResult : class
         {
-            return await SendAsync<TResult>(HttpMethod.Post, uri, message);
+            return await SendAsync<TResult>(HttpMethod.Post, uri, message).ConfigureAwait(false);
         }
 
         private async Task<TResult> SendAsync<TResult>(HttpMethod method, Uri uri, object message) where TResult : class
@@ -190,7 +190,7 @@ namespace Oocx.ACME.Client
                 Content = content
             };
 
-            var response = await client.SendAsync(request);
+            var response = await client.SendAsync(request).ConfigureAwait(false);
             
             Verbose($"response status: {(int)response.StatusCode} {response.ReasonPhrase}");
             
@@ -199,7 +199,7 @@ namespace Oocx.ACME.Client
 
             if (response.Content.Headers.ContentType.MediaType == "application/problem+json")
             {
-                var problemJson = await response.Content.ReadAsStringAsync();
+                var problemJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var problem = JsonConvert.DeserializeObject<Problem>(problemJson);
                 Verbose($"error response from server: {problem.Type}: {problem.Detail}");
                 throw new AcmeException(problem, response);
@@ -207,13 +207,13 @@ namespace Oocx.ACME.Client
 
             if (typeof(TResult) == typeof(CertificateResponse) && response.Content.Headers.ContentType.MediaType == "application/pkix-cert")
             {                
-                var certificateBytes = await response.Content.ReadAsByteArrayAsync();
+                var certificateBytes = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
                 var certificateResponse = new CertificateResponse() {Certificate = certificateBytes};
                 GetHeaderValues(response, certificateResponse);
                 return certificateResponse as TResult;
             }
 
-            var responseContent = await response.Content.ReadAsAsync<TResult>();
+            var responseContent = await response.Content.ReadAsAsync<TResult>().ConfigureAwait(false);
 
             GetHeaderValues(response, responseContent);
 
