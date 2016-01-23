@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "0.0.0-beta-*",
   "description": "",
   "authors": [ "" ],
@@ -9,9 +9,9 @@
   "dependencies": {
     "xunit": "2.1.0",
     "xunit.runner.dnx": "2.1.0-rc1-build204",
-    "FluentAssertions": "4.0.1",
     "NSubstitute": "1.9.2",
-    "Oocx.ACME.IIS": ""
+    "Oocx.ACME.IIS": "",
+    "FluentAssertions": "4.2.1"
   },
   "commands": {
     "test": "xunit.runner.dnx"

@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "0.0.0-beta-*",
   "description": "Oocx.ACME.IIS Class Library",
   "authors": [ "Mathias Raacke" ],
@@ -6,7 +6,7 @@
   "projectUrl": "https://github.com/oocx/acme.net",
   "licenseUrl": "https://github.com/oocx/acme.net/blob/master/LICENSE",
   "dependencies": {
-    "System.Runtime": "4.0.21-beta-23409",
+    "System.Runtime": "4.0.21-beta-23516",
     "System.Linq": "4.0.1-beta-23409",
     "System.Threading": "4.0.11-beta-23409",
     "Microsoft.Web.Administration": "7.0.0",
@@ -23,5 +23,8 @@
       }
     },
     "net46": { }
-  }
+  },
+  "resource": [
+    "web.config"
+  ]
 }

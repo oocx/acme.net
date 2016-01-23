@@ -7,14 +7,14 @@
   "licenseUrl": "https://github.com/oocx/acme.net/blob/master/LICENSE",
 
   "dependencies": {
-    "System.Runtime": "4.0.21-beta-23409",
+    "System.Runtime": "4.0.21-beta-23516",
     "System.Linq": "4.0.1-beta-23409",
     "System.Threading": "4.0.11-beta-23409",
-    "Newtonsoft.Json": "7.0.1",
     "System.Net.Http": "4.0.1-beta-23409",
     "Microsoft.AspNet.WebApi.Client": "5.2.3",
     "Oocx.ACME.Common": "",
-    "Oocx.Asn1PKCS": ""
+    "Oocx.Asn1PKCS": "",
+    "Newtonsoft.Json": "8.0.2"
   },
 
   "frameworks": {

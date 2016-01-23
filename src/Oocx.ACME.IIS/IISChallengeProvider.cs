@@ -10,6 +10,7 @@ using Oocx.ACME.Client;
 using Oocx.ACME.Protocol;
 using static Oocx.ACME.Common.Log;
 using Directory = System.IO.Directory;
+using System.Reflection;
 
 namespace Oocx.ACME.IIS
 {
@@ -115,6 +116,9 @@ namespace Oocx.ACME.IIS
             CreateDirectory(wellKnownPath);
             var acmePath = Path.Combine(wellKnownPath, "acme-challenge");
             CreateDirectory(acmePath);
+
+            CreateWebConfig(acmePath);
+
             var challengeFilePath = Path.Combine(acmePath, token);
 
             Verbose($"writing challenge to {challengeFilePath}");
@@ -122,6 +126,22 @@ namespace Oocx.ACME.IIS
             {
                 var data = System.Text.Encoding.ASCII.GetBytes(keyAuthorization);
                 await fs.WriteAsync(data, 0, data.Length);
+            }
+        }        
+
+        private static void CreateWebConfig(string acmePath)
+        {
+            var webConfigPath = Path.Combine(acmePath, "web.config");
+            if (File.Exists(webConfigPath))
+            {
+                return;
+            }
+
+            Verbose($"Creating file '{webConfigPath}'");
+            var webConfigStream = typeof (IISChallengeProvider).GetTypeInfo().Assembly.GetManifestResourceStream("web.config");
+            using (var fileStream = new FileStream(webConfigPath, FileMode.CreateNew, FileAccess.Write))
+            {
+                webConfigStream.CopyTo(fileStream);
             }
         }
 
