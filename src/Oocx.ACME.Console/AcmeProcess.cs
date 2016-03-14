@@ -59,7 +59,7 @@ namespace Oocx.ACME.Console
 
                 SaveCertificateWithPrivateKey(domain, keyPair, certificatePath);
                 
-                ConfigureServer(domain, certificatePath, keyPair, options.IISWebSite, options.IISBinidng);                
+                ConfigureServer(domain, certificatePath, keyPair, options.IISWebSite, options.IISBinding);                
             }
         }
 
@@ -156,8 +156,15 @@ namespace Oocx.ACME.Console
             }            
 
             System.Console.WriteLine(challenge.Instructions);
-            System.Console.WriteLine("Press ENTER to continue");
-            System.Console.ReadLine();
+            if (!options.AcceptInstructions)
+            {
+                System.Console.WriteLine("Press ENTER to continue");
+                System.Console.ReadLine();
+            }
+            else
+            {
+                System.Console.WriteLine("Automatically accepting instructions.");
+            }
             var challengeResult = await challenge.Complete();
             return "valid".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
         }
