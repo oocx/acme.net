@@ -6,6 +6,7 @@ using Autofac.Core;
 using static System.Console;
 
 using CommandLine;
+using CommandLine.Text;
 using Oocx.ACME.Client;
 using Oocx.ACME.Common;
 using static  Oocx.ACME.Common.Log;
@@ -16,8 +17,15 @@ namespace Oocx.ACME.Console
     {
         
         public void Main(string[] args)
-        {            
-            Parser.Default.ParseArguments<Options>(args)                
+        {
+            Parser parser = new Parser(config =>
+            {
+              config.EnableDashDash = true;
+              config.CaseSensitive = true;
+              config.IgnoreUnknownArguments = false;
+              config.HelpWriter = Out;
+            });
+            parser.ParseArguments<Options>(args)              
                 .WithNotParsed(ArgumentsError)
                 .WithParsed(Execute);
         }

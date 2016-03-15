@@ -64,7 +64,7 @@ namespace Oocx.ACME.IIS
         public async Task AcceptChallengeForDomainAsync(string domain, string token, string challengeJson)
         {
             Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
-            var root = GetIisRootAndConfigureMimeType(domain);
+            var root = GetIisRoot(domain);
             await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);                        
         }
 
@@ -74,7 +74,7 @@ namespace Oocx.ACME.IIS
             var site = manager.Sites[siteName];
             if (site == null)
             {
-                Error($"ISS web site '{siteName}' not found, cannot process challenge.");
+                Error($"IIS web site '{siteName}' not found, cannot process challenge.");
                 return;
             }
 
@@ -82,30 +82,10 @@ namespace Oocx.ACME.IIS
             await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);
         }
 
-        private string GetIisRootAndConfigureMimeType(string domain)
+        private string GetIisRoot(string domain)
         {
             var site = manager.GetSiteForDomain(domain);
-
             var app = site.Applications["/"];
-
-            var config = app.GetWebConfiguration();
-            var staticContent = config.GetSection("system.webServer/staticContent");
-            var collection = staticContent.GetCollection();
-            if (!collection.Any(
-                    e => e.ElementTagName == "mimeMap" && ".".Equals(e.GetAttribute("fileExtension").Value)))
-            {
-                Info("adding mime type 'text/plain' for extension '.'");
-                var mime = collection.CreateElement("mimeMap");
-                mime["fileExtension"] = ".";
-                mime["mimeType"] = "text/plain";
-                collection.Add(mime);
-                manager.CommitChanges();
-            }
-            else
-            {
-                Info("configuration already contains mime type mapping for extension '.'");
-            }                        
-
             return app.VirtualDirectories["/"].PhysicalPath;
         }
 
@@ -137,11 +117,16 @@ namespace Oocx.ACME.IIS
                 return;
             }
 
-            Verbose($"Creating file '{webConfigPath}'");
-            var webConfigStream = typeof (IISChallengeProvider).GetTypeInfo().Assembly.GetManifestResourceStream("web.config");
+            Type iisChallengeProviderType = typeof (IISChallengeProvider);
+            string resourceName = iisChallengeProviderType.ToString().Substring(0, iisChallengeProviderType.ToString().LastIndexOf(".", StringComparison.Ordinal)) + ".web.config";
+            Verbose($"Creating file '{webConfigPath}' from internal resource '{resourceName}'");
+
+            var webConfigStream = iisChallengeProviderType.GetTypeInfo().Assembly.GetManifestResourceStream(resourceName);
             using (var fileStream = new FileStream(webConfigPath, FileMode.CreateNew, FileAccess.Write))
             {
                 webConfigStream.CopyTo(fileStream);
+                webConfigStream.Flush();
+                webConfigStream.Close();
             }
         }
 
