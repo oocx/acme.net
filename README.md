@@ -7,7 +7,7 @@ This repository contains a library that can be used to develop ACME / Let's Encr
 Requesting and installing a a new SSL certificate can be as simple as this:
 
 ```
-acme.exe www.example.com -a
+acme.exe -d www.example.com -a
 ```
 
 That's all you need to do to request and install a free SSL certificate from Let's Encrypt!
