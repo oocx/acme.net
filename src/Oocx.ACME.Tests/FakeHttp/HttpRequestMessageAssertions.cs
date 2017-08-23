@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using FluentAssertions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oocx.ACME.Jose;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
 
@@ -18,13 +19,19 @@ namespace Oocx.ACME.Tests.FakeHttp
 
         public static HttpRequestMessage HasContent<T>(this HttpRequestMessage request, Action<T> contentAssertion)
         {
-            contentAssertion(request.Content.ReadAsAsync<T>().Result);
+            var responseText = request.Content.ReadAsStringAsync().Result;
+            var responseObject = JObject.Parse(responseText).ToObject<T>();
+
+            contentAssertion(responseObject);
+
             return request;
         }
 
         public static HttpRequestMessage HasJwsPayload<T>(this HttpRequestMessage request, Action<T> contentAssertion)
         {
-            var message = request.Content.ReadAsAsync<JWSMessage>().Result;
+            var responseText = request.Content.ReadAsStringAsync().Result;
+            var message = JObject.Parse(responseText).ToObject<JWSMessage>();
+
             var contentJson = Encoding.UTF8.GetString(message.Payload.Base64UrlDecode());
             var content = JsonConvert.DeserializeObject<T>(contentJson);
 

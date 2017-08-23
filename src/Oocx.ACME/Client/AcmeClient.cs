@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oocx.ACME.Jose;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
@@ -213,7 +214,9 @@ namespace Oocx.ACME.Client
                 return certificateResponse as TResult;
             }
 
-            var responseContent = await response.Content.ReadAsAsync<TResult>().ConfigureAwait(false);
+            var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            var responseContent = JObject.Parse(responseText).ToObject<TResult>();
 
             GetHeaderValues(response, responseContent);
 

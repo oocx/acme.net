@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
+using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace Oocx.ACME.Tests.FakeHttp
 {
     public class FakeRequestConfiguration
     {
         private readonly FakeHttpMessageHandler fakeHttpMessageHandler;
-        private static readonly JsonMediaTypeFormatter Formatter = new JsonMediaTypeFormatter();
 
         public FakeRequestConfiguration(FakeHttpMessageHandler fakeHttpMessageHandler)
         {
@@ -19,7 +19,7 @@ namespace Oocx.ACME.Tests.FakeHttp
 
         public string Uri { get; set; }
 
-        public ObjectContent Content { get; set; }
+        public StringContent Content { get; set; }
 
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();        
 
@@ -27,7 +27,7 @@ namespace Oocx.ACME.Tests.FakeHttp
 
         public FakeRequestConfiguration Returns<T>(T content, string contentType = "application/json")
         {
-            Content = new ObjectContent<T>(content, Formatter);
+            Content = new StringContent(JObject.FromObject(content).ToString(), Encoding.UTF8, contentType);
             Content.Headers.ContentType.MediaType = contentType;
             return this;
         }

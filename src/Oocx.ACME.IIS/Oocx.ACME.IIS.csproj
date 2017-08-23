@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Oocx.ACME.IIS Class Library</Description>
+    <VersionPrefix>0.0.0-beta</VersionPrefix>
+    <Authors>Mathias Raacke</Authors>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <AssemblyName>Oocx.ACME.IIS</AssemblyName>
+    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="web.config" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oocx.Asn1PKCS\Oocx.Asn1PKCS.csproj" />
+    <ProjectReference Include="..\Oocx.ACME\Oocx.ACME.csproj" />
+    <ProjectReference Include="..\Oocx.ACME.Common\Oocx.ACME.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.Administration" Version="10.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System" />
+  </ItemGroup>
+
+</Project>

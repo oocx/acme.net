@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>ACME.Console Console Application</Description>
+    <VersionPrefix>0.0.0-beta</VersionPrefix>
+    <Authors>Mathias Raacke</Authors>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <AssemblyName>Oocx.ACME.Console</AssemblyName>
+    <PackageTags>ACME;letsencrypt;ssl;certificates</PackageTags>
+    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oocx.ACME\Oocx.ACME.csproj" />
+    <ProjectReference Include="..\Oocx.ACME.IIS\Oocx.ACME.IIS.csproj" />
+    <ProjectReference Include="..\Oocx.Asn1PKCS\Oocx.Asn1PKCS.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="CommandLineParser" Version="1.9.71" />
+  </ItemGroup>
+
+
+</Project>
