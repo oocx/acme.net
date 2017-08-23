@@ -11,7 +11,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
 
         public int Length { get; private set; }
 
-        public int Size { get; protected set; } 
+        public int Size { get; protected set; }
 
         public byte[] LengthBytes { get; private set; } = { 0 };
 
@@ -20,17 +20,17 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
             get { return data; }
             set
             {
-                data = value;                
+                data = value;
                 LengthBytes = Data.Length.ToEncodedLength().ToArray();
                 Length = data.Length;
                 Size = Length + LengthBytes.Length + 1;
             }
         }
-        
+
         protected Asn1Primitive(byte tag)
         {
             Tag = tag;
-        }         
+        }
     }
 
     public abstract class Asn1Primitive<T> : Asn1Primitive

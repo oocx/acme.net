@@ -4,7 +4,7 @@ namespace Oocx.Asn1PKCS.PKCS12
 {
     public class SafeContentsBag : IBagType
     {
-        public SafeContentsBag(IAsn1Element content) 
+        public SafeContentsBag(IAsn1Element content)
         {
             Content = content;
         }

@@ -28,7 +28,7 @@ namespace Oocx.Asn1PKCS.PKCS1
                 //TODO add more validation, ensure that the algorithm used is RSA
 
                 var asn1 = (Sequence)parser.Parse(derStream).First();
-                var octet = (OctetString) asn1.Children.Last();
+                var octet = (OctetString)asn1.Children.Last();
                 using (var octetStream = new MemoryStream(octet.UnencodedValue))
                 {
                     var rsaParser = new RSAPrivateKeyParser(parser);

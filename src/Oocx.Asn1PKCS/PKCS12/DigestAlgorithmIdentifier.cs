@@ -6,7 +6,7 @@ namespace Oocx.Asn1PKCS.PKCS12
     {
         public DigestAlgorithmIdentifier(string oid) : base(oid)
         {
-            
+
         }
     }
 }
