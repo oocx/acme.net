@@ -12,9 +12,8 @@ build:
   publish_nuget_symbols: true
   verbosity: minimal
 test_script:
-- cmd: >-
-    dotnet test .\src\Oocx.ACME.Tests
-    dotnet test .\src\Oocx.Asn1PKCS.Tests
+- dotnet test .\src\Oocx.ACME.Tests
+- dotnet test .\src\Oocx.Asn1PKCS.Tests
 artifacts:
 - path: src\Oocx.ACME.Console\bin\Debug\net46\acme.exe
 - path: artifacts\bin\Oocx.ACME\Debug\*.nupkg
