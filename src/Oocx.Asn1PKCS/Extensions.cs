@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
@@ -25,20 +26,29 @@ namespace Oocx.Asn1PKCS
 
         public static byte[] DecodePEM(this Stream pem, string type)
         {
-            string[] lines;
+            var lines = new List<string>();
+
+            string line;
+
             using (var sr = new StreamReader(pem))
             {
-                lines = sr.ReadToEnd().Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (string.IsNullOrEmpty(line)) continue;
+
+                    lines.Add(line);
+                }
             }
-            if (!$"-----BEGIN {type}-----".Equals(lines.First()))
+
+            if (!$"-----BEGIN {type}-----".Equals(lines[0]))
             {
                 throw new InvalidDataException($"The PEM file should start with -----BEGIN {type}-----");
             }
-            if (!"-----END PRIVATE KEY-----".Equals(lines.Last()))
+            if (!"-----END PRIVATE KEY-----".Equals(lines[lines.Count - 1]))
             {
                 throw new InvalidDataException($"The PEM file should end with -----END {type}-----");
             }
-            var base64 = string.Join("", lines.Skip(1).Take(lines.Length - 2));
+            var base64 = string.Join("", lines.Skip(1).Take(lines.Count - 2));
             var der = base64.Base64UrlDecode();
             return der;
         }
