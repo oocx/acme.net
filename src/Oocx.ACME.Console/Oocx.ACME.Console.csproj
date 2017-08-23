@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
+    <TargetFrameworks>net461</TargetFrameworks>
     <AssemblyName>Oocx.ACME.Console</AssemblyName>
     <OutputType>Exe</OutputType>
     

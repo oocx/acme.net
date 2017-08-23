@@ -1,13 +1,10 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Security;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Oocx.ACME.Client;
-using Oocx.ACME.IIS;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Asn1PKCS.PKCS10;
