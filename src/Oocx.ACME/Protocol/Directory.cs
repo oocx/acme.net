@@ -19,5 +19,8 @@ namespace Oocx.ACME.Protocol
 
         [JsonProperty("revoke-cert")]
         public Uri RevokeCertificate { get; set; }
+
+        [JsonProperty("key-change")]
+        public Uri KeyChange { get; set; }
     }
 }
