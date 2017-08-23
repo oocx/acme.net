@@ -19,18 +19,18 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
 
             foreach (var b in element.LengthBytes) yield return b;
 
-            if (element is BitString)
+            if (element is BitString bitString)
             {
                 //yield return ((BitString)element).UnusedBits;
             }
 
-            if (element is Asn1Primitive)
+            if (element is Asn1Primitive asn1Primitive)
             {                
-                foreach (var b in ((Asn1Primitive)element).Data) yield return b;
+                foreach (var b in asn1Primitive.Data) yield return b;
             }
-            else if (element is Asn1Container)
+            else if (element is Asn1Container asn1Container)
             {
-                foreach (var b in ((Asn1Container) element).Children.SelectMany(e => Serialize(e, depth+1)))
+                foreach (var b in asn1Container.Children.SelectMany(e => Serialize(e, depth+1)))
                 {
                     yield return b;
                 }
