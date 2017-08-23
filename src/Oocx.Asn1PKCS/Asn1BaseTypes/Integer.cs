@@ -5,20 +5,20 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
     /// <see cref="https://msdn.microsoft.com/en-us/library/windows/desktop/bb540806(v=vs.85).aspx"/>
     public class Integer : Asn1Primitive<byte[]>
-    {        
+    {
         public Integer(int value) : base(2)
         {
             UnencodedValue = BitConverter.GetBytes(value);
 
             if (value <= byte.MaxValue)
             {
-                Data = AddLeadingZero(new[] {(byte) value});
+                Data = AddLeadingZero(new[] { (byte)value });
                 return;
             }
             var bytes = BitConverter.GetBytes(value);
-            if (value < 256*256)
+            if (value < 256 * 256)
             {
-                Data = AddLeadingZero(new[] { bytes[1], bytes[0]});
+                Data = AddLeadingZero(new[] { bytes[1], bytes[0] });
                 return;
             }
             if (value < 256 * 256 * 256)
@@ -41,9 +41,8 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
             {
                 return data;
             }
+
             return new byte[] { 0 }.Concat(data).ToArray();
         }
-
-        
     }
 }

@@ -7,7 +7,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
     /// https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
     /// </summary>
     public class ObjectIdentifier : Asn1Primitive
-    {                        
+    {
         public ObjectIdentifier(string id) : base(6)
         {
             var nodes = id.Split('.').Select(int.Parse).ToArray();

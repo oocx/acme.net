@@ -28,7 +28,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
             public const string digestedData = "1.2.840.113549.1.7.5";
             public const string encryptedData = "1.2.840.113549.1.7.6";
         }
-        
+
         public class PKCS12
         {
             public class BagType
@@ -39,7 +39,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
                 public const string crlBag = "1.2.840.113549.1.12.10.4";
                 public const string secretBag = "1.2.840.113549.1.12.10.5";
                 public const string safeContentsBag = "1.2.840.113549.1.12.10.6";
-            }   
+            }
         }
     }
 }

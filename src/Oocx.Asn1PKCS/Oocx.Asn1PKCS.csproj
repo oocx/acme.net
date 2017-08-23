@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Helper classes that are used by ACME.net to work with various PKCS standards like certificate signing requests.</Description>
+    <VersionPrefix>0.0.0-beta</VersionPrefix>
+    <Authors>Mathias Raacke</Authors>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <AssemblyName>Oocx.Asn1PKCS</AssemblyName>
+    <PackageTags>asn1</PackageTags>
+    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+
+  </ItemGroup>
+
+
+</Project>

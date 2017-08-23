@@ -33,8 +33,8 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
 
         public static string Base64UrlEncoded(this string s)
         {
-            s = Encoding.UTF8.GetBytes(s).Base64UrlEncoded();            
+            s = Encoding.UTF8.GetBytes(s).Base64UrlEncoded();
             return s;
-        }        
+        }
     }
 }

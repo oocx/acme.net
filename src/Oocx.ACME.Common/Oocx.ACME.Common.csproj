@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Utility classes for ACME.net</Description>
+    <VersionPrefix>0.0.0-beta</VersionPrefix>
+    <Authors>Mathias Raacke</Authors>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <AssemblyName>Oocx.ACME.Common</AssemblyName>
+    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System" />
+  </ItemGroup>
+
+</Project>

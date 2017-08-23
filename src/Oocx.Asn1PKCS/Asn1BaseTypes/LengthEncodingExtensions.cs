@@ -23,15 +23,15 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
             if (value <= ushort.MaxValue)
             {
                 yield return 128 + 2;
-                bytes = BitConverter.GetBytes((ushort) value);
+                bytes = BitConverter.GetBytes((ushort)value);
                 yield return bytes[1];
                 yield return bytes[0];
                 yield break;
             }
-            if (value < 256*256*256)
+            if (value < 256 * 256 * 256)
             {
                 yield return 128 + 3;
-                bytes = BitConverter.GetBytes(value);                
+                bytes = BitConverter.GetBytes(value);
                 yield return bytes[2];
                 yield return bytes[1];
                 yield return bytes[0];
@@ -48,9 +48,8 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
 
         public static IEnumerable<byte> ToVLQEncodedInt(this int value)
         {
-            return ((uint) value).ToVLQEncodedInt();
+            return ((uint)value).ToVLQEncodedInt();
         }
-
 
         /// <summary>
         /// https://en.wikipedia.org/wiki/Variable-length_quantity        
@@ -73,17 +72,17 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
 
             */
 
-            var a = (value & 4026531840) >> 28;            
+            var a = (value & 4026531840) >> 28;
             var b = (value & 266338304) >> 21;
             var c = (value & 2080768) >> 14;
             var d = (value & 16256) >> 7;
             var e = (value & 127);
-            
+
             if (a > 0) yield return (byte)(a + 128);
-            if (a > 0 || b > 0) yield return (byte) (b + 128);
-            if (a > 0 || b > 0 || c > 0) yield return (byte) (c + 128);
+            if (a > 0 || b > 0) yield return (byte)(b + 128);
+            if (a > 0 || b > 0 || c > 0) yield return (byte)(c + 128);
             if (a > 0 || b > 0 || c > 0 || d > 0) yield return (byte)(d + 128);
             yield return (byte)e;
-        }       
+        }
     }
 }

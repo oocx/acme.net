@@ -90,5 +90,25 @@ namespace Oocx.Asn1PKCS.Tests
             parsedRsaKey.Key.DQ.Should().Equal(rsaParameters.DQ);
             parsedRsaKey.Key.InverseQ.Should().Equal(rsaParameters.InverseQ);            
         }
+
+        [Fact]
+        public void RSAPrivateKey_parse_and_encode_to_pem_should_result_in_equal_keys()
+        {
+            var rsa = new RSACryptoServiceProvider(2048);
+            var rsaParameters = rsa.ExportParameters(true);
+
+            var privateKey = new RSAPrivateKey(rsaParameters);
+
+            var parsedRsaKey = RSAPrivateKey.ParsePem(privateKey.ToPemString());
+
+            Assert.Equal(rsaParameters.Exponent, parsedRsaKey.Key.Exponent);
+            Assert.Equal(rsaParameters.Modulus,  parsedRsaKey.Key.Modulus);
+            Assert.Equal(rsaParameters.P,        parsedRsaKey.Key.P);
+            Assert.Equal(rsaParameters.D,        parsedRsaKey.Key.D);
+            Assert.Equal(rsaParameters.DP,       parsedRsaKey.Key.DP);
+            Assert.Equal(rsaParameters.Q,        parsedRsaKey.Key.Q);
+            Assert.Equal(rsaParameters.DQ,       parsedRsaKey.Key.DQ);
+            Assert.Equal(rsaParameters.InverseQ, parsedRsaKey.Key.InverseQ);
+        }
     }
 }

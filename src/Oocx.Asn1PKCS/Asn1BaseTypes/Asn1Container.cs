@@ -3,7 +3,7 @@ using System.Linq;
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
     public abstract class Asn1Container : IAsn1Element
-    {        
+    {
         protected Asn1Container(byte tag, IAsn1Element[] children)
         {
             Tag = tag;
@@ -14,7 +14,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
             Size = Length + LengthBytes.Length + 1;
         }
 
-        public  IAsn1Element[] Children { get; }
+        public IAsn1Element[] Children { get; }
 
         public byte Tag { get; }
 

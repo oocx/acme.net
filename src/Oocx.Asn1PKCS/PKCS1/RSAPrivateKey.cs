@@ -1,7 +1,7 @@
 using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Asn1PKCS.Parser;
 
 namespace Oocx.Asn1PKCS.PKCS1
 {
@@ -17,7 +17,7 @@ namespace Oocx.Asn1PKCS.PKCS1
         public RSAPrivateKey(Integer modulus, Integer publicExponent, Integer privateExponent, Integer prime1,
             Integer prime2, Integer exponent1, Integer exponent2, Integer coefficient)
             : this(new Integer(0), modulus, publicExponent, privateExponent, prime1, prime2, exponent1, exponent2, coefficient)
-        {            
+        {
         }
 
         public RSAPrivateKey(Integer version, Integer modulus, Integer publicExponent, Integer privateExponent, Integer prime1, Integer prime2, Integer exponent1, Integer exponent2, Integer coefficient)
@@ -40,13 +40,30 @@ namespace Oocx.Asn1PKCS.PKCS1
         {
             // As a result of parsing the asn1 Integer, the parser might have removed a leading zero.
             // We need to add it back here, as they are expected by the .NET RsaParameters class
-            if (data.Length %2 == 1)
+            if (data.Length % 2 == 1)
             {
                 return new byte[] { 0 }.Concat(data).ToArray();
             }
             return data;
         }
-        
-        public  RSAParameters Key { get; private set; }
+
+        public RSAParameters Key { get; private set; }
+
+
+        public string ToPemString()
+        {
+            var asn1Serializer = new Asn1Serializer();
+            
+            return asn1Serializer.Serialize(this).ToArray().EncodeAsPEM(PEMExtensions.RSAPrivateKey);
+        }
+
+        public static RSAPrivateKey ParsePem(string pem)
+        {
+            var asn1Parser = new Asn1Parser();
+
+            var rsaParser = new RSAPrivateKeyParser(asn1Parser);
+
+            return rsaParser.ParsePem(pem);
+        }
     }
 }
