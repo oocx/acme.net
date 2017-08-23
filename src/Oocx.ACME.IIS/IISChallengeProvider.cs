@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Principal;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using Oocx.ACME.Client;
 using Oocx.ACME.Protocol;
 using static Oocx.ACME.Common.Log;
 using Directory = System.IO.Directory;
-using System.Reflection;
 
 namespace Oocx.ACME.IIS
 {
@@ -54,18 +51,18 @@ namespace Oocx.ACME.IIS
                 Complete = () => client.CompleteChallengeAsync(challenge)
             };
         }
-    
-    public bool CanAcceptChallengeForDomain(string domain)
-        {            
+
+        public bool CanAcceptChallengeForDomain(string domain)
+        {
             return manager.GetSiteForDomain(domain) != null;
         }
-              
+
 
         public async Task AcceptChallengeForDomainAsync(string domain, string token, string challengeJson)
         {
             Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
             var root = GetIisRoot(domain);
-            await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);                        
+            await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);
         }
 
         public async Task AcceptChallengeForSiteAsync(string siteName, string token, string challengeJson)
@@ -107,7 +104,7 @@ namespace Oocx.ACME.IIS
                 var data = System.Text.Encoding.ASCII.GetBytes(keyAuthorization);
                 await fs.WriteAsync(data, 0, data.Length);
             }
-        }        
+        }
 
         private static void CreateWebConfig(string acmePath)
         {
@@ -117,7 +114,7 @@ namespace Oocx.ACME.IIS
                 return;
             }
 
-            Type iisChallengeProviderType = typeof (IISChallengeProvider);
+            Type iisChallengeProviderType = typeof(IISChallengeProvider);
             string resourceName = iisChallengeProviderType.ToString().Substring(0, iisChallengeProviderType.ToString().LastIndexOf(".", StringComparison.Ordinal)) + ".web.config";
             Verbose($"Creating file '{webConfigPath}' from internal resource '{resourceName}'");
 
@@ -135,7 +132,7 @@ namespace Oocx.ACME.IIS
             if (Directory.Exists(challengePath)) return;
 
             Verbose($"creating directory {challengePath}");
-            System.IO.Directory.CreateDirectory(challengePath);            
+            System.IO.Directory.CreateDirectory(challengePath);
         }
     }
 }

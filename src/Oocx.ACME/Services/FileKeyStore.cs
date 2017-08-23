@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Security.AccessControl;
 using System.Security.Cryptography;
+
 using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Services
@@ -17,6 +16,7 @@ namespace Oocx.ACME.Services
             {                
                 basePath = Directory.GetCurrentDirectory();
             }
+
             Verbose($"using key base path {basePath}");
             this.basePath = basePath;
         }
@@ -44,7 +44,5 @@ namespace Oocx.ACME.Services
 
             return rsa;
         }
-
-        
     }
 }
