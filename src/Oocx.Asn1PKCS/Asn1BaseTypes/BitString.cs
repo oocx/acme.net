@@ -10,9 +10,9 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
     {
         public BitString(byte[] data, byte unusedBits = 0) : base(3)
         {
-            Data = new byte[]{0}.Concat(data).ToArray();
+            Data = new byte[] { 0 }.Concat(data).ToArray();
             UnusedBits = unusedBits;
-            Size = Length+LengthBytes.Length+1;
+            Size = Length + LengthBytes.Length + 1;
         }
 
         public byte UnusedBits { get; }

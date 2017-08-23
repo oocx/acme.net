@@ -4,7 +4,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
     {
         byte Tag { get; }
 
-        byte[] LengthBytes { get; }        
+        byte[] LengthBytes { get; }
 
         int Length { get; }
 

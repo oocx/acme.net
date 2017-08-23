@@ -51,7 +51,6 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
             return ((uint)value).ToVLQEncodedInt();
         }
 
-
         /// <summary>
         /// https://en.wikipedia.org/wiki/Variable-length_quantity        
         /// </summary>        

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Asn1PKCS.Parser;
 
 namespace Oocx.Asn1PKCS.PKCS1
 {
@@ -47,5 +48,22 @@ namespace Oocx.Asn1PKCS.PKCS1
         }
 
         public RSAParameters Key { get; private set; }
+
+
+        public string ToPemString()
+        {
+            var asn1Serializer = new Asn1Serializer();
+            
+            return asn1Serializer.Serialize(this).ToArray().EncodeAsPEM(PEMExtensions.RSAPrivateKey);
+        }
+
+        public static RSAPrivateKey ParsePem(string pem)
+        {
+            var asn1Parser = new Asn1Parser();
+
+            var rsaParser = new RSAPrivateKeyParser(asn1Parser);
+
+            return rsaParser.ParsePem(pem);
+        }
     }
 }
