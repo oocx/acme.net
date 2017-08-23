@@ -1,24 +1,22 @@
 version: 0.0.{build}
 image: Visual Studio 2017
-assembly_info:
+dotnet_csproj:
   patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
 before_build:
-- cmd: nuget restore ACME.net.sln
+- cmd: dotnet restore ACME.net.sln
 build:
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal
 test_script:
 - cmd: >-
-    dnx -p .\src\Oocx.ACME.Tests test
-
-    dnx -p .\src\Oocx.Asn1PKCS.Tests test
+    dotnet test .\src\Oocx.ACME.Tests
+    dotnet test .\src\Oocx.Asn1PKCS.Tests
 artifacts:
-- path: src\Oocx.ACME.CLRConsole\bin\Debug\acme.exe
+- path: src\Oocx.ACME.Console\bin\Debug\net46\acme.exe
 - path: artifacts\bin\Oocx.ACME\Debug\*.nupkg
 - path: artifacts\bin\Oocx.ACME.Common\Debug\*.nupkg
 - path: artifacts\bin\Oocx.Asn1PKCS\Debug\*.nupkg
