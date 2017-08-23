@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using CommandLine;
@@ -12,11 +11,9 @@ namespace Oocx.ACME.Console
 {
     public class Program
     {
-        
-        public void Main(string[] args)
+        static void Main(string[] args)
         {
-            Parser parser = new Parser(config =>
-            {
+            Parser parser = new Parser(config => {
                 
               // config.EnableDashDash = true;
               config.CaseSensitive = true;
@@ -33,7 +30,7 @@ namespace Oocx.ACME.Console
             Execute(options);
         }
       
-        private void Execute(Options options)
+        private static void Execute(Options options)
         {
             try
             {
