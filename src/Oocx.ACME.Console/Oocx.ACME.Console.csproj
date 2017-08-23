@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>ACME.Console Console Application</Description>
-    <VersionPrefix>0.0.0-beta</VersionPrefix>
-    <Authors>Mathias Raacke</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
     <AssemblyName>Oocx.ACME.Console</AssemblyName>
+    <OutputType>Exe</OutputType>
+    
+    <!-- Package Details-->
+    <Authors>Mathias Raacke</Authors>
+    <Description>ACME.Console Console Application</Description>
     <PackageTags>ACME;letsencrypt;ssl;certificates</PackageTags>
     <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
