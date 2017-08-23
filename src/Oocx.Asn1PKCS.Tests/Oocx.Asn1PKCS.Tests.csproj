@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>0.0.0</VersionPrefix>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>Oocx.Asn1PKCS.Tests</AssemblyName>
 
     <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
@@ -23,6 +21,5 @@
     <PackageReference Include="FluentAssertions" Version="4.19.3" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
-
 
 </Project>

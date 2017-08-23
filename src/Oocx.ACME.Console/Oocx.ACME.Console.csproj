@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
     <AssemblyName>Oocx.ACME.Console</AssemblyName>
+    <TargetFrameworks>net461</TargetFrameworks>
+    <VersionPrefix>0.0.0</VersionPrefix>
+    <VersionSuffix>beta</VersionSuffix>
     <OutputType>Exe</OutputType>
     
     <!-- Package Details-->
@@ -23,6 +25,5 @@
     <PackageReference Include="Autofac" Version="4.6.1" />
     <PackageReference Include="CommandLineParser" Version="1.9.71" />
   </ItemGroup>
-
 
 </Project>

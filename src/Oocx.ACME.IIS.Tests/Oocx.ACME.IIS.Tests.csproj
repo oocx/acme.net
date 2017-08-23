@@ -1,11 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>0.0.0-beta</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Oocx.ACME.IIS.Tests</AssemblyName>
-    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
