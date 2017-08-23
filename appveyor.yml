@@ -1,0 +1,33 @@
+version: 0.0.{build}
+image: Visual Studio 2017
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- cmd: nuget restore ACME.net.sln
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  verbosity: minimal
+test_script:
+- cmd: >-
+    dnx -p .\src\Oocx.ACME.Tests test
+
+    dnx -p .\src\Oocx.Asn1PKCS.Tests test
+artifacts:
+- path: src\Oocx.ACME.CLRConsole\bin\Debug\acme.exe
+- path: artifacts\bin\Oocx.ACME\Debug\*.nupkg
+- path: artifacts\bin\Oocx.ACME.Common\Debug\*.nupkg
+- path: artifacts\bin\Oocx.Asn1PKCS\Debug\*.nupkg
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: +xbvoITYPaEgmN7KE7yzVuwhiZgqZ4OwlUWPvG/YmiX+yZS0UU57b8te3qRb9Ayv
+  artifact: src\Oocx.ACME.CLRConsole\bin\Debug\acme.exe
+  draft: true
+- provider: NuGet
+  api_key:
+    secure: fHwi4jYY65gWfM9aXQlgsvRldB5a/hfr9ifRQqVkrJw+Hd4osewjEad16Rr+AOYS
