@@ -4,7 +4,7 @@
     <Description>ACME.Console Console Application</Description>
     <VersionPrefix>0.0.0-beta</VersionPrefix>
     <Authors>Mathias Raacke</Authors>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Oocx.ACME.Console</AssemblyName>
     <PackageTags>ACME;letsencrypt;ssl;certificates</PackageTags>
     <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
