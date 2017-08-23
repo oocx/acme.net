@@ -25,8 +25,7 @@ namespace Oocx.Asn1PKCS.Asn1BaseTypes
                 case 2: s += "=="; break; // Two pad chars
                 case 3: s += "="; break; // One pad char
                 default:
-                    throw new System.Exception(
-                        "Illegal base64url string!");
+                    throw new Exception("Illegal base64url string!");
             }
             return Convert.FromBase64String(s); // Standard base64 decoder
         }

@@ -13,7 +13,7 @@ namespace Oocx.ACME.Services
         public FileKeyStore(string basePath)
         {
             if (string.IsNullOrWhiteSpace(basePath))
-            {                
+            {
                 basePath = Directory.GetCurrentDirectory();
             }
 

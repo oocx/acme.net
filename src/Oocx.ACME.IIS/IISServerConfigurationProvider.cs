@@ -20,7 +20,7 @@ namespace Oocx.ACME.IIS
         }
 
         public byte[] InstallCertificateWithPrivateKey(string certificatePath, string certificateStoreName, RSAParameters privateKey)
-        {            
+        {
             var certificateBytes = File.ReadAllBytes(certificatePath);
             var x509 = new X509Certificate2(certificateBytes, (string)null, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
             var csp = new CspParameters { KeyContainerName = x509.GetCertHashString(), Flags = CspProviderFlags.UseMachineKeyStore };
@@ -37,7 +37,7 @@ namespace Oocx.ACME.IIS
         public void ConfigureServer(string domain, byte[] certificateHash, string certificateStoreName, string siteName, string binding)
         {
             Info($"configuring IIS to use the new certificate for {domain}");
-            
+
             var site = GetWebSite(domain, siteName);
             if (site == null)
             {
@@ -98,17 +98,17 @@ namespace Oocx.ACME.IIS
             }
         }
 
-        private void InstallCertificateToStore(X509Certificate2 certificate,  string certificateStoreName)
+        private void InstallCertificateToStore(X509Certificate2 certificate, string certificateStoreName)
         {
             var hash = certificate.GetCertHashString();
 
-            var store = new X509Store(certificateStoreName, StoreLocation.LocalMachine);            
-            store.Open(OpenFlags.OpenExistingOnly | OpenFlags.ReadWrite); 
+            var store = new X509Store(certificateStoreName, StoreLocation.LocalMachine);
+            store.Open(OpenFlags.OpenExistingOnly | OpenFlags.ReadWrite);
             if (store.Certificates.OfType<X509Certificate2>()
                 .Any(
                     c =>
                         c.Subject == certificate.Subject &&
-                        c.HasPrivateKey &&                        
+                        c.HasPrivateKey &&
                         string.Equals(c.GetCertHashString(), hash, StringComparison.OrdinalIgnoreCase)))
             {
                 Info($"the certificate with subject {certificate.Subject} and hash {hash} is already installed in store LocalMachine\\{certificateStoreName}");
@@ -117,7 +117,7 @@ namespace Oocx.ACME.IIS
             }
 
             Info($"Installing certificate with subject {certificate.Subject} and hash {hash} to store LocalMachine\\{certificateStoreName}");
-            
+
             store.Add(certificate);
             store.Close();
         }
@@ -128,8 +128,8 @@ namespace Oocx.ACME.IIS
             {
                 Info($"updating existing binding {httpsBinding.BindingInformation} in site {site.Name}");
                 httpsBinding.CertificateHash = certificateHash;
-                httpsBinding.CertificateStoreName = certificateStoreName;                
-            }            
+                httpsBinding.CertificateStoreName = certificateStoreName;
+            }
 
             manager.CommitChanges();
         }

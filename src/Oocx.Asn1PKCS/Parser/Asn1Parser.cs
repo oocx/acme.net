@@ -74,11 +74,11 @@ namespace Oocx.Asn1PKCS.Parser
         private static Asn1ParsedElement GetAsn1ParsedElement(BinaryReader reader)
         {
             var tag = reader.ReadByte();
-            uint length = (uint) reader.ReadByte();
-                        
+            uint length = (uint)reader.ReadByte();
+
             if (length > 128)
-            {            
-                length = length - 128;    
+            {
+                length = length - 128;
                 switch (length)
                 {
                     case 1:
@@ -103,14 +103,14 @@ namespace Oocx.Asn1PKCS.Parser
                 throw new NotImplementedException("asn elements with length > int.MaxValue are not supported");
             }
             var data = new byte[length];
-            reader.Read(data, 0, (int) length);
-            var element = new Asn1ParsedElement() {Tag = tag, Data = data};
+            reader.Read(data, 0, (int)length);
+            var element = new Asn1ParsedElement { Tag = tag, Data = data };
             return element;
         }
 
         class Asn1ParsedElement
         {
-            public byte Tag { get; set; }            
+            public byte Tag { get; set; }
 
             public byte[] Data { get; set; }
 

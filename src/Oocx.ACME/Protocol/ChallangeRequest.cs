@@ -23,6 +23,6 @@ namespace Oocx.ACME.Protocol
         public string Resource => "challenge";
 
         [JsonProperty("keyAuthorization")]
-        public string KeyAuthorization { get; set; }        
+        public string KeyAuthorization { get; set; }
     }
 }

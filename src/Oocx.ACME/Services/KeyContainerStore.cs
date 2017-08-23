@@ -17,14 +17,14 @@ namespace Oocx.ACME.Services
         }
 
         public RSA GetOrCreateKey(string keyName)
-        {            
-            Log.Verbose($"using key name {keyName}");            
-            var csp = new CspParameters()
+        {
+            Log.Verbose($"using key name {keyName}");
+            var csp = new CspParameters
             {
                 KeyContainerName = keyName,
-                Flags =  flags,                
+                Flags = flags,
             };
-                        
+
             var rsa = new RSACryptoServiceProvider(2048, csp);
             return rsa;
         }

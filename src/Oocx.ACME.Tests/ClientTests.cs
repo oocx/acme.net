@@ -41,7 +41,7 @@ namespace Oocx.ACME.Tests
         {
             // Arrange
             var http = new FakeHttpMessageHandler("http://baseaddress/");
-            var directory = new Directory() { NewRegistration = new Uri("http://baseaddress/registration")};
+            var directory = new Directory { NewRegistration = new Uri("http://baseaddress/registration")};
             var registration = new RegistrationResponse();
 
             var client = 
@@ -69,7 +69,7 @@ namespace Oocx.ACME.Tests
         {
             // Arrange
             var http = new FakeHttpMessageHandler("http://baseaddress/");
-            var directory = new Directory() { NewRegistration = new Uri("http://baseaddress/registration") };
+            var directory = new Directory { NewRegistration = new Uri("http://baseaddress/registration") };
             var registration = new RegistrationResponse();
 
             var client =

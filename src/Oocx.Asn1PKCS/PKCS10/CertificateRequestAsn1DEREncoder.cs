@@ -16,7 +16,7 @@ namespace Oocx.Asn1PKCS.PKCS10
         }
 
         public CertificationRequest Encode(CertificateRequestData requestData)
-        {            
+        {
             var publicKeyBytes = serializer.Serialize(new Sequence(new Integer(requestData.Key.Modulus), new Integer(requestData.Key.Exponent))).ToArray();
 
             var certificationRequestInfo = new CertificationRequestInfo(
@@ -49,7 +49,7 @@ namespace Oocx.Asn1PKCS.PKCS10
             return new CertificationRequest(
                 certificationRequestInfo,
                 new AlgorithmIdentifier(Oid.Algorithm.sha256RSA),
-                new BitString(signatureBytes));          
+                new BitString(signatureBytes));
         }
 
         public byte[] EncodeAsDER(CertificateRequestData requestData)
@@ -60,7 +60,7 @@ namespace Oocx.Asn1PKCS.PKCS10
         }
 
         public string EncodeAsBase64(CertificateRequestData requestData)
-        {                                   
+        {
             var bytes = EncodeAsDER(requestData);
             var base64 = Convert.ToBase64String(bytes);
             string base64lines = "";

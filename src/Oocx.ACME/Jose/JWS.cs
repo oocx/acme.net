@@ -18,7 +18,7 @@ namespace Oocx.ACME.Jose
         {
             var jwk = GetKey();
 
-            var header = new JWSHeader()
+            var header = new JWSHeader
             {
                 Key = jwk,
                 Algorithm = "RS256"
@@ -39,7 +39,7 @@ namespace Oocx.ACME.Jose
         public JsonWebKey GetKey()
         {
             var parameters = rsa.ExportParameters(true);
-            var jwk = new JsonWebKey()
+            var jwk = new JsonWebKey
             {
                 KeyType = "RSA",
                 Exponent = parameters.Exponent.Base64UrlEncoded(),

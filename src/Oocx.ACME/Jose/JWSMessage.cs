@@ -14,6 +14,6 @@ namespace Oocx.ACME.Jose
         public string Payload { get; set; }
 
         [JsonProperty("signature")]
-        public string Signature { get; set; }        
+        public string Signature { get; set; }
     }
 }

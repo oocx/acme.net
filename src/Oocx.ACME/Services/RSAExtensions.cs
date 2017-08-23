@@ -12,7 +12,7 @@ namespace Oocx.ACME.Services
 
         public static string ToXmlString(this RSA rsa, bool includePrivateKey)
         {
-            throw new NotImplementedException();            
+            throw new NotImplementedException();
         }
     }
 }

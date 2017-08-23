@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using Oocx.ACME.Protocol;
 using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Client
-{    
+{
     public class ManualChallengeProvider : IChallengeProvider
     {
         private readonly IAcmeClient client;
@@ -25,7 +24,7 @@ namespace Oocx.ACME.Client
                 Error("the server does not accept challenge type http-01");
                 return null;
             }
-            
+
             Info($"accepting challenge {challenge.Type}");
 
             var keyAuthorization = client.GetKeyAuthorization(challenge.Token);
@@ -38,7 +37,7 @@ namespace Oocx.ACME.Client
                 await fs.WriteAsync(data, 0, data.Length);
             }
 
-            return new PendingChallenge()
+            return new PendingChallenge
             {
                 Instructions = $"Copy {challengeFile} to https://{domain ?? siteName}/.well-known/acme-challenge/{challenge.Token}",
                 Complete = () => client.CompleteChallengeAsync(challenge)

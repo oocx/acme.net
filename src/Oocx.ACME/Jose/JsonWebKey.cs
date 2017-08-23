@@ -4,7 +4,7 @@ namespace Oocx.ACME.Jose
 {
     /// <see cref="http://self-issued.info/docs/draft-ietf-jose-json-web-key.html#rfc.section.4"/>    
     public class JsonWebKey
-    {        
+    {
         [JsonProperty("kty")]
         public string KeyType { get; set; }
 
@@ -38,11 +38,9 @@ namespace Oocx.ACME.Jose
         [JsonProperty("qi")]
         public string InverseQ { get; set; }
 
-        [JsonProperty("alg")]        
+        [JsonProperty("alg")]
         public string Algorithm { get; set; }
-
     }
-
 
     // Based on: https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#appendix-C
 

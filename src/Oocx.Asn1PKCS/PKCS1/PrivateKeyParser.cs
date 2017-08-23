@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,12 +19,13 @@ namespace Oocx.Asn1PKCS.PKCS1
         {
             using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(pem))) { return ParsePem(stream); }
         }
+
         public RSAPrivateKey ParsePem(Stream input)
         {
             var der = DecodePem(input);
             using (var derStream = new MemoryStream(der))
             {
-                //TODO add more validation, ensure that the algorithm used is RSA
+                // TODO add more validation, ensure that the algorithm used is RSA
 
                 var asn1 = (Sequence)parser.Parse(derStream).First();
                 var octet = (OctetString)asn1.Children.Last();

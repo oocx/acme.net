@@ -7,7 +7,7 @@ namespace Oocx.ACME.Protocol
     {
         [JsonProperty("jwk")]
         public JsonWebKey Key { get; set; }
-        
+
         [JsonProperty("contact")]
         public string[] Contact { get; set; }
 
