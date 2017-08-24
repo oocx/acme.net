@@ -3,8 +3,8 @@
   <PropertyGroup>
     <AssemblyName>Oocx.ACME.IIS</AssemblyName>
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
-    <VersionPrefix>0.0.0</VersionPrefix>
-    <VersionSuffix>beta</VersionSuffix>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
 
     <!-- Package Details-->
     <Description>Oocx.ACME.IIS Class Library</Description>
