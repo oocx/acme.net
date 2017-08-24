@@ -17,7 +17,7 @@ namespace Oocx.ACME.Console
         [Option('a', "acceptTermsOfService", HelpText = "Accept the terms of service of the ACME server")]
         public bool AcceptTermsOfService { get; set; }
 
-        [Option('t', "termsOfServiceUri", HelpText = "The uri of the terms of service that you accept.", DefaultValue = "https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf")]
+        [Option('t', "termsOfServiceUri", HelpText = "The uri of the terms of service that you accept.")]
         public string TermsOfServiceUri { get; set; }
 
         [Option("ignoreSSLErrors", HelpText = "Ignore SSL certificate errors for the HTTPS connection to the ACME server (useful for debugging messages with fiddler)")]

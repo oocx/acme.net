@@ -174,6 +174,8 @@ namespace Oocx.ACME.Console
 
         private async Task RegisterWithServer()
         {
+            // note: the terms of service is automatically populated from directory.meta.terms-of-service when null
+
             var registration = await client.RegisterAsync(
                 termsOfServiceUri : options.AcceptTermsOfService ? options.TermsOfServiceUri : null,
                 contacts          : new[] { options.Contact }
