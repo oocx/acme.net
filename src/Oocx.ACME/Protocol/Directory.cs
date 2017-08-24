@@ -22,5 +22,20 @@ namespace Oocx.ACME.Protocol
 
         [JsonProperty("key-change")]
         public Uri KeyChange { get; set; }
+
+        [JsonProperty("meta")]
+        public DirectoryMeta Meta { get; set; }
+    }
+
+    public class DirectoryMeta
+    {
+        [JsonProperty("terms-of-service")]
+        public string TermsOfService { get; set; }
+
+        [JsonProperty("website")]
+        public string Website { get; set; }
+
+        [JsonProperty("caa-identities")]
+        public string[] CaaIdentities { get; set; }
     }
 }

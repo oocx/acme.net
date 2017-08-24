@@ -65,7 +65,7 @@ namespace Oocx.ACME.Client
             var request = new NewRegistrationRequest
             {
                 Contact = contact,
-                Agreement = termsOfServiceUri
+                Agreement = termsOfServiceUri ?? directory.Meta.TermsOfService
             };
 
             try
