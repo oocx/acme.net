@@ -24,3 +24,5 @@ namespace Oocx.ACME.Protocol
         public Uri Location { get; set; }
     }
 }
+
+// https://tools.ietf.org/html/draft-ietf-acme-acme-01#section-5.3

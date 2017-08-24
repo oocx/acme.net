@@ -15,7 +15,7 @@ namespace Oocx.ACME.Protocol
         public string Agreement { get; set; }
 
         [JsonProperty("authorizations")]
-        public string Authorization { get; set; }
+        public string Authorizations { get; set; }
 
         [JsonProperty("certificates")]
         public string Certificates { get; set; }
