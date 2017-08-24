@@ -12,7 +12,7 @@ namespace Oocx.Asn1PKCS.PKCS10
 
         public CertificateRequestAsn1DEREncoder(IAsn1Serializer serializer)
         {
-            this.serializer = serializer;
+            this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
         public CertificationRequest Encode(CertificateRequestData requestData)

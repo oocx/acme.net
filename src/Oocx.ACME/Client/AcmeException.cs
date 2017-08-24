@@ -9,7 +9,8 @@ namespace Oocx.ACME.Client
         public Problem Problem { get; }
         public HttpResponseMessage Response { get; }
 
-        public AcmeException(Problem problem, HttpResponseMessage response) : base($"{problem.Type}: {problem.Detail}")
+        public AcmeException(Problem problem, HttpResponseMessage response)
+            : base($"{problem.Type}: {problem.Detail}")
         {
             Problem = problem;
             Response = response;

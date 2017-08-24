@@ -11,17 +11,14 @@ using Directory = System.IO.Directory;
 
 namespace Oocx.ACME.IIS
 {
-    // This project can output the Class library as a NuGet Package.
-    // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class IISChallengeProvider : IChallengeProvider
     {
         private readonly IAcmeClient client;
-        private readonly ServerManager manager;
+        private readonly ServerManager manager = new ServerManager();
 
         public IISChallengeProvider(IAcmeClient client)
         {
-            this.client = client;
-            manager = new ServerManager();
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public async Task<PendingChallenge> AcceptChallengeAsync(string domain, string siteName, AuthorizationResponse authorization)
@@ -56,7 +53,6 @@ namespace Oocx.ACME.IIS
         {
             return manager.GetSiteForDomain(domain) != null;
         }
-
 
         public async Task AcceptChallengeForDomainAsync(string domain, string token, string challengeJson)
         {
@@ -115,6 +111,7 @@ namespace Oocx.ACME.IIS
             }
 
             Type iisChallengeProviderType = typeof(IISChallengeProvider);
+
             string resourceName = iisChallengeProviderType.ToString().Substring(0, iisChallengeProviderType.ToString().LastIndexOf(".", StringComparison.Ordinal)) + ".web.config";
             Verbose($"Creating file '{webConfigPath}' from internal resource '{resourceName}'");
 

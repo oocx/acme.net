@@ -14,8 +14,15 @@ namespace Oocx.Asn1PKCS.PKCS1
             Key = key;
         }
 
-        public RSAPrivateKey(Integer modulus, Integer publicExponent, Integer privateExponent, Integer prime1,
-            Integer prime2, Integer exponent1, Integer exponent2, Integer coefficient)
+        public RSAPrivateKey(
+            Integer modulus, 
+            Integer publicExponent, 
+            Integer privateExponent,
+            Integer prime1,
+            Integer prime2, 
+            Integer exponent1,
+            Integer exponent2,
+            Integer coefficient)
             : this(new Integer(0), modulus, publicExponent, privateExponent, prime1, prime2, exponent1, exponent2, coefficient)
         {
         }
@@ -23,15 +30,14 @@ namespace Oocx.Asn1PKCS.PKCS1
         public RSAPrivateKey(Integer version, Integer modulus, Integer publicExponent, Integer privateExponent, Integer prime1, Integer prime2, Integer exponent1, Integer exponent2, Integer coefficient)
             : base(version, modulus, publicExponent, privateExponent, prime1, prime2, exponent1, exponent2, coefficient)
         {
-            Key = new RSAParameters()
-            {
-                Modulus = AddPadding(modulus.UnencodedValue),
+            Key = new RSAParameters {
+                Modulus  = AddPadding(modulus.UnencodedValue),
                 Exponent = publicExponent.UnencodedValue, // the exponent does not require padding
-                D = AddPadding(privateExponent.UnencodedValue),
-                P = AddPadding(prime1.UnencodedValue),
-                Q = AddPadding(prime2.UnencodedValue),
-                DP = AddPadding(exponent1.UnencodedValue),
-                DQ = AddPadding(exponent2.UnencodedValue),
+                D        = AddPadding(privateExponent.UnencodedValue),
+                P        = AddPadding(prime1.UnencodedValue),
+                Q        = AddPadding(prime2.UnencodedValue),
+                DP       = AddPadding(exponent1.UnencodedValue),
+                DQ       = AddPadding(exponent2.UnencodedValue),
                 InverseQ = AddPadding(coefficient.UnencodedValue)
             };
         }
@@ -40,15 +46,13 @@ namespace Oocx.Asn1PKCS.PKCS1
         {
             // As a result of parsing the asn1 Integer, the parser might have removed a leading zero.
             // We need to add it back here, as they are expected by the .NET RsaParameters class
-            if (data.Length % 2 == 1)
-            {
-                return new byte[] { 0 }.Concat(data).ToArray();
-            }
-            return data;
+
+            return (data.Length % 2 == 1)
+                ? new byte[] { 0 }.Concat(data).ToArray()
+                : data;
         }
 
         public RSAParameters Key { get; private set; }
-
 
         public string ToPemString()
         {

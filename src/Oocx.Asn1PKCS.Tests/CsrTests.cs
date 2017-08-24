@@ -44,6 +44,7 @@ namespace Oocx.Asn1PKCS.Tests
 
             File.WriteAllBytes(@"request.der", der);
             File.WriteAllText(@"request.txt", base64);
+
             bytes.Should().NotBeNull();
 
             // openssl req -in r:\request.txt -noout -text

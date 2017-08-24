@@ -13,8 +13,7 @@ namespace Oocx.ACME.Console
     {
         static void Main(string[] args)
         {
-            Parser parser = new Parser(config => {
-                
+            var parser = new Parser(config => {
               // config.EnableDashDash = true;
               config.CaseSensitive = true;
               config.IgnoreUnknownArguments = false;
@@ -63,7 +62,6 @@ namespace Oocx.ACME.Console
                 PrintError(ex);
             }
         }
-        
 
         private static void PrintError(AcmeException ex)
         {
@@ -73,4 +71,3 @@ namespace Oocx.ACME.Console
         }
     }
 }
-

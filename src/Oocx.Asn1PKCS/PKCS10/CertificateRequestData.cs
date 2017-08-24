@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 
 namespace Oocx.Asn1PKCS.PKCS10
@@ -5,7 +6,7 @@ namespace Oocx.Asn1PKCS.PKCS10
     public class CertificateRequestData
     {
         public CertificateRequestData(string commonName, RSAParameters key)
-        {            
+        {
             Key = key;
             CN = commonName;
         }
@@ -44,7 +45,7 @@ namespace Oocx.Asn1PKCS.PKCS10
         /// Common Name
         /// </summary>
         /// <see cref="http://www.alvestrand.no/objectid/2.5.4.3.html"/>
-        public string CN { get;     }        
+        public string CN { get; }
 
         public RSAParameters Key { get; }
     }

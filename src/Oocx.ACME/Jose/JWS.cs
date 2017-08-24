@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
@@ -11,22 +12,19 @@ namespace Oocx.ACME.Jose
 
         public JWS(RSA rsa)
         {
-            this.rsa = rsa;
+            this.rsa = rsa ?? throw new ArgumentNullException(nameof(rsa));
         }
 
         public JWSMessage Encode<TPayload, THeader>(TPayload payload, THeader protectedHeader)
         {
             var jwk = GetKey();
 
-            var header = new JWSHeader
-            {
-                Key = jwk,
-                Algorithm = "RS256"
-            };
-
             var message = new JWSMessage
             {
-                Header = header,
+                Header = new JWSHeader {
+                    Key = jwk,
+                    Algorithm = "RS256"
+                },
                 Payload = JsonConvert.SerializeObject(payload).Base64UrlEncoded(),
                 Protected = JsonConvert.SerializeObject(protectedHeader).Base64UrlEncoded()
             };
@@ -39,13 +37,12 @@ namespace Oocx.ACME.Jose
         public JsonWebKey GetKey()
         {
             var parameters = rsa.ExportParameters(true);
-            var jwk = new JsonWebKey
-            {
+
+            return new JsonWebKey {
                 KeyType = "RSA",
                 Exponent = parameters.Exponent.Base64UrlEncoded(),
                 Modulus = parameters.Modulus.Base64UrlEncoded(),
             };
-            return jwk;
         }
 
         public string GetSha256Thumbprint()

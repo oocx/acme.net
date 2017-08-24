@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -30,7 +29,7 @@ namespace Oocx.ACME.Client
         {
             Info($"using server {client.BaseAddress}");
 
-            this.client = client;
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
             jws = new JWS(key);
         }
 
@@ -62,8 +61,7 @@ namespace Oocx.ACME.Client
 
             Info("trying to create new registration");
 
-            var request = new NewRegistrationRequest
-            {
+            var request = new NewRegistrationRequest {
                 Contact = contact,
                 Agreement = termsOfServiceUri ?? directory.Meta.TermsOfService
             };
@@ -102,8 +100,7 @@ namespace Oocx.ACME.Client
 
             Info("updating registration: accepting terms of service");
 
-            var registration = new UpdateRegistrationRequest
-            {
+            var registration = new UpdateRegistrationRequest {
                 Contact = contact,
                 Agreement = termsOfServiceUri
             };
@@ -117,10 +114,9 @@ namespace Oocx.ACME.Client
 
             Info($"requesting authorization for dns identifier {dnsName}");
 
-            var authorization = new AuthorizationRequest
-            {
+            var authorization = new AuthorizationRequest {
                 Resource = "new-authz",
-                Identifier = new Identifier { Type = "dns", Value = dnsName }
+                Identifier = new Identifier("dns", dnsName)
             };
 
             return await PostAsync<AuthorizationResponse>(directory.NewAuthorization, authorization).ConfigureAwait(false);
@@ -128,8 +124,7 @@ namespace Oocx.ACME.Client
 
         public async Task<Challenge> CompleteChallengeAsync(Challenge challenge)
         {
-            var challangeRequest = new KeyAuthorizationRequest
-            {
+            var challangeRequest = new KeyAuthorizationRequest {
                 KeyAuthorization = jws.GetKeyAuthorization(challenge.Token)
             };
 
@@ -142,6 +137,7 @@ namespace Oocx.ACME.Client
             }
 
             Info($"challenge status is {challenge?.Status}");
+
             if (challenge?.Error?.Type != null)
             {
                 Error($"{challenge.Error.Type} : {challenge.Error.Detail}");
@@ -156,13 +152,18 @@ namespace Oocx.ACME.Client
 
             Info("requesting certificate");
 
-            var request = new CertificateRequest { Csr = csr.Base64UrlEncoded() };
+            var request = new CertificateRequest {
+                Csr = csr.Base64UrlEncoded()
+            };
+
             var response = await PostAsync<CertificateResponse>(directory.NewCertificate, request).ConfigureAwait(false);
 
             Verbose($"location: {response.Location}");
 
             return response;
         }
+
+        #region Helpers
 
         private async Task<TResult> GetAsync<TResult>(Uri uri) where TResult : class
         {
@@ -174,8 +175,7 @@ namespace Oocx.ACME.Client
             return await SendAsync<TResult>(HttpMethod.Post, uri, message).ConfigureAwait(false);
         }
 
-        private static readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
-        {
+        private static readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings {
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.Indented
         };
@@ -210,10 +210,13 @@ namespace Oocx.ACME.Client
                 throw new AcmeException(problem, response);
             }
 
-            if (typeof(TResult) == typeof(CertificateResponse) && response.Content.Headers.ContentType.MediaType == "application/pkix-cert")
+            if (typeof(TResult) == typeof(CertificateResponse) 
+                && response.Content.Headers.ContentType.MediaType == "application/pkix-cert")
             {
                 var certificateBytes = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-                var certificateResponse = new CertificateResponse { Certificate = certificateBytes };
+                var certificateResponse = new CertificateResponse {
+                    Certificate = certificateBytes
+                };
                 GetHeaderValues(response, certificateResponse);
                 return certificateResponse as TResult;
             }
@@ -258,5 +261,7 @@ namespace Oocx.ACME.Client
                 }
             }
         }
+
+        #endregion
     }
 }

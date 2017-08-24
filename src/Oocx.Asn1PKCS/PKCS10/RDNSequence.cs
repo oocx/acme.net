@@ -6,7 +6,7 @@ namespace Oocx.Asn1PKCS.PKCS10
     {
         public RDNSequence(params RelativeDistinguishedName[] names) : base(names)
         {
-            
+
         }
     }
 }

@@ -12,13 +12,11 @@ namespace Oocx.ACME.Services
 
         public FileKeyStore(string basePath)
         {
-            if (string.IsNullOrWhiteSpace(basePath))
-            {
-                basePath = Directory.GetCurrentDirectory();
-            }
+            this.basePath = !string.IsNullOrWhiteSpace(basePath) 
+                ? basePath
+                : Directory.GetCurrentDirectory();
 
-            Verbose($"using key base path {basePath}");
-            this.basePath = basePath;
+            Verbose($"using key base path {this.basePath}");
         }
 
         public RSA GetOrCreateKey(string keyName)
