@@ -49,7 +49,7 @@ namespace Oocx.Asn1PKCS
                 throw new InvalidDataException($"The PEM file should start with -----BEGIN {type}-----");
             }
 
-            if (!"-----END PRIVATE KEY-----".Equals(lines[lines.Count - 1]))
+            if (!$"-----END {type}-----".Equals(lines[lines.Count - 1]))
             {
                 throw new InvalidDataException($"The PEM file should end with -----END {type}-----");
             }

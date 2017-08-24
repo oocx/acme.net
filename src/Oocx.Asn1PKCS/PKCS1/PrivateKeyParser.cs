@@ -20,12 +20,18 @@ namespace Oocx.Asn1PKCS.PKCS1
 
         public RSAPrivateKey ParsePem(string pem)
         {
-            using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(pem))) { return ParsePem(stream); }
+            using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(pem)))
+            {
+                return ParsePem(stream);
+            }
         }
+        
+        // This function supports both PKCS#1 & PKCS#8 encodings
 
         public RSAPrivateKey ParsePem(Stream input)
         {
-            var der = DecodePem(input);
+            var der = PEM.Decode(input, PEM.PrivateKey);
+
             using (var derStream = new MemoryStream(der))
             {
                 // TODO add more validation, ensure that the algorithm used is RSA
@@ -38,11 +44,6 @@ namespace Oocx.Asn1PKCS.PKCS1
                     return rsaParser.ParseDer(octetStream);
                 }
             }
-        }
-
-        private static byte[] DecodePem(Stream input)
-        {
-            return PEM.Decode(input, PEM.PrivateKey);
         }
     }
 }
