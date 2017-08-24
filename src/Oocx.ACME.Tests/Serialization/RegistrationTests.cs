@@ -18,7 +18,7 @@ namespace Oocx.ACME.Tests
                     "mailto:cert-admin@example.com",
                     "tel:+12025551212"
                 },
-                Key = new JsonWebKey
+                Key = new JWK
                 {
                     Algorithm = "none"
                 },

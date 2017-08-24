@@ -7,7 +7,7 @@ namespace Oocx.ACME.Protocol
     public class RegistrationResponse
     {
         [JsonProperty("key")]
-        public JsonWebKey Key { get; set; }
+        public JWK Key { get; set; }
 
         [JsonProperty("id")]
         public string Id { get; set; }

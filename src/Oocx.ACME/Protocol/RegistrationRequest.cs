@@ -6,7 +6,7 @@ namespace Oocx.ACME.Protocol
     public abstract class RegistrationRequest
     {
         [JsonProperty("jwk")]
-        public JsonWebKey Key { get; set; }
+        public JWK Key { get; set; }
 
         [JsonProperty("contact")]
         public string[] Contact { get; set; }
