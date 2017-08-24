@@ -14,14 +14,15 @@ namespace Oocx.ACME.Services
 
         public KeyExport(string basePath)
         {
-            this.basePath = basePath;
+            this.basePath = basePath ?? throw new ArgumentNullException(nameof(basePath));
         }
 
         public enum Format
         {
-            DotNetXml,
-            PEM,
-            DER
+            [Obsolete]
+            DotNetXml = 1,
+            PEM       = 2,
+            DER       = 3
         }
 
         public void Save(RSAParameters key, string keyName, Format format)
