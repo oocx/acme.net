@@ -45,7 +45,7 @@ namespace Oocx.ACME.Tests
   ""agreement"": ""https://example.com/acme/terms"",
   ""authorizations"": ""https://example.com/acme/reg/1/authz"",
   ""certificates"": ""https://example.com/acme/reg/1/cert""
-}", json);
+}".Replace("\r\n", "\n"), json.Replace("\r\n", "\n"));
             
         }
     }
