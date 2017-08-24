@@ -2,12 +2,12 @@
 {
     public interface ILog
     {
-        void Verbose(string message, params object[] args);
+        void Verbose(string message);
 
-        void Info(string message, params object[] args);
+        void Info(string message);
 
-        void Warning(string message, params object[] args);
+        void Warning(string message);
 
-        void Error(string message, params object[] args);
+        void Error(string message);
     }
 }

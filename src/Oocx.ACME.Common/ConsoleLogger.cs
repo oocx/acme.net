@@ -4,32 +4,32 @@ namespace Oocx.ACME.Common
 {
     public class ConsoleLogger : ILog
     {
-        private void WriteLine(ConsoleColor color, string message, params object[] args)
+        private void WriteLine(ConsoleColor color, string message)
         {
             var previous = Console.ForegroundColor;
             Console.ForegroundColor = color;
-            Console.WriteLine(string.Format(message, args));
+            Console.WriteLine(message);
             Console.ForegroundColor = previous;
         }
 
-        public void Verbose(string message, params object[] args)
+        public void Verbose(string message)
         {
-            WriteLine(ConsoleColor.DarkGray, message, args);
+            WriteLine(ConsoleColor.DarkGray, message);
         }
 
-        public void Info(string message, params object[] args)
+        public void Info(string message)
         {
-            WriteLine(ConsoleColor.Gray, message, args);
+            WriteLine(ConsoleColor.Gray, message);
         }
 
-        public void Warning(string message, params object[] args)
+        public void Warning(string message)
         {
-            WriteLine(ConsoleColor.Yellow, message, args);
+            WriteLine(ConsoleColor.Yellow, message);
         }
 
-        public void Error(string message, params object[] args)
+        public void Error(string message)
         {
-            WriteLine(ConsoleColor.Red, message, args);
+            WriteLine(ConsoleColor.Red, message);
         }
     }
 }
