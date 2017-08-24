@@ -10,7 +10,7 @@ namespace Oocx.ACME.Tests
     public class StagingTests
     {
         [Fact]
-        public async Task Can_discovery_urls()
+        public async Task Can_discover_urls()
         {
             var key = RSA.Create(2048);
 
@@ -30,11 +30,6 @@ namespace Oocx.ACME.Tests
             Assert.Equal(new Uri("https://acme-staging.api.letsencrypt.org/acme/key-change"),  directory.KeyChange);
 
             Assert.Equal("https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf", directory.Meta.TermsOfService);
-
-            var result = await client.RegisterAsync(
-                termsOfServiceUri: null, 
-                contact: new[] { "mailto:test@test.com" }
-            );
         }
     }
 }
