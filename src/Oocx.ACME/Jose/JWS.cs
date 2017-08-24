@@ -9,23 +9,26 @@ namespace Oocx.ACME.Jose
     public class JWS
     {
         private readonly RSA rsa;
+        private readonly JWK jwk;
 
         public JWS(RSA rsa)
         {
             this.rsa = rsa ?? throw new ArgumentNullException(nameof(rsa));
+
+            var publicParameters = rsa.ExportParameters(includePrivateParameters: false);
+
+            this.jwk = new JWK {
+                KeyType = "RSA",
+                Exponent = publicParameters.Exponent.Base64UrlEncoded(),
+                Modulus  = publicParameters.Modulus.Base64UrlEncoded(),
+            };
         }
 
         public JWSMessage Encode<TPayload, THeader>(TPayload payload, THeader protectedHeader)
         {
-            var jwk = GetKey();
-
-            var message = new JWSMessage
-            {
-                Header = new JWSHeader {
-                    Key = jwk,
-                    Algorithm = "RS256"
-                },
-                Payload = JsonConvert.SerializeObject(payload).Base64UrlEncoded(),
+            var message = new JWSMessage {
+                Header    = new JWSHeader(algorithm: "RS256", key: jwk),
+                Payload   = JsonConvert.SerializeObject(payload).Base64UrlEncoded(),
                 Protected = JsonConvert.SerializeObject(protectedHeader).Base64UrlEncoded()
             };
 
@@ -34,22 +37,12 @@ namespace Oocx.ACME.Jose
             return message;
         }
 
-        public JsonWebKey GetKey()
+        private string GetSha256Thumbprint()
         {
-            var parameters = rsa.ExportParameters(true);
+            var json = "{\"e\":\"" + jwk.Exponent + "\",\"kty\":\"RSA\",\"n\":\"" + jwk.Modulus + "\"}";
 
-            return new JsonWebKey {
-                KeyType = "RSA",
-                Exponent = parameters.Exponent.Base64UrlEncoded(),
-                Modulus = parameters.Modulus.Base64UrlEncoded(),
-            };
-        }
-
-        public string GetSha256Thumbprint()
-        {
-            var key = GetKey();
-            var json = "{\"e\":\"" + key.Exponent + "\",\"kty\":\"RSA\",\"n\":\"" + key.Modulus + "\"}";
             var sha256 = SHA256.Create();
+
             return sha256.ComputeHash(Encoding.UTF8.GetBytes(json)).Base64UrlEncoded();
         }
 
