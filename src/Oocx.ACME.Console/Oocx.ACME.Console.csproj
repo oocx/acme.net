@@ -4,7 +4,7 @@
     <AssemblyName>acme</AssemblyName>
     <TargetFrameworks>net461</TargetFrameworks>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>beta</VersionSuffix>
+    <VersionSuffix>alpha</VersionSuffix>
     <OutputType>Exe</OutputType>
     <LangVersion>7.1</LangVersion>
     
