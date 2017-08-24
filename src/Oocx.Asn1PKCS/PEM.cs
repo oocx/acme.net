@@ -8,8 +8,9 @@ namespace Oocx.Asn1PKCS
 {
     public static class PEM
     {
-        public const string RSAPrivateKey = "RSA PRIVATE KEY";
-        public const string PrivateKey    = "PRIVATE KEY";
+        // Preambles
+        public const string RSAPrivateKey = "RSA PRIVATE KEY"; // PKCS#1
+        public const string PrivateKey    = "PRIVATE KEY";     // PKCS#8
 
         internal static string Encode(byte[] derEncodedBytes, string type)
         {
@@ -47,10 +48,12 @@ namespace Oocx.Asn1PKCS
             {
                 throw new InvalidDataException($"The PEM file should start with -----BEGIN {type}-----");
             }
+
             if (!"-----END PRIVATE KEY-----".Equals(lines[lines.Count - 1]))
             {
                 throw new InvalidDataException($"The PEM file should end with -----END {type}-----");
             }
+            
             var base64 = string.Join("", lines.Skip(1).Take(lines.Count - 2));
             var der = base64.Base64UrlDecode();
             return der;

@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -38,12 +38,21 @@ namespace Oocx.Asn1PKCS.PKCS1
 
         private static byte[] DecodePem(Stream input)
         {
-            string[] lines;
+            var lines = new List<string>();
+
+            string line;
+
             using (var sr = new StreamReader(input))
             {
-                lines = sr.ReadToEnd().Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (string.IsNullOrEmpty(line)) continue;
+
+                    lines.Add(line);
+                }
             }
-            if (!"-----BEGIN RSA PRIVATE KEY-----".Equals(lines.First()))
+
+            if (!"-----BEGIN RSA PRIVATE KEY-----".Equals(lines[0]))
             {
                 throw new InvalidDataException("A pem private key file should start with -----BEGIN RSA PRIVATE KEY-----");
             }
@@ -51,7 +60,7 @@ namespace Oocx.Asn1PKCS.PKCS1
             {
                 throw new InvalidDataException("A pem private key file should end with -----END RSA PRIVATE KEY-----");
             }
-            var base64 = string.Join("", lines.Skip(1).Take(lines.Length - 2));
+            var base64 = string.Join("", lines.Skip(1).Take(lines.Count - 2));
             var der = base64.Base64UrlDecode();
             return der;
         }

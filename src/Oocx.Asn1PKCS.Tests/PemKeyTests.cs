@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
+using Newtonsoft.Json;
 using Oocx.Asn1PKCS.Parser;
 using Oocx.Asn1PKCS.PKCS1;
 using Xunit;
@@ -39,24 +40,51 @@ namespace Oocx.Asn1PKCS.Tests
             "AcOwqy5KsCy6n9dI7u7nu1u2l7UMDYNUrjigD09qN6OlqukcjhpWQQ==\n"+ 
             "-----END RSA PRIVATE KEY-----\n";
 
+        const string jwtPrivateKey = @"-----BEGIN RSA PRIVATE KEY-----
+MIICWwIBAAKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQABAoGAD+onAtVye4ic7VR7V50DF9bOnwRwNXrARcDhq9LWNRrRGElESYYTQ6EbatXS3MCyjjX2eMhu/aF5YhXBwkppwxg+EOmXeh+MzL7Zh284OuPbkglAaGhV9bb6/5CpuGb1esyPbYW+Ty2PC0GSZfIXkXs76jXAu9TOBvD0ybc2YlkCQQDywg2R/7t3Q2OE2+yo382CLJdrlSLVROWKwb4tb2PjhY4XAwV8d1vy0RenxTB+K5Mu57uVSTHtrMK0GAtFr833AkEA6avx20OHo61Yela/4k5kQDtjEf1N0LfI+BcWZtxsS3jDM3i1Hp0KSu5rsCPb8acJo5RO26gGVrfAsDcIXKC+bQJAZZ2XIpsitLyPpuiMOvBbzPavd4gY6Z8KWrfYzJoI/Q9FuBo6rKwl4BFoToD7WIUS+hpkagwWiz+6zLoX1dbOZwJACmH5fSSjAkLRi54PKJ8TFUeOP15h9sQzydI8zJU+upvDEKZsZc/UhT/SySDOxQ4G/523Y0sz/OZtSWcol/UMgQJALesy++GdvoIDLfJX5GBQpuFgFenRiRDabxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw==
+-----END RSA PRIVATE KEY-----";
+
+        [Fact]
+        public void Can_read_jwt_base64url_encoded_key()
+        {
+            var key = RSAPrivateKey.ParsePem(jwtPrivateKey).Key;
+
+            Assert.Equal(@"{
+  ""D"": ""D+onAtVye4ic7VR7V50DF9bOnwRwNXrARcDhq9LWNRrRGElESYYTQ6EbatXS3MCyjjX2eMhu/aF5YhXBwkppwxg+EOmXeh+MzL7Zh284OuPbkglAaGhV9bb6/5CpuGb1esyPbYW+Ty2PC0GSZfIXkXs76jXAu9TOBvD0ybc2Ylk="",
+  ""DP"": ""ZZ2XIpsitLyPpuiMOvBbzPavd4gY6Z8KWrfYzJoI/Q9FuBo6rKwl4BFoToD7WIUS+hpkagwWiz+6zLoX1dbOZw=="",
+  ""DQ"": ""CmH5fSSjAkLRi54PKJ8TFUeOP15h9sQzydI8zJU+upvDEKZsZc/UhT/SySDOxQ4G/523Y0sz/OZtSWcol/UMgQ=="",
+  ""Exponent"": ""AQAB"",
+  ""InverseQ"": ""Lesy++GdvoIDLfJX5GBQpuFgFenRiRDabxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw=="",
+  ""Modulus"": ""3ZWrUY0Y6IKN1qI4BhxR2C7oHVFgGPYkd38uGq1jQNSqEvJFcN93CYm16/G78FAFKWqwsJb3Wx+nbxDn6LtP4AhULB1H0K0g7/jLklDAHvI8yhOKlvoyvsUFPWtNxlJyh5JJXvkNKV/4Oo12e69f8QCuQ6NpEPl+cSvXIqUYBCs="",
+  ""P"": ""8sINkf+7d0NjhNvsqN/NgiyXa5Ui1UTlisG+LW9j44WOFwMFfHdb8tEXp8UwfiuTLue7lUkx7azCtBgLRa/N9w=="",
+  ""Q"": ""6avx20OHo61Yela/4k5kQDtjEf1N0LfI+BcWZtxsS3jDM3i1Hp0KSu5rsCPb8acJo5RO26gGVrfAsDcIXKC+bQ==""
+}", JsonConvert.SerializeObject(new
+            {
+                 key.D,
+                 key.DP,
+                 key.DQ,
+                 key.Exponent,
+                 key.InverseQ,
+                 key.Modulus,
+                 key.P,
+                 key.Q
+            }, Formatting.Indented));
+        }
 
         [Fact]
         public void Can_read_a_private_key_from_a_PEM_file()
         {
             // Arrange
-            var asn1Parser = new Asn1Parser();
-            var sut = new RSAPrivateKeyParser(asn1Parser);
+            var sut = new RSAPrivateKeyParser(new Asn1Parser());
 
             // Act
             var rsa = sut.ParsePem(new MemoryStream(Encoding.ASCII.GetBytes(TestPrivateKey)));
-
+            
             // Assert
             rsa.Key.Exponent.Should().Equal(1, 0, 1);
-
             rsa.Key.Modulus.Length.Should().Be(256);            
             rsa.Key.Modulus[0].Should().Be(0xb2);
             rsa.Key.Modulus[255].Should().Be(0xab);
-
             rsa.Key.P.Length.Should().Be(128);
         }
 

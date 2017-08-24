@@ -7,7 +7,6 @@ namespace Oocx.Asn1PKCS.PKCS1
 {
     public class RSAPrivateKey : Sequence
     {
-        // http://blogs.msdn.com/b/shawnfa/archive/2005/11/17/493972.aspx
         public RSAPrivateKey(RSAParameters key) :
             this(new Integer(key.Modulus), new Integer(key.Exponent), new Integer(key.D), new Integer(key.P), new Integer(key.Q), new Integer(key.DP), new Integer(key.DQ), new Integer(key.InverseQ))
         {
@@ -42,7 +41,7 @@ namespace Oocx.Asn1PKCS.PKCS1
             };
         }
 
-        private byte[] AddPadding(byte[] data)
+        private static byte[] AddPadding(byte[] data)
         {
             // As a result of parsing the asn1 Integer, the parser might have removed a leading zero.
             // We need to add it back here, as they are expected by the .NET RsaParameters class
@@ -53,7 +52,7 @@ namespace Oocx.Asn1PKCS.PKCS1
         }
 
         public RSAParameters Key { get; private set; }
-
+        
         public string ToPemString()
         {
             return PEM.Encode(this.ToDerBytes(), PEM.RSAPrivateKey);
