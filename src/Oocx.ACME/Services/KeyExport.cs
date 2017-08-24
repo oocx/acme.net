@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
-using Oocx.Asn1PKCS;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.PKCS1;
 
 namespace Oocx.ACME.Services
@@ -54,27 +51,22 @@ namespace Oocx.ACME.Services
 
         private void SaveAsDER(RSAParameters key, string keyName)
         {
-            var keyBytes = GetKeyAsDER(key);
+            var keyBytes = new RSAPrivateKey(key).ToDerBytes();
+
             var keyFileName = Path.Combine(basePath, $"{keyName}.der");
+
             File.WriteAllBytes(keyFileName, keyBytes);
         }
 
         private void SaveAsPEM(RSAParameters key, string keyName)
         {
-            var keyBytes = GetKeyAsDER(key);
+            var privateKey = new RSAPrivateKey(key);
 
-            var pem = keyBytes.EncodeAsPEM(PEMExtensions.RSAPrivateKey);
+            var pem = privateKey.ToPemString();
 
             var keyFileName = Path.Combine(basePath, $"{keyName}.pem");
-            File.WriteAllText(keyFileName, pem);
-        }
 
-        private static byte[] GetKeyAsDER(RSAParameters key)
-        {
-            var asn1Key = new RSAPrivateKey(key);
-            var serializer = new Asn1Serializer();
-            var keyBytes = serializer.Serialize(asn1Key).ToArray();
-            return keyBytes;
+            File.WriteAllText(keyFileName, pem);
         }
     }
 }

@@ -56,9 +56,14 @@ namespace Oocx.Asn1PKCS.PKCS1
 
         public string ToPemString()
         {
-            var asn1Serializer = new Asn1Serializer();
-            
-            return asn1Serializer.Serialize(this).ToArray().EncodeAsPEM(PEMExtensions.RSAPrivateKey);
+            return PEM.Encode(this.ToDerBytes(), PEM.RSAPrivateKey);
+        }
+
+        public byte[] ToDerBytes()
+        {
+            var serializer = new Asn1Serializer();
+
+            return serializer.Serialize(this).ToArray();
         }
 
         public static RSAPrivateKey ParsePem(string pem)

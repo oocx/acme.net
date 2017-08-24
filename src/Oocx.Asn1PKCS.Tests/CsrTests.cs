@@ -27,15 +27,15 @@ namespace Oocx.Asn1PKCS.Tests
                 S = "NRW",
                 L = "Werther",
                 O = "Aero Club Bünde",
-                OU = ""                
+                OU = ""
             };
 
             var serializer = new Asn1Serializer();
             var sut = new CertificateRequestAsn1DEREncoder(serializer);
-            
+
 
             // Act
-            var csr = sut.Encode(data);            
+            var csr = sut.Encode(data);
             var der = sut.EncodeAsDER(data);
             var base64 = sut.EncodeAsBase64(data);
             var bytes = serializer.Serialize(csr).ToArray();
@@ -54,7 +54,7 @@ namespace Oocx.Asn1PKCS.Tests
         public void Convert_xml_key_to_pem()
         {
             // Arrange            
-            var keyStore = new FileKeyStore(Environment.CurrentDirectory);            
+            var keyStore = new FileKeyStore(Environment.CurrentDirectory);
             var key = keyStore.GetOrCreateKey("test.startliste.info");
             var sut = new KeyExport(Environment.CurrentDirectory);
 
@@ -65,7 +65,7 @@ namespace Oocx.Asn1PKCS.Tests
             File.Exists(Path.Combine(Environment.CurrentDirectory, "test.startliste.info.pem")).Should().BeTrue();
         }
 
-        
+
         //[Fact]        
         public void Create_pfx()
         {
@@ -73,7 +73,7 @@ namespace Oocx.Asn1PKCS.Tests
             var keyManager = new FileKeyStore(Environment.CurrentDirectory);
             var key = keyManager.GetOrCreateKey("test.startliste.info").ExportParameters(true);
             var sut = new Pkcs12();
-            
+
             // Act
             sut.CreatePfxFile(key, @"test.startliste.info.cer", "test", @"test.startliste.info.pfx");
 

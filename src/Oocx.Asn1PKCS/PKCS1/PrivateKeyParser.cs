@@ -15,6 +15,9 @@ namespace Oocx.Asn1PKCS.PKCS1
             this.parser = parser;
         }
 
+        public PrivateKeyParser()
+            : this(new Asn1Parser()) { }
+
         public RSAPrivateKey ParsePem(string pem)
         {
             using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(pem))) { return ParsePem(stream); }
@@ -39,7 +42,7 @@ namespace Oocx.Asn1PKCS.PKCS1
 
         private static byte[] DecodePem(Stream input)
         {
-            return input.DecodePEM(PEMExtensions.PrivateKey);
+            return PEM.Decode(input, PEM.PrivateKey);
         }
     }
 }

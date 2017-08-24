@@ -1,9 +1,7 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.Parser;
 using Oocx.Asn1PKCS.PKCS1;
 using Xunit;
@@ -63,37 +61,10 @@ namespace Oocx.Asn1PKCS.Tests
         }
 
         [Fact]
-        public void Serializing_and_deserializing_a_private_key_should_result_in_equal_keys()
-        {            
-            // Arrange
-            var rsa = new RSACryptoServiceProvider(2048);
-            var rsaParameters = rsa.ExportParameters(true);
-            var asn1Parser = new Asn1Parser();
-            var rsaParser = new RSAPrivateKeyParser(asn1Parser);
-            var asn1Serializer = new Asn1Serializer();
-            var asn1Rsa = new RSAPrivateKey(rsaParameters);
-
-            // Act
-            var serializedPEM = asn1Serializer.Serialize(asn1Rsa).ToArray().EncodeAsPEM(PEMExtensions.RSAPrivateKey);
-            var parsedRsaKey = rsaParser.ParsePem(new MemoryStream(Encoding.ASCII.GetBytes(serializedPEM)));
-
-            //TODO this test sometimes has a missing leading '0' byte.
-
-
-            // Assert
-            parsedRsaKey.Key.Exponent.Should().Equal(rsaParameters.Exponent);
-            parsedRsaKey.Key.Modulus.Should().Equal(rsaParameters.Modulus);
-            parsedRsaKey.Key.P.Should().Equal(rsaParameters.P);
-            parsedRsaKey.Key.D.Should().Equal(rsaParameters.D);
-            parsedRsaKey.Key.DP.Should().Equal(rsaParameters.DP);
-            parsedRsaKey.Key.Q.Should().Equal(rsaParameters.Q);
-            parsedRsaKey.Key.DQ.Should().Equal(rsaParameters.DQ);
-            parsedRsaKey.Key.InverseQ.Should().Equal(rsaParameters.InverseQ);            
-        }
-
-        [Fact]
         public void RSAPrivateKey_parse_and_encode_to_pem_should_result_in_equal_keys()
         {
+            // TODO this test sometimes has a missing leading '0' byte.
+
             var rsa = new RSACryptoServiceProvider(2048);
             var rsaParameters = rsa.ExportParameters(true);
 
