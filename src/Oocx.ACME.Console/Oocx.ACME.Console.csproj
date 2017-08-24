@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Oocx.ACME.Console</AssemblyName>
+    <AssemblyName>acme</AssemblyName>
     <TargetFrameworks>net461</TargetFrameworks>
     <VersionPrefix>0.0.0</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
     <OutputType>Exe</OutputType>
+    <LangVersion>7.1</LangVersion>
     
     <!-- Package Details-->
     <Authors>Mathias Raacke</Authors>

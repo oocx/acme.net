@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Autofac;
 using CommandLine;
 using Oocx.ACME.Client;
@@ -11,7 +12,7 @@ namespace Oocx.ACME.Console
 {
     public class Program
     {
-        static void Main(string[] args)
+        async static Task Main(string[] args)
         {
             var parser = new Parser(config => {
               // config.EnableDashDash = true;
@@ -24,12 +25,12 @@ namespace Oocx.ACME.Console
 
             parser.ParseArguments(args, options);
 
-            // TODO: Error handling...
+            // TODO: Validate arguments
 
-            Execute(options);
+            await ExecuteAsync(options);
         }
-      
-        private static void Execute(Options options)
+
+        private static async Task ExecuteAsync(Options options)
         {
             try
             {
@@ -43,7 +44,8 @@ namespace Oocx.ACME.Console
                 }
 
                 var process = container.Resolve<IAcmeProcess>(new NamedParameter("options",  options));
-                process.StartAsync().GetAwaiter().GetResult();
+
+                await process.StartAsync();
             }
             catch (AggregateException ex)
             {
