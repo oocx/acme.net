@@ -1,5 +1,8 @@
+using System;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using Oocx.Asn1PKCS.Asn1BaseTypes;
 using Oocx.Asn1PKCS.Parser;
 
@@ -72,6 +75,35 @@ namespace Oocx.Asn1PKCS.PKCS1
             var rsaParser = new RSAPrivateKeyParser(asn1Parser);
 
             return rsaParser.ParsePem(pem);
+        }
+
+        public void WriteTo(Stream stream, KeyFormat format)
+        {
+            byte[] keyBytes;
+
+            switch (format)
+            {
+                case KeyFormat.DER:
+                    keyBytes = ToDerBytes();
+                    break;
+                case KeyFormat.PEM:
+                    keyBytes = Encoding.ASCII.GetBytes(ToPemString());
+                    break;
+                case KeyFormat.DotNetXml:
+                    var rsa = RSA.Create();
+
+                    rsa.ImportParameters(Key);
+
+                    var xml = rsa.ToXmlString(true);
+
+                    keyBytes = Encoding.ASCII.GetBytes(xml);
+
+                    break;
+                default:
+                    throw new Exception("Unsupported key format:" + format);
+            }
+
+            stream.Write(keyBytes, 0, keyBytes.Length);
         }
     }
 }

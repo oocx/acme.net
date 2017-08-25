@@ -6,13 +6,13 @@ using Oocx.Asn1PKCS.Asn1BaseTypes;
 
 namespace Oocx.Asn1PKCS
 {
-    public static class PEM
+    internal static class PEM
     {
         // Preambles
         public const string RSAPrivateKey = "RSA PRIVATE KEY"; // PKCS#1
         public const string PrivateKey    = "PRIVATE KEY";     // PKCS#8
 
-        internal static string Encode(byte[] derEncodedBytes, string type)
+        public static string Encode(byte[] derEncodedBytes, string type)
         {
             var base64 = Convert.ToBase64String(derEncodedBytes);
 
@@ -28,7 +28,7 @@ namespace Oocx.Asn1PKCS
             return pem;
         }
 
-        internal static byte[] Decode(Stream pem, string type)
+        public static byte[] Decode(Stream pem, string type)
         {
             var lines = new List<string>();
 
