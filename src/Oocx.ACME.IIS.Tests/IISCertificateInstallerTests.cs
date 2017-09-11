@@ -63,7 +63,7 @@ namespace Oocx.ACME.IIS.Tests
 
 
 
-        [Fact]        
+        // [Fact]        
         public void Should_install_a_x509_certificate_and_update_bindings()
         {
             // Arrange
@@ -71,8 +71,13 @@ namespace Oocx.ACME.IIS.Tests
             var sut = new IISServerConfigurationProvider();
             var asn1Parser = new Asn1Parser();
             var rsaParser = new PrivateKeyParser(asn1Parser);
-            var privateKey = rsaParser.ParsePem(TestPrivateKey).Key;            
-            var csp = new CspParameters { KeyContainerName = x509.GetCertHashString(), Flags = CspProviderFlags.UseMachineKeyStore };
+            var privateKey = rsaParser.ParsePem(TestPrivateKey).Key;    
+            
+            var csp = new CspParameters {
+                KeyContainerName = x509.GetCertHashString(),
+                Flags = CspProviderFlags.UseMachineKeyStore
+            };
+
             var rsa2 = new RSACryptoServiceProvider(csp);
             rsa2.ImportParameters(privateKey);
             x509.PrivateKey = rsa2;
