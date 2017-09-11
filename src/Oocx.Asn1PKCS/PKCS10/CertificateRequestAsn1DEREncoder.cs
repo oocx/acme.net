@@ -47,9 +47,10 @@ namespace Oocx.Asn1PKCS.PKCS10
             var signatureBytes = rsa.SignData(certificationRequestInfoBytes, SHA256.Create());
 
             return new CertificationRequest(
-                certificationRequestInfo,
-                new AlgorithmIdentifier(Oid.Algorithm.sha256RSA),
-                new BitString(signatureBytes));
+                certificationRequestInfo : certificationRequestInfo,
+                signatureAlgorithm       : new AlgorithmIdentifier(Oid.Algorithm.sha256RSA),
+                signature                : new BitString(signatureBytes)
+            );
         }
 
         public byte[] EncodeAsDER(CertificateRequestData requestData)

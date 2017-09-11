@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Oocx.ACME.Jose
 {
-    /// <see cref="http://self-issued.info/docs/draft-ietf-jose-json-web-key.html#rfc.section.4"/>    
     public class JWK
     {
         [JsonProperty("kty")]

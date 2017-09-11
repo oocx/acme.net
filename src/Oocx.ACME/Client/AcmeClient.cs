@@ -18,7 +18,6 @@ namespace Oocx.ACME.Client
     public class AcmeClient : IAcmeClient
     {
         private readonly HttpClient client;
-
         private Directory directory;
 
         private string nonce;
@@ -46,6 +45,7 @@ namespace Oocx.ACME.Client
         public async Task<Directory> DiscoverAsync()
         {
             Verbose($"Querying directory information from {client.BaseAddress}");
+
             return await GetAsync<Directory>(new Uri("directory", UriKind.Relative)).ConfigureAwait(false);
         }
 
@@ -78,10 +78,12 @@ namespace Oocx.ACME.Client
                 var location = ex.Response.Headers.Location.ToString();
                 Info($"using existing registration: {location}");
                 var response = await PostAsync<RegistrationResponse>(new Uri(location), new UpdateRegistrationRequest()).ConfigureAwait(false);
+
                 if (string.IsNullOrEmpty(response.Location))
                 {
                     response.Location = location;
                 }
+
                 return response;
             }
         }
@@ -214,10 +216,13 @@ namespace Oocx.ACME.Client
                 && response.Content.Headers.ContentType.MediaType == "application/pkix-cert")
             {
                 var certificateBytes = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+
                 var certificateResponse = new CertificateResponse {
                     Certificate = certificateBytes
                 };
+
                 GetHeaderValues(response, certificateResponse);
+
                 return certificateResponse as TResult;
             }
 
@@ -239,9 +244,10 @@ namespace Oocx.ACME.Client
 
             foreach (var header in response.Headers)
             {
-                if (properties.ContainsKey(header.Key) && header.Value.Count() == 1)
+                if (properties.TryGetValue(header.Key, out PropertyInfo property) 
+                    && header.Value.Count() == 1)
                 {
-                    properties[header.Key].SetValue(responseContent, header.Value.First());
+                    property.SetValue(responseContent, header.Value.First());
                 }
 
                 if (header.Key == "Link")
@@ -249,10 +255,12 @@ namespace Oocx.ACME.Client
                     foreach (var link in header.Value)
                     {
                         var parts = link.Split(';');
+
                         if (parts.Length != 2)
                         {
                             continue;
                         }
+
                         if (parts[1] == "rel=\"terms-of-service\"" && properties.ContainsKey("Agreement"))
                         {
                             properties["Agreement"].SetValue(responseContent, parts[0].Substring(1, parts[0].Length - 2));

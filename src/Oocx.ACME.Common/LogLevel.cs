@@ -4,7 +4,7 @@
     {
         Disabled,
         Error,
-        Warning,        
+        Warning,
         Info,
         Verbose
     }

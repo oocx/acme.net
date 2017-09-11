@@ -8,15 +8,15 @@ namespace Oocx.Asn1PKCS.PKCS10
         public CertificateRequestData(string commonName, RSAParameters key)
         {
             Key = key;
-            CN = commonName;
+            CN = commonName ?? throw new ArgumentNullException(nameof(commonName));
         }
 
         /// <summary>
         /// Country
         /// </summary>
         /// <see cref="http://www.alvestrand.no/objectid/2.5.4.6.html"/>
-
         public string C { get; set; }
+
         /// <summary>
         /// State or Province Name
         /// </summary>

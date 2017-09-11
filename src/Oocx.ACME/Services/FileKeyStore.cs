@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
 using Oocx.Asn1PKCS.PKCS1;
 using static Oocx.ACME.Common.Log;
@@ -24,8 +23,6 @@ namespace Oocx.ACME.Services
             var rsa = new RSACryptoServiceProvider(2048);
 
             var keyFileName = Path.Combine(basePath, $"{keyName}.pem");
-
-            Debug.WriteLine(keyFileName);
 
             if (File.Exists(keyFileName))
             {

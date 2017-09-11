@@ -20,12 +20,10 @@ namespace Oocx.ACME.Services
         {
             Log.Verbose($"using key name {keyName}");
 
-            var csp = new CspParameters {
+            return new RSACryptoServiceProvider(2048, new CspParameters {
                 KeyContainerName = keyName,
                 Flags = flags,
-            };
-
-            return new RSACryptoServiceProvider(2048, csp);
+            });
         }
     }
 }

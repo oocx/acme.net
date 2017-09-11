@@ -4,7 +4,8 @@ namespace Oocx.Asn1PKCS.PKCS10
 {
     public class SubjectPublicKeyInfo : Sequence
     {
-        public SubjectPublicKeyInfo(AlgorithmIdentifier algorithm, BitString subjectPublicKey) : base(algorithm, subjectPublicKey)
+        public SubjectPublicKeyInfo(AlgorithmIdentifier algorithm, BitString subjectPublicKey)
+            : base(algorithm, subjectPublicKey)
         {            
         }        
     }

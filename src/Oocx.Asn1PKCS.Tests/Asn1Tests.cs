@@ -12,9 +12,6 @@ namespace Oocx.Asn1PKCS.Tests
         [Fact]
         public void Should_encode_ObjectIdentifiers()
         {
-            // Arrange
-
-            // Act
             var oid = new ObjectIdentifier("1.3.6.1.4.1.311.21.20");
 
             // Assert            
@@ -60,7 +57,7 @@ namespace Oocx.Asn1PKCS.Tests
             asn.LengthBytes.Should().Equal(7);
             asn.Data.Should().Equal(0x57, 0x65, 0x72, 0x74, 0x68, 0x65, 0x72);
         }
-        
+
         [Fact]
         public void Should_serialize_a_sequence()
         {
@@ -79,7 +76,7 @@ namespace Oocx.Asn1PKCS.Tests
         public void Should_serialize_integer_from_int()
         {
             // Arrange
-            var ints = new int[] {0, 127, 128, 256*256};
+            var ints = new int[] { 0, 127, 128, 256 * 256 };
             var asn1ints = ints.Select(i => new Integer(i));
             var sut = new Asn1Serializer();
 
@@ -92,7 +89,7 @@ namespace Oocx.Asn1PKCS.Tests
             bytes[2].Should().Equal(0x02, 2, 0, 128); // da das 1. Bit zur Vorzeichenerkennung genutzt wird, wird bei >= 128 ein 0-Byte voran gestellt
             bytes[3].Should().Equal(0x02, 3, 1, 0, 0);
         }
-        
+
         [Fact]
         public void Should_parse_integer_to_bytes()
         {
@@ -131,13 +128,13 @@ namespace Oocx.Asn1PKCS.Tests
                 result[i].Should().Equal(expectedParsedValues[i]);
             }
         }
-        
+
         [Fact]
         public void Should_serialize_integer_from_bytes()
         {
             // Arrange
             var byteArrays = new byte[][]
-            {                
+            {
                 new byte[] {0},
                 new byte[] {127},
                 new byte[] {0, 127},
@@ -168,7 +165,6 @@ namespace Oocx.Asn1PKCS.Tests
             {
                 result[i].Should().Equal(expectedSerializedValues[i]);
             }
-           
         }
     }
 }

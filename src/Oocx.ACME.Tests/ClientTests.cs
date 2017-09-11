@@ -14,8 +14,6 @@ namespace Oocx.ACME.Tests
 {
     public class ClientTests
     {
-       
-
         [Fact]
         public async Task Should_get_a_Directory_object_from_the_default_endpoint()
         {
