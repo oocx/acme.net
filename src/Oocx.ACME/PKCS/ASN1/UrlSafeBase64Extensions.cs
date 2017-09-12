@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    internal static class UrlSafeBase64Extensions
+    public static class UrlSafeBase64Extensions
     {
         public static string Base64UrlEncoded(this byte[] arg)
         {

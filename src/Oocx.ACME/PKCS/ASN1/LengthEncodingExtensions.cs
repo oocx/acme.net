@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    internal static class LengthEncodingExtensions
+    public static class LengthEncodingExtensions
     {
         public static IEnumerable<byte> ToEncodedLength(this int value)
         {

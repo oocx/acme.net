@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    internal interface IAsn1Serializer
+    public interface IAsn1Serializer
     {
         IEnumerable<byte> Serialize(IAsn1Element element, int depth = 0);
     }

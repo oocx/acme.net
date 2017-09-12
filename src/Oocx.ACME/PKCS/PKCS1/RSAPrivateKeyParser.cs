@@ -12,7 +12,10 @@ namespace Oocx.Asn1PKCS.PKCS1
     {
         private readonly Asn1Parser parser;
 
-        internal RSAPrivateKeyParser(Asn1Parser parser)
+        public RSAPrivateKeyParser()
+            : this(new Asn1Parser()) { }
+
+        public RSAPrivateKeyParser(Asn1Parser parser)
         {
             this.parser = parser ?? throw new ArgumentNullException(nameof(parser));
         }

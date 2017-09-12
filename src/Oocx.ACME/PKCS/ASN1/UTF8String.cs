@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    internal class UTF8String : Asn1Primitive
+    public class UTF8String : Asn1Primitive
     {
         public UTF8String(string text) : base(12)
         {

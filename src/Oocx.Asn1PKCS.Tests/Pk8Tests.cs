@@ -49,7 +49,7 @@ lK1DcBvq+IFLucBdi0/9hXE=
         [Fact]
         public void Decode_pkcs8_key()
         {
-            var parser = new PrivateKeyParser(new Asn1Parser());
+            var parser = new PrivateKeyParser();
 
             var ps = parser.ParsePem(key).Key;
 

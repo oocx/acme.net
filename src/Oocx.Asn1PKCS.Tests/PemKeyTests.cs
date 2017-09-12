@@ -75,7 +75,7 @@ MIICWwIBAAKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUp
         public void Can_read_a_private_key_from_a_PEM_file()
         {
             // Arrange
-            var sut = new RSAPrivateKeyParser(new Asn1Parser());
+            var sut = new RSAPrivateKeyParser();
 
             // Act
             var rsa = sut.ParsePem(new MemoryStream(Encoding.ASCII.GetBytes(TestPrivateKey)));

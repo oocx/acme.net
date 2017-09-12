@@ -79,9 +79,7 @@ namespace Oocx.Asn1PKCS.PKCS1
 
         public static RSAPrivateKey ParsePem(string pem)
         {
-            var asn1Parser = new Asn1Parser();
-
-            var rsaParser = new RSAPrivateKeyParser(asn1Parser);
+            var rsaParser = new RSAPrivateKeyParser();
 
             return rsaParser.ParsePem(pem);
         }

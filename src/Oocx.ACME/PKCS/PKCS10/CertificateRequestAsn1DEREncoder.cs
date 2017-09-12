@@ -10,7 +10,7 @@ namespace Oocx.Asn1PKCS.PKCS10
     {
         private readonly IAsn1Serializer serializer;
 
-        internal CertificateRequestAsn1DEREncoder(IAsn1Serializer serializer)
+        public CertificateRequestAsn1DEREncoder(IAsn1Serializer serializer)
         {
             this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }

@@ -6,7 +6,7 @@ using Oocx.Asn1PKCS.Asn1BaseTypes;
 
 namespace Oocx.Asn1PKCS.Parser
 {
-    internal class Asn1Parser
+    public class Asn1Parser
     {
         public IEnumerable<IAsn1Element> Parse(Stream asn1Stream)
         {

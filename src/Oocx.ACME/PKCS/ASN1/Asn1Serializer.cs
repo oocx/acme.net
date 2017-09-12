@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Oocx.Asn1PKCS.Asn1BaseTypes
 {
-    internal class Asn1Serializer : IAsn1Serializer
+    public class Asn1Serializer : IAsn1Serializer
     {        
         public IEnumerable<byte> Serialize(IAsn1Element element, int depth = 0)
         {

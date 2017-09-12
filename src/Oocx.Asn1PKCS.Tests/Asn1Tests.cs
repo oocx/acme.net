@@ -63,10 +63,10 @@ namespace Oocx.Asn1PKCS.Tests
         {
             // Arrange
             var sequence = new Sequence(new ObjectIdentifier("2.5.4.8"), new UTF8String("NRW"));
-            var sut = new Asn1Serializer();
+            var serializer = new Asn1Serializer();
 
             // Act
-            var bytes = sut.Serialize(sequence);
+            var bytes = serializer.Serialize(sequence);
 
             // Assert
             bytes.Should().Equal(0x30, 0x0A, 0x06, 0x03, 0x55, 0x04, 0x08, 0x0C, 0x03, 0x4E, 0x52, 0x57);
