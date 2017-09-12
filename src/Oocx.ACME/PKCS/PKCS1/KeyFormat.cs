@@ -2,8 +2,7 @@
 {
     public enum KeyFormat
     {
-        DotNetXml = 1,
-        PEM = 2,
-        DER = 3
+        PEM = 1,
+        DER = 2
     }
 }

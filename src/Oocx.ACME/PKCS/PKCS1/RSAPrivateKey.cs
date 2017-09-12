@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Oocx.Pkcs.Asn1BaseTypes;
-using Oocx.Pkcs.Parser;
 
 namespace Oocx.Pkcs.PKCS1
 {
@@ -95,16 +94,6 @@ namespace Oocx.Pkcs.PKCS1
                     break;
                 case KeyFormat.PEM:
                     keyBytes = Encoding.ASCII.GetBytes(ToPemString());
-                    break;
-                case KeyFormat.DotNetXml:
-                    var rsa = RSA.Create();
-
-                    rsa.ImportParameters(Key);
-
-                    var xml = rsa.ToXmlString(true);
-
-                    keyBytes = Encoding.ASCII.GetBytes(xml);
-
                     break;
                 default:
                     throw new Exception("Unsupported key format:" + format);
