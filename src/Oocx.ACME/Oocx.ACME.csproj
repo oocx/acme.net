@@ -15,11 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Oocx.ACME.Common\Oocx.ACME.Common.csproj" />
-    <ProjectReference Include="..\Oocx.Asn1PKCS\Oocx.Asn1PKCS.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 

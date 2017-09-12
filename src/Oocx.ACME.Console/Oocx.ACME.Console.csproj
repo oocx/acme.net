@@ -19,7 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Oocx.ACME\Oocx.ACME.csproj" />
     <ProjectReference Include="..\Oocx.ACME.IIS\Oocx.ACME.IIS.csproj" />
-    <ProjectReference Include="..\Oocx.Asn1PKCS\Oocx.Asn1PKCS.csproj" />
   </ItemGroup>
 
   <ItemGroup>
