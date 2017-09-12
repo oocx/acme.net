@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Oocx.Asn1PKCS.PKCS10
+namespace Oocx.Pkcs.PKCS10
 {
     public class CertificateRequestData
     {

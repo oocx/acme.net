@@ -1,11 +1,11 @@
 using System.IO;
 using System.Linq;
 using FluentAssertions;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
-using Oocx.Asn1PKCS.Parser;
+using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs.Parser;
 using Xunit;
 
-namespace Oocx.Asn1PKCS.Tests
+namespace Oocx.Pkcs.Tests
 {
     public class Asn1Tests
     {

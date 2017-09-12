@@ -1,4 +1,4 @@
-﻿namespace Oocx.Asn1PKCS
+﻿namespace Oocx.Pkcs
 {
     public enum KeyFormat
     {

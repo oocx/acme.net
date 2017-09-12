@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Security.Cryptography;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
-using Oid = Oocx.Asn1PKCS.Asn1BaseTypes.Oid;
+using Oocx.Pkcs.Asn1BaseTypes;
+using Oid = Oocx.Pkcs.Asn1BaseTypes.Oid;
 
-namespace Oocx.Asn1PKCS.PKCS10
+namespace Oocx.Pkcs.PKCS10
 {
     public class CertificateRequestAsn1DEREncoder : ICertificateRequestAsn1DEREncoder
     {

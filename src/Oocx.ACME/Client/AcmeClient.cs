@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 using Oocx.ACME.Jose;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Client

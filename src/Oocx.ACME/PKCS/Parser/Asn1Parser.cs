@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 
-namespace Oocx.Asn1PKCS.Parser
+namespace Oocx.Pkcs.Parser
 {
     public class Asn1Parser
     {

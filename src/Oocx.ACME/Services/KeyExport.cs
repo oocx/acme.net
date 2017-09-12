@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
-using Oocx.Asn1PKCS;
-using Oocx.Asn1PKCS.PKCS1;
+using Oocx.Pkcs;
+using Oocx.Pkcs.PKCS1;
 
 namespace Oocx.ACME.Services
 {

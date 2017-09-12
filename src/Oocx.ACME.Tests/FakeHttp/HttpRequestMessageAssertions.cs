@@ -5,7 +5,7 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oocx.ACME.Jose;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 
 namespace Oocx.ACME.Tests.FakeHttp
 {

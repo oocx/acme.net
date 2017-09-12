@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Oocx.Asn1PKCS.Asn1BaseTypes
+namespace Oocx.Pkcs.Asn1BaseTypes
 {
     /// <summary>
     /// https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx

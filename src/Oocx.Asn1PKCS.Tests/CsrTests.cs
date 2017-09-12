@@ -3,14 +3,14 @@ using System.IO;
 using System.Linq;
 
 using Oocx.ACME.Services;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
-using Oocx.Asn1PKCS.PKCS1;
-using Oocx.Asn1PKCS.PKCS10;
-using Oocx.Asn1PKCS.PKCS12;
+using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs.PKCS1;
+using Oocx.Pkcs.PKCS10;
+using Oocx.Pkcs.PKCS12;
 
 using Xunit;
 
-namespace Oocx.Asn1PKCS.Tests
+namespace Oocx.Pkcs.Tests
 {
     public class CsrTests
     {

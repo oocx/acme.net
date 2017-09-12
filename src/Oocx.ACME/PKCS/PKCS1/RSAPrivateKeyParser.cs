@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Oocx.Asn1PKCS.Asn1BaseTypes;
-using Oocx.Asn1PKCS.Parser;
+using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs.Parser;
 
-namespace Oocx.Asn1PKCS.PKCS1
+namespace Oocx.Pkcs.PKCS1
 {
     public class RSAPrivateKeyParser
     {

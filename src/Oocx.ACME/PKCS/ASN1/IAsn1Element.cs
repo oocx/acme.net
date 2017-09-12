@@ -1,4 +1,4 @@
-namespace Oocx.Asn1PKCS.Asn1BaseTypes
+namespace Oocx.Pkcs.Asn1BaseTypes
 {
     public interface IAsn1Element : IAsn1Entity
     {

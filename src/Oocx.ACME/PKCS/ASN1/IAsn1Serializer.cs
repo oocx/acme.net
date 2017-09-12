@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Oocx.Asn1PKCS.Asn1BaseTypes
+namespace Oocx.Pkcs.Asn1BaseTypes
 {
     public interface IAsn1Serializer
     {

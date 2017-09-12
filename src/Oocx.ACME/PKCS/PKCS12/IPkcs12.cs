@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace Oocx.Asn1PKCS.PKCS12
+namespace Oocx.Pkcs.PKCS12
 {
     public interface IPkcs12
     {

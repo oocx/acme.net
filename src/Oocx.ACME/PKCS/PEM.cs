@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 
-namespace Oocx.Asn1PKCS
+namespace Oocx.Pkcs
 {
     internal static class PEM
     {

@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using Oocx.Asn1PKCS.Parser;
-using Oocx.Asn1PKCS.PKCS1;
+using Oocx.Pkcs.Parser;
+using Oocx.Pkcs.PKCS1;
 using Xunit;
 
-namespace Oocx.Asn1PKCS.Tests
+namespace Oocx.Pkcs.Tests
 {
     public class Pkcs8Tests
     {

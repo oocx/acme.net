@@ -1,8 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Oocx.Asn1PKCS.Parser;
-using Oocx.Asn1PKCS.PKCS1;
+using Oocx.Pkcs.Parser;
+using Oocx.Pkcs.PKCS1;
 using Xunit;
 
 namespace Oocx.ACME.IIS.Tests

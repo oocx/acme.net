@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Oocx.Asn1PKCS.Asn1BaseTypes
+namespace Oocx.Pkcs.Asn1BaseTypes
 {
     public class UTF8String : Asn1Primitive
     {

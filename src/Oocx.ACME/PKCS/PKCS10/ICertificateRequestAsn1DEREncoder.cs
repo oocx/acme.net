@@ -1,4 +1,4 @@
-namespace Oocx.Asn1PKCS.PKCS10
+namespace Oocx.Pkcs.PKCS10
 {
     public interface ICertificateRequestAsn1DEREncoder
     {

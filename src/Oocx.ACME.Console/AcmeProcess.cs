@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Oocx.ACME.Client;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
-using Oocx.Asn1PKCS.PKCS10;
-using Oocx.Asn1PKCS.PKCS12;
+using Oocx.Pkcs.PKCS10;
+using Oocx.Pkcs.PKCS12;
 using static Oocx.ACME.Common.Log;
 
 namespace Oocx.ACME.Console

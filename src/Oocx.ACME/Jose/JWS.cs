@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 
 namespace Oocx.ACME.Jose
 {

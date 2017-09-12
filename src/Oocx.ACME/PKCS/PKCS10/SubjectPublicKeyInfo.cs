@@ -1,6 +1,6 @@
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 
-namespace Oocx.Asn1PKCS.PKCS10
+namespace Oocx.Pkcs.PKCS10
 {
     public class SubjectPublicKeyInfo : Sequence
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Oocx.Asn1PKCS.Asn1BaseTypes
+namespace Oocx.Pkcs.Asn1BaseTypes
 {
     /// <see cref="https://msdn.microsoft.com/en-us/library/windows/desktop/bb540806(v=vs.85).aspx"/>
     public class Integer : Asn1Primitive<byte[]>

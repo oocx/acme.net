@@ -1,7 +1,7 @@
 using System;
-using Oocx.Asn1PKCS.Asn1BaseTypes;
+using Oocx.Pkcs.Asn1BaseTypes;
 
-namespace Oocx.Asn1PKCS.PKCS12
+namespace Oocx.Pkcs.PKCS12
 {
     public class CertBag : IBagType
     {
