@@ -1,4 +1,6 @@
-namespace Oocx.ACME.Common
+using Oocx.ACME.Services;
+
+namespace Oocx.ACME.Logging
 {
     public class Log
     {

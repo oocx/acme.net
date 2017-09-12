@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Web.Administration;
 using Oocx.ACME.Services;
-using static Oocx.ACME.Common.Log;
+using static Oocx.ACME.Logging.Log;
 
 namespace Oocx.ACME.IIS
 {

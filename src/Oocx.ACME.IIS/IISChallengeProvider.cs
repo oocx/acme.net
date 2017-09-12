@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
-using Oocx.ACME.Client;
+using Oocx.ACME.Services;
 using Oocx.ACME.Protocol;
-using static Oocx.ACME.Common.Log;
+using static Oocx.ACME.Logging.Log;
 using Directory = System.IO.Directory;
 
 namespace Oocx.ACME.IIS

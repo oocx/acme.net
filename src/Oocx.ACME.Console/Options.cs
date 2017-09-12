@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using CommandLine;
 
-using Oocx.ACME.Common;
+using Oocx.ACME.Logging;
 
 namespace Oocx.ACME.Console
 {

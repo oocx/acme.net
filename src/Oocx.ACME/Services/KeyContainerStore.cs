@@ -1,5 +1,5 @@
 using System.Security.Cryptography;
-using Oocx.ACME.Common;
+using Oocx.ACME.Logging;
 
 namespace Oocx.ACME.Services
 {

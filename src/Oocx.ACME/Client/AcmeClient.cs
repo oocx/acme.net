@@ -5,13 +5,16 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using Oocx.ACME.Jose;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
 using Oocx.Pkcs.Asn1BaseTypes;
-using static Oocx.ACME.Common.Log;
+
+using static Oocx.ACME.Logging.Log;
 
 namespace Oocx.ACME.Client
 {

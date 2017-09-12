@@ -1,6 +1,7 @@
 using System;
+using Oocx.ACME.Services;
 
-namespace Oocx.ACME.Common
+namespace Oocx.ACME.Logging
 {
     public class ConsoleLogger : ILog
     {

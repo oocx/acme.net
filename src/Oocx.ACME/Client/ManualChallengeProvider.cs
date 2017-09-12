@@ -3,7 +3,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Oocx.ACME.Protocol;
-using static Oocx.ACME.Common.Log;
+using Oocx.ACME.Services;
+
+using static Oocx.ACME.Logging.Log;
 
 namespace Oocx.ACME.Client
 {
@@ -19,6 +21,7 @@ namespace Oocx.ACME.Client
         public async Task<PendingChallenge> AcceptChallengeAsync(string domain, string siteName, AuthorizationResponse authorization)
         {
             var challenge = authorization?.Challenges.FirstOrDefault(c => c.Type == "http-01");
+
             if (challenge == null)
             {
                 Error("the server does not accept challenge type http-01");

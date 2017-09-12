@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Autofac;
 using CommandLine;
 using Oocx.ACME.Client;
-using Oocx.ACME.Common;
+using Oocx.ACME.Logging;
 using static System.Console;
-using static Oocx.ACME.Common.Log;
+using static Oocx.ACME.Logging.Log;
 
 namespace Oocx.ACME.Console
 {

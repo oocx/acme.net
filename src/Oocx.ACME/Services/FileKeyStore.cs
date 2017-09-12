@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 using Oocx.Pkcs.PKCS1;
-using static Oocx.ACME.Common.Log;
+using static Oocx.ACME.Logging.Log;
 
 namespace Oocx.ACME.Services
 {
