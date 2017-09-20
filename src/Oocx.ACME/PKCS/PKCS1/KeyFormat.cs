@@ -2,7 +2,7 @@
 {
     public enum KeyFormat
     {
-        PEM = 1,
-        DER = 2
+        Pem = 1,
+        Der = 2
     }
 }

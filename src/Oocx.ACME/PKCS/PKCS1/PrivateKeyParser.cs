@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using Oocx.Pkcs.Asn1BaseTypes;
 using Oocx.Pkcs.Parser;
 
 namespace Oocx.Pkcs.PKCS1
@@ -41,6 +40,7 @@ namespace Oocx.Pkcs.PKCS1
                 using (var octetStream = new MemoryStream(octet.UnencodedValue))
                 {
                     var rsaParser = new RSAPrivateKeyParser(parser);
+
                     return rsaParser.ParseDer(octetStream);
                 }
             }

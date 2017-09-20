@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Oocx.Pkcs.Asn1BaseTypes;
 
 namespace Oocx.Pkcs
 {
@@ -54,9 +53,9 @@ namespace Oocx.Pkcs
                 throw new InvalidDataException($"The PEM file should end with -----END {type}-----");
             }
             
-            var base64 = string.Join("", lines.Skip(1).Take(lines.Count - 2));
-            var der = base64.Base64UrlDecode();
-            return der;
+            string base64 = string.Join("", lines.Skip(1).Take(lines.Count - 2));
+
+            return base64.Base64UrlDecode(); // der encoded bytes
         }
     }
 }

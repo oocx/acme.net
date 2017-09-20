@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 
 using Oocx.ACME.Services;
-using Oocx.Pkcs.Asn1BaseTypes;
 using Oocx.Pkcs.PKCS1;
 using Oocx.Pkcs.PKCS10;
 using Oocx.Pkcs.PKCS12;
@@ -101,7 +100,7 @@ FXTQmRtze3w5yKOadkSEyr6FG3qq+3IukRgiuxK12SsN7dE0sIO7ow==
             var sut = new KeyExport(Environment.CurrentDirectory);
 
             // Act
-            sut.Save(key.ExportParameters(true), "test.startliste.info", KeyFormat.PEM);
+            sut.Save(key.ExportParameters(true), "test.startliste.info", KeyFormat.Pem);
 
             Assert.True(File.Exists(Path.Combine(Environment.CurrentDirectory, "test.startliste.info.pem")));
         }

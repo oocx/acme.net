@@ -1,6 +1,6 @@
 using System;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public class OctetString : Asn1Primitive<byte[]>
     {

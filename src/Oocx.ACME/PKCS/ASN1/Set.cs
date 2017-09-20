@@ -1,4 +1,4 @@
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public class Set : Asn1Container
     {

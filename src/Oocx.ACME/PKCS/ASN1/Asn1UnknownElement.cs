@@ -1,4 +1,4 @@
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     internal class Asn1UnknownElement : Asn1Primitive<byte[]>
     {

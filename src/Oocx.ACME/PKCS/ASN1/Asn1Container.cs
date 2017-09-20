@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public abstract class Asn1Container : IAsn1Element
     {

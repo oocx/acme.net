@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public class Asn1Serializer : IAsn1Serializer
     {        

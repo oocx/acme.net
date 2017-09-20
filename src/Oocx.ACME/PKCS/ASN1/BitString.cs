@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     /// <summary>
     /// https://msdn.microsoft.com/en-us/library/windows/desktop/bb540792(v=vs.85).aspx

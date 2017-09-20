@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public static class UrlSafeBase64Extensions
     {
@@ -32,8 +32,7 @@ namespace Oocx.Pkcs.Asn1BaseTypes
 
         public static string Base64UrlEncoded(this string s)
         {
-            s = Encoding.UTF8.GetBytes(s).Base64UrlEncoded();
-            return s;
+            return Encoding.UTF8.GetBytes(s).Base64UrlEncoded();
         }
     }
 }

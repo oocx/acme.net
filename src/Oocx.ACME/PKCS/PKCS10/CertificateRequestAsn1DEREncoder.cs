@@ -1,8 +1,6 @@
 using System;
 using System.Linq;
 using System.Security.Cryptography;
-using Oocx.Pkcs.Asn1BaseTypes;
-using Oid = Oocx.Pkcs.Asn1BaseTypes.Oid;
 
 namespace Oocx.Pkcs.PKCS10
 {

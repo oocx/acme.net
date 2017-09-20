@@ -17,6 +17,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
     <PackageReference Include="WorldDomination.HttpClient.Helpers" Version="6.1.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
+
   </ItemGroup>
 
 </Project>

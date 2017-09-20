@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
 using FluentAssertions;
-using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs;
 using Oocx.Pkcs.Parser;
 using Xunit;
 

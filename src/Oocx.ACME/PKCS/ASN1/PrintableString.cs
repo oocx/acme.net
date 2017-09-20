@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     internal class PrintableString : Asn1Primitive
     {

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Oocx.Pkcs.Asn1BaseTypes;
 
 namespace Oocx.Pkcs.Parser
 {

@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Oocx.Pkcs.Asn1BaseTypes;
 
 namespace Oocx.Pkcs.PKCS1
 {
@@ -62,12 +61,9 @@ namespace Oocx.Pkcs.PKCS1
                 : data;
         }
 
-        public RSAParameters Key { get; private set; }
-        
-        public string ToPemString()
-        {
-            return PEM.Encode(this.ToDerBytes(), PEM.RSAPrivateKey);
-        }
+        public RSAParameters Key { get; }
+
+        public string ToPemString() => PEM.Encode(ToDerBytes(), PEM.RSAPrivateKey);
 
         public byte[] ToDerBytes()
         {
@@ -78,9 +74,9 @@ namespace Oocx.Pkcs.PKCS1
 
         public static RSAPrivateKey ParsePem(string pem)
         {
-            var rsaParser = new RSAPrivateKeyParser();
+            var parser = new RSAPrivateKeyParser();
 
-            return rsaParser.ParsePem(pem);
+            return parser.ParsePem(pem);
         }
 
         public void WriteTo(Stream stream, KeyFormat format)
@@ -89,14 +85,14 @@ namespace Oocx.Pkcs.PKCS1
 
             switch (format)
             {
-                case KeyFormat.DER:
+                case KeyFormat.Der:
                     keyBytes = ToDerBytes();
                     break;
-                case KeyFormat.PEM:
+                case KeyFormat.Pem:
                     keyBytes = Encoding.ASCII.GetBytes(ToPemString());
                     break;
                 default:
-                    throw new Exception("Unsupported key format:" + format);
+                    throw new Exception("Unexpected key format:" + format);
             }
 
             stream.Write(keyBytes, 0, keyBytes.Length);

@@ -1,5 +1,4 @@
 using System;
-using Oocx.Pkcs.Asn1BaseTypes;
 
 namespace Oocx.Pkcs.PKCS12
 {

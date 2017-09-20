@@ -1,4 +1,4 @@
-using Oocx.Pkcs.Asn1BaseTypes;
+using System;
 
 namespace Oocx.Pkcs.PKCS12
 {
@@ -6,7 +6,7 @@ namespace Oocx.Pkcs.PKCS12
     {
         public SafeContentsBag(IAsn1Element content)
         {
-            Content = content;
+            Content = content ?? throw new ArgumentNullException(nameof(content));
         }
 
         public ObjectIdentifier Type { get; } = new ObjectIdentifier(Oid.PKCS12.BagType.safeContentsBag);

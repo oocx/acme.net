@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs;
 using Oocx.Pkcs.Parser;
 
 namespace Oocx.Pkcs.PKCS1

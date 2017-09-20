@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public static class LengthEncodingExtensions
     {

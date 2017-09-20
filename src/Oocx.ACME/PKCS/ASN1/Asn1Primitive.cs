@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Oocx.Pkcs.Asn1BaseTypes
+namespace Oocx.Pkcs
 {
     public abstract class Asn1Primitive : IAsn1Element
     {
@@ -16,7 +16,7 @@ namespace Oocx.Pkcs.Asn1BaseTypes
 
         public byte[] Data
         {
-            get { return data; }
+            get => data;
             set
             {
                 data = value;
