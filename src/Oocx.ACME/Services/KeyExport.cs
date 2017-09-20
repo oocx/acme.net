@@ -31,8 +31,8 @@ namespace Oocx.ACME.Services
         {
             switch (format)
             {
-                case KeyFormat.DER : return "der";
-                case KeyFormat.PEM : return "pem";
+                case KeyFormat.Der : return "der";
+                case KeyFormat.Pem : return "pem";
                 default            : throw new Exception("Unsupported key format:" + format);
             }
         }

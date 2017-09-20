@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using Oocx.ACME.Logging;
 
 namespace Oocx.ACME.Services
 {
@@ -9,17 +8,13 @@ namespace Oocx.ACME.Services
 
         public KeyContainerStore(string storeType)
         {
-            flags = "machine".Equals(storeType)
+            flags = storeType == "machine"
                 ? CspProviderFlags.UseMachineKeyStore
                 : CspProviderFlags.UseUserProtectedKey;
-
-            Log.Verbose($"using key container, flags: {flags}");
         }
 
         public RSA GetOrCreateKey(string keyName)
         {
-            Log.Verbose($"using key name {keyName}");
-
             return new RSACryptoServiceProvider(2048, new CspParameters {
                 KeyContainerName = keyName,
                 Flags = flags,

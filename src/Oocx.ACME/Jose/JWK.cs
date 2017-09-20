@@ -40,8 +40,6 @@ namespace Oocx.ACME.Jose
         [JsonProperty("alg")]
         public string Algorithm { get; set; }
     }
-
-    // Based on: https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#appendix-C
-
-    // http://tools.ietf.org/html/rfc7515#page-15
+    
+    // ref: http://tools.ietf.org/html/rfc7515#page-15
 }

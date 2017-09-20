@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 using Oocx.ACME.Jose;
 using Oocx.ACME.Protocol;
 using Oocx.ACME.Services;
-using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs;
 
 using static Oocx.ACME.Logging.Log;
 
@@ -55,7 +55,8 @@ namespace Oocx.ACME.Client
         private void RememberNonce(HttpResponseMessage response)
         {
             nonce = response.Headers.GetValues("Replay-Nonce").First();
-            Verbose($"nonce from server is {nonce}");
+
+            Verbose($"set nonce: {nonce}");
         }
 
         public async Task<RegistrationResponse> RegisterAsync(string termsOfServiceUri, string[] contact)
@@ -99,18 +100,14 @@ namespace Oocx.ACME.Client
             }
         }
 
-        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, string termsOfServiceUri, string[] contact)
+        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, UpdateRegistrationRequest request)
         {
             await EnsureDirectoryAsync().ConfigureAwait(false);
 
             Info("updating registration: accepting terms of service");
+            
 
-            var registration = new UpdateRegistrationRequest {
-                Contact = contact,
-                Agreement = termsOfServiceUri
-            };
-
-            return await PostAsync<RegistrationResponse>(new Uri(registrationUri), registration).ConfigureAwait(false);
+            return await PostAsync<RegistrationResponse>(new Uri(registrationUri), request).ConfigureAwait(false);
         }
 
         public async Task<AuthorizationResponse> NewDnsAuthorizationAsync(string dnsName)

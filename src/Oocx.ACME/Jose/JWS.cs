@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
-using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs;
 
 namespace Oocx.ACME.Jose
 {
@@ -48,7 +48,7 @@ namespace Oocx.ACME.Jose
 
         public string GetKeyAuthorization(string token)
         {
-            return $"{token}.{GetSha256Thumbprint()}";
+            return token + "." + GetSha256Thumbprint();
         }
     }
 }

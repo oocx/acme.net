@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+
 using Oocx.ACME.Jose;
 
 namespace Oocx.ACME.Protocol
@@ -29,6 +30,14 @@ namespace Oocx.ACME.Protocol
 
     public class UpdateRegistrationRequest : RegistrationRequest
     {
+        public UpdateRegistrationRequest() { }
+
+        public UpdateRegistrationRequest(string agreement, string[] contact)
+        {
+            Agreement = agreement;
+            Contact   = contact;
+        }
+
         [JsonProperty("resource")]
         public string Resource { get; } = "reg";
     }

@@ -82,8 +82,8 @@ namespace Oocx.ACME.Console
         private static RSAParameters GetNewKeyPair()
         {
             var rsa = new RSACryptoServiceProvider(2048);
-            var key = rsa.ExportParameters(true);
-            return key;
+
+            return rsa.ExportParameters(true);
         }
 
         private void SaveCertificateWithPrivateKey(string domain, RSAParameters key, string certificatePath)
@@ -191,12 +191,17 @@ namespace Oocx.ACME.Console
             if (!string.IsNullOrWhiteSpace(registration.Location) && options.AcceptTermsOfService)
             {
                 Info("accepting terms of service");
+
                 if (!string.Equals(registration.Agreement, options.TermsOfServiceUri))
                 {
                     Error($"Cannot accept terms of service. The terms of service uri is '{registration.Agreement}', expected it to be '{options.TermsOfServiceUri}'.");
                     return;
                 }
-                await client.UpdateRegistrationAsync(registration.Location, registration.Agreement, new[] { options.Contact });
+
+                await client.UpdateRegistrationAsync(registration.Location, new UpdateRegistrationRequest(
+                    agreement : registration.Agreement,
+                    contact   : new[] { options.Contact }
+                ));
             }
         }
 

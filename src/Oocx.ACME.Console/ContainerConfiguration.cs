@@ -4,7 +4,7 @@ using Autofac;
 using Oocx.ACME.Client;
 using Oocx.ACME.IIS;
 using Oocx.ACME.Services;
-using Oocx.Pkcs.Asn1BaseTypes;
+using Oocx.Pkcs;
 using Oocx.Pkcs.PKCS10;
 using Oocx.Pkcs.PKCS12;
 using static Oocx.ACME.Logging.Log;
