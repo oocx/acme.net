@@ -2,8 +2,13 @@ namespace Oocx.Pkcs
 {
     public class ContentInfo : Sequence
     {
-        public ContentInfo(IContent content) : base(content.Type, content.Content)
+        public ContentInfo(ObjectIdentifier type, IAsn1Element content) 
+            : base(type, content)
         {
         }
+
+        // Type
+
+        // Content
     }
 }
