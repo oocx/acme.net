@@ -40,10 +40,7 @@ namespace Oocx.ACME.Client
         {
         }
 
-        public string GetKeyAuthorization(string token)
-        {
-            return jws.GetKeyAuthorization(token);
-        }
+        public string GetKeyAuthorization(string token) => jws.GetKeyAuthorization(token);
 
         public async Task<Directory> DiscoverAsync()
         {
@@ -59,20 +56,19 @@ namespace Oocx.ACME.Client
             Verbose($"set nonce: {nonce}");
         }
 
-        public async Task<RegistrationResponse> RegisterAsync(string termsOfServiceUri, string[] contact)
+        public async Task<RegistrationResponse> RegisterAsync(NewRegistrationRequest request)
         {
             await EnsureDirectoryAsync().ConfigureAwait(false);
 
-            Info("trying to create new registration");
-
-            var request = new NewRegistrationRequest {
-                Contact = contact,
-                Agreement = termsOfServiceUri ?? directory.Meta.TermsOfService
-            };
+            if (request.Agreement == null)
+            {
+                request.Agreement = directory.Meta.TermsOfService;
+            }
 
             try
             {
                 var registration = await PostAsync<RegistrationResponse>(directory.NewRegistration, request).ConfigureAwait(false);
+
                 Info($"new registration created: {registration.Location}");
 
                 return registration;
@@ -100,14 +96,13 @@ namespace Oocx.ACME.Client
             }
         }
 
-        public async Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, UpdateRegistrationRequest request)
+        public async Task<RegistrationResponse> UpdateRegistrationAsync(UpdateRegistrationRequest request)
         {
             await EnsureDirectoryAsync().ConfigureAwait(false);
 
-            Info("updating registration: accepting terms of service");
-            
+            Info("updating registration");
 
-            return await PostAsync<RegistrationResponse>(new Uri(registrationUri), request).ConfigureAwait(false);
+            return await PostAsync<RegistrationResponse>(new Uri(request.Location), request).ConfigureAwait(false);
         }
 
         public async Task<AuthorizationResponse> NewDnsAuthorizationAsync(string dnsName)

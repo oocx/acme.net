@@ -177,12 +177,11 @@ namespace Oocx.ACME.Console
         {
             // note: the terms of service is automatically populated from directory.meta.terms-of-service when null
 
-            var registration = await client.RegisterAsync(
-                termsOfServiceUri : options.AcceptTermsOfService ? options.TermsOfServiceUri : null,
-                contacts          : new[] { options.Contact }
-            );
+            var registration = await client.RegisterAsync(new NewRegistrationRequest { 
+                Agreement = options.AcceptTermsOfService ? options.TermsOfServiceUri : null,
+                Contact   = new[] { options.Contact }
+            });
 
-            Info($"Terms of service: {registration.Agreement}");
             Verbose($"Created at: {registration.CreatedAt}");
             Verbose($"Id: {registration.Id}");
             Verbose($"Contact: {string.Join(", ", registration.Contact)}");
@@ -198,7 +197,8 @@ namespace Oocx.ACME.Console
                     return;
                 }
 
-                await client.UpdateRegistrationAsync(registration.Location, new UpdateRegistrationRequest(
+                await client.UpdateRegistrationAsync(new UpdateRegistrationRequest(
+                    location  : registration.Location,
                     agreement : registration.Agreement,
                     contact   : new[] { options.Contact }
                 ));

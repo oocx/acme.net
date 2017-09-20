@@ -17,7 +17,6 @@ namespace Oocx.ACME.Tests
         [Fact]
         public async Task Should_get_a_Directory_object_from_the_default_endpoint()
         {
-            // Arrange
             var http = new FakeHttpMessageHandler("http://baseaddress/");
             var directory = new Directory();
 
@@ -27,17 +26,14 @@ namespace Oocx.ACME.Tests
 
             var sut = new AcmeClient(client, new RSACryptoServiceProvider());
 
-            // Act
             var discoverResponse = await sut.DiscoverAsync();
 
-            // Assert
             discoverResponse.Should().NotBeNull();
         }
 
         [Fact]
         public async Task Should_post_a_valid_Registration_message()
         {
-            // Arrange
             var http = new FakeHttpMessageHandler("http://baseaddress/");
             var directory = new Directory { NewRegistration = new Uri("http://baseaddress/registration")};
             var registration = new RegistrationResponse();
@@ -50,7 +46,10 @@ namespace Oocx.ACME.Tests
             var sut = new AcmeClient(client, new RSACryptoServiceProvider());
 
             // Act
-            var registrationResponse =  await sut.RegisterAsync("agreementUri", new []{ "mailto:admin@example.com"});
+            var registrationResponse =  await sut.RegisterAsync(new NewRegistrationRequest {
+                Agreement = "agreementUri",
+                Contact = new[] { "mailto:admin@example.com" }
+            });
 
             // Assert
             registrationResponse.Should().NotBeNull();
@@ -65,7 +64,6 @@ namespace Oocx.ACME.Tests
         [Fact]
         public async Task Should_POST_to_get_registration_details_if_the_registration_already_exists()
         {
-            // Arrange
             var http = new FakeHttpMessageHandler("http://baseaddress/");
             var directory = new Directory { NewRegistration = new Uri("http://baseaddress/registration") };
             var registration = new RegistrationResponse();
@@ -77,9 +75,11 @@ namespace Oocx.ACME.Tests
                 GetHttpClient();
 
             var sut = new AcmeClient(client, new RSACryptoServiceProvider());
-
-            // Act
-            var registrationResponse = await sut.RegisterAsync("agreementUri", new[] { "mailto:admin@example.com" });
+            
+            var registrationResponse = await sut.RegisterAsync(new NewRegistrationRequest {
+                Agreement = "agreementUri",
+                Contact = new[] { "mailto:admin@example.com" }
+            });
 
             // Assert
             registrationResponse.Should().NotBeNull();
@@ -89,6 +89,7 @@ namespace Oocx.ACME.Tests
                 r.Agreement.Should().Be("agreementUri");
                 r.Contact.Should().Contain("mailto:admin@example.com");
             });
+
             http.ReceivedRequestsTo("existingreguri").Single().HasMethod(HttpMethod.Post).HasJwsPayload<UpdateRegistrationRequest>(r =>
             {
                 r.Agreement.Should().BeNull();

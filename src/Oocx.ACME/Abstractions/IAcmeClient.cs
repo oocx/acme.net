@@ -33,7 +33,7 @@ namespace Oocx.ACME.Services
         /// <param name="termsOfServiceUri"> URI referring to a subscriber agreement or terms of service provided by the server. Including this field indicates the client's agreement with the referenced terms.</param>
         /// <param name="contacts">An array of URIs that the server can use to contact the client for issues related to this authorization.  For example, the server may wish to notify the client about server-initiated revocation.</param>
         /// <returns>The server's response to the registration request.</returns>
-        Task<RegistrationResponse> RegisterAsync(string termsOfServiceUri, string[] contacts);
+        Task<RegistrationResponse> RegisterAsync(NewRegistrationRequest request);
 
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Oocx.ACME.Services
         /// <param name="termsOfServiceUri"> URI referring to a subscriber agreement or terms of service provided by the server. Including this field indicates the client's agreement with the referenced terms.</param>
         /// <param name="contact">An array of URIs that the server can use to contact the client for issues related to this authorization.  For example, the server may wish to notify the client about server-initiated revocation.</param>
         /// <returns>The server's response to the update request.</returns>
-        Task<RegistrationResponse> UpdateRegistrationAsync(string registrationUri, UpdateRegistrationRequest request);
+        Task<RegistrationResponse> UpdateRegistrationAsync(UpdateRegistrationRequest request);
 
         /// <summary>
         /// Starts a dns authorization process.

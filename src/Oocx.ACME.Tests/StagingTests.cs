@@ -19,8 +19,7 @@ namespace Oocx.ACME.Tests
             };
 
             var client = new AcmeClient(httpClient, key);
-
-
+            
             var directory = await client.DiscoverAsync();
 
             Assert.Equal(new Uri("https://acme-staging.api.letsencrypt.org/acme/new-reg"),     directory.NewRegistration);
@@ -29,7 +28,7 @@ namespace Oocx.ACME.Tests
             Assert.Equal(new Uri("https://acme-staging.api.letsencrypt.org/acme/revoke-cert"), directory.RevokeCertificate);
             Assert.Equal(new Uri("https://acme-staging.api.letsencrypt.org/acme/key-change"),  directory.KeyChange);
 
-            Assert.Equal("https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf", directory.Meta.TermsOfService);
+            Assert.Equal("https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf",   directory.Meta.TermsOfService);
         }
     }
 }
