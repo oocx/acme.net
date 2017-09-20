@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace Oocx.Pkcs
 {
@@ -8,9 +9,9 @@ namespace Oocx.Pkcs
     /// </summary>
     public class ObjectIdentifier : Asn1Primitive
     {
-        public ObjectIdentifier(string id) : base(6)
+        public ObjectIdentifier(Oid id) : base(6)
         {
-            var nodes = id.Split('.').Select(int.Parse).ToArray();
+            var nodes = id.Value.Split('.').Select(int.Parse).ToArray();
             Data = GetData(nodes).ToArray();
         }
 

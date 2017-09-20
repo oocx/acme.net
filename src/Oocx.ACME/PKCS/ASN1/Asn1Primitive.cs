@@ -16,7 +16,7 @@ namespace Oocx.Pkcs
 
         public byte[] Data
         {
-            get => data;
+            get { return data; }
             set
             {
                 data = value;

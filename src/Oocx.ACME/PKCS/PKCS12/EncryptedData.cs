@@ -1,4 +1,4 @@
-using Oocx.Pkcs;
+using System;
 
 namespace Oocx.Pkcs.PKCS12
 {
@@ -6,10 +6,10 @@ namespace Oocx.Pkcs.PKCS12
     {
         public EncryptedData(OctetString data)
         {
-            Content = data;
+            Content = data ?? throw new ArgumentNullException(nameof(data));
         }
 
-        ObjectIdentifier Type { get; } = new ObjectIdentifier(Oid.PKCS7.encryptedData);
+        ObjectIdentifier Type { get; } = new ObjectIdentifier(Oids.EncryptedData);
 
         OctetString Content { get; }
     }

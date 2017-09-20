@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using FluentAssertions;
 using Oocx.Pkcs;
 using Oocx.Pkcs.Parser;
@@ -12,7 +13,7 @@ namespace Oocx.Pkcs.Tests
         [Fact]
         public void Should_encode_ObjectIdentifiers()
         {
-            var oid = new ObjectIdentifier("1.3.6.1.4.1.311.21.20");
+            var oid = new ObjectIdentifier(new Oid("1.3.6.1.4.1.311.21.20"));
 
             // Assert            
             oid.Data.Should().Equal(0x2b, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x15, 0x14);
@@ -62,7 +63,7 @@ namespace Oocx.Pkcs.Tests
         public void Should_serialize_a_sequence()
         {
             // Arrange
-            var sequence = new Sequence(new ObjectIdentifier("2.5.4.8"), new UTF8String("NRW"));
+            var sequence = new Sequence(new ObjectIdentifier(new Oid("2.5.4.8")), new UTF8String("NRW"));
             var serializer = new Asn1Serializer();
 
             // Act

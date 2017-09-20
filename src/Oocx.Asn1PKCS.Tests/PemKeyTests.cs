@@ -3,7 +3,6 @@ using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
 using Newtonsoft.Json;
-using Oocx.Pkcs.PKCS1;
 using Xunit;
 
 namespace Oocx.Pkcs.Tests

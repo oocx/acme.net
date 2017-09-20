@@ -1,8 +1,10 @@
-namespace Oocx.Pkcs.PKCS10
+using System.Security.Cryptography;
+
+namespace Oocx.Pkcs
 {
     public class AlgorithmIdentifier : Sequence
     {
-        public AlgorithmIdentifier(string algorithm)
+        public AlgorithmIdentifier(Oid algorithm)
             : base(new ObjectIdentifier(algorithm), new Null())
         {            
         }    

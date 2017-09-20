@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Oocx.Pkcs.Parser;
 
-namespace Oocx.Pkcs.PKCS1
+namespace Oocx.Pkcs
 {
     public class PrivateKeyParser
     {

@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-using Oocx.Pkcs.PKCS1;
+using Oocx.Pkcs;
 
 using Xunit;
 

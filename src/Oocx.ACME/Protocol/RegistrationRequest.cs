@@ -36,7 +36,7 @@ namespace Oocx.ACME.Protocol
 
         public UpdateRegistrationRequest(string location, string agreement, string[] contact)
         {
-            Location = location ?? throw new ArgumentNullException(nameof(location));
+            Location  = location ?? throw new ArgumentNullException(nameof(location));
             Agreement = agreement;
             Contact   = contact;
         }

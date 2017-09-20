@@ -1,4 +1,4 @@
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class ContentInfo : Sequence
     {

@@ -32,9 +32,9 @@ namespace Oocx.Pkcs.PKCS10
                     new RelativeDistinguishedName(
                         new AttributeTypeAndValue(new ObjectIdentifier(Oid.Attribute.OU), new UTF8String(requestData.OU))),*/
                     new RelativeDistinguishedName(
-                        new AttributeTypeAndValue(new ObjectIdentifier(Oid.Attribute.CN), new UTF8String(requestData.CN)))),
+                        new AttributeTypeAndValue(new ObjectIdentifier(Oids.Attribute.CN), new UTF8String(requestData.CN)))),
                 new SubjectPublicKeyInfo(
-                    new AlgorithmIdentifier(Oid.Algorithm.RSA),
+                    new AlgorithmIdentifier(Oids.Algorithm.RSA),
                     new BitString(publicKeyBytes)),
                 new ContextSpecific());
 
@@ -46,7 +46,7 @@ namespace Oocx.Pkcs.PKCS10
 
             return new CertificationRequest(
                 certificationRequestInfo : certificationRequestInfo,
-                signatureAlgorithm       : new AlgorithmIdentifier(Oid.Algorithm.sha256RSA),
+                signatureAlgorithm       : new AlgorithmIdentifier(Oids.Algorithm.Sha256RSA),
                 signature                : new BitString(signatureBytes)
             );
         }

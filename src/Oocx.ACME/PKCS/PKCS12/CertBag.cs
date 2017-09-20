@@ -9,7 +9,7 @@ namespace Oocx.Pkcs.PKCS12
             Content = content ?? throw new ArgumentNullException(nameof(Content));
         }
 
-        public ObjectIdentifier Type { get; } = new ObjectIdentifier(Oid.PKCS12.BagType.certBag);
+        public ObjectIdentifier Type { get; } = new ObjectIdentifier(Oids.BagType.CertBag);
 
         public IAsn1Element Content { get; }
     }

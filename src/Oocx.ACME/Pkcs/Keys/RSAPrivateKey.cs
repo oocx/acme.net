@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Oocx.Pkcs.PKCS1
+namespace Oocx.Pkcs
 {
     public class RSAPrivateKey : Sequence
     {
