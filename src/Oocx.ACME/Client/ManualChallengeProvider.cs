@@ -2,12 +2,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Oocx.ACME.Protocol;
-using Oocx.ACME.Services;
+using Oocx.Acme.Protocol;
+using Oocx.Acme.Services;
 
-using static Oocx.ACME.Logging.Log;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.Client
+namespace Oocx.Acme.Client
 {
     public class ManualChallengeProvider : IChallengeProvider
     {

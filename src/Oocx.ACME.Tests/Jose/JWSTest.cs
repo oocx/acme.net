@@ -4,14 +4,14 @@ using Oocx.Pkcs;
 
 using Xunit;
 
-namespace Oocx.ACME.Jose.Tests
+namespace Oocx.Jose.Tests
 {
-    public class JWSTest
+    public class JwsTest
     {
         [Fact]
         public void Ensure_key_authorization_is_correct()
         {
-            var jws = new JWS(GetPrivateKey());
+            var jws = new Jws(GetPrivateKey());
 
             Assert.Equal("token.pdmN_UI10XD6wy44jm-JkHmJOFxevse_2jio8cH1lRw", jws.GetKeyAuthorization("token"));
         }

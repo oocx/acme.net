@@ -1,6 +1,6 @@
 using System;
 
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class CertBag : IBagType
     {

@@ -1,11 +1,11 @@
 using Newtonsoft.Json;
 
-namespace Oocx.ACME.Jose
+namespace Oocx.Jose
 {
-    public class JWSMessage
+    public class JwsMessage
     {
         [JsonProperty("header")]
-        public JWSHeader Header { get; set; }
+        public JwsHeader Header { get; set; }
 
         [JsonProperty("protected")]
         public string Protected { get; set; }

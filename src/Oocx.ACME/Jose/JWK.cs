@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 
-namespace Oocx.ACME.Jose
+namespace Oocx.Jose
 {
-    public class JWK
+    public class Jwk
     {
         [JsonProperty("kty")]
         public string KeyType { get; set; }

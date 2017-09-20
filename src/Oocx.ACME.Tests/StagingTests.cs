@@ -2,10 +2,10 @@
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Oocx.ACME.Client;
+using Oocx.Acme.Client;
 using Xunit;
 
-namespace Oocx.ACME.Tests
+namespace Oocx.Acme.Tests
 {
     public class StagingTests
     {

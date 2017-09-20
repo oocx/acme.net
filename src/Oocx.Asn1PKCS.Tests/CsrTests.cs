@@ -2,9 +2,8 @@
 using System.IO;
 using System.Linq;
 
-using Oocx.ACME.Services;
+using Oocx.Acme.Services;
 using Oocx.Pkcs.PKCS10;
-using Oocx.Pkcs.PKCS12;
 
 using Xunit;
 
@@ -64,7 +63,7 @@ yXgq378FifWsRemLckRjOC+T0brxqxzqPflbe+c2AHZgMSjuRplC
 
             // Act
             var csr = sut.Encode(data);
-            var der = sut.EncodeAsDER(data);
+            var der = sut.EncodeAsDer(data);
             var base64 = sut.EncodeAsBase64(data);
             var bytes = serializer.Serialize(csr).ToArray();
 

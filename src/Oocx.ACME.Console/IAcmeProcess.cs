@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Oocx.ACME.Console
+namespace Oocx.Acme.Console
 {
     public interface IAcmeProcess
     {

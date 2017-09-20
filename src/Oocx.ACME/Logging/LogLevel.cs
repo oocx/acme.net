@@ -1,4 +1,4 @@
-﻿namespace Oocx.ACME.Logging
+﻿namespace Oocx.Acme.Logging
 {
     public enum LogLevel
     {

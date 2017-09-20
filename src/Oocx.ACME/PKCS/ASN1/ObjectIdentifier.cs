@@ -7,7 +7,7 @@ namespace Oocx.Pkcs
     /// <summary>
     /// https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
     /// </summary>
-    public class ObjectIdentifier : Asn1Primitive
+    public class ObjectIdentifier : Asn1Object
     {
         public ObjectIdentifier(Oid id) : base(6)
         {

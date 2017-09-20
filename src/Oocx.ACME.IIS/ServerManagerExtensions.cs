@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.Web.Administration;
 
-namespace Oocx.ACME.IIS
+namespace Oocx.Acme.IIS
 {
     public static class ServerManagerExtensions
     {

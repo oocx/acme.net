@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
-using Oocx.ACME.Services;
-using Oocx.ACME.Protocol;
-using static Oocx.ACME.Logging.Log;
+using Oocx.Acme.Services;
+using Oocx.Acme.Protocol;
+using static Oocx.Acme.Logging.Log;
 using Directory = System.IO.Directory;
 
-namespace Oocx.ACME.IIS
+namespace Oocx.Acme.IIS
 {
     public class IISChallengeProvider : IChallengeProvider
     {

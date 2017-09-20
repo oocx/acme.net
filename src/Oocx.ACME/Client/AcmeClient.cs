@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-using Oocx.ACME.Jose;
-using Oocx.ACME.Protocol;
-using Oocx.ACME.Services;
+using Oocx.Acme.Protocol;
+using Oocx.Acme.Services;
+using Oocx.Jose;
 using Oocx.Pkcs;
 
-using static Oocx.ACME.Logging.Log;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.Client
+namespace Oocx.Acme.Client
 {
     public class AcmeClient : IAcmeClient
     {
@@ -25,14 +25,14 @@ namespace Oocx.ACME.Client
 
         private string nonce;
 
-        private readonly JWS jws;
+        private readonly Jws jws;
 
         public AcmeClient(HttpClient client, RSA key)
         {
             Info($"using server {client.BaseAddress}");
 
             this.client = client ?? throw new ArgumentNullException(nameof(client));
-            jws = new JWS(key);
+            jws = new Jws(key);
         }
 
         public AcmeClient(string baseAddress, string keyName, IKeyStore keyStore)

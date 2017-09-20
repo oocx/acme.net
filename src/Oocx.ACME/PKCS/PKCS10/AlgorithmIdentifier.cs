@@ -5,7 +5,7 @@ namespace Oocx.Pkcs
     public class AlgorithmIdentifier : Sequence
     {
         public AlgorithmIdentifier(Oid algorithm)
-            : base(new ObjectIdentifier(algorithm), new Null())
+            : base(new ObjectIdentifier(algorithm), new Asn1Null())
         {            
         }    
     }

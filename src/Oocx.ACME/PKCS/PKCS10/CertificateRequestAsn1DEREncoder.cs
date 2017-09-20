@@ -4,21 +4,21 @@ using System.Security.Cryptography;
 
 namespace Oocx.Pkcs.PKCS10
 {
-    public class CertificateRequestAsn1DEREncoder : ICertificateRequestAsn1DEREncoder
+    public class CertificateRequestAsn1DEREncoder : ICertificateRequestAsn1DerEncoder
     {
-        private readonly IAsn1Serializer serializer;
+        private readonly Asn1Serializer serializer;
 
-        public CertificateRequestAsn1DEREncoder(IAsn1Serializer serializer)
+        public CertificateRequestAsn1DEREncoder(Asn1Serializer serializer)
         {
             this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
         public CertificationRequest Encode(CertificateRequestData requestData)
         {
-            var publicKeyBytes = serializer.Serialize(new Sequence(new Integer(requestData.Key.Modulus), new Integer(requestData.Key.Exponent))).ToArray();
+            var publicKeyBytes = serializer.Serialize(new Sequence(new DerInteger(requestData.Key.Modulus), new DerInteger(requestData.Key.Exponent))).ToArray();
 
             var certificationRequestInfo = new CertificationRequestInfo(
-                new Integer(0),
+                new DerInteger(0),
                 new Name(
                     /*new RelativeDistinguishedName(
                         new AttributeTypeAndValue(new ObjectIdentifier(Oid.Attribute.C),
@@ -51,7 +51,7 @@ namespace Oocx.Pkcs.PKCS10
             );
         }
 
-        public byte[] EncodeAsDER(CertificateRequestData requestData)
+        public byte[] EncodeAsDer(CertificateRequestData requestData)
         {
             var asn1 = Encode(requestData);
             var bytes = serializer.Serialize(asn1).ToArray();
@@ -60,7 +60,7 @@ namespace Oocx.Pkcs.PKCS10
 
         public string EncodeAsBase64(CertificateRequestData requestData)
         {
-            var bytes = EncodeAsDER(requestData);
+            var bytes = EncodeAsDer(requestData);
             var base64 = Convert.ToBase64String(bytes);
             string base64lines = "";
             for (int i = 0; i < base64.Length; i += 64)
@@ -71,7 +71,7 @@ namespace Oocx.Pkcs.PKCS10
         }
         public string EncodeAsBase64Url(CertificateRequestData requestData)
         {
-            var bytes = EncodeAsDER(requestData);
+            var bytes = EncodeAsDer(requestData);
             var base64 = bytes.Base64UrlEncoded();
             string base64lines = "";
             for (int i = 0; i < base64.Length; i += 64)

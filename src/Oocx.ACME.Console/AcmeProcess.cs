@@ -5,14 +5,14 @@ using System.Net.Security;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-using Oocx.ACME.Protocol;
-using Oocx.ACME.Services;
+using Oocx.Acme.Protocol;
+using Oocx.Acme.Services;
+using Oocx.Pkcs;
 using Oocx.Pkcs.PKCS10;
-using Oocx.Pkcs.PKCS12;
 
-using static Oocx.ACME.Logging.Log;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.Console
+namespace Oocx.Acme.Console
 {
     public class AcmeProcess : IAcmeProcess
     {
@@ -22,7 +22,7 @@ namespace Oocx.ACME.Console
         private readonly IAcmeClient client;
         private readonly IPkcs12 pkcs12;
 
-        private readonly ICertificateRequestAsn1DEREncoder certificateRequestEncoder;
+        private readonly ICertificateRequestAsn1DerEncoder certificateRequestEncoder;
 
         public AcmeProcess(
             Options options,
@@ -30,7 +30,7 @@ namespace Oocx.ACME.Console
             IServerConfigurationProvider serverConfiguration,
             IAcmeClient client, 
             IPkcs12 pkcs12,
-            ICertificateRequestAsn1DEREncoder certificateRequestEncoder)
+            ICertificateRequestAsn1DerEncoder certificateRequestEncoder)
         {
             this.options = options;
             this.challengeProvider = challengeProvider;
@@ -106,7 +106,7 @@ namespace Oocx.ACME.Console
         private byte[] CreateCertificateRequest(string domain, RSAParameters key)
         {
             var data = new CertificateRequestData(domain, key);
-            var csr = certificateRequestEncoder.EncodeAsDER(data);
+            var csr = certificateRequestEncoder.EncodeAsDer(data);
             return csr;
         }
 

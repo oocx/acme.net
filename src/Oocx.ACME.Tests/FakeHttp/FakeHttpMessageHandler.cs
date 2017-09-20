@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions.Execution;
 
-namespace Oocx.ACME.Tests.FakeHttp
+namespace Oocx.Acme.Tests.FakeHttp
 {
     public class FakeHttpMessageHandler : HttpMessageHandler
     {        

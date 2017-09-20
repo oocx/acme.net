@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using CommandLine;
-using Oocx.ACME.Client;
-using Oocx.ACME.Logging;
+using Oocx.Acme.Client;
+using Oocx.Acme.Logging;
 using static System.Console;
-using static Oocx.ACME.Logging.Log;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.Console
+namespace Oocx.Acme.Console
 {
     public class Program
     {

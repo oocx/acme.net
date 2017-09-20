@@ -29,7 +29,7 @@ namespace Oocx.Pkcs
 
         public RSAPrivateKey ParsePem(Stream input)
         {
-            var der = PEM.Decode(input, PEM.PrivateKey);
+            var der = Pem.Decode(input, Pem.PrivateKey);
 
             using (var derStream = new MemoryStream(der))
             {

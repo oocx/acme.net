@@ -1,7 +1,6 @@
 using System;
-using System.Security.Cryptography;
 
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class Data
     {

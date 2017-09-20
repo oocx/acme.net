@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-namespace Oocx.ACME.Tests.FakeHttp
+namespace Oocx.Acme.Tests.FakeHttp
 {
     public class FakeRequestConfiguration
     {

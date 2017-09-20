@@ -2,7 +2,7 @@
 
 namespace Oocx.Pkcs
 {
-    public abstract class Asn1Primitive : IAsn1Element
+    public abstract class Asn1Object : IAsn1Element
     {
         private byte[] data;
 
@@ -26,17 +26,17 @@ namespace Oocx.Pkcs
             }
         }
 
-        protected Asn1Primitive(byte tag)
+        protected Asn1Object(byte tag)
         {
             Tag = tag;
         }
     }
 
-    public abstract class Asn1Primitive<T> : Asn1Primitive
+    public abstract class Asn1Object<T> : Asn1Object
     {
         public T UnencodedValue { get; protected set; }
 
-        protected Asn1Primitive(byte tag) : base(tag)
+        protected Asn1Object(byte tag) : base(tag)
         {
         }
     }

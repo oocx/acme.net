@@ -1,6 +1,4 @@
-using Oocx.Pkcs;
-
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class DigestInfo : Sequence
     {

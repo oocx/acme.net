@@ -4,10 +4,10 @@ using System.Text;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oocx.ACME.Jose;
+using Oocx.Jose;
 using Oocx.Pkcs;
 
-namespace Oocx.ACME.Tests.FakeHttp
+namespace Oocx.Acme.Tests.FakeHttp
 {
     public static class HttpRequestMessageAssertions
     {
@@ -30,7 +30,7 @@ namespace Oocx.ACME.Tests.FakeHttp
         public static HttpRequestMessage HasJwsPayload<T>(this HttpRequestMessage request, Action<T> contentAssertion)
         {
             var responseText = request.Content.ReadAsStringAsync().Result;
-            var message = JObject.Parse(responseText).ToObject<JWSMessage>();
+            var message = JObject.Parse(responseText).ToObject<JwsMessage>();
 
             var contentJson = Encoding.UTF8.GetString(message.Payload.Base64UrlDecode());
             var content = JsonConvert.DeserializeObject<T>(contentJson);

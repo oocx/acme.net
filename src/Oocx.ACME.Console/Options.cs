@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 using CommandLine;
 
-using Oocx.ACME.Logging;
+using Oocx.Acme.Logging;
 
-namespace Oocx.ACME.Console
+namespace Oocx.Acme.Console
 {
     public class Options
     {

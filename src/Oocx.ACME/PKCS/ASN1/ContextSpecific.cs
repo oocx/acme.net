@@ -1,6 +1,6 @@
 namespace Oocx.Pkcs
 {
-    internal class ContextSpecific : Asn1Primitive
+    internal class ContextSpecific : Asn1Object
     {
         public ContextSpecific() : base(0xa0)
         {

@@ -5,7 +5,7 @@ namespace Oocx.Pkcs
     /// <summary>
     /// https://msdn.microsoft.com/en-us/library/windows/desktop/bb540792(v=vs.85).aspx
     /// </summary>
-    public class BitString : Asn1Primitive<byte[]>
+    public class BitString : Asn1Object<byte[]>
     {
         public BitString(byte[] data, byte unusedBits = 0) : base(3)
         {

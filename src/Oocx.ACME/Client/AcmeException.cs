@@ -1,8 +1,8 @@
 using System;
 using System.Net.Http;
-using Oocx.ACME.Protocol;
+using Oocx.Acme.Protocol;
 
-namespace Oocx.ACME.Client
+namespace Oocx.Acme.Client
 {
     public class AcmeException : Exception
     {

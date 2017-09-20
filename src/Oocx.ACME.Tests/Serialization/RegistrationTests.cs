@@ -1,10 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
-using Oocx.ACME.Jose;
-using Oocx.ACME.Protocol;
+﻿using Newtonsoft.Json;
+using Oocx.Acme.Protocol;
+using Oocx.Jose;
 using Xunit;
 
-namespace Oocx.ACME.Tests
+namespace Oocx.Acme.Tests
 {
     public class RegistrationTests
     {
@@ -13,13 +12,11 @@ namespace Oocx.ACME.Tests
         {
             var request = new NewRegistrationRequest
             {
-                Contact = new[]
-                {
+                Contact = new[] {
                     "mailto:cert-admin@example.com",
                     "tel:+12025551212"
                 },
-                Key = new JWK
-                {
+                Key = new Jwk{
                     Algorithm = "none"
                 },
                 Agreement = "https://example.com/acme/terms",

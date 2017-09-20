@@ -4,30 +4,30 @@ using System.Text;
 using Newtonsoft.Json;
 using Oocx.Pkcs;
 
-namespace Oocx.ACME.Jose
+namespace Oocx.Jose
 {
-    public class JWS
+    public class Jws
     {
         private readonly RSA rsa;
-        private readonly JWK jwk;
+        private readonly Jwk jwk;
 
-        public JWS(RSA rsa)
+        public Jws(RSA rsa)
         {
             this.rsa = rsa ?? throw new ArgumentNullException(nameof(rsa));
 
             var publicParameters = rsa.ExportParameters(includePrivateParameters: false);
 
-            this.jwk = new JWK {
+            this.jwk = new Jwk {
                 KeyType = "RSA",
                 Exponent = publicParameters.Exponent.Base64UrlEncoded(),
                 Modulus  = publicParameters.Modulus.Base64UrlEncoded(),
             };
         }
 
-        public JWSMessage Encode<TPayload, THeader>(TPayload payload, THeader protectedHeader)
+        public JwsMessage Encode<TPayload, THeader>(TPayload payload, THeader protectedHeader)
         {
-            var message = new JWSMessage {
-                Header    = new JWSHeader(algorithm: "RS256", key: jwk),
+            var message = new JwsMessage {
+                Header    = new JwsHeader(algorithm: "RS256", key: jwk),
                 Payload   = JsonConvert.SerializeObject(payload).Base64UrlEncoded(),
                 Protected = JsonConvert.SerializeObject(protectedHeader).Base64UrlEncoded()
             };

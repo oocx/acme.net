@@ -53,21 +53,21 @@ namespace Oocx.Pkcs.Parser
         {
             if (element.Data.Length == 0)
             {
-                return new Integer(new byte[0]);
+                return new DerInteger(new byte[0]);
             }
             if (element.Data[0] == 0)
             {
                 if (element.Data.Length == 1)
                 {
-                    return new Integer(new byte[] { 0 });
+                    return new DerInteger(new byte[] { 0 });
                 }
                 if (element.Data[1] <= 127)
                 {
-                    return new Integer(element.Data);
+                    return new DerInteger(element.Data);
                 }
-                return new Integer(element.Data.Skip(1).ToArray());
+                return new DerInteger(element.Data.Skip(1).ToArray());
             }
-            return new Integer(element.Data);
+            return new DerInteger(element.Data);
         }
 
         private static Asn1ParsedElement GetAsn1ParsedElement(BinaryReader reader)

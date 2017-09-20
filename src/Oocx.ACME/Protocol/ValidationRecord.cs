@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Oocx.ACME.Protocol
+namespace Oocx.Acme.Protocol
 {
     public class ValidationRecord
     {

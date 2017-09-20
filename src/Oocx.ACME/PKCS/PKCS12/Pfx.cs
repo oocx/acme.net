@@ -1,9 +1,9 @@
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class Pfx : Sequence
     {
         public Pfx(ContentInfo authSafe, MacData macData) 
-            : base(new Integer(3), authSafe, macData)
+            : base(new DerInteger(3), authSafe, macData)
         {
         }
     }

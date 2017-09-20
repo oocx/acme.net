@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Oocx.Pkcs;
 using Oocx.Pkcs.Parser;
-using Oocx.Pkcs.PKCS1;
 using Xunit;
 
-namespace Oocx.ACME.IIS.Tests
+namespace Oocx.Acme.IIS.Tests
 {
     public class IISCertificateInstallerTests
     {

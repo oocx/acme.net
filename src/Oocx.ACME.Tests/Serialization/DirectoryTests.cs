@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Newtonsoft.Json;
-using Oocx.ACME.Protocol;
+using Oocx.Acme.Protocol;
 using Xunit;
 
-namespace Oocx.ACME.Tests
+namespace Oocx.Acme.Tests
 {
     public class DirectoryTests
     {

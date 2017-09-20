@@ -5,12 +5,12 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Oocx.ACME.Client;
-using Oocx.ACME.Protocol;
-using Oocx.ACME.Tests.FakeHttp;
+using Oocx.Acme.Client;
+using Oocx.Acme.Protocol;
+using Oocx.Acme.Tests.FakeHttp;
 using Xunit;
 
-namespace Oocx.ACME.Tests
+namespace Oocx.Acme.Tests
 {
     public class ClientTests
     {

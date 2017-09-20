@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Oocx.Pkcs
 {
-    internal class PrintableString : Asn1Primitive
+    internal class PrintableString : Asn1Object
     {
         public PrintableString(string text) : base(0x13)
         {

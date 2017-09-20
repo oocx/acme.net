@@ -41,14 +41,14 @@ namespace Oocx.Pkcs
         {
             var asn1 = (Sequence) parser.Parse(derStream).First();
 
-            var ints = asn1.Children.Cast<Integer>().ToArray();
+            var ints = asn1.Children.Cast<DerInteger>().ToArray();
 
             return new RSAPrivateKey(ints[0], ints[1], ints[2], ints[3], ints[4], ints[5], ints[6], ints[7], ints[8]);
         }
 
         private static byte[] DecodePem(Stream input)
         {
-            return PEM.Decode(input, PEM.RSAPrivateKey);
+            return Pem.Decode(input, Pem.RSAPrivateKey);
         }
     }
 }

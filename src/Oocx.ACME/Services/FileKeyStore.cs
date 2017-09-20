@@ -2,9 +2,9 @@
 using System.Security.Cryptography;
 
 using Oocx.Pkcs;
-using static Oocx.ACME.Logging.Log;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.Services
+namespace Oocx.Acme.Services
 {
     public class FileKeyStore : IKeyStore
     {

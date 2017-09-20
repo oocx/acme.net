@@ -4,9 +4,9 @@ using System.Linq;
 namespace Oocx.Pkcs
 {
     /// <see cref="https://msdn.microsoft.com/en-us/library/windows/desktop/bb540806(v=vs.85).aspx"/>
-    public class Integer : Asn1Primitive<byte[]>
+    public class DerInteger : Asn1Object<byte[]>
     {
-        public Integer(int value) : base(2)
+        public DerInteger(int value) : base(2)
         {
             UnencodedValue = BitConverter.GetBytes(value);
 
@@ -29,7 +29,7 @@ namespace Oocx.Pkcs
             Data = AddLeadingZero(bytes);
         }
 
-        public Integer(byte[] value) : base(2)
+        public DerInteger(byte[] value) : base(2)
         {
             UnencodedValue = value;
             Data = AddLeadingZero(value);

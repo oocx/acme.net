@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Oocx.ACME.Protocol
+namespace Oocx.Acme.Protocol
 {
     public class PendingChallenge
     {

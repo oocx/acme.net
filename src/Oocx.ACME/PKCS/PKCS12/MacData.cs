@@ -1,8 +1,9 @@
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class MacData : Sequence
     {
-        public MacData(DigestInfo mac, OctetString macSalt) : base(mac, macSalt, new Integer(1))
+        public MacData(DigestInfo mac, OctetString macSalt) 
+            : base(mac, macSalt, new DerInteger(1))
         {
 
         }

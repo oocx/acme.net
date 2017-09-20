@@ -2,7 +2,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class Pkcs12 : IPkcs12
     {        

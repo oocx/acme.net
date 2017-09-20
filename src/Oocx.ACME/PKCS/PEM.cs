@@ -1,28 +1,30 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace Oocx.Pkcs
 {
-    internal static class PEM
+    internal static class Pem
     {
         // Preambles
         public const string RSAPrivateKey = "RSA PRIVATE KEY"; // PKCS#1
         public const string PrivateKey    = "PRIVATE KEY";     // PKCS#8
 
-        public static string Encode(byte[] derEncodedBytes, string type)
+        public static string Encode(byte[] derBytes, string type)
         {
-            var base64 = Convert.ToBase64String(derEncodedBytes);
+            var base64 = Convert.ToBase64String(derBytes);
 
-            string base64Lines = "";
+            var base64Lines = new StringBuilder();
 
             for (int i = 0; i < base64.Length; i += 64)
             {
-                base64Lines += base64.Substring(i, Math.Min(64, base64.Length - i)) + "\n";
+                base64Lines.Append(base64.Substring(i, Math.Min(64, base64.Length - i)));
+                base64Lines.Append("\n");
             }
 
-            var pem = $"-----BEGIN {type}-----\n{base64Lines}-----END {type}-----";
+            var pem = $"-----BEGIN {type}-----\n{base64Lines.ToString()}-----END {type}-----";
 
             return pem;
         }

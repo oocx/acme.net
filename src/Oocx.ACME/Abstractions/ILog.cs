@@ -1,4 +1,4 @@
-﻿namespace Oocx.ACME.Services
+﻿namespace Oocx.Acme.Services
 {
     public interface ILog
     {

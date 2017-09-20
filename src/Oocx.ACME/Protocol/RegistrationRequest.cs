@@ -2,14 +2,14 @@ using System;
 
 using Newtonsoft.Json;
 
-using Oocx.ACME.Jose;
+using Oocx.Jose;
 
-namespace Oocx.ACME.Protocol
+namespace Oocx.Acme.Protocol
 {
     public abstract class RegistrationRequest
     {
         [JsonProperty("jwk")]
-        public JWK Key { get; set; }
+        public Jwk Key { get; set; }
 
         [JsonProperty("contact")]
         public string[] Contact { get; set; }

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Oocx.ACME.Protocol;
+using Oocx.Acme.Protocol;
 
-namespace Oocx.ACME.Services
+namespace Oocx.Acme.Services
 {
     public interface IChallengeProvider
     {

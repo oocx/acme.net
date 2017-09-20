@@ -78,7 +78,7 @@ namespace Oocx.Pkcs.Tests
         {
             // Arrange
             var ints = new int[] { 0, 127, 128, 256 * 256 };
-            var asn1ints = ints.Select(i => new Integer(i));
+            var asn1ints = ints.Select(i => new DerInteger(i));
             var sut = new Asn1Serializer();
 
             // Act
@@ -120,7 +120,7 @@ namespace Oocx.Pkcs.Tests
             var sut = new Asn1Parser();
 
             // Act
-            var result = asn1Input.SelectMany(sut.Parse).Cast<Integer>().Select(i => i.UnencodedValue).ToArray();
+            var result = asn1Input.SelectMany(sut.Parse).Cast<DerInteger>().Select(i => i.UnencodedValue).ToArray();
 
             // Assert
             result.Length.Should().Be(expectedParsedValues.Length);
@@ -143,7 +143,7 @@ namespace Oocx.Pkcs.Tests
                 new byte[] {1, 0, 0},
                 new byte[0],
                 new byte[] {0, 165, 163, 214, 2, 169, 62}
-            }.Select(data => new Integer(data));
+            }.Select(data => new DerInteger(data));
 
             var expectedSerializedValues = new[]
             {

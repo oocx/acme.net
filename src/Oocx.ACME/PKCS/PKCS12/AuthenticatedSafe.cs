@@ -1,10 +1,9 @@
-using Oocx.Pkcs;
-
-namespace Oocx.Pkcs.PKCS12
+namespace Oocx.Pkcs
 {
     public class AuthenticatedSafe : Sequence
     {
-        public AuthenticatedSafe(params ContentInfo[] data) : base(data)
+        public AuthenticatedSafe(params ContentInfo[] data)
+            : base(data)
         {
 
         }

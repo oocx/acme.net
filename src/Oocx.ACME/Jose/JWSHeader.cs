@@ -1,12 +1,12 @@
 using Newtonsoft.Json;
 
-namespace Oocx.ACME.Jose
+namespace Oocx.Jose
 {
-    public class JWSHeader
+    public class JwsHeader
     {
-        public JWSHeader() { }
+        public JwsHeader() { }
 
-        public JWSHeader(string algorithm, JWK key)
+        public JwsHeader(string algorithm, Jwk key)
         {
             Algorithm = algorithm;
             Key       = key;
@@ -16,6 +16,6 @@ namespace Oocx.ACME.Jose
         public string Algorithm { get; set; }
 
         [JsonProperty("jwk")]
-        public JWK Key { get; set; }
+        public Jwk Key { get; set; }
     }
 }

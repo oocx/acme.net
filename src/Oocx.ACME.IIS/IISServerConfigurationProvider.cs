@@ -5,10 +5,10 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Web.Administration;
-using Oocx.ACME.Services;
-using static Oocx.ACME.Logging.Log;
+using Oocx.Acme.Services;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.IIS
+namespace Oocx.Acme.IIS
 {
     public class IISServerConfigurationProvider : IServerConfigurationProvider
     {

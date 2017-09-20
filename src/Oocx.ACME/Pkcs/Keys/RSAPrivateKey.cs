@@ -9,34 +9,34 @@ namespace Oocx.Pkcs
     public class RSAPrivateKey : Sequence
     {
         public RSAPrivateKey(RSAParameters key) :
-            this(new Integer(key.Modulus), new Integer(key.Exponent), new Integer(key.D), new Integer(key.P), new Integer(key.Q), new Integer(key.DP), new Integer(key.DQ), new Integer(key.InverseQ))
+            this(new DerInteger(key.Modulus), new DerInteger(key.Exponent), new DerInteger(key.D), new DerInteger(key.P), new DerInteger(key.Q), new DerInteger(key.DP), new DerInteger(key.DQ), new DerInteger(key.InverseQ))
         {
             Key = key;
         }
 
         internal RSAPrivateKey(
-            Integer modulus, 
-            Integer publicExponent, 
-            Integer privateExponent,
-            Integer prime1,
-            Integer prime2, 
-            Integer exponent1,
-            Integer exponent2,
-            Integer coefficient)
-            : this(new Integer(0), modulus, publicExponent, privateExponent, prime1, prime2, exponent1, exponent2, coefficient)
+            DerInteger modulus, 
+            DerInteger publicExponent, 
+            DerInteger privateExponent,
+            DerInteger prime1,
+            DerInteger prime2, 
+            DerInteger exponent1,
+            DerInteger exponent2,
+            DerInteger coefficient)
+            : this(new DerInteger(0), modulus, publicExponent, privateExponent, prime1, prime2, exponent1, exponent2, coefficient)
         {
         }
 
         internal RSAPrivateKey(
-            Integer version, 
-            Integer modulus,
-            Integer publicExponent, 
-            Integer privateExponent, 
-            Integer prime1, 
-            Integer prime2, 
-            Integer exponent1, 
-            Integer exponent2, 
-            Integer coefficient)
+            DerInteger version, 
+            DerInteger modulus,
+            DerInteger publicExponent, 
+            DerInteger privateExponent, 
+            DerInteger prime1, 
+            DerInteger prime2, 
+            DerInteger exponent1, 
+            DerInteger exponent2, 
+            DerInteger coefficient)
             : base(version, modulus, publicExponent, privateExponent, prime1, prime2, exponent1, exponent2, coefficient)
         {
             Key = new RSAParameters {
@@ -63,7 +63,7 @@ namespace Oocx.Pkcs
 
         public RSAParameters Key { get; }
 
-        public string ToPemString() => PEM.Encode(ToDerBytes(), PEM.RSAPrivateKey);
+        public string ToPemString() => Pem.Encode(ToDerBytes(), Pem.RSAPrivateKey);
 
         public byte[] ToDerBytes()
         {

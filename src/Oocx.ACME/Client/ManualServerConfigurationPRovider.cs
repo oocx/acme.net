@@ -1,8 +1,8 @@
 using System.Security.Cryptography;
 
-using Oocx.ACME.Services;
+using Oocx.Acme.Services;
 
-namespace Oocx.ACME.Client
+namespace Oocx.Acme.Client
 {
     public class ManualServerConfigurationProvider : IServerConfigurationProvider
     {

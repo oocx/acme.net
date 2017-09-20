@@ -1,15 +1,14 @@
 ﻿using System;
 using Autofac;
 
-using Oocx.ACME.Client;
-using Oocx.ACME.IIS;
-using Oocx.ACME.Services;
+using Oocx.Acme.Client;
+using Oocx.Acme.IIS;
+using Oocx.Acme.Services;
 using Oocx.Pkcs;
 using Oocx.Pkcs.PKCS10;
-using Oocx.Pkcs.PKCS12;
-using static Oocx.ACME.Logging.Log;
+using static Oocx.Acme.Logging.Log;
 
-namespace Oocx.ACME.Console
+namespace Oocx.Acme.Console
 {
     class ContainerConfiguration
     {
@@ -55,8 +54,8 @@ namespace Oocx.ACME.Console
             }
 
             builder.RegisterType<Pkcs12>().As<IPkcs12>();
-            builder.RegisterType<Asn1Serializer>().As<IAsn1Serializer>();
-            builder.RegisterType<CertificateRequestAsn1DEREncoder>().As<ICertificateRequestAsn1DEREncoder>();
+            builder.RegisterType<Asn1Serializer>().As<Asn1Serializer>();
+            builder.RegisterType<CertificateRequestAsn1DEREncoder>().As<ICertificateRequestAsn1DerEncoder>();
 
             return builder.Build();
         }        
