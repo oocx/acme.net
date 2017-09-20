@@ -8,9 +8,9 @@ namespace Oocx.Pkcs
 
         public byte Tag { get; private set; }
 
-        public int Length { get; private set; }
+        public int Length => data.Length;
 
-        public int Size { get; protected set; }
+        public int Size => data.Length + LengthBytes.Length + 1;
 
         public byte[] LengthBytes { get; private set; } = { 0 };
 
@@ -21,8 +21,6 @@ namespace Oocx.Pkcs
             {
                 data = value;
                 LengthBytes = Data.Length.ToEncodedLength().ToArray();
-                Length = data.Length;
-                Size = Length + LengthBytes.Length + 1;
             }
         }
 
@@ -30,6 +28,10 @@ namespace Oocx.Pkcs
         {
             Tag = tag;
         }
+
+        // public Encode(Stream stream) { } 
+
+        // Tag + LengthBytes + Data
     }
 
     public abstract class Asn1Object<T> : Asn1Object

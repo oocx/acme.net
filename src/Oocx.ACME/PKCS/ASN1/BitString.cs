@@ -11,7 +11,6 @@ namespace Oocx.Pkcs
         {
             Data = new byte[] { 0 }.Concat(data).ToArray();
             UnusedBits = unusedBits;
-            Size = Length + LengthBytes.Length + 1;
         }
 
         public byte UnusedBits { get; }

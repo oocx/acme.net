@@ -22,6 +22,6 @@ namespace Oocx.Pkcs
 
         public int Length { get; }
 
-        public int Size { get; protected set; }
+        public int Size { get; }
     }
 }

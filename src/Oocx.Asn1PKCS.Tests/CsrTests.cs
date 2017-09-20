@@ -93,12 +93,14 @@ FXTQmRtze3w5yKOadkSEyr6FG3qq+3IukRgiuxK12SsN7dE0sIO7ow==
         [Fact]
         public void Convert_xml_key_to_pem()
         {
+            var name = "test.startliste2.info";
+
             var keyStore = new FileKeyStore(Environment.CurrentDirectory);
-            var key = keyStore.GetOrCreateKey("test.startliste.info");
+            var key = keyStore.GetOrCreateKey(name);
             var sut = new KeyExport(Environment.CurrentDirectory);
 
             // Act
-            sut.Save(key.ExportParameters(true), "test.startliste.info", KeyFormat.Pem);
+            sut.Save(key.ExportParameters(true), name, KeyFormat.Pem);
 
             Assert.True(File.Exists(Path.Combine(Environment.CurrentDirectory, "test.startliste.info.pem")));
         }

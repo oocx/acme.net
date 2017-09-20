@@ -17,7 +17,7 @@ namespace Oocx.Pkcs.Tests
 
             // Assert            
             oid.Data.Should().Equal(0x2b, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x15, 0x14);
-            oid.LengthBytes.Should().Equal(0x09);
+            // oid.LengthBytes.Should().Equal(0x09);
         }
 
         [Fact]
@@ -55,7 +55,8 @@ namespace Oocx.Pkcs.Tests
 
             // Assert
             asn.Tag.Should().Be(0x0c);
-            asn.LengthBytes.Should().Equal(7);
+
+            // asn.LengthBytes.Should().Equal(7);
             asn.Data.Should().Equal(0x57, 0x65, 0x72, 0x74, 0x68, 0x65, 0x72);
         }
 

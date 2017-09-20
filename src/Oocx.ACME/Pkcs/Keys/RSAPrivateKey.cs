@@ -69,7 +69,12 @@ namespace Oocx.Pkcs
         {
             var serializer = new Asn1Serializer();
 
-            return serializer.Serialize(this).ToArray();
+            using (var ms = new MemoryStream())
+            {
+                serializer.Serialize(this, ms);
+
+                return ms.ToArray();
+            }
         }
 
         public static RSAPrivateKey ParsePem(string pem)

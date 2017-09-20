@@ -6,8 +6,9 @@ namespace Oocx.Pkcs
 
         byte[] LengthBytes { get; }
 
-        int Length { get; }
-
+        /// <summary>
+        /// The size of the encoded element (tag + lengthBytes.length + data.length)
+        /// </summary>
         int Size { get; }
     }
 }
