@@ -42,7 +42,7 @@ namespace Oocx.ACME.Client
 
         public string GetKeyAuthorization(string token) => jws.GetKeyAuthorization(token);
 
-        public async Task<Directory> DiscoverAsync()
+        public async Task<Directory> GetDirectoryAsync()
         {
             Verbose($"Querying directory information from {client.BaseAddress}");
 
@@ -92,7 +92,7 @@ namespace Oocx.ACME.Client
         {
             if (directory == null || nonce == null)
             {
-                directory = await DiscoverAsync().ConfigureAwait(false);
+                directory = await GetDirectoryAsync().ConfigureAwait(false);
             }
         }
 

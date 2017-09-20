@@ -23,7 +23,7 @@ namespace Oocx.ACME.Services
         /// <seealso cref="https://tools.ietf.org/html/draft-ietf-acme-acme-01#section-6.2"/>        
         /// </summary>
         /// <returns>The endpoint URIs of the ACME server.</returns>
-        Task<Directory> DiscoverAsync();
+        Task<Directory> GetDirectoryAsync();
 
         /// <summary>
         /// Calls the new-reg endpoint to perform a new registration with the ACME server.
@@ -34,7 +34,6 @@ namespace Oocx.ACME.Services
         /// <param name="contacts">An array of URIs that the server can use to contact the client for issues related to this authorization.  For example, the server may wish to notify the client about server-initiated revocation.</param>
         /// <returns>The server's response to the registration request.</returns>
         Task<RegistrationResponse> RegisterAsync(NewRegistrationRequest request);
-
 
         /// <summary>
         /// Updates an existing registration.

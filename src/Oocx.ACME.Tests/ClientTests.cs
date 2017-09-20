@@ -26,7 +26,7 @@ namespace Oocx.ACME.Tests
 
             var sut = new AcmeClient(client, new RSACryptoServiceProvider());
 
-            var discoverResponse = await sut.DiscoverAsync();
+            var discoverResponse = await sut.GetDirectoryAsync();
 
             discoverResponse.Should().NotBeNull();
         }

@@ -20,7 +20,7 @@ namespace Oocx.ACME.Tests
 
             var client = new AcmeClient(httpClient, key);
             
-            var directory = await client.DiscoverAsync();
+            var directory = await client.GetDirectoryAsync();
 
             Assert.Equal(new Uri("https://acme-staging.api.letsencrypt.org/acme/new-reg"),     directory.NewRegistration);
             Assert.Equal(new Uri("https://acme-staging.api.letsencrypt.org/acme/new-authz"),   directory.NewAuthorization);
