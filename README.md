@@ -12,7 +12,6 @@ acme.exe -d www.example.com -a
 
 That's all you need to do to request and install a free SSL certificate from Let's Encrypt!
 
-
 **This project is work in progress. It works, but probably still has many bugs and needs more testing.**
 
 I created this project as a training excercise and to learn about ACME and related 
@@ -78,16 +77,6 @@ unit tests.
 This is a simple command line client that I use to test my ACME client. It does not yet have
 any command line arguments (I use it by commenting out/in whatever I need).
 
-## Oocx.ACME.ConsoleCLR
-
-A "classic" .net framework console application used to create a console .exe in addition to the
-dnx console application.
-
-## Oocx.Asn1PKCS
-
-This project contains classes to generate PKCS10 certificate requests. It can also save private 
-keys in a PKCS1 .pem file. I have started to work on PKCS12 (PFX) support, but this code is 
-not used yet.
 
 # Change log
 
