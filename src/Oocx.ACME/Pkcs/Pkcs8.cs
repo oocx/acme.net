@@ -1,3 +1,4 @@
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -5,19 +6,26 @@ using Oocx.Pkcs.Parser;
 
 namespace Oocx.Pkcs
 {
-    public class PrivateKeyParser
+    public static class Pkcs8
     {
-        public RSAPrivateKey ParsePem(string pem)
+        public const string Prefix = "-----BEGIN PRIVATE KEY-----";
+        public const string Suffix = "-----END PRIVATE KEY-----";
+
+        public static RSAPrivateKey ParsePem(string pem)
         {
+            if (pem == null)
+            {
+                throw new ArgumentNullException(nameof(pem));
+            }
+
             using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(pem)))
             {
                 return ParsePem(stream);
             }
         }
         
-        // This function supports both PKCS#1 & PKCS#8 encodings
-
-        public RSAPrivateKey ParsePem(Stream input)
+        // Parses a PKCS#8 encoded private key
+        public static RSAPrivateKey ParsePem(Stream input)
         {
             var der = Pem.Decode(input, Pem.PrivateKey);
 
@@ -35,3 +43,5 @@ namespace Oocx.Pkcs
         }
     }
 }
+
+// ref: https://en.wikipedia.org/wiki/PKCS_8

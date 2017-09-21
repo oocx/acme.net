@@ -2,7 +2,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using FluentAssertions;
-using Oocx.Pkcs;
 using Oocx.Pkcs.Parser;
 using Xunit;
 
@@ -15,13 +14,10 @@ namespace Oocx.Pkcs.Tests
         {
             var oid = new ObjectIdentifier(new Oid("1.3.6.1.4.1.311.21.20"));
 
-            // Assert            
-            oid.Data.Should().Equal(0x2b, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x15, 0x14);
-            // oid.LengthBytes.Should().Equal(0x09);
+            Assert.Equal(new byte[] { 0x2b, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x15, 0x14 }, oid.Data);
         }
 
-        [Fact]
-        // https://en.wikipedia.org/wiki/Variable-length_quantity
+        [Fact] // https://en.wikipedia.org/wiki/Variable-length_quantity
         public void Should_VLQEncode_correctly()
         {
             0.ToVLQEncodedInt().Should().Equal(0x00);
@@ -54,7 +50,7 @@ namespace Oocx.Pkcs.Tests
             var asn = new UTF8String("Werther");
 
             // Assert
-            asn.Tag.Should().Be(0x0c);
+            Assert.Equal((byte)0x0c, asn.Tag);
 
             // asn.LengthBytes.Should().Equal(7);
             asn.Data.Should().Equal(0x57, 0x65, 0x72, 0x74, 0x68, 0x65, 0x72);
@@ -67,7 +63,6 @@ namespace Oocx.Pkcs.Tests
             var sequence = new Sequence(new ObjectIdentifier(new Oid("2.5.4.8")), new UTF8String("NRW"));
             var serializer = new Asn1Serializer();
 
-            // Act
             var bytes = serializer.Serialize(sequence);
 
             // Assert
@@ -77,15 +72,12 @@ namespace Oocx.Pkcs.Tests
         [Fact]
         public void Should_serialize_integer_from_int()
         {
-            // Arrange
             var ints = new int[] { 0, 127, 128, 256 * 256 };
             var asn1ints = ints.Select(i => new DerInteger(i));
             var sut = new Asn1Serializer();
 
-            // Act
             var bytes = asn1ints.Select(i => sut.Serialize(i)).ToArray();
 
-            // Assert
             bytes[0].Should().Equal(0x02, 1, 0);
             bytes[1].Should().Equal(0x02, 1, 127);
             bytes[2].Should().Equal(0x02, 2, 0, 128); // da das 1. Bit zur Vorzeichenerkennung genutzt wird, wird bei >= 128 ein 0-Byte voran gestellt

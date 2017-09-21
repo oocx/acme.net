@@ -69,8 +69,7 @@ namespace Oocx.Acme.IIS.Tests
             // Arrange
             var x509 = new X509Certificate2(Encoding.ASCII.GetBytes(TestCertificate), (string)null, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);            
             var sut = new IISServerConfigurationProvider();
-            var rsaParser = new PrivateKeyParser();
-            var privateKey = rsaParser.ParsePem(TestPrivateKey).Key;    
+            var privateKey = Pkcs8.ParsePem(TestPrivateKey).Key;    
             
             var csp = new CspParameters {
                 KeyContainerName = x509.GetCertHashString(),
