@@ -1,5 +1,3 @@
-using Oocx.Pkcs;
-
 namespace Oocx.Pkcs.PKCS10
 {
     public class RDNSequence : Sequence

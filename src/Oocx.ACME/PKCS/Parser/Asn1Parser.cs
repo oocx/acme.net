@@ -7,6 +7,8 @@ namespace Oocx.Pkcs.Parser
 {
     public class Asn1Parser
     {
+        public static readonly Asn1Parser Default = new Asn1Parser();
+
         public IEnumerable<IAsn1Element> Parse(Stream asn1Stream)
         {
             using (var reader = new BinaryReader(asn1Stream))
@@ -55,6 +57,7 @@ namespace Oocx.Pkcs.Parser
             {
                 return new DerInteger(new byte[0]);
             }
+
             if (element.Data[0] == 0)
             {
                 if (element.Data.Length == 1)

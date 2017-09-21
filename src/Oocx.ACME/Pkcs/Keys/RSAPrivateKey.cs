@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Oocx.Pkcs.Parser;
 
 namespace Oocx.Pkcs
 {
@@ -79,9 +80,34 @@ namespace Oocx.Pkcs
 
         public static RSAPrivateKey ParsePem(string pem)
         {
-            var parser = new RSAPrivateKeyParser();
+            using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(pem)))
+            {
+                return ParsePem(stream);
+            }
+        }
 
-            return parser.ParsePem(pem);
+        public static RSAPrivateKey ParsePem(Stream input)
+        {
+            var der = DecodePem(input);
+
+            using (var derStream = new MemoryStream(der))
+            {
+                return ParseDer(derStream);
+            }
+        }
+
+        public static RSAPrivateKey ParseDer(MemoryStream derStream)
+        {
+            var asn1 = (Sequence)Asn1Parser.Default.Parse(derStream).First();
+
+            var ints = asn1.Children.Cast<DerInteger>().ToArray();
+
+            return new RSAPrivateKey(ints[0], ints[1], ints[2], ints[3], ints[4], ints[5], ints[6], ints[7], ints[8]);
+        }
+
+        private static byte[] DecodePem(Stream input)
+        {
+            return Pem.Decode(input, Pem.RSAPrivateKey);
         }
 
         public void WriteTo(Stream stream, KeyFormat format)
