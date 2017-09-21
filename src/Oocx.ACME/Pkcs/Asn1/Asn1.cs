@@ -3,19 +3,19 @@ using System.IO;
 
 namespace Oocx.Pkcs
 {
-    public class Asn1Serializer
+    public static class Asn1
     {
-        public byte[] Serialize(IAsn1Element element, int depth = 0)
+        public static byte[] Encode(IAsn1Element element, int depth = 0)
         {
             using (var ms = new MemoryStream())
             {
-                Serialize(element, ms);
+                Encode(element, ms);
 
                 return ms.ToArray();
             }
         }
 
-        public void Serialize(IAsn1Element element, Stream stream, int depth = 0)
+        public static void Encode(IAsn1Element element, Stream stream, int depth = 0)
         {
             /*
             string tabs = "";
@@ -45,7 +45,7 @@ namespace Oocx.Pkcs
             {
                 foreach (var b in asn1Container.Children)
                 {
-                    Serialize(b, stream, depth + 1);
+                    Encode(b, stream, depth + 1);
                 }
             }
             else

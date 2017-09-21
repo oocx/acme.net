@@ -54,7 +54,6 @@ namespace Oocx.Acme.Console
             }
 
             builder.RegisterType<Pkcs12>().As<IPkcs12>();
-            builder.RegisterType<Asn1Serializer>().As<Asn1Serializer>();
             builder.RegisterType<CertificateRequestAsn1DEREncoder>().As<ICertificateRequestAsn1DerEncoder>();
 
             return builder.Build();

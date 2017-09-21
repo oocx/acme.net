@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 
 using Oocx.Acme.Services;
 using Oocx.Pkcs.PKCS10;
@@ -57,15 +56,13 @@ yXgq378FifWsRemLckRjOC+T0brxqxzqPflbe+c2AHZgMSjuRplC
                 OU = ""
             };
 
-            var serializer = new Asn1Serializer();
-            var sut = new CertificateRequestAsn1DEREncoder(serializer);
-
+            var sut = new CertificateRequestAsn1DEREncoder();
 
             // Act
             var csr = sut.Encode(data);
             var der = sut.EncodeAsDer(data);
             var base64 = sut.EncodeAsBase64(data);
-            var bytes = serializer.Serialize(csr).ToArray();
+            var bytes = Asn1.Encode(csr);
 
           Assert.Equal(
 @"-----BEGIN NEW CERTIFICATE REQUEST-----

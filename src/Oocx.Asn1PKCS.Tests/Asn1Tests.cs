@@ -61,9 +61,8 @@ namespace Oocx.Pkcs.Tests
         {
             // Arrange
             var sequence = new Sequence(new ObjectIdentifier(new Oid("2.5.4.8")), new UTF8String("NRW"));
-            var serializer = new Asn1Serializer();
-
-            var bytes = serializer.Serialize(sequence);
+            
+            var bytes = Asn1.Encode(sequence);
 
             // Assert
             bytes.Should().Equal(0x30, 0x0A, 0x06, 0x03, 0x55, 0x04, 0x08, 0x0C, 0x03, 0x4E, 0x52, 0x57);
@@ -74,9 +73,8 @@ namespace Oocx.Pkcs.Tests
         {
             var ints = new int[] { 0, 127, 128, 256 * 256 };
             var asn1ints = ints.Select(i => new DerInteger(i));
-            var sut = new Asn1Serializer();
 
-            var bytes = asn1ints.Select(i => sut.Serialize(i)).ToArray();
+            var bytes = asn1ints.Select(i => Asn1.Encode(i)).ToArray();
 
             bytes[0].Should().Equal(0x02, 1, 0);
             bytes[1].Should().Equal(0x02, 1, 127);
@@ -148,10 +146,9 @@ namespace Oocx.Pkcs.Tests
                 new byte[] {2, 0},
                 new byte[] {2, 7, 0, 165, 163, 214, 2, 169, 62}
             };
-            var sut = new Asn1Serializer();
 
             // Act
-            var result = byteArrays.Select(i => sut.Serialize(i)).ToArray();
+            var result = byteArrays.Select(i => Asn1.Encode(i)).ToArray();
 
             // Assert
             result.Length.Should().Be(expectedSerializedValues.Length);

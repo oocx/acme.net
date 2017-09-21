@@ -64,18 +64,14 @@ namespace Oocx.Pkcs
 
         public RSAParameters Key { get; }
 
-        public string ToPemString() => Pem.Encode(ToDerBytes(), Pem.RSAPrivateKey);
+        public string ToPemString()
+        {
+            return Pem.Encode(ToDerBytes(), Pem.RSAPrivateKey);
+        }
 
         public byte[] ToDerBytes()
         {
-            var serializer = new Asn1Serializer();
-
-            using (var ms = new MemoryStream())
-            {
-                serializer.Serialize(this, ms);
-
-                return ms.ToArray();
-            }
+            return Asn1.Encode(this);            
         }
 
         public static RSAPrivateKey ParsePem(string pem)

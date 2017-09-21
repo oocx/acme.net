@@ -6,16 +6,12 @@ namespace Oocx.Pkcs.PKCS10
 {
     public class CertificateRequestAsn1DEREncoder : ICertificateRequestAsn1DerEncoder
     {
-        private readonly Asn1Serializer serializer;
-
-        public CertificateRequestAsn1DEREncoder(Asn1Serializer serializer)
-        {
-            this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
-        }
-
         public CertificationRequest Encode(CertificateRequestData requestData)
         {
-            var publicKeyBytes = serializer.Serialize(new Sequence(new DerInteger(requestData.Key.Modulus), new DerInteger(requestData.Key.Exponent))).ToArray();
+            var publicKeyBytes = Asn1.Encode(new Sequence(
+                new DerInteger(requestData.Key.Modulus),
+                new DerInteger(requestData.Key.Exponent)
+            ));
 
             var certificationRequestInfo = new CertificationRequestInfo(
                 new DerInteger(0),
@@ -38,7 +34,7 @@ namespace Oocx.Pkcs.PKCS10
                     new BitString(publicKeyBytes)),
                 new ContextSpecific());
 
-            var certificationRequestInfoBytes = serializer.Serialize(certificationRequestInfo).ToArray();
+            var certificationRequestInfoBytes = Asn1.Encode(certificationRequestInfo);
 
             var rsa = new RSACryptoServiceProvider();
             rsa.ImportParameters(requestData.Key);
@@ -54,8 +50,8 @@ namespace Oocx.Pkcs.PKCS10
         public byte[] EncodeAsDer(CertificateRequestData requestData)
         {
             var asn1 = Encode(requestData);
-            var bytes = serializer.Serialize(asn1).ToArray();
-            return bytes;
+
+            return Asn1.Encode(asn1);
         }
 
         public string EncodeAsBase64(CertificateRequestData requestData)
@@ -63,10 +59,12 @@ namespace Oocx.Pkcs.PKCS10
             var bytes = EncodeAsDer(requestData);
             var base64 = Convert.ToBase64String(bytes);
             string base64lines = "";
+
             for (int i = 0; i < base64.Length; i += 64)
             {
                 base64lines += base64.Substring(i, Math.Min(64, base64.Length - i)) + "\n";
             }
+
             return $"-----BEGIN NEW CERTIFICATE REQUEST-----\n{base64lines}-----END NEW CERTIFICATE REQUEST-----";
         }
         public string EncodeAsBase64Url(CertificateRequestData requestData)
