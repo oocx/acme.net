@@ -45,12 +45,12 @@ namespace Oocx.Pkcs
                 }
             }
 
-            if (!$"-----BEGIN {type}-----".Equals(lines[0]))
+            if ($"-----BEGIN {type}-----" != lines[0])
             {
                 throw new InvalidDataException($"The PEM file should start with -----BEGIN {type}-----");
             }
 
-            if (!$"-----END {type}-----".Equals(lines[lines.Count - 1]))
+            if ($"-----END {type}-----" != lines[lines.Count - 1])
             {
                 throw new InvalidDataException($"The PEM file should end with -----END {type}-----");
             }

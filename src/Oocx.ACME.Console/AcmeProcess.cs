@@ -89,6 +89,7 @@ namespace Oocx.Acme.Console
         private void SaveCertificateWithPrivateKey(string domain, RSAParameters key, string certificatePath)
         {
             Info("generating pfx file with certificate and private key");
+
             GetPfxPasswordFromUser();
 
             try
@@ -191,7 +192,7 @@ namespace Oocx.Acme.Console
             {
                 Info("accepting terms of service");
 
-                if (!string.Equals(registration.Agreement, options.TermsOfServiceUri))
+                if (registration.Agreement != options.TermsOfServiceUri)
                 {
                     Error($"Cannot accept terms of service. The terms of service uri is '{registration.Agreement}', expected it to be '{options.TermsOfServiceUri}'.");
                     return;

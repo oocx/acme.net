@@ -21,7 +21,7 @@ namespace Oocx.Acme.Console
                 .WithParameter("keyName", options.AccountKeyName )
                 .SingleInstance();
 
-            if ("user".Equals(options.AccountKeyContainerLocation) || "machine".Equals(options.AccountKeyContainerLocation))
+            if ("user" == options.AccountKeyContainerLocation || "machine" == options.AccountKeyContainerLocation)
             {
                 builder.RegisterType<KeyContainerStore>().As<IKeyStore>().WithParameter("storeType", options.AccountKeyContainerLocation);
             }
@@ -44,7 +44,7 @@ namespace Oocx.Acme.Console
                 return null;
             }
 
-            if ("iis".Equals(options.ServerConfigurationProvider))
+            if ("iis" == options.ServerConfigurationProvider)
             {
                 builder.RegisterType<IISServerConfigurationProvider>().As<IServerConfigurationProvider>();
             }

@@ -21,13 +21,30 @@ namespace Oocx.Acme.Console
               config.HelpWriter = Out;
             });
 
+
+            if (args == null || args.Length == 0)
+            {
+                System.Console.WriteLine("enter a command");
+
+                args = new[] { System.Console.ReadLine() };
+            }
+
             var options = new Options();
 
             parser.ParseArguments(args, options);
 
             // TODO: Validate arguments
 
-            await ExecuteAsync(options);
+            try
+            {
+                await ExecuteAsync(options);
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex.Message);
+
+                System.Console.ReadLine();
+            }
         }
 
         private static async Task ExecuteAsync(Options options)

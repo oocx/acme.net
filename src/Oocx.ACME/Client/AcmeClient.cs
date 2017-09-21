@@ -32,6 +32,7 @@ namespace Oocx.Acme.Client
             Info($"using server {client.BaseAddress}");
 
             this.client = client ?? throw new ArgumentNullException(nameof(client));
+
             jws = new Jws(key);
         }
 
@@ -127,9 +128,12 @@ namespace Oocx.Acme.Client
 
             challenge = await PostAsync<Challenge>(challenge.Uri, challangeRequest).ConfigureAwait(false);
 
-            while ("pending".Equals(challenge?.Status, StringComparison.OrdinalIgnoreCase))
+            while (challenge?.Status == "pending")
             {
                 await Task.Delay(4000).ConfigureAwait(false);
+
+                Info($"- challenge status is {challenge?.Status}");
+
                 challenge = await GetAsync<Challenge>(challenge.Uri).ConfigureAwait(false);
             }
 
