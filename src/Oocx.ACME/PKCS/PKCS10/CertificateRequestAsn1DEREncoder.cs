@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace Oocx.Pkcs.PKCS10
@@ -57,16 +56,10 @@ namespace Oocx.Pkcs.PKCS10
         public string EncodeAsBase64(CertificateRequestData requestData)
         {
             var bytes = EncodeAsDer(requestData);
-            var base64 = Convert.ToBase64String(bytes);
-            string base64lines = "";
 
-            for (int i = 0; i < base64.Length; i += 64)
-            {
-                base64lines += base64.Substring(i, Math.Min(64, base64.Length - i)) + "\n";
-            }
-
-            return $"-----BEGIN NEW CERTIFICATE REQUEST-----\n{base64lines}-----END NEW CERTIFICATE REQUEST-----";
+            return Pem.Encode(bytes, "NEW CERTIFICATE REQUEST");
         }
+
         public string EncodeAsBase64Url(CertificateRequestData requestData)
         {
             var bytes = EncodeAsDer(requestData);

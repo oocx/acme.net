@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
 
 namespace Oocx.Pkcs
 {
@@ -14,26 +12,31 @@ namespace Oocx.Pkcs
 
         public static string Encode(byte[] derBytes, string type)
         {
-            var base64 = Convert.ToBase64String(derBytes);
+            var base64String = Convert.ToBase64String(derBytes);
 
-            var base64Lines = new StringBuilder();
+            var pemBuilder = new StringBuilder();
 
-            for (int i = 0; i < base64.Length; i += 64)
+            pemBuilder.AppendFormat("-----BEGIN {0}-----\n", type);
+
+            for (int i = 0; i < base64String.Length; i += 64)
             {
-                base64Lines.Append(base64.Substring(i, Math.Min(64, base64.Length - i)));
-                base64Lines.Append("\n");
+                pemBuilder.Append(base64String.Substring(i, Math.Min(64, base64String.Length - i)));
+                pemBuilder.Append("\n");
             }
 
-            var pem = $"-----BEGIN {type}-----\n{base64Lines.ToString()}-----END {type}-----";
-
-            return pem;
+            pemBuilder.AppendFormat("-----END {0}-----", type);
+            
+            return pemBuilder.ToString();
         }
 
         public static byte[] Decode(Stream pem, string type)
         {
-            var lines = new List<string>();
+            var sb = new StringBuilder();
 
             string line;
+
+            //  $"-----BEGIN {type}-----"
+            //  $"-----END {type}-----"
 
             using (var sr = new StreamReader(pem))
             {
@@ -41,23 +44,13 @@ namespace Oocx.Pkcs
                 {
                     if (string.IsNullOrEmpty(line)) continue;
 
-                    lines.Add(line);
+                    if (line.StartsWith("-----") && line.EndsWith("-----")) continue;
+                    
+                    sb.Append(line);
                 }
             }
-
-            if ($"-----BEGIN {type}-----" != lines[0])
-            {
-                throw new InvalidDataException($"The PEM file should start with -----BEGIN {type}-----");
-            }
-
-            if ($"-----END {type}-----" != lines[lines.Count - 1])
-            {
-                throw new InvalidDataException($"The PEM file should end with -----END {type}-----");
-            }
             
-            string base64 = string.Join("", lines.Skip(1).Take(lines.Count - 2));
-
-            return base64.Base64UrlDecode(); // der encoded bytes
+            return sb.ToString().Base64UrlDecode(); // der encoded bytes
         }
     }
 }
