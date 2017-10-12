@@ -4,7 +4,6 @@ using Autofac;
 using Oocx.Acme.Client;
 using Oocx.Acme.IIS;
 using Oocx.Acme.Services;
-using Oocx.Pkcs;
 using Oocx.Pkcs.PKCS10;
 using static Oocx.Acme.Logging.Log;
 
@@ -52,9 +51,6 @@ namespace Oocx.Acme.Console
             {
                 builder.RegisterType<ManualServerConfigurationProvider>().As<IServerConfigurationProvider>();
             }
-
-            builder.RegisterType<Pkcs12>().As<IPkcs12>();
-            builder.RegisterType<CertificateRequestAsn1DEREncoder>().As<ICertificateRequestAsn1DerEncoder>();
 
             return builder.Build();
         }        

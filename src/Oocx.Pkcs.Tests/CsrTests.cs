@@ -55,13 +55,10 @@ yXgq378FifWsRemLckRjOC+T0brxqxzqPflbe+c2AHZgMSjuRplC
                 O = "Aero Club Bünde",
                 OU = ""
             };
-
-            var sut = new CertificateRequestAsn1DEREncoder();
-
-            // Act
-            var csr = sut.Encode(data);
-            var der = sut.EncodeAsDer(data);
-            var base64 = sut.EncodeAsBase64(data);
+            
+            var csr = Pkcs10.Encode(data);
+            var der = Pkcs10.EncodeAsDer(data);
+            var base64 = Pkcs10.EncodeAsBase64(data);
             var bytes = Asn1.Encode(csr);
 
           Assert.Equal(
@@ -108,10 +105,8 @@ FXTQmRtze3w5yKOadkSEyr6FG3qq+3IukRgiuxK12SsN7dE0sIO7ow==
             // Arrange            
             var keyManager = new FileKeyStore(Environment.CurrentDirectory);
             var key = keyManager.GetOrCreateKey("test.startliste.info").ExportParameters(true);
-            var sut = new Pkcs12();
-
-            // Act
-            sut.CreatePfxFile(key, @"test.startliste.info.cer", "test", @"test.startliste.info.pfx");
+   
+            Pkcs12.CreatePfxFile(key, @"test.startliste.info.cer", "test", @"test.startliste.info.pfx");
 
             Assert.True(File.Exists(@"test.startliste.info.pfx"));
         }

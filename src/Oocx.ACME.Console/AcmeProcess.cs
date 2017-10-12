@@ -20,24 +20,17 @@ namespace Oocx.Acme.Console
         private readonly IChallengeProvider challengeProvider;
         private readonly IServerConfigurationProvider serverConfiguration;
         private readonly IAcmeClient client;
-        private readonly IPkcs12 pkcs12;
-
-        private readonly ICertificateRequestAsn1DerEncoder certificateRequestEncoder;
 
         public AcmeProcess(
             Options options,
             IChallengeProvider challengeProvider, 
             IServerConfigurationProvider serverConfiguration,
-            IAcmeClient client, 
-            IPkcs12 pkcs12,
-            ICertificateRequestAsn1DerEncoder certificateRequestEncoder)
+            IAcmeClient client)
         {
             this.options = options;
             this.challengeProvider = challengeProvider;
             this.serverConfiguration = serverConfiguration;
             this.client = client;
-            this.pkcs12 = pkcs12;
-            this.certificateRequestEncoder = certificateRequestEncoder;
         }
 
         public async Task StartAsync()
@@ -95,7 +88,9 @@ namespace Oocx.Acme.Console
             try
             {
                 var pfxPath = Path.Combine(Environment.CurrentDirectory, $"{domain}.pfx");
-                pkcs12.CreatePfxFile(key, certificatePath, options.PfxPassword, pfxPath);
+
+                Pkcs12.CreatePfxFile(key, certificatePath, options.PfxPassword, pfxPath);
+
                 Info($"pfx file saved to {pfxPath}");
             }
             catch (Exception ex)
@@ -107,8 +102,8 @@ namespace Oocx.Acme.Console
         private byte[] CreateCertificateRequest(string domain, RSAParameters key)
         {
             var data = new CertificateRequestData(domain, key);
-            var csr = certificateRequestEncoder.EncodeAsDer(data);
-            return csr;
+
+            return Pkcs10.EncodeAsDer(data);
         }
 
         private void GetPfxPasswordFromUser()

@@ -21,7 +21,6 @@ namespace Oocx.Acme.Console
               config.HelpWriter = Out;
             });
 
-
             if (args == null || args.Length == 0)
             {
                 System.Console.WriteLine("enter a command");

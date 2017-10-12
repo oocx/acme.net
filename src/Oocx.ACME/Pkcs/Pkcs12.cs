@@ -4,9 +4,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Oocx.Pkcs
 {
-    public class Pkcs12 : IPkcs12
+    public static class Pkcs12
     {        
-        public void CreatePfxFile(RSAParameters key, string pathToCertificate, string password, string pathToPfx)
+        public static void CreatePfxFile(RSAParameters key, string pathToCertificate, string password, string pathToPfx)
         {
             var csp = new CspParameters {
                 KeyContainerName = "oocx-acme-temp"
