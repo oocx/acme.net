@@ -10,7 +10,16 @@ namespace Oocx.Pkcs
     public class RSAPrivateKey : Sequence
     {
         public RSAPrivateKey(RSAParameters key) :
-            this(new DerInteger(key.Modulus), new DerInteger(key.Exponent), new DerInteger(key.D), new DerInteger(key.P), new DerInteger(key.Q), new DerInteger(key.DP), new DerInteger(key.DQ), new DerInteger(key.InverseQ))
+            this(
+                new DerInteger(key.Modulus), 
+                new DerInteger(key.Exponent),
+                new DerInteger(key.D),
+                new DerInteger(key.P), 
+                new DerInteger(key.Q), 
+                new DerInteger(key.DP), 
+                new DerInteger(key.DQ), 
+                new DerInteger(key.InverseQ)
+            )
         {
             Key = key;
         }

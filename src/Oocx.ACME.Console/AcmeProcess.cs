@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Oocx.Acme.Protocol;
 using Oocx.Acme.Services;
 using Oocx.Pkcs;
-using Oocx.Pkcs.PKCS10;
 
 using static Oocx.Acme.Logging.Log;
 

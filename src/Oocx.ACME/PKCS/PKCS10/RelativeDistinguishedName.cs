@@ -1,10 +1,8 @@
-namespace Oocx.Pkcs.PKCS10
+namespace Oocx.Pkcs
 {
     public class RelativeDistinguishedName : Set
     {
-        public RelativeDistinguishedName(params AttributeTypeAndValue[] attributes) : base(attributes)
-        {
-            
-        }
+        public RelativeDistinguishedName(params AttributeTypeAndValue[] attributes)
+            : base(attributes) { }
     }
 }

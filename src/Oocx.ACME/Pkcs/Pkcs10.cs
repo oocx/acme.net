@@ -1,6 +1,5 @@
 using System;
 using System.Security.Cryptography;
-using Oocx.Pkcs.PKCS10;
 
 namespace Oocx.Pkcs
 {

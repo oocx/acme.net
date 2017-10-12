@@ -2,7 +2,6 @@
 using System.IO;
 
 using Oocx.Acme.Services;
-using Oocx.Pkcs.PKCS10;
 
 using Xunit;
 

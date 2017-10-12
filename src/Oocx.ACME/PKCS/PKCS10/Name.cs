@@ -1,4 +1,4 @@
-namespace Oocx.Pkcs.PKCS10
+namespace Oocx.Pkcs
 {
     public class Name : RDNSequence
     {
