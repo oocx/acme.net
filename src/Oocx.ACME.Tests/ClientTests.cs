@@ -5,9 +5,10 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Oocx.Acme.Client;
+
 using Oocx.Acme.Protocol;
 using Oocx.Acme.Tests.FakeHttp;
+
 using Xunit;
 
 namespace Oocx.Acme.Tests
