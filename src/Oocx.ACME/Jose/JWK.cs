@@ -40,6 +40,6 @@ namespace Oocx.Jose
         [JsonProperty("alg")]
         public string Algorithm { get; set; }
     }
-    
+
     // ref: http://tools.ietf.org/html/rfc7515#page-15
 }

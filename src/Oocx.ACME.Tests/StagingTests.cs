@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Oocx.Acme.Client;
+
 using Xunit;
 
 namespace Oocx.Acme.Tests

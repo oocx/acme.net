@@ -21,7 +21,7 @@ namespace Oocx.Pkcs
             public static readonly Oid Sha256RSA = new Oid("1.2.840.113549.1.1.11");
         }
         
-        // PKCS7 ----
+        // PKCS#7 ----
 
         public static readonly Oid Data                   = new Oid("1.2.840.113549.1.7.1");
         public static readonly Oid SignedData             = new Oid("1.2.840.113549.1.7.2");
@@ -30,7 +30,7 @@ namespace Oocx.Pkcs
         public static readonly Oid DigestedData           = new Oid("1.2.840.113549.1.7.5");
         public static readonly Oid EncryptedData          = new Oid("1.2.840.113549.1.7.6");
 
-        // PKCS12 ----
+        // PKCS#12 ----
 
         public class BagType
         {

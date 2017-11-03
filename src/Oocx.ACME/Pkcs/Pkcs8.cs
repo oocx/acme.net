@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+
 using Oocx.Pkcs.Parser;
 
 namespace Oocx.Pkcs
@@ -43,5 +44,13 @@ namespace Oocx.Pkcs
         }
     }
 }
+
+/*
+PrivateKeyInfo ::= SEQUENCE {
+  version         Version,
+  algorithm       AlgorithmIdentifier,
+  PrivateKey      OCTET STRING
+}
+*/
 
 // ref: https://en.wikipedia.org/wiki/PKCS_8

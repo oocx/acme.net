@@ -49,15 +49,7 @@ ZoBzI10DGPIuoKXBd3nk/eBxPkaxlEECIQCNymjsoI7GldtujVnr1qT+3yedLfHK
 srDVjIT3LsvTqw==
 -----END PRIVATE KEY-----";
 
-        /*
-        PKCS#8
-        PrivateKeyInfo ::= SEQUENCE {
-          version         Version,
-          algorithm       AlgorithmIdentifier,
-          PrivateKey      OCTET STRING
-        }
-        */
-
+      
 
         [Fact]
         public void Decode_pkcs8_key2()
