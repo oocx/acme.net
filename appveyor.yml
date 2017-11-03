@@ -1,23 +1,23 @@
 version: 0.1.{build}
 image: Visual Studio 2017
 before_build:
-- cmd: dotnet restore ACME.net.sln
+- cmd: dotnet restore Acme.net.sln
 build:
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal
 test_script:
-- dotnet test .\src\Oocx.ACME.Tests
-- dotnet test .\src\Oocx.Asn1PKCS.Tests
+- dotnet test .\src\Oocx.Acme.Tests
+- dotnet test .\src\Oocx.Pkcs.Tests
 artifacts:
-- path: src\Oocx.ACME.Console\bin\Debug\net461\acme.exe
+- path: src\Oocx.Acme.Console\bin\Debug\net461\acme.exe
 - path: '**\*.nupkg'
 
 deploy:
 - provider: GitHub
   auth_token:
     secure: +xbvoITYPaEgmN7KE7yzVuwhiZgqZ4OwlUWPvG/YmiX+yZS0UU57b8te3qRb9Ayv
-  artifact: src\Oocx.ACME.Console\bin\Debug\net461\acme.exe
+  artifact: src\Oocx.Acme.Console\bin\Debug\net461\acme.exe
   draft: true
 - provider: NuGet
   api_key:
