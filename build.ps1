@@ -1,0 +1,1 @@
+dotnet pack ./src/Oocx.Acme -c Release -o ./../../release/Oocx.Acme
