@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Oocx.ACME.IIS</AssemblyName>
+    <AssemblyName>Oocx.Acme.IIS</AssemblyName>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <VersionPrefix>0.1.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
 
     <!-- Package Details-->
-    <Description>Oocx.ACME.IIS Class Library</Description>
+    <Description>Oocx.Acme.IIS Class Library</Description>
     <Authors>Mathias Raacke</Authors>
     <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Oocx.ACME\Oocx.Acme.csproj" />
+    <ProjectReference Include="..\Oocx.Acme\Oocx.Acme.csproj" />
   </ItemGroup>
 
 </Project>

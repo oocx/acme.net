@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Oocx.ACME\Oocx.Acme.csproj" />
+    <ProjectReference Include="..\Oocx.Acme\Oocx.Acme.csproj" />
   </ItemGroup>
 
 </Project>

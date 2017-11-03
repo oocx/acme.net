@@ -10,15 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme", "src\Oocx.ACME\Oocx.Acme.csproj", "{67929D7F-CCEE-4EB9-AF9B-7266844DB0F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme", "src\Oocx.Acme\Oocx.Acme.csproj", "{67929D7F-CCEE-4EB9-AF9B-7266844DB0F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.Tests", "src\Oocx.ACME.Tests\Oocx.Acme.Tests.csproj", "{650A5A85-5956-491E-9312-5E25A27D1108}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.Tests", "src\Oocx.Acme.Tests\Oocx.Acme.Tests.csproj", "{650A5A85-5956-491E-9312-5E25A27D1108}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.Console", "src\Oocx.ACME.Console\Oocx.Acme.Console.csproj", "{17A6D94F-D402-46E2-9096-E19DF980B2ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.Console", "src\Oocx.Acme.Console\Oocx.Acme.Console.csproj", "{17A6D94F-D402-46E2-9096-E19DF980B2ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.IIS", "src\Oocx.ACME.IIS\Oocx.Acme.IIS.csproj", "{CC1C7776-20EC-41A1-AD04-E7E19319B1A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.IIS", "src\Oocx.Acme.IIS\Oocx.Acme.IIS.csproj", "{CC1C7776-20EC-41A1-AD04-E7E19319B1A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.IIS.Tests", "src\Oocx.ACME.IIS.Tests\Oocx.Acme.IIS.Tests.csproj", "{B92E0CD0-C1BD-4108-ACA0-9F6989C3522B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oocx.Acme.IIS.Tests", "src\Oocx.Acme.IIS.Tests\Oocx.Acme.IIS.Tests.csproj", "{B92E0CD0-C1BD-4108-ACA0-9F6989C3522B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2A8EF47A-18C4-4A5A-A447-87ADBF1ACE96}"
 EndProject

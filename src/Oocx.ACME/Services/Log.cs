@@ -1,5 +1,3 @@
-using Oocx.Acme.Services;
-
 namespace Oocx.Acme.Services
 {
     public class Log
