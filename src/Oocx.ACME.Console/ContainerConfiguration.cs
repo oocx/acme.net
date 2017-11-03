@@ -1,11 +1,9 @@
 ﻿using System;
 using Autofac;
 
-using Oocx.Acme.Client;
 using Oocx.Acme.IIS;
 using Oocx.Acme.Services;
 
-using static Oocx.Acme.Logging.Log;
 
 namespace Oocx.Acme.Console
 {
@@ -29,17 +27,17 @@ namespace Oocx.Acme.Console
                 builder.RegisterType<FileKeyStore>().As<IKeyStore>().WithParameter("basePath", options.AccountKeyContainerLocation ?? Environment.CurrentDirectory);
             }
 
-            if ("manual-http-01".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
+            if ("manual-http-01".Equals(options.ChallengeProvider))
             {
                 builder.RegisterType<ManualChallengeProvider>().As<IChallengeProvider>();                
             }
-            else if ("iis-http-01".Equals(options.ChallengeProvider, StringComparison.OrdinalIgnoreCase))
+            else if ("iis-http-01".Equals(options.ChallengeProvider))
             {
                 builder.RegisterType<IISChallengeProvider>().As<IChallengeProvider>();             
             }
             else
             {
-                Error($"unsupported challenge provider: {options.ChallengeProvider}");
+                Log.Error($"unsupported challenge provider: {options.ChallengeProvider}");
                 return null;
             }
 

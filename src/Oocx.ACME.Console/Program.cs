@@ -3,10 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using CommandLine;
-using Oocx.Acme.Client;
-using Oocx.Acme.Logging;
+using Oocx.Acme.Services;
 using static System.Console;
-using static Oocx.Acme.Logging.Log;
 
 namespace Oocx.Acme.Console
 {
@@ -83,9 +81,9 @@ namespace Oocx.Acme.Console
 
         private static void PrintError(AcmeException ex)
         {
-            Error("error:");
-            Error(ex.Problem.Type);
-            Error(ex.Problem.Detail);
+            Log.Error("error:");
+            Log.Error(ex.Problem.Type);
+            Log.Error(ex.Problem.Detail);
         }
     }
 }

@@ -4,9 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+
 using Microsoft.Web.Administration;
+
 using Oocx.Acme.Services;
-using static Oocx.Acme.Logging.Log;
 
 namespace Oocx.Acme.IIS
 {
@@ -23,12 +24,17 @@ namespace Oocx.Acme.IIS
         {
             var certificateBytes = File.ReadAllBytes(certificatePath);
             var x509 = new X509Certificate2(certificateBytes, (string)null, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
-            var csp = new CspParameters { KeyContainerName = x509.GetCertHashString(), Flags = CspProviderFlags.UseMachineKeyStore };
+
+            var csp = new CspParameters {
+                KeyContainerName = x509.GetCertHashString(),
+                Flags = CspProviderFlags.UseMachineKeyStore
+            };
+
             var rsa = new RSACryptoServiceProvider(csp);
             rsa.ImportParameters(privateKey);
             x509.PrivateKey = rsa;
 
-            Info($"Installing certificate private key to localmachine\\{certificateStoreName}, container name {csp.KeyContainerName}");
+            Log.Info($"Installing certificate private key to localmachine\\{certificateStoreName}, container name {csp.KeyContainerName}");
 
             InstallCertificateToStore(x509, certificateStoreName);
             return x509.GetCertHash();
@@ -36,9 +42,10 @@ namespace Oocx.Acme.IIS
 
         public void ConfigureServer(string domain, byte[] certificateHash, string certificateStoreName, string siteName, string binding)
         {
-            Info($"configuring IIS to use the new certificate for {domain}");
+            Log.Info($"configuring IIS to use the new certificate for {domain}");
 
             var site = GetWebSite(domain, siteName);
+
             if (site == null)
             {
                 return;
@@ -55,7 +62,7 @@ namespace Oocx.Acme.IIS
                 site = manager.GetSiteForDomain(domain);
                 if (site == null)
                 {
-                    Error($"IIS Web Site with binding for domain {domain} not found, cannot configure IIS.");
+                    Log.Error($"IIS Web Site with binding for domain {domain} not found, cannot configure IIS.");
                     return null;
                 }
             }
@@ -64,7 +71,7 @@ namespace Oocx.Acme.IIS
                 site = manager.Sites[siteName];
                 if (site == null)
                 {
-                    Error($"IIS Web Site {siteName} not found, cannot configure IIS.");
+                    Log.Error($"IIS Web Site {siteName} not found, cannot configure IIS.");
                     return null;
                 }
             }
@@ -105,18 +112,17 @@ namespace Oocx.Acme.IIS
             var store = new X509Store(certificateStoreName, StoreLocation.LocalMachine);
             store.Open(OpenFlags.OpenExistingOnly | OpenFlags.ReadWrite);
             if (store.Certificates.OfType<X509Certificate2>()
-                .Any(
-                    c =>
-                        c.Subject == certificate.Subject &&
-                        c.HasPrivateKey &&
-                        string.Equals(c.GetCertHashString(), hash, StringComparison.OrdinalIgnoreCase)))
+                .Any(c =>
+                    c.Subject == certificate.Subject &&
+                    c.HasPrivateKey &&
+                    string.Equals(c.GetCertHashString(), hash, StringComparison.OrdinalIgnoreCase)))
             {
-                Info($"the certificate with subject {certificate.Subject} and hash {hash} is already installed in store LocalMachine\\{certificateStoreName}");
+                Log.Info($"the certificate with subject {certificate.Subject} and hash {hash} is already installed in store LocalMachine\\{certificateStoreName}");
                 store.Close();
                 return;
             }
 
-            Info($"Installing certificate with subject {certificate.Subject} and hash {hash} to store LocalMachine\\{certificateStoreName}");
+            Log.Info($"Installing certificate with subject {certificate.Subject} and hash {hash} to store LocalMachine\\{certificateStoreName}");
 
             store.Add(certificate);
             store.Close();
@@ -124,11 +130,11 @@ namespace Oocx.Acme.IIS
 
         private void UpdateExistingBindings(byte[] certificateHash, string certificateStoreName, Site site, IEnumerable<Binding> httpsBindings)
         {
-            foreach (var httpsBinding in httpsBindings)
+            foreach (var binding in httpsBindings)
             {
-                Info($"updating existing binding {httpsBinding.BindingInformation} in site {site.Name}");
-                httpsBinding.CertificateHash = certificateHash;
-                httpsBinding.CertificateStoreName = certificateStoreName;
+                Log.Info($"updating existing binding {binding.BindingInformation} in site {site.Name}");
+                binding.CertificateHash = certificateHash;
+                binding.CertificateStoreName = certificateStoreName;
             }
 
             manager.CommitChanges();
@@ -137,7 +143,7 @@ namespace Oocx.Acme.IIS
         private void AddNewHttpsBinding(byte[] certificateHash, string certificateStoreName, Site site, string domain)
         {
             var bindingInformation = $"*:443:{domain}";
-            Info($"adding new binding {bindingInformation} to site {site.Name}");
+            Log.Info($"adding new binding {bindingInformation} to site {site.Name}");
             var binding = site.Bindings.Add(bindingInformation, certificateHash, certificateStoreName);
             binding.SetAttributeValue("sslFlags", 1);
             manager.CommitChanges();

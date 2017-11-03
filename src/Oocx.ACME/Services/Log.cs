@@ -1,6 +1,6 @@
 using Oocx.Acme.Services;
 
-namespace Oocx.Acme.Logging
+namespace Oocx.Acme.Services
 {
     public class Log
     {

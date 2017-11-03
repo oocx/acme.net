@@ -9,8 +9,6 @@ using Oocx.Acme.Protocol;
 using Oocx.Acme.Services;
 using Oocx.Pkcs;
 
-using static Oocx.Acme.Logging.Log;
-
 namespace Oocx.Acme.Console
 {
     public class AcmeProcess : IAcmeProcess
@@ -41,9 +39,10 @@ namespace Oocx.Acme.Console
             foreach (var domain in options.Domains)
             {
                 bool isAuthorized = await AuthorizeForDomain(domain);
+
                 if (!isAuthorized)
                 {
-                    Error($"authorization for domain {domain} failed");
+                    Log.Error($"authorization for domain {domain} failed");
                     continue;
                 }
 
@@ -59,9 +58,10 @@ namespace Oocx.Acme.Console
             }
         }
 
-        private void ConfigureServer(string domain, string certificatePath, RSAParameters key, string siteName, string binding)
+        private void ConfigureServer(string domain, string certificatePath, RSAParameters privateKey, string siteName, string binding)
         {
-            var certificateHash = serverConfiguration.InstallCertificateWithPrivateKey(certificatePath, "my", key);
+            var certificateHash = serverConfiguration.InstallCertificateWithPrivateKey(certificatePath, "my", privateKey);
+
             serverConfiguration.ConfigureServer(domain, certificateHash, "my", siteName, binding);
         }
 
@@ -80,7 +80,7 @@ namespace Oocx.Acme.Console
 
         private void SaveCertificateWithPrivateKey(string domain, RSAParameters key, string certificatePath)
         {
-            Info("generating pfx file with certificate and private key");
+            Log.Info("generating pfx file with certificate and private key");
 
             GetPfxPasswordFromUser();
 
@@ -90,11 +90,11 @@ namespace Oocx.Acme.Console
 
                 Pkcs12.CreatePfxFile(key, certificatePath, options.PfxPassword, pfxPath);
 
-                Info($"pfx file saved to {pfxPath}");
+                Log.Info($"pfx file saved to {pfxPath}");
             }
             catch (Exception ex)
             {
-                Error("could not create pfx file: " + ex);
+                Log.Error("could not create pfx file: " + ex);
             }
         }
 
@@ -139,7 +139,7 @@ namespace Oocx.Acme.Console
         private static string SaveCertificateReturnedByServer(string domain, CertificateResponse response)
         {
             var certificatePath = Path.Combine(Environment.CurrentDirectory, $"{domain}.cer");
-            Info($"saving certificate returned by ACME server to {certificatePath}");
+            Log.Info($"saving certificate returned by ACME server to {certificatePath}");
             File.WriteAllBytes(certificatePath, response.Certificate);
             return certificatePath;
         }
@@ -165,7 +165,8 @@ namespace Oocx.Acme.Console
                 System.Console.WriteLine("Automatically accepting instructions.");
             }
             var challengeResult = await challenge.Complete();
-            return "valid".Equals(challengeResult?.Status, StringComparison.OrdinalIgnoreCase);
+
+            return challengeResult?.Status == "valid";
         }
 
         private async Task RegisterWithServer()
@@ -177,18 +178,18 @@ namespace Oocx.Acme.Console
                 Contact   = new[] { options.Contact }
             });
 
-            Verbose($"Created at: {registration.CreatedAt}");
-            Verbose($"Id: {registration.Id}");
-            Verbose($"Contact: {string.Join(", ", registration.Contact)}");
-            Verbose($"Initial Ip: {registration.InitialIp}");
+            Log.Verbose($"Created at: {registration.CreatedAt}");
+            Log.Verbose($"Id: {registration.Id}");
+            Log.Verbose($"Contact: {string.Join(", ", registration.Contact)}");
+            Log.Verbose($"Initial Ip: {registration.InitialIp}");
 
             if (!string.IsNullOrWhiteSpace(registration.Location) && options.AcceptTermsOfService)
             {
-                Info("accepting terms of service");
+                Log.Info("accepting terms of service");
 
                 if (registration.Agreement != options.TermsOfServiceUri)
                 {
-                    Error($"Cannot accept terms of service. The terms of service uri is '{registration.Agreement}', expected it to be '{options.TermsOfServiceUri}'.");
+                    Log.Error($"Cannot accept terms of service. The terms of service uri is '{registration.Agreement}', expected it to be '{options.TermsOfServiceUri}'.");
                     return;
                 }
 
@@ -208,7 +209,7 @@ namespace Oocx.Acme.Console
                 {
                     if (sslPolicyErrors != SslPolicyErrors.None)
                     {
-                        Verbose($"ignoring SSL certificate error: {sslPolicyErrors}");
+                        Log.Verbose($"ignoring SSL certificate error: {sslPolicyErrors}");
                     }
 
                     return true;

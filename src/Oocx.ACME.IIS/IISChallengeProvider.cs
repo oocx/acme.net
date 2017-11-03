@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using Oocx.Acme.Services;
 using Oocx.Acme.Protocol;
-using static Oocx.Acme.Logging.Log;
 using Directory = System.IO.Directory;
 
 namespace Oocx.Acme.IIS
@@ -24,12 +23,13 @@ namespace Oocx.Acme.IIS
         public async Task<PendingChallenge> AcceptChallengeAsync(string domain, string siteName, AuthorizationResponse authorization)
         {
             var challenge = authorization?.Challenges.FirstOrDefault(c => c.Type == "http-01");
+
             if (challenge == null)
             {
-                Error("the server does not accept challenge type http-01");
+                Log.Error("the server does not accept challenge type http-01");
                 return null;
             }
-            Info($"accepting challenge {challenge.Type}");
+            Log.Info($"accepting challenge {challenge.Type}");
 
             var keyAuthorization = client.GetKeyAuthorization(challenge.Token);
 
@@ -56,18 +56,18 @@ namespace Oocx.Acme.IIS
 
         public async Task AcceptChallengeForDomainAsync(string domain, string token, string challengeJson)
         {
-            Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
+            Log.Info($"IISChallengeService is accepting challenge with token {token} for domain {domain}");
             var root = GetIisRoot(domain);
             await CreateWellKnownDirectoryWithChallengeFileAsync(root, token, challengeJson);
         }
 
         public async Task AcceptChallengeForSiteAsync(string siteName, string token, string challengeJson)
         {
-            Info($"IISChallengeService is accepting challenge with token {token} for IIS web site '{siteName}'");
+            Log.Info($"IISChallengeService is accepting challenge with token {token} for IIS web site '{siteName}'");
             var site = manager.Sites[siteName];
             if (site == null)
             {
-                Error($"IIS web site '{siteName}' not found, cannot process challenge.");
+                Log.Error($"IIS web site '{siteName}' not found, cannot process challenge.");
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace Oocx.Acme.IIS
 
             var challengeFilePath = Path.Combine(acmePath, token);
 
-            Verbose($"writing challenge to {challengeFilePath}");
+            Log.Verbose($"writing challenge to {challengeFilePath}");
             using (var fs = new FileStream(challengeFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 var data = System.Text.Encoding.ASCII.GetBytes(keyAuthorization);
@@ -105,6 +105,7 @@ namespace Oocx.Acme.IIS
         private static void CreateWebConfig(string acmePath)
         {
             var webConfigPath = Path.Combine(acmePath, "web.config");
+
             if (File.Exists(webConfigPath))
             {
                 return;
@@ -112,10 +113,11 @@ namespace Oocx.Acme.IIS
 
             Type iisChallengeProviderType = typeof(IISChallengeProvider);
 
-            string resourceName = iisChallengeProviderType.ToString().Substring(0, iisChallengeProviderType.ToString().LastIndexOf(".", StringComparison.Ordinal)) + ".web.config";
-            Verbose($"Creating file '{webConfigPath}' from internal resource '{resourceName}'");
+            string resourceName = iisChallengeProviderType.ToString().Substring(0, iisChallengeProviderType.ToString().LastIndexOf(".")) + ".web.config";
+            Log.Verbose($"Creating file '{webConfigPath}' from internal resource '{resourceName}'");
 
             var webConfigStream = iisChallengeProviderType.GetTypeInfo().Assembly.GetManifestResourceStream(resourceName);
+
             using (var fileStream = new FileStream(webConfigPath, FileMode.CreateNew, FileAccess.Write))
             {
                 webConfigStream.CopyTo(fileStream);
@@ -128,8 +130,9 @@ namespace Oocx.Acme.IIS
         {
             if (Directory.Exists(challengePath)) return;
 
-            Verbose($"creating directory {challengePath}");
-            System.IO.Directory.CreateDirectory(challengePath);
+            Log.Verbose($"creating directory {challengePath}");
+
+            Directory.CreateDirectory(challengePath);
         }
     }
 }

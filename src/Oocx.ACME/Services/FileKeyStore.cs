@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 
 using Oocx.Pkcs;
-using static Oocx.Acme.Logging.Log;
 
 namespace Oocx.Acme.Services
 {
@@ -12,11 +11,11 @@ namespace Oocx.Acme.Services
 
         public FileKeyStore(string basePath)
         {
-            this.basePath = !string.IsNullOrWhiteSpace(basePath) 
+            this.basePath = !string.IsNullOrWhiteSpace(basePath)
                 ? basePath
                 : Directory.GetCurrentDirectory();
 
-            Verbose($"using key base path {this.basePath}");
+            Log.Verbose($"using key base path {this.basePath}");
         }
 
         public RSA GetOrCreateKey(string keyName)
@@ -27,7 +26,7 @@ namespace Oocx.Acme.Services
 
             if (File.Exists(keyFileName))
             {
-                Verbose($"using existing key file {keyFileName}");
+                Log.Verbose($"using existing key file {keyFileName}");
 
                 var keyXml = File.ReadAllText(keyFileName);
 
@@ -39,7 +38,7 @@ namespace Oocx.Acme.Services
             {
                 var privateKey = new RSAPrivateKey(rsa.ExportParameters(true));
 
-                Verbose($"writing new key to file {keyFileName}");
+                Log.Verbose($"writing new key to file {keyFileName}");
 
                 var pemEncodedPrivateKey = privateKey.ToPemString();
 
