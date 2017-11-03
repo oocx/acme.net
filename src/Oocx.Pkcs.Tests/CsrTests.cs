@@ -90,7 +90,7 @@ FXTQmRtze3w5yKOadkSEyr6FG3qq+3IukRgiuxK12SsN7dE0sIO7ow==
 
             var keyStore = new FileKeyStore(Environment.CurrentDirectory);
             var key = keyStore.GetOrCreateKey(name);
-            var sut = new KeyExport(Environment.CurrentDirectory);
+            var sut = new KeyExporter(Environment.CurrentDirectory);
 
             // Act
             sut.Save(key.ExportParameters(true), name, KeyFormat.Pem);
