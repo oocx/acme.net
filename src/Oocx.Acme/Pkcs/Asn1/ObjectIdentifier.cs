@@ -1,0 +1,38 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+
+namespace Oocx.Pkcs
+{
+    /// <summary>
+    /// https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
+    /// </summary>
+    public class ObjectIdentifier : Asn1Object
+    {
+        public ObjectIdentifier(Oid id) : base(6)
+        {
+            var nodes = id.Value.Split('.').Select(int.Parse).ToArray();
+            Data = GetData(nodes).ToArray();
+        }
+
+        private IEnumerable<byte> GetData(int[] nodes)
+        {
+            yield return (byte)(nodes[0] * 40 + nodes[1]);
+
+            foreach (var n in nodes.Skip(2))
+            {
+                if (n <= 127)
+                {
+                    yield return (byte)n;
+                }
+                else
+                {
+                    foreach (var b in n.ToVLQEncodedInt())
+                    {
+                        yield return b;
+                    }
+                }
+            }
+        }
+    }
+}

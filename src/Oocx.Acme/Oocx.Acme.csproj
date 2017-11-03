@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Oocx.Acme</AssemblyName>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+
+    <!-- Packge Details-->
+    <Authors>Mathias Raacke</Authors>
+    <Description>ACME.net can be used to create clients for the ACME (Automatic Certificate Management Environment) protocol. </Description>
+    <PackageTags>ACME;letsencrypt;ssl;certificates</PackageTags>
+    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+</Project>

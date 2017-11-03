@@ -195,3 +195,8 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 /acme-key.xml
+src/Oocx.Acme.Console/acme-key.pem
+src/Oocx.Pkcs.Tests/test.startliste.info.pem
+src/Oocx.Pkcs.Tests/test.startliste.info.xml
+src/Oocx.Pkcs.Tests/request.txt
+src/Oocx.Pkcs.Tests/request.der

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>acme</AssemblyName>
+    <TargetFramework>net461</TargetFramework>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <OutputType>Exe</OutputType>
+    <LangVersion>7.1</LangVersion>
+    
+    <!-- Package Details-->
+    <Authors>Mathias Raacke</Authors>
+    <Description>A command line application for managing Let's Encrypt certificates.</Description>
+    <PackageTags>ACME;letsencrypt;ssl;certificates</PackageTags>
+    <PackageProjectUrl>https://github.com/oocx/acme.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/oocx/acme.net/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="CommandLineParser" Version="1.9.71" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oocx.Acme.IIS\Oocx.Acme.IIS.csproj" />
+    <ProjectReference Include="..\Oocx.Acme\Oocx.Acme.csproj" />
+  </ItemGroup>
+
+</Project>
